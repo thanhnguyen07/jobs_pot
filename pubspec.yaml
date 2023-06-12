@@ -10,6 +10,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   easy_localization: ^3.0.2
+  flutter_svg: ^2.0.6
 
 dev_dependencies:
   flutter_test:
@@ -23,8 +24,8 @@ flutter:
     - lib/resources/i18n/langs/
     - lib/assets/images/
     - lib/assets/icons/
-    - lib/assets/icons/arrow
-    - lib/assets/icons/company
-    - lib/assets/icons/country
-    - lib/assets/icons/specialization
-    - lib/assets/icons/tabBar
+    - lib/assets/icons/arrow/
+    - lib/assets/icons/company/
+    - lib/assets/icons/language/
+    - lib/assets/icons/specialization/
+    - lib/assets/icons/tabBar/

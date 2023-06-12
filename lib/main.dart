@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 
 import 'resources/i18n/generated/codegen_loader.g.dart';
@@ -74,6 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(LocaleKeys.day).plural(1).tr(),
+            SvgPicture.asset(
+              AppIcons.add,
+              colorFilter:
+                  const ColorFilter.mode(Colors.amber, BlendMode.srcIn),
+            ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
