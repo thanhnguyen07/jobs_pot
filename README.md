@@ -1,4 +1,4 @@
-# jobs_pot
+# Jobs Pot
 
 Jobs Pot.
 ## easy_localization
