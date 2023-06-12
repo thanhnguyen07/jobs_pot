@@ -1,6 +1,4 @@
 # Jobs Pot
-
-Jobs Pot.
 ## easy_localization
 **Generated Code**
 
