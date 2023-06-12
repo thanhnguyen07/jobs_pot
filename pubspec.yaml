@@ -20,7 +20,7 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - lib/resources/langs/
+    - lib/resources/i18n/langs/
     - lib/assets/images/
     - lib/assets/icons/
     - lib/assets/icons/arrow

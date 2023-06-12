@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:jobs_pot/generated/locale_keys.dart';
+import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 
-import 'generated/codegen_loader.g.dart';
+import 'resources/i18n/generated/codegen_loader.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,7 +10,7 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('vi')],
-      path: 'resources/langs',
+      path: 'resources/i18n/langs',
       fallbackLocale: const Locale('en'),
       assetLoader: const CodegenLoader(),
       child: const MyApp(),
