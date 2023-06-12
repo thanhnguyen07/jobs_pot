@@ -9,9 +9,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  intl: any
-  flutter_localizations:
-    sdk: flutter
   easy_localization: ^3.0.2
 
 dev_dependencies:
@@ -22,3 +19,5 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+  assets:
+    - lib/resources/langs/
