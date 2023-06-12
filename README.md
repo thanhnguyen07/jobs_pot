@@ -2,7 +2,7 @@
 ## easy_localization
 **Generated Code**
 
->folder: lib/generated
+>folder: lib/resources/i18n/generated
 
 `file codegen_loader.g.dart`
 ```
