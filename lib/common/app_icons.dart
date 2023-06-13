@@ -35,18 +35,10 @@ class AppIcons {
   static const programmer = 'lib/assets/icons/specialization/programmer.svg';
   static const restaurant = 'lib/assets/icons/specialization/restaurant.svg';
 
-  static const chatActivated = 'lib/assets/icons/tabBar/chat_activated.svg';
-  static const chatNotActivated =
-      'lib/assets/icons/tabBar/chat_not_activated.svg';
-  static const homeActivated = 'lib/assets/icons/tabBar/home_activated.svg';
-  static const homeNotActivated =
-      'lib/assets/icons/tabBar/home_not_activated.svg';
-  static const postActivated = 'lib/assets/icons/tabBar/post_activated.svg';
-  static const postNotActivated =
-      'lib/assets/icons/tabBar/post_not_activated.svg';
-  static const saveActivated = 'lib/assets/icons/tabBar/save_activated.svg';
-  static const saveNotActivated =
-      'lib/assets/icons/tabBar/save_not_activated.svg';
+  static const chat = 'lib/assets/icons/tabBar/chat.svg';
+  static const home = 'lib/assets/icons/tabBar/home.svg';
+  static const post = 'lib/assets/icons/tabBar/post.svg';
+  static const save = 'lib/assets/icons/tabBar/save.svg';
 
   static const add = 'lib/assets/icons/add.svg';
   static const apply = 'lib/assets/icons/apply.svg';
@@ -56,11 +48,9 @@ class AppIcons {
   static const camera = 'lib/assets/icons/camera.svg';
   static const checked = 'lib/assets/icons/checked.svg';
   static const doubleChecked = 'lib/assets/icons/double_checked.svg';
-  static const checked2 = 'lib/assets/icons/checked_2.svg';
   static const clock = 'lib/assets/icons/clock.svg';
   static const comment = 'lib/assets/icons/comment.svg';
   static const darkMode = 'lib/assets/icons/dark_mode.svg';
-  static const delete = 'lib/assets/icons/delete.svg';
   static const edit = 'lib/assets/icons/edit.svg';
   static const edit2 = 'lib/assets/icons/edit_2.svg';
   static const education2 = 'lib/assets/icons/education_2.svg';
@@ -76,7 +66,6 @@ class AppIcons {
   static const lock = 'lib/assets/icons/lock.svg';
   static const logo = 'lib/assets/icons/logo.svg';
   static const logout = 'lib/assets/icons/logout.svg';
-  static const notification2 = 'lib/assets/icons/notification_2.svg';
   static const offNotification = 'lib/assets/icons/off_notification.svg';
   static const options = 'lib/assets/icons/options.svg';
   static const pdf = 'lib/assets/icons/pdf.svg';
@@ -84,8 +73,7 @@ class AppIcons {
   static const play = 'lib/assets/icons/play.svg';
   static const remove = 'lib/assets/icons/remove.svg';
   static const remove2 = 'lib/assets/icons/remove_2.svg';
-  static const remove3 = 'lib/assets/icons/remove_3.svg';
-  static const save = 'lib/assets/icons/save.svg';
+  static const save2 = 'lib/assets/icons/save.svg';
   static const search = 'lib/assets/icons/search.svg';
   static const send = 'lib/assets/icons/send.svg';
   static const send2 = 'lib/assets/icons/send_2.svg';
