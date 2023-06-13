@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {context.setLocale(const Locale('vi'))},
+        onPressed: () => {context.setLocale(AppConfigs.appLanguageEn)},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
