@@ -29,3 +29,25 @@ flutter:
     - lib/assets/icons/language/
     - lib/assets/icons/specialization/
     - lib/assets/icons/tabBar/
+  fonts:
+    - family: DMSans-Bold
+      fonts:
+        - asset: lib/resources/fonts/DMSans-Bold.ttf
+    - family: DMSans-BoldItalic
+      fonts:
+        - asset: lib/resources/fonts/DMSans-BoldItalic.ttf
+          style: italic
+    - family: DMSans-Italic
+      fonts:
+        - asset: lib/resources/fonts/DMSans-Italic.ttf
+          style: italic
+    - family: DMSans-Medium
+      fonts:
+        - asset: lib/resources/fonts/DMSans-Medium.ttf
+    - family: DMSans-MediumItalic
+      fonts:
+        - asset: lib/resources/fonts/DMSans-MediumItalic.ttf
+          style: italic
+    - family: DMSans-Regular
+      fonts:
+        - asset: lib/resources/fonts/DMSans-Regular.ttf
