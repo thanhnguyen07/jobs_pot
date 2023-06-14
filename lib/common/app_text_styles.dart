@@ -52,4 +52,18 @@ class AppTextStyle {
     fontSize: 30,
     fontFamily: AppFontFamily.dMSansBold,
   );
+  //40
+  static const blackBoldS40 = TextStyle(
+    color: Colors.black,
+    fontSize: 40,
+    fontFamily: AppFontFamily.dMSansBold,
+    height: 1,
+  );
+  static const fireYellowUnderlineBoldS40 = TextStyle(
+    color: AppColors.fireYellowColor,
+    fontSize: 40,
+    fontFamily: AppFontFamily.dMSansBold,
+    height: 1,
+    decoration: TextDecoration.underline,
+  );
 }

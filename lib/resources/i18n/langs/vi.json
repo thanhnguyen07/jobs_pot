@@ -1,3 +1,16 @@
 {
-  "splashTitle": "Jobspot"
+  "splashTitle": "Jobspot",
+  "onboardingTitle1": "Tìm",
+  "onboardingTitle2": "Công Việc Mơ Ước",
+  "onboardingTitle3": "Của Bạn Ở Đây!",
+  "onboardingSubTitle": "Khám phá tất cả các vai trò công việc thú vị nhất dựa trên sở thích và chuyên ngành học của bạn.",
+  "authenticationLoginTitle": "Chào mừng trở lại",
+  "authenticationEmailInputTitle": "Email",
+  "authenticationPasswordInputTitle": "Mật khẩu",
+  "authenticationRememberMe": "Ghi nhớ đăng nhập",
+  "authenticationForgotPassword": "Quên mật khẩu?",
+  "authenticationLoginButtonTitle": "Đăng nhập",
+  "authenticationGoogleButtonTitle": "Đăng nhập với Google",
+  "authenticationSuggestionsSignUp": "Bạn chưa có tài khoản?",
+  "authenticationSignUpButtonTitle": "Đăng ký"
 }

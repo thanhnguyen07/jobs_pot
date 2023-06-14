@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jobs_pot/config/app_configs.dart';
-import 'package:jobs_pot/routes/route_config.dart';
-import 'resources/i18n/generated/codegen_loader.g.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/authentication/presentation/screens/login_screen.dart';
+import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart';
+import 'package:jobs_pot/features/authentication/presentation/screens/splash_screen.dart';
+import 'package:jobs_pot/resources/i18n/generated/codegen_loader.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,10 +19,10 @@ void main() async {
         AppConfigs.appLanguageEn,
         AppConfigs.appLanguageVi
       ],
-      path: 'resources/i18n/langs',
+      path: 'lib/resources/i18n/langs',
       fallbackLocale: AppConfigs.appLanguageEn,
       assetLoader: const CodegenLoader(),
-      child: const ProviderScope(
+      child: ProviderScope(
         child: MyApp(),
       ),
     ),
@@ -26,7 +30,46 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _route = GoRouter(
+    initialLocation: '/${SplashScreen.route}',
+    navigatorKey: GlobalKey<NavigatorState>(),
+    routes: [
+      GoRoute(
+        name: SplashScreen.route,
+        path: "/${SplashScreen.route}",
+        builder: (BuildContext context, GoRouterState state) {
+          return const SplashScreen();
+        },
+      ),
+      GoRoute(
+        name: OnboardingScreen.route,
+        path: "/${OnboardingScreen.route}",
+        builder: (BuildContext context, GoRouterState state) {
+          return const OnboardingScreen();
+        },
+      ),
+      GoRoute(
+        name: LoginScreen.route,
+        path: "/${LoginScreen.route}",
+        builder: (BuildContext context, GoRouterState state) {
+          return const LoginScreen();
+        },
+      ),
+    ],
+    redirect: (context, state) {
+      final loggedIn = authStateListenable.value;
+
+      if (loggedIn == null) {
+        return '/${SplashScreen.route}';
+      }
+
+      return null;
+    },
+    refreshListenable: authStateListenable,
+    debugLogDiagnostics: true,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +77,21 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routerConfig: RouteConfig.router(context),
+      routerConfig: _route,
     );
   }
 }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     localizationsDelegates: context.localizationDelegates,
+  //     supportedLocales: context.supportedLocales,
+  //     locale: context.locale,
+  //     // routerConfig: RouteConfig.router(context),
+  //     routes: <String, WidgetBuilder>{
+  //       '/Login': (BuildContext context) => const LoginScreen(),
+  //       '/splash': (BuildContext context) => const SplashScreen(),
+  //     },
+  //   );
+  // }
