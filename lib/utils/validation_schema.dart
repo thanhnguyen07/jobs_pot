@@ -1,19 +1,23 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class EmailValidatorSchema extends Validator<dynamic> {
+class EmailValidator extends Validator<dynamic> {
+  static final RegExp emailRegex = RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+
+  const EmailValidator() : super();
+
   @override
   Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
-    // don't validate empty values to allow optional controls
     return (control.isNull ||
             control.value.toString().isEmpty ||
-            EmailValidator.validate(control.value))
+            emailRegex.hasMatch(control.value.toString()))
         ? null
-        : <String, dynamic>{'email': control.value};
+        : <String, dynamic>{ValidationMessage.email: control.value};
   }
 }
 
-ValidatorFunction get emailValidatorSchema => EmailValidatorSchema().validate;
+Validator<dynamic> get emailValidatorSchema => const EmailValidator();
 
 class PasswordValidator extends Validator<dynamic> {
   static final RegExp passwordRegex =
@@ -30,4 +34,4 @@ class PasswordValidator extends Validator<dynamic> {
   }
 }
 
-ValidatorFunction get passwordValidatorSchema => PasswordValidator().validate;
+Validator<dynamic> get passwordValidatorSchema => PasswordValidator();
