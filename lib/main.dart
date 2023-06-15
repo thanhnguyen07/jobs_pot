@@ -8,6 +8,7 @@ import 'package:jobs_pot/features/authentication/presentation/screens/login_scre
 import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/splash_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/codegen_loader.g.dart';
+import 'package:jobs_pot/routes/route_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,21 +78,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routerConfig: _route,
+      routerConfig: routeConfig,
     );
   }
 }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     localizationsDelegates: context.localizationDelegates,
-  //     supportedLocales: context.supportedLocales,
-  //     locale: context.locale,
-  //     // routerConfig: RouteConfig.router(context),
-  //     routes: <String, WidgetBuilder>{
-  //       '/Login': (BuildContext context) => const LoginScreen(),
-  //       '/splash': (BuildContext context) => const SplashScreen(),
-  //     },
-  //   );
-  // }

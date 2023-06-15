@@ -1,4 +1,3 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class EmailValidator extends Validator<dynamic> {
