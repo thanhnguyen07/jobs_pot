@@ -5,8 +5,10 @@ import 'package:jobs_pot/features/authentication/application/splash_controller.d
 
 final authStateListenable = ValueNotifier<bool?>(null);
 
-final autheControllerProvider =
-    Provider<AuthController>((ref) => AuthController(ref));
+final autheControllerProvider = Provider<AuthController>(
+  (ref) => AuthController(ref),
+);
 
 final splashControllerProvider = StateNotifierProvider<SplashController, bool>(
-    (ref) => SplashController(ref));
+  (ref) => SplashController(),
+);

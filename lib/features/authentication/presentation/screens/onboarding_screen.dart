@@ -1,21 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
-import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/login_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/codegen_loader.g.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 
+@RoutePage()
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
-  static const String route = 'OnboardingScreen';
+  static const String path = "/OnboardingScreen";
 
   @override
   ConsumerState createState() => _OnboardingScreenState();
@@ -23,8 +23,7 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   void goLogin() {
-    ref.read(autheControllerProvider).updateAuthState(true);
-    context.goNamed(LoginScreen.route);
+    context.router.pushNamed(LoginScreen.path);
   }
 
   @override

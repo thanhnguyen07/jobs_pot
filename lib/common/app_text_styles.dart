@@ -5,6 +5,8 @@ import 'app_font_family.dart';
 
 class AppTextStyle {
   //12
+  static const textErrorInputS12 = TextStyle(
+      color: Colors.red, fontSize: 12, fontFamily: AppFontFamily.dMSansItalic);
   static const textColor1RegularS12 = TextStyle(
       color: AppColors.textColor1,
       fontSize: 12,

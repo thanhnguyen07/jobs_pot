@@ -14,5 +14,12 @@ abstract class  LocaleKeys {
   static const authenticationLoginButtonTitle = 'authenticationLoginButtonTitle';
   static const authenticationGoogleButtonTitle = 'authenticationGoogleButtonTitle';
   static const authenticationSignUpButtonTitle = 'authenticationSignUpButtonTitle';
+  static const authenticationInputRequired = 'authenticationInputRequired';
+  static const authenticationInputEmailFormatInCorrect = 'authenticationInputEmailFormatInCorrect';
+  static const authenticationPasswordValidationMessages1 = 'authenticationPasswordValidationMessages1';
+  static const authenticationPasswordValidationMessages2 = 'authenticationPasswordValidationMessages2';
+  static const authenticationPasswordValidationMessages3 = 'authenticationPasswordValidationMessages3';
+  static const authenticationPasswordValidationMessages4 = 'authenticationPasswordValidationMessages4';
+  static const authenticationPasswordValidationMessages5 = 'authenticationPasswordValidationMessages5';
 
 }

@@ -12,5 +12,12 @@
   "authenticationLoginButtonTitle": "Đăng nhập",
   "authenticationGoogleButtonTitle": "Đăng nhập với Google",
   "authenticationSuggestionsSignUp": "Bạn chưa có tài khoản?",
-  "authenticationSignUpButtonTitle": "Đăng ký"
+  "authenticationSignUpButtonTitle": "Đăng ký",
+  "authenticationInputRequired": "Trường này là bắt buộc.",
+  "authenticationInputEmailFormatInCorrect": "Định dạng email không chính xác.",
+  "authenticationPasswordValidationMessages1": "Mật khẩu phải có ít nhất một ký tự đặc biệt.",
+  "authenticationPasswordValidationMessages2": "Mật khẩu phải có ít nhất một chữ số ('0'-'9').",
+  "authenticationPasswordValidationMessages3": "Mật khẩu phải có ít nhất một chữ cái ('a'-'z').",
+  "authenticationPasswordValidationMessages4": "Mật khẩu phải có ít nhất một chữ hoa ('A'-Z').",
+  "authenticationPasswordValidationMessages5": "Mật khẩu phải nhiều hơn 3 ký tự."
 }

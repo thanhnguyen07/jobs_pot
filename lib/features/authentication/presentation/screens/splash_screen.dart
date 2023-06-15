@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,10 +9,11 @@ import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 
+@RoutePage()
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
-  static const String route = 'splash';
+  static const String path = "/SplashScreen";
 
   @override
   ConsumerState createState() => _SplashScreenState();

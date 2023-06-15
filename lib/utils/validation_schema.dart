@@ -1,3 +1,4 @@
+import 'package:jobs_pot/common/validation_keys.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class EmailValidator extends Validator<dynamic> {
@@ -12,24 +13,36 @@ class EmailValidator extends Validator<dynamic> {
             control.value.toString().isEmpty ||
             emailRegex.hasMatch(control.value.toString()))
         ? null
-        : <String, dynamic>{ValidationMessage.email: control.value};
+        : <String, dynamic>{ValidationKeys.email: control.value};
   }
 }
 
 Validator<dynamic> get emailValidatorSchema => const EmailValidator();
 
 class PasswordValidator extends Validator<dynamic> {
-  static final RegExp passwordRegex =
-      RegExp(r'^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20})$');
+  final digitRegex = RegExp(r'\d');
+  final lowerCaseRegex = RegExp(r'[a-z]');
+  final upperCaseRegex = RegExp(r'[A-Z]');
+  final nonAlphanumericRegex = RegExp(r'[^a-zA-Z0-9]');
 
   @override
   Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
-    // don't validate empty values to allow optional controls
-    return (control.isNull ||
-            control.value.toString().isEmpty ||
-            passwordRegex.hasMatch(control.value.toString()))
-        ? null
-        : <String, dynamic>{'password': control.value};
+    if (control.isNull || control.value.toString().isEmpty) {
+      return null;
+    }
+    if (!digitRegex.hasMatch(control.value.toString())) {
+      return <String, dynamic>{ValidationKeys.number: control.value};
+    }
+    if (!lowerCaseRegex.hasMatch(control.value.toString())) {
+      return <String, dynamic>{ValidationKeys.lowerCase: control.value};
+    }
+    if (!upperCaseRegex.hasMatch(control.value.toString())) {
+      return <String, dynamic>{ValidationKeys.upperCase: control.value};
+    }
+    if (!nonAlphanumericRegex.hasMatch(control.value.toString())) {
+      return <String, dynamic>{ValidationKeys.nonAlphanumeric: control.value};
+    }
+    return null;
   }
 }
 
