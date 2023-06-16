@@ -12,4 +12,6 @@ class AppColors {
 
   static const textColor1 = Color(0xFF524B6B);
   static const textColor2 = Color(0x99524B6B);
+
+  static const shadowColor = Color(0x2099ABC6);
 }

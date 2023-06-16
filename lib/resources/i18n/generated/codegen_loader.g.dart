@@ -30,7 +30,7 @@ class CodegenLoader extends AssetLoader{
   "authenticationSignUpButtonTitle": "Sign up",
   "authenticationInputRequired": "This field is required.",
   "authenticationInputEmailFormatInCorrect": "The email format is not correct.",
-  "authenticationPasswordValidationMessages1": "Password must have at least one special character. Password must have at least one special character.",
+  "authenticationPasswordValidationMessages1": "Password must have at least one special character.",
   "authenticationPasswordValidationMessages2": "Passwords must have at least one digit ('0'-'9').",
   "authenticationPasswordValidationMessages3": "Passwords must have at least one letter ('a'-'z').",
   "authenticationPasswordValidationMessages4": "Passwords must have at least one uppercase ('A'-Z').",

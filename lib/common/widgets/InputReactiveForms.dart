@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -8,11 +9,15 @@ class InputReactiveForms extends StatefulWidget {
     required this.formController,
     this.title,
     this.validationMessages,
+    required this.obscureText,
+    this.suffixIcon,
   });
 
   final FormControl? formController;
   final Text? title;
   final Map<String, String Function(Object)>? validationMessages;
+  final bool obscureText;
+  final Widget? suffixIcon;
 
   @override
   State<InputReactiveForms> createState() => _InputReactiveFormsState();
@@ -60,24 +65,33 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
         ),
         Container(
           decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
-            ),
-          ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.shadowColor,
+                  blurRadius: 4,
+                  offset: Offset(2, 4), // Shadow position
+                ),
+              ]),
           child: ReactiveTextField(
+            obscureText: widget.obscureText,
             keyboardType: TextInputType.emailAddress,
             formControl: widget.formController,
             showErrors: (control) => _handleError(control),
             onChanged: _onChanged,
             validationMessages: widget.validationMessages,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              suffixIcon: widget.suffixIcon,
               filled: true,
               hintText: '',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide.none,
               ),
-              contentPadding: EdgeInsets.only(left: 15, right: 15),
+              contentPadding: const EdgeInsets.only(left: 15, right: 15),
             ),
           ),
         ),

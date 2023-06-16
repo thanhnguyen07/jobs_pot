@@ -2,9 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/validation_keys.dart';
 import 'package:jobs_pot/common/widgets/InputReactiveForms.dart';
+import 'package:jobs_pot/common/widgets/RememberAndForgot.dart';
 import 'package:jobs_pot/config/app_configs.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
@@ -96,7 +99,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ),
         Expanded(
           flex: 3,
-          child: _formInput(),
+          child: Column(
+            children: [
+              _formInput(),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              const RememberAndForgot(),
+            ],
+          ),
         ),
         Expanded(
           flex: 2,
@@ -125,6 +136,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     return Column(
       children: [
         InputReactiveForms(
+          obscureText: false,
           formController: formControlEmail,
           title: const Text(
             LocaleKeys.authenticationEmailInputTitle,
@@ -138,6 +150,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           },
         ),
         InputReactiveForms(
+          obscureText: showPassword,
+          suffixIcon: _buildSuffixIcon(),
           formController: formControlPassword,
           title: const Text(
             LocaleKeys.authenticationPasswordInputTitle,
@@ -159,6 +173,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildSuffixIcon() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.all(
+          Radius.circular(50),
+        ),
+      ),
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            showPassword = !showPassword;
+          });
+        },
+        child: SvgPicture.asset(
+          showPassword ? AppIcons.showEye : AppIcons.hideEye,
+          fit: BoxFit.fitWidth,
+        ),
+      ),
     );
   }
 }
