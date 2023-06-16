@@ -8,7 +8,6 @@ import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/login_screen.dart';
-import 'package:jobs_pot/resources/i18n/generated/codegen_loader.g.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 
 @RoutePage()
@@ -69,17 +68,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 children: [
                   RichText(
                     text: TextSpan(
-                      text:
-                          '${CodegenLoader.en[LocaleKeys.onboardingTitle1]}\n',
+                      text: '${LocaleKeys.onboardingTitle1.tr()}\n',
                       style: AppTextStyle.blackBoldS40,
                       children: <TextSpan>[
                         TextSpan(
-                          text:
-                              '${CodegenLoader.en[LocaleKeys.onboardingTitle2]}\n',
+                          text: '${LocaleKeys.onboardingTitle2.tr()}\n',
                           style: AppTextStyle.fireYellowUnderlineBoldS40,
                         ),
                         TextSpan(
-                          text: CodegenLoader.en[LocaleKeys.onboardingTitle3],
+                          text: LocaleKeys.onboardingTitle3.tr(),
                           style: AppTextStyle.blackBoldS40,
                         ),
                       ],

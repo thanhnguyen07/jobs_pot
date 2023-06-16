@@ -11,6 +11,8 @@ class InputReactiveForms extends StatefulWidget {
     this.validationMessages,
     required this.obscureText,
     this.suffixIcon,
+    this.hintText,
+    this.keyboardType,
   });
 
   final FormControl? formController;
@@ -18,6 +20,8 @@ class InputReactiveForms extends StatefulWidget {
   final Map<String, String Function(Object)>? validationMessages;
   final bool obscureText;
   final Widget? suffixIcon;
+  final String? hintText;
+  final TextInputType? keyboardType;
 
   @override
   State<InputReactiveForms> createState() => _InputReactiveFormsState();
@@ -59,7 +63,7 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.only(bottom: 15),
+          margin: const EdgeInsets.only(bottom: 10, top: 10),
           width: double.infinity,
           child: widget.title,
         ),
@@ -77,8 +81,8 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
                 ),
               ]),
           child: ReactiveTextField(
+            keyboardType: widget.keyboardType,
             obscureText: widget.obscureText,
-            keyboardType: TextInputType.emailAddress,
             formControl: widget.formController,
             showErrors: (control) => _handleError(control),
             onChanged: _onChanged,
@@ -86,7 +90,8 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
             decoration: InputDecoration(
               suffixIcon: widget.suffixIcon,
               filled: true,
-              hintText: '',
+              hintText: widget.hintText,
+              hintStyle: AppTextStyle.textlavenderGraS12,
               border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide.none,

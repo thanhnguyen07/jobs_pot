@@ -40,13 +40,15 @@ flutter:
   uses-material-design: true
   assets:
     - lib/resources/i18n/langs/
-    - lib/assets/images/
-    - lib/assets/icons/
-    - lib/assets/icons/arrow/
-    - lib/assets/icons/company/
-    - lib/assets/icons/language/
-    - lib/assets/icons/specialization/
-    - lib/assets/icons/tabBar/
+    - lib/assets/iconsPng/
+    - lib/assets/imagesPng/
+    - lib/assets/iconsPng/company/
+    - lib/assets/iconsPng/languages/
+    - lib/assets/iconsSvg/
+    - lib/assets/imagesSvg/
+    - lib/assets/iconsSvg/arrow/
+    - lib/assets/iconsSvg/specialization/
+    - lib/assets/iconsSvg/tabBar/
   fonts:
     - family: DMSans-Bold
       fonts:
