@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://api.fleetlog.com.au/v1';
+    baseUrl ??= 'server-jobs-pot.vercel.app';
   }
 
   final Dio _dio;
@@ -40,7 +40,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/login',
+          'user/login',
           queryParameters: queryParameters,
           data: _data,
         )

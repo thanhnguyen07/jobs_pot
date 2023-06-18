@@ -11,7 +11,7 @@ class SplashController extends StateNotifier<bool> {
     Timer(
       const Duration(seconds: 2),
       () async {
-        context.router.pushNamed(OnboardingScreen.path);
+        context.router.replaceNamed(OnboardingScreen.path);
       },
     );
   }

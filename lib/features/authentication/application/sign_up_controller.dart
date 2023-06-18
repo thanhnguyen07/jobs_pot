@@ -3,12 +3,20 @@ import 'package:jobs_pot/common/app_validation_keys.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class LoginController extends StateNotifier {
-  LoginController(this.ref) : super(null);
+class SignUpController extends StateNotifier {
+  SignUpController(this.ref) : super(null);
   final Ref ref;
 
-  final loginForm = FormGroup(
+  final signUpForm = FormGroup(
     {
+      ValidationKeys.fullName: FormControl<String>(
+        value: '',
+        validators: [
+          Validators.minLength(3),
+          Validators.required,
+        ],
+        touched: true,
+      ),
       ValidationKeys.email: FormControl<String>(
         value: '',
         validators: [Validators.required, emailValidatorSchema],

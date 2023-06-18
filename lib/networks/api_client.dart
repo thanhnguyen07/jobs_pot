@@ -10,7 +10,7 @@ abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   ///User
-  @POST("/login")
+  @POST("user/login")
   Future<dynamic> authLogin(@Header("Authorization") String username,
       @Header("Fltoken") String token);
 }

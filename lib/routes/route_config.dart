@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:jobs_pot/features/authentication/presentation/screens/login_screen.dart';
+import 'package:jobs_pot/features/authentication/presentation/screens/login/login_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart';
+import 'package:jobs_pot/features/authentication/presentation/screens/signUp/sign_up_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/splash_screen.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 
@@ -22,6 +23,10 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: LoginRoute.page,
           path: LoginScreen.path,
+        ),
+        AutoRoute(
+          page: SignUpRoute.page,
+          path: SignUpScreen.path,
         ),
       ];
 }

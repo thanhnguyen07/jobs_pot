@@ -25,6 +25,7 @@ dependencies:
   shared_preferences: ^2.1.2
   flutter_riverpod: ^2.2.0
   auto_route: ^7.4.0
+  fpdart: ^0.6.0
 
 dev_dependencies:
   flutter_test:

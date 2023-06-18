@@ -7,4 +7,5 @@ class ValidationKeys {
   static const String upperCase = 'upperCase';
   static const String email = 'email';
   static const String password = 'psassword';
+  static const String fullName = 'fullName';
 }

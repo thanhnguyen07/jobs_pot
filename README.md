@@ -38,11 +38,17 @@ class HomeScreen extends StatefulWidget {}
 Use the [watch] flag to watch the files' system for edits and rebuild as necessary.
 
 ```
-flutter packages pub run build_runner watch
+fvm flutter packages pub run build_runner watch
 ```
 
 if you want the generator to run one time and exit, use
 
 ```
-flutter packages pub run build_runner build
+fvm flutter packages pub run build_runner build
+```
+
+## freezed
+**Generated code**
+```
+fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 ```

@@ -6,15 +6,20 @@
   "onboardingTitle3": "Here!",
   "onboardingSubTitle": "Khám phá tất cả các vai trò công việc thú vị nhất dựa trên sở thích và chuyên ngành học của bạn.",
   "authenticationLoginTitle": "Chào mừng trở lại",
+  "authenticationSignUpTitle": "Tạo một tài khoản",
   "authenticationEmailInputTitle": "Email",
+  "authenticationFullNameInputTitle": "Họ và tên",
   "authenticationPasswordInputTitle": "Mật khẩu",
   "authenticationRememberMe": "Ghi nhớ đăng nhập",
   "authenticationForgotPassword": "Quên mật khẩu?",
   "authenticationLoginButtonTitle": "ĐĂNG NHẬP",
   "authenticationGoogleButtonTitle": "ĐĂNG NHẬP VỚI GOOGLE",
   "authenticationSuggestionsSignUp": "Bạn chưa có tài khoản?",
+  "authenticationSuggestionsLogin": "Bạn đã có tài khoản?",
   "authenticationSuggestionsActionSignUp": "Đăng ký",
+  "authenticationSuggestionsActionLogin": "Đăng nhập",
   "authenticationSignUpButtonTitle": "ĐĂNG KÝ",
+  "authenticationInputFullNameHintText": "Nguyễn Văn A",
   "authenticationInputEmailHintText": "abc@gmail.com",
   "authenticationInputPasswordHintText": "• • • • • • • •",
   "authenticationInputRequired": "Trường này là bắt buộc.",
@@ -23,5 +28,7 @@
   "authenticationPasswordValidationMessages2": "Mật khẩu phải có ít nhất một chữ số ('0'-'9').",
   "authenticationPasswordValidationMessages3": "Mật khẩu phải có ít nhất một chữ cái ('a'-'z').",
   "authenticationPasswordValidationMessages4": "Mật khẩu phải có ít nhất một chữ hoa ('A'-Z').",
-  "authenticationPasswordValidationMessages5": "Mật khẩu phải nhiều hơn 3 ký tự."
+  "authenticationPasswordValidationMessages5": "Mật khẩu phải nhiều hơn 3 ký tự.",
+  "authenticationPasswordValidationMessages6": "Tên đầy đủ phải nhiều hơn 3 ký tự."
+
 }

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppConfigs {
-  static const String appName = 'Flutter';
+  static const String appName = 'Jobs Pot';
 
   ///DEV
 
   ///STAGING
   static const envName = "Staging";
-  static const webUrl = "https://www.themoviedb.org";
-  static const baseUrl = "https://api.fleetlog.com.au/v1";
-  static const socketUrl = 'wss://socket.themoviedb.org'; //Todo: change this
+  static const baseUrl = "server-jobs-pot.vercel.app";
 
   ///PRODUCTION
 
