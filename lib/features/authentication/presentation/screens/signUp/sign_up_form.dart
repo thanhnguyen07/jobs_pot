@@ -25,7 +25,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   FormControl<dynamic>? formControlEmail;
   FormControl<dynamic>? formControlPassword;
 
-  late bool showPassword = true;
   late bool rememberState = true;
   late FormGroup signUpForm;
 
@@ -79,14 +78,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
       child: Column(
         children: [
           _formInput(),
-          RememberAndForgot(
-            state: rememberState,
-            setState: () => {
-              setState(() {
-                rememberState = !rememberState;
-              })
-            },
-          ),
+          const RememberAndForgot(),
           ButtonSubmitForm(
             title: Text(
               Utils.getLocaleMessage(

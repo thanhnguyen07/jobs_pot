@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/app_validation_keys.dart';
@@ -44,9 +47,14 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   void _onLogin(FormGroup form) {
     FocusManager.instance.primaryFocus?.unfocus();
-    // final email = form.controls[ValidationKeys.email]?.value.toString() ?? "";
-    // final password =
-    //     form.controls[ValidationKeys.password]?.value.toString() ?? "";
+    final email = form.controls[ValidationKeys.email]?.value.toString() ?? "";
+
+    final password =
+        form.controls[ValidationKeys.password]?.value.toString() ?? "";
+
+    final encode = Utils.encryptPassword(password);
+    print(encode);
+    // EasyLoading.show();
 
     final isValid = form.valid;
     if (isValid) {
@@ -73,14 +81,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       child: Column(
         children: [
           _formInput(),
-          RememberAndForgot(
-            state: rememberState,
-            setState: () => {
-              setState(() {
-                rememberState = !rememberState;
-              })
-            },
-          ),
+          const RememberAndForgot(),
           ButtonSubmitForm(
             title: Text(
               Utils.getLocaleMessage(LocaleKeys.authenticationLoginButtonTitle),
@@ -97,7 +98,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
     return Column(
       children: [
         EmailInput(formControlEmail: formControlEmail),
-        PasswordInput(formControlPassword: formControlEmail),
+        PasswordInput(formControlPassword: formControlPassword),
       ],
     );
   }
