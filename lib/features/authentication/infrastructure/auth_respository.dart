@@ -1,5 +1,7 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/token_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/authentication/domain/repositories/auth_respository_interface.dart';
 import 'package:jobs_pot/networks/api_client.dart';
 import 'package:jobs_pot/networks/api_util.dart';
@@ -41,24 +43,18 @@ class AuthRepository implements AuthRepositoryInterface {
     return LocalStorageHelper.removeRefreshToken();
   }
 
-  // @override
-  // Future<Either<Failure, TokenEntity>> signinWithMail(
-  //     String userName, String password) async {
-  //   try {
-  //     String credentials = "$userName:$password";
+  @override
+  Future<Either<Failure, TokenEntity>> signUpWithMail(
+      String fullName, String email, String password) async {
+    try {
+      final tokenEntityResponse =
+          await _apiClient.authLogin('Basic $encodedCredential', 't63esC9kE56');
 
-  //     Codec<String, String> stringToBase64 = utf8.fuse(base64);
-
-  //     String encodedCredential = stringToBase64.encode(credentials);
-
-  //     final tokenEntityResponse =
-  //         await _apiClient.authLogin('Basic $encodedCredential', 't63esC9kE56');
-
-  //     return right(TokenEntity.fromJson(tokenEntityResponse));
-  //   } catch (error) {
-  //     return left(Failure.message(message: error.toString()));
-  //   }
-  // }
+      return right(TokenEntity.fromJson(tokenEntityResponse));
+    } catch (error) {
+      return left(Failure.message(message: error.toString()));
+    }
+  }
 
   // @override
   // Future<Either<Failure, UserResponseEntity>> getUserProfile() async {

@@ -11,6 +11,6 @@ abstract class ApiClient {
 
   ///User
   @POST("user/login")
-  Future<dynamic> authLogin(@Header("Authorization") String username,
+  Future<dynamic> signUpWithEmail(@Header("Authorization") String username,
       @Header("Fltoken") String token);
 }

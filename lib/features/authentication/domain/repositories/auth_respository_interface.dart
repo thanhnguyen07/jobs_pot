@@ -1,4 +1,6 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/token_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 
 abstract class AuthRepositoryInterface {
   void saveToken(TokenEntity token);
@@ -15,6 +17,9 @@ abstract class AuthRepositoryInterface {
 
   // Future<Either<Failure, UserResponseEntity>> getUserProfile();
 
-  // Future<Either<Failure, TokenEntity>> signinWithMail(
-  //     String userName, String password);
+  Future<Either<Failure, TokenEntity>> signUpWithMail(
+    String fullName,
+    String email,
+    String password,
+  );
 }

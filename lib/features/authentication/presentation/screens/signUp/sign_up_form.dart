@@ -85,7 +85,10 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                   LocaleKeys.authenticationSignUpButtonTitle),
               style: AppTextStyle.whiteBoldS14,
             ),
-            onLogin: _onSignUp,
+            onLogin: () {
+              // _onSignUp;
+              ref.read(signUpControllerProvider.notifier).onSignUp();
+            },
           ),
         ],
       ),
