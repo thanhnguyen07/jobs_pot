@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // import '../features/authentication/infrastructure/repositories/auth_repository.dart';
 import '../utils/logger.dart';
 
@@ -64,7 +65,8 @@ class ApiInterceptors extends InterceptorsWrapper {
     final uri = err.requestOptions.path;
     var data = "";
     try {
-      data = jsonEncode(err.response?.data);
+      Fluttertoast.showToast(msg: err.response?.data["msg"]);
+      data = jsonEncode(err.response?.data.msg);
     } catch (e) {
       logger.e(e);
     }

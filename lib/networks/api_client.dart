@@ -10,7 +10,6 @@ abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   ///User
-  @POST("user/login")
-  Future<dynamic> signUpWithEmail(@Header("Authorization") String username,
-      @Header("Fltoken") String token);
+  @POST("user/signup")
+  Future<dynamic> signUpWithEmail(@Body() Map<String, dynamic> body);
 }

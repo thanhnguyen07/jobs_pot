@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/token_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/authentication/domain/repositories/auth_respository_interface.dart';
 import 'package:jobs_pot/networks/api_client.dart';
@@ -44,13 +45,17 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, TokenEntity>> signUpWithMail(
+  Future<Either<Failure, UserResponseEntity>> signUpWithMail(
       String fullName, String email, String password) async {
     try {
-      final tokenEntityResponse =
-          await _apiClient.authLogin('Basic $encodedCredential', 't63esC9kE56');
+      final Map<String, String> body = {
+        "userName": fullName,
+        "email": email,
+        "password": password
+      };
+      final signUpRes = await _apiClient.signUpWithEmail(body);
 
-      return right(TokenEntity.fromJson(tokenEntityResponse));
+      return right(UserResponseEntity.fromJson(signUpRes));
     } catch (error) {
       return left(Failure.message(message: error.toString()));
     }

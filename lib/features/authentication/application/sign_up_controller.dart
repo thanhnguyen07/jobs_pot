@@ -1,5 +1,7 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_validation_keys.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
@@ -39,14 +41,6 @@ class SignUpController extends StateNotifier {
   void onSignUp() {
     final isValid = signUpForm.valid;
     if (isValid) {
-      final fullName =
-          signUpForm.controls[ValidationKeys.fullName]?.value.toString() ?? "";
-      final email =
-          signUpForm.controls[ValidationKeys.email]?.value.toString() ?? "";
-      final password =
-          signUpForm.controls[ValidationKeys.password]?.value.toString() ?? "";
-
-      final encryptPassword = Utils.encryptPassword(password);
       signUpWithEmail();
     } else {
       signUpForm.controls.forEach((key, value) {
@@ -68,5 +62,15 @@ class SignUpController extends StateNotifier {
         signUpForm.controls[ValidationKeys.password]?.value.toString() ?? "";
 
     final encryptPassword = Utils.encryptPassword(password);
+
+    EasyLoading.show();
+
+    final resSignUp = await ref
+        .read(authRepositoryProvider)
+        .signUpWithMail(fullName, email, encryptPassword);
+
+    print("Res $resSignUp");
+
+    EasyLoading.dismiss();
   }
 }

@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'server-jobs-pot.vercel.app';
+    baseUrl ??= 'https://server-jobs-pot.vercel.app/';
   }
 
   final Dio _dio;
@@ -21,18 +21,12 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<dynamic> authLogin(
-    String username,
-    String token,
-  ) async {
+  Future<dynamic> signUpWithEmail(Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'Authorization': username,
-      r'Fltoken': token,
-    };
-    _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -40,7 +34,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          'user/login',
+          'user/signup',
           queryParameters: queryParameters,
           data: _data,
         )
