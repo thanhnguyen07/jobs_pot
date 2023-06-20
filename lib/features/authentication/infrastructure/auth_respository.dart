@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/token_entity.dart';
@@ -15,22 +16,22 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future saveToken(TokenEntity token) {
+  Future saveToken(String token) {
     return LocalStorageHelper.saveToken(token);
   }
 
   @override
-  Future saveRefreshToken(TokenEntity token) {
+  Future saveRefreshToken(String token) {
     return LocalStorageHelper.saveRefreshToken(token);
   }
 
   @override
-  Future<TokenEntity?> getToken() {
+  Future<String?> getToken() {
     return LocalStorageHelper.getToken();
   }
 
   @override
-  Future<TokenEntity?> getRefreshToken() {
+  Future<String?> getRefreshToken() {
     return LocalStorageHelper.getRefreshToken();
   }
 
@@ -45,7 +46,7 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, UserResponseEntity>> signUpWithMail(
+  Future<Either<Failure, UserResponseEntity>> signUpWithEmail(
       String fullName, String email, String password) async {
     try {
       final Map<String, String> body = {
@@ -54,6 +55,19 @@ class AuthRepository implements AuthRepositoryInterface {
         "password": password
       };
       final signUpRes = await _apiClient.signUpWithEmail(body);
+
+      return right(UserResponseEntity.fromJson(signUpRes));
+    } catch (error) {
+      return left(Failure.message(message: error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserResponseEntity>> signInWithEmail(
+      String email, String password) async {
+    try {
+      final Map<String, String> body = {"email": email, "password": password};
+      final signUpRes = await _apiClient.signInWithEmail(body);
 
       return right(UserResponseEntity.fromJson(signUpRes));
     } catch (error) {

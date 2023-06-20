@@ -5,6 +5,7 @@ import 'package:jobs_pot/features/authentication/presentation/screens/login/logi
 import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/signUp/sign_up_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/splash_screen.dart';
+import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
@@ -35,6 +36,10 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: EmailVerificationRoute.page,
           path: EmailVerificationScreen.path,
+        ),
+        AutoRoute(
+          page: HomeRoute.page,
+          path: HomeScreen.path,
         ),
       ];
 }

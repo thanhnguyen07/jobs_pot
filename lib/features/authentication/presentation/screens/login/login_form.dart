@@ -42,33 +42,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
         loginForm.control(ValidationKeys.password) as FormControl?;
   }
 
-  void _onLogin(FormGroup form) {
-    FocusManager.instance.primaryFocus?.unfocus();
-    final email = form.controls[ValidationKeys.email]?.value.toString() ?? "";
-
-    final password =
-        form.controls[ValidationKeys.password]?.value.toString() ?? "";
-
-    final encode = Utils.encryptPassword(password);
-    print(encode);
-    // EasyLoading.show();
-
-    final isValid = form.valid;
-    if (isValid) {
-      // ref
-      //     .read(signinWithEmailProvider.notifier)
-      //     .signinWithMail(email, password);
-    } else {
-      form.controls.forEach((key, value) {
-        if (value.invalid) {
-          value.setErrors({
-            ValidationKeys.required: LocaleKeys.authenticationInputRequired
-          });
-        }
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     ref.watch(languageControllerProvider);
@@ -84,7 +57,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               Utils.getLocaleMessage(LocaleKeys.authenticationLoginButtonTitle),
               style: AppTextStyle.whiteBoldS14,
             ),
-            onLogin: _onLogin,
+            onLogin: () =>
+                ref.read(loginControllerProvider.notifier).onLogin(context),
           )
         ],
       ),

@@ -7,9 +7,9 @@ class LocalStorageHelper {
   static const _tokenKey = 'token';
   static const _refreshTokenKey = 'refresh_token';
 
-  static Future<void> saveToken(TokenEntity token) async {
+  static Future<void> saveToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_tokenKey, jsonEncode(token.toJson()));
+    await prefs.setString(_tokenKey, jsonEncode(token));
   }
 
   static Future<void> removeToken() async {
@@ -17,24 +17,23 @@ class LocalStorageHelper {
     await prefs.remove(_tokenKey);
   }
 
-  static Future<TokenEntity?> getToken() async {
+  static Future<String?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       final tokenEncoded = prefs.getString(_tokenKey);
       if (tokenEncoded == null) {
         return null;
       } else {
-        return TokenEntity.fromJson(
-            jsonDecode(tokenEncoded) as Map<String, dynamic>);
+        return tokenEncoded;
       }
     } catch (e) {
       return null;
     }
   }
 
-  static Future<void> saveRefreshToken(TokenEntity token) async {
+  static Future<void> saveRefreshToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_refreshTokenKey, jsonEncode(token.toJson()));
+    await prefs.setString(_refreshTokenKey, jsonEncode(token));
   }
 
   static Future<void> removeRefreshToken() async {
@@ -42,15 +41,14 @@ class LocalStorageHelper {
     await prefs.remove(_refreshTokenKey);
   }
 
-  static Future<TokenEntity?> getRefreshToken() async {
+  static Future<String?> getRefreshToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       final tokenEncoded = prefs.getString(_refreshTokenKey);
       if (tokenEncoded == null) {
         return null;
       } else {
-        return TokenEntity.fromJson(
-            jsonDecode(tokenEncoded) as Map<String, dynamic>);
+        return tokenEncoded;
       }
     } catch (e) {
       return null;

@@ -12,4 +12,7 @@ abstract class ApiClient {
   ///User
   @POST("user/signup")
   Future<dynamic> signUpWithEmail(@Body() Map<String, dynamic> body);
+
+  @POST("user/signin")
+  Future<dynamic> signInWithEmail(@Body() Map<String, dynamic> body);
 }

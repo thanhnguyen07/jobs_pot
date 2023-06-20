@@ -87,7 +87,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             ),
             onLogin: () {
               // _onSignUp;
-              ref.read(signUpControllerProvider.notifier).onSignUp();
+              ref.read(signUpControllerProvider.notifier).onSignUp(context);
             },
           ),
         ],
