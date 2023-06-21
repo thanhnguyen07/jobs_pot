@@ -47,28 +47,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
         signUpForm.control(ValidationKeys.password) as FormControl?;
   }
 
-  void _onSignUp(FormGroup form) {
-    FocusManager.instance.primaryFocus?.unfocus();
-    // final email = form.controls[ValidationKeys.email]?.value.toString() ?? "";
-    // final password =
-    //     form.controls[ValidationKeys.password]?.value.toString() ?? "";
-
-    final isValid = form.valid;
-    if (isValid) {
-      // ref
-      //     .read(signinWithEmailProvider.notifier)
-      //     .signinWithMail(email, password);
-    } else {
-      form.controls.forEach((key, value) {
-        if (value.invalid) {
-          value.setErrors({
-            ValidationKeys.required: LocaleKeys.authenticationInputRequired
-          });
-        }
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     ref.watch(languageControllerProvider);
@@ -86,7 +64,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               style: AppTextStyle.whiteBoldS14,
             ),
             onLogin: () {
-              // _onSignUp;
               ref.read(signUpControllerProvider.notifier).onSignUp(context);
             },
           ),

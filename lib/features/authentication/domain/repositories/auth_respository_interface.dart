@@ -7,13 +7,19 @@ abstract class AuthRepositoryInterface {
 
   void saveRefreshToken(String token);
 
+  void saveOnboadingStatus();
+
   Future<String?> getToken();
 
   Future<String?> getRefreshToken();
 
+  Future<bool?> getOnboadingStatus();
+
   void removeToken();
 
   void removeRefreshToken();
+
+  void removeOnboadingStatus();
 
   Future<Either<Failure, UserResponseEntity>> signInWithEmail(
     String email,

@@ -23,7 +23,7 @@ mixin _$UserResponseEntity {
   UserEntity get results => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
-  String? get msg => throw _privateConstructorUsedError;
+  String get msg => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,7 @@ abstract class $UserResponseEntityCopyWith<$Res> {
       _$UserResponseEntityCopyWithImpl<$Res, UserResponseEntity>;
   @useResult
   $Res call(
-      {UserEntity results, String token, String refreshToken, String? msg});
+      {UserEntity results, String token, String refreshToken, String msg});
 
   $UserEntityCopyWith<$Res> get results;
 }
@@ -59,7 +59,7 @@ class _$UserResponseEntityCopyWithImpl<$Res, $Val extends UserResponseEntity>
     Object? results = null,
     Object? token = null,
     Object? refreshToken = null,
-    Object? msg = freezed,
+    Object? msg = null,
   }) {
     return _then(_value.copyWith(
       results: null == results
@@ -74,10 +74,10 @@ class _$UserResponseEntityCopyWithImpl<$Res, $Val extends UserResponseEntity>
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
-      msg: freezed == msg
+      msg: null == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 
@@ -99,7 +99,7 @@ abstract class _$$_UserResponseEntityCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {UserEntity results, String token, String refreshToken, String? msg});
+      {UserEntity results, String token, String refreshToken, String msg});
 
   @override
   $UserEntityCopyWith<$Res> get results;
@@ -119,7 +119,7 @@ class __$$_UserResponseEntityCopyWithImpl<$Res>
     Object? results = null,
     Object? token = null,
     Object? refreshToken = null,
-    Object? msg = freezed,
+    Object? msg = null,
   }) {
     return _then(_$_UserResponseEntity(
       results: null == results
@@ -134,10 +134,10 @@ class __$$_UserResponseEntityCopyWithImpl<$Res>
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
-      msg: freezed == msg
+      msg: null == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -149,7 +149,7 @@ class _$_UserResponseEntity implements _UserResponseEntity {
       {required this.results,
       required this.token,
       required this.refreshToken,
-      this.msg});
+      required this.msg});
 
   factory _$_UserResponseEntity.fromJson(Map<String, dynamic> json) =>
       _$$_UserResponseEntityFromJson(json);
@@ -161,7 +161,7 @@ class _$_UserResponseEntity implements _UserResponseEntity {
   @override
   final String refreshToken;
   @override
-  final String? msg;
+  final String msg;
 
   @override
   String toString() {
@@ -205,7 +205,7 @@ abstract class _UserResponseEntity implements UserResponseEntity {
       {required final UserEntity results,
       required final String token,
       required final String refreshToken,
-      final String? msg}) = _$_UserResponseEntity;
+      required final String msg}) = _$_UserResponseEntity;
 
   factory _UserResponseEntity.fromJson(Map<String, dynamic> json) =
       _$_UserResponseEntity.fromJson;
@@ -217,7 +217,7 @@ abstract class _UserResponseEntity implements UserResponseEntity {
   @override
   String get refreshToken;
   @override
-  String? get msg;
+  String get msg;
   @override
   @JsonKey(ignore: true)
   _$$_UserResponseEntityCopyWith<_$_UserResponseEntity> get copyWith =>

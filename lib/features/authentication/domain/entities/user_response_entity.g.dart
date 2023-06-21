@@ -12,7 +12,7 @@ _$_UserResponseEntity _$$_UserResponseEntityFromJson(
       results: UserEntity.fromJson(json['results'] as Map<String, dynamic>),
       token: json['token'] as String,
       refreshToken: json['refreshToken'] as String,
-      msg: json['msg'] as String?,
+      msg: json['msg'] as String,
     );
 
 Map<String, dynamic> _$$_UserResponseEntityToJson(

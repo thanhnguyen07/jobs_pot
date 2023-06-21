@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/token_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 
 part 'user_response_entity.freezed.dart';
@@ -14,7 +13,7 @@ class UserResponseEntity with _$UserResponseEntity {
     required UserEntity results,
     required String token,
     required String refreshToken,
-    String? msg,
+    required String msg,
   }) = _UserResponseEntity;
 
   /// factory method to create entity from JSON

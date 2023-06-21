@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../utils/logger.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
@@ -63,13 +62,12 @@ class ApiInterceptors extends InterceptorsWrapper {
     final uri = err.requestOptions.path;
     var data = "";
     try {
-      Fluttertoast.showToast(msg: err.response?.data["msg"]);
-
       data = jsonEncode(err.response.toString());
     } catch (e) {
       logger.e(e);
     }
     apiLogger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
+
     super.onError(err, handler);
   }
 }

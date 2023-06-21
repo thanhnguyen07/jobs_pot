@@ -6,6 +6,7 @@ import 'package:jobs_pot/common/app_validation_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -74,12 +75,17 @@ class SignUpController extends StateNotifier {
         .signUpWithEmail(fullName, email, encryptPassword);
 
     resSignUp.fold((l) {
-      // final error = l.error;
-
-      // print(error);
+      ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
     }, (r) {
-      ref.read(authRepositoryProvider).saveToken(r.token);
-      context.router.replaceNamed(HomeScreen.path);
+      ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+
+      ref.read(authRepositoryProvider).saveToken(r.token).then(
+        (value) {
+          context.router.removeLast();
+
+          context.router.pushNamed(HomeScreen.path);
+        },
+      );
     });
 
     EasyLoading.dismiss();

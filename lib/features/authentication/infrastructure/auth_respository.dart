@@ -1,7 +1,7 @@
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/database/local_storage.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/token_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/authentication/domain/repositories/auth_respository_interface.dart';
@@ -26,6 +26,11 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
+  Future saveOnboadingStatus() {
+    return LocalStorageHelper.saveOnboadingStatus();
+  }
+
+  @override
   Future<String?> getToken() {
     return LocalStorageHelper.getToken();
   }
@@ -36,6 +41,11 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
+  Future<bool?> getOnboadingStatus() {
+    return LocalStorageHelper.getOnboadingStatus();
+  }
+
+  @override
   Future removeToken() {
     return LocalStorageHelper.removeToken();
   }
@@ -43,6 +53,11 @@ class AuthRepository implements AuthRepositoryInterface {
   @override
   Future removeRefreshToken() {
     return LocalStorageHelper.removeRefreshToken();
+  }
+
+  @override
+  Future removeOnboadingStatus() {
+    return LocalStorageHelper.removeOnboadingStatus();
   }
 
   @override
@@ -58,6 +73,11 @@ class AuthRepository implements AuthRepositoryInterface {
 
       return right(UserResponseEntity.fromJson(signUpRes));
     } catch (error) {
+      if (error is DioException) {
+        final resError = ErrorResponseEntity.fromJson(error.response?.data);
+
+        return left(Failure.message(message: resError.msg));
+      }
       return left(Failure.message(message: error.toString()));
     }
   }
@@ -71,6 +91,11 @@ class AuthRepository implements AuthRepositoryInterface {
 
       return right(UserResponseEntity.fromJson(signUpRes));
     } catch (error) {
+      if (error is DioException) {
+        final resError = ErrorResponseEntity.fromJson(error.response?.data);
+
+        return left(Failure.message(message: resError.msg));
+      }
       return left(Failure.message(message: error.toString()));
     }
   }

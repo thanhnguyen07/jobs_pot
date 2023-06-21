@@ -6,6 +6,7 @@ import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/login/login_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -64,7 +65,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           TextButton(
-            onPressed: _goLogin,
+            onPressed: () =>
+                ref.read(onboardingController.notifier).goLogin(context),
             style: TextButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100),
