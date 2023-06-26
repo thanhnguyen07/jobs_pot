@@ -64,18 +64,22 @@ class LoginController extends StateNotifier {
         .read(authRepositoryProvider)
         .signInWithEmail(email, encryptPassword);
 
-    resSignUp.fold((l) {
-      ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
-    }, (r) {
-      ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+    resSignUp.fold(
+      (l) {
+        ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
+      },
+      (r) {
+        ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
 
-      ref.read(authRepositoryProvider).saveToken(r.token).then(
-        (value) {
+        ref
+            .read(authRepositoryProvider)
+            .saveBothToken(r.token, r.refreshToken)
+            .then((value) {
           context.router.removeLast();
           context.router.pushNamed(HomeScreen.path);
-        },
-      );
-    });
+        });
+      },
+    );
 
     EasyLoading.dismiss();
   }

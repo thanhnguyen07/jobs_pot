@@ -3,6 +3,8 @@ import 'package:jobs_pot/features/authentication/domain/entities/user_response_e
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 
 abstract class AuthRepositoryInterface {
+  void saveBothToken(String token, String refreshToken);
+
   void saveToken(String token);
 
   void saveRefreshToken(String token);
@@ -14,6 +16,8 @@ abstract class AuthRepositoryInterface {
   Future<String?> getRefreshToken();
 
   Future<bool?> getOnboadingStatus();
+
+  void removeBothToken();
 
   void removeToken();
 
@@ -31,4 +35,8 @@ abstract class AuthRepositoryInterface {
     String email,
     String password,
   );
+
+  Future<Either<Failure, UserResponseEntity>> getUserProfile();
+
+  Future<Either<Failure, String>> refreshToken();
 }

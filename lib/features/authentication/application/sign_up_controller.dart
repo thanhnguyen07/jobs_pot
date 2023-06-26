@@ -79,7 +79,10 @@ class SignUpController extends StateNotifier {
     }, (r) {
       ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
 
-      ref.read(authRepositoryProvider).saveToken(r.token).then(
+      ref
+          .read(authRepositoryProvider)
+          .saveBothToken(r.token, r.refreshToken)
+          .then(
         (value) {
           context.router.removeLast();
 

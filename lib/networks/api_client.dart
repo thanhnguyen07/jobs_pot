@@ -15,4 +15,10 @@ abstract class ApiClient {
 
   @POST("user/signin")
   Future<dynamic> signInWithEmail(@Body() Map<String, dynamic> body);
+
+  @GET("user/profile")
+  Future<dynamic> getUserProfile();
+
+  @POST("user/refreshtoken")
+  Future<dynamic> refreshToken(@Body() Map<String, dynamic> body);
 }

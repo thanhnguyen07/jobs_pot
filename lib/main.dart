@@ -3,7 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/config/app_configs.dart';
+import 'package:jobs_pot/config/providers.dart';
 import 'package:jobs_pot/routes/route_config.dart';
+import 'package:jobs_pot/routes/route_providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,20 +19,28 @@ void main() async {
       ],
       path: AppConfigs.pathLanguage,
       fallbackLocale: AppConfigs.appLanguageEn,
-      child: ProviderScope(
-        child: MyApp(),
+      child: UncontrolledProviderScope(
+        container: await appProviderContainer(),
+        child: const MyApp(),
       ),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+final appRouter = AppRouter();
 
-  final _appRouter = AppRouter();
+class MyApp extends ConsumerStatefulWidget {
+  const MyApp({super.key});
 
   @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
   Widget build(BuildContext context) {
+    // final appRouter = ref.watch(routeControllerProvider);
+
     EasyLoading.instance.maskType = EasyLoadingMaskType.black;
     EasyLoading.instance.loadingStyle = EasyLoadingStyle.light;
 
@@ -39,7 +49,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routerConfig: _appRouter.config(),
+      routerConfig: appRouter.config(),
     );
   }
 }

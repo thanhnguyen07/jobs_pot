@@ -16,6 +16,11 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
+  Future saveBothToken(String token, String refreshToken) {
+    return LocalStorageHelper.saveBothToken(token, refreshToken);
+  }
+
+  @override
   Future saveToken(String token) {
     return LocalStorageHelper.saveToken(token);
   }
@@ -43,6 +48,11 @@ class AuthRepository implements AuthRepositoryInterface {
   @override
   Future<bool?> getOnboadingStatus() {
     return LocalStorageHelper.getOnboadingStatus();
+  }
+
+  @override
+  Future removeBothToken() {
+    return LocalStorageHelper.removeBothToken();
   }
 
   @override
@@ -100,14 +110,39 @@ class AuthRepository implements AuthRepositoryInterface {
     }
   }
 
-  // @override
-  // Future<Either<Failure, UserResponseEntity>> getUserProfile() async {
-  //   try {
-  //     final userProfileResponse = await _apiClient.getUserProfile();
-  //     final user = UserResponseEntity.fromJson(userProfileResponse);
-  //     return right(user);
-  //   } catch (error) {
-  //     return left(Failure.message(message: error.toString()));
-  //   }
-  // }
+  @override
+  Future<Either<Failure, UserResponseEntity>> getUserProfile() async {
+    try {
+      final userProfileResponse = await _apiClient.getUserProfile();
+
+      return right(UserResponseEntity.fromJson(userProfileResponse));
+    } catch (error) {
+      if (error is DioException) {
+        final resError = ErrorResponseEntity.fromJson(error.response?.data);
+
+        return left(Failure.message(message: resError.msg));
+      }
+      return left(Failure.message(message: error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> refreshToken() async {
+    try {
+      final String? refreshToken = await getRefreshToken();
+
+      final Map<String, String?> body = {"refreshToken": refreshToken};
+
+      final userProfileResponse = await _apiClient.refreshToken(body);
+
+      final dataRes = UserResponseEntity.fromJson(userProfileResponse);
+
+      await saveBothToken(dataRes.token, dataRes.refreshToken);
+
+      return right(dataRes.token);
+    } catch (error) {
+      return left(const Failure.message(
+          message: "An error occurred. Please login again!!!"));
+    }
+  }
 }

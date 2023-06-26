@@ -1,5 +1,11 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:jobs_pot/config/app_configs.dart';
+import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
+import 'package:jobs_pot/features/authentication/infrastructure/auth_respository.dart';
+import 'package:jobs_pot/features/authentication/presentation/screens/login/login_screen.dart';
+import 'package:jobs_pot/main.dart';
 import '../utils/logger.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
@@ -12,10 +18,12 @@ class ApiInterceptors extends InterceptorsWrapper {
 
     final data = options.data;
 
-    // final tokenDataStore = await AuthRepository().getTokenSharePerferences();
+    // final token = await AuthRepository().getToken();
+    const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoYW5oamFuZ0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyN2I1MGRlNmQwMDU0YWIwMjcyOTE1MmQzYjEzMjU0NzgxNTk3MzQzMTQzYmYzNDFhNGIyMjMzMDFhMTRiOWMiLCJpYXQiOjE2ODc2ODc0NTEsImV4cCI6MTY4NzY5ODI1MX0.vDeUXgfqIB4WwRnOhEjWCDbrVNq7cst0NCM6xK7XdsE';
 
     if (!uri.path.contains("login")) {
-      // options.headers['Authorization'] = 'Bearer ${tokenDataStore.token}';
+      options.headers['Authorization'] = "Bearer $token";
     }
 
     apiLogger.log(
@@ -29,15 +37,15 @@ class ApiInterceptors extends InterceptorsWrapper {
         apiLogger.log(
             "✈️ REQUEST[$method] => PATH: $uri \n DATA: ${jsonEncode(data)}",
             printFullText: true);
-        // apiLogger.log(
-        //     "✈️ REQUEST[$method] => PATH: $uri \n Token: ${tokenDataStore?.token} \n DATA: ${jsonEncode(data)}",
-        //     printFullText: true);
+        apiLogger.log(
+            "✈️ REQUEST[$method] => PATH: $uri \n Token: $token \n DATA: ${jsonEncode(data)}",
+            printFullText: true);
       } catch (e) {
         apiLogger.log("✈️ REQUEST[$method] => PATH: $uri \n DATA: $data",
             printFullText: true);
-        // apiLogger.log(
-        //     "✈️ REQUEST[$method] => PATH: $uri \n Token: ${tokenDataStore?.token} \n DATA: $data",
-        //     printFullText: true);
+        apiLogger.log(
+            "✈️ REQUEST[$method] => PATH: $uri \n Token: $token \n DATA: $data",
+            printFullText: true);
       }
     }
     super.onRequest(options, handler);
@@ -57,15 +65,44 @@ class ApiInterceptors extends InterceptorsWrapper {
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
+  Future<void> onError(
+      DioException err, ErrorInterceptorHandler handler) async {
     final statusCode = err.response?.statusCode;
+
     final uri = err.requestOptions.path;
+
     var data = "";
+
+    if (statusCode == 401) {
+      final Either<Failure, String> resRefreshToken =
+          await AuthRepository().refreshToken();
+
+      await resRefreshToken.fold((l) {
+        appRouter.removeLast();
+
+        appRouter.pushNamed(LoginScreen.path);
+      }, (r) async {
+        err.requestOptions.headers['Authorization'] = 'Bearer $r';
+
+        final opts = Options(
+            method: err.requestOptions.method,
+            headers: err.requestOptions.headers);
+
+        final cloneReq = await Dio().request(
+            "${AppConfigs.baseUrl}${err.requestOptions.path}",
+            options: opts,
+            data: err.requestOptions.data,
+            queryParameters: err.requestOptions.queryParameters);
+
+        return handler.resolve(cloneReq);
+      });
+    }
     try {
       data = jsonEncode(err.response.toString());
     } catch (e) {
       logger.e(e);
     }
+
     apiLogger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
 
     super.onError(err, handler);

@@ -15,7 +15,7 @@ final authRepositoryProvider = Provider<AuthRepository>(
 );
 
 final authControllerProvider = Provider<AuthController>(
-  (ref) => AuthController(),
+  (ref) => AuthController(ref),
 );
 
 final splashControllerProvider = StateNotifierProvider<SplashController, bool>(
@@ -32,11 +32,11 @@ final signUpControllerProvider =
 );
 
 final rememberLoginController =
-    StateNotifierProvider<RememberLoginController, bool>(
+    AutoDisposeStateNotifierProvider<RememberLoginController, bool>(
   (ref) => RememberLoginController(),
 );
 
 final onboardingController =
-    StateNotifierProvider<OnboardingController, dynamic>(
+    AutoDisposeStateNotifierProvider<OnboardingController, dynamic>(
   (ref) => OnboardingController(ref),
 );
