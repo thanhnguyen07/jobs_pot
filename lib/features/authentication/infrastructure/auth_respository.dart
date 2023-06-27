@@ -130,19 +130,26 @@ class AuthRepository implements AuthRepositoryInterface {
   Future<Either<Failure, String>> refreshToken() async {
     try {
       final String? refreshToken = await getRefreshToken();
+      if (refreshToken != null) {
+        final Map<String, String?> body = {"refreshToken": refreshToken};
 
-      final Map<String, String?> body = {"refreshToken": refreshToken};
+        final userProfileResponse = await _apiClient.refreshToken(body);
 
-      final userProfileResponse = await _apiClient.refreshToken(body);
+        final dataRes = UserResponseEntity.fromJson(userProfileResponse);
 
-      final dataRes = UserResponseEntity.fromJson(userProfileResponse);
+        await saveBothToken(dataRes.token, dataRes.refreshToken);
 
-      await saveBothToken(dataRes.token, dataRes.refreshToken);
-
-      return right(dataRes.token);
+        return right(dataRes.token);
+      }
+      return left(
+        const Failure.message(
+            message: "An error occurred. Please login again!!!"),
+      );
     } catch (error) {
-      return left(const Failure.message(
-          message: "An error occurred. Please login again!!!"));
+      return left(
+        const Failure.message(
+            message: "An error occurred. Please login again!!!"),
+      );
     }
   }
 }

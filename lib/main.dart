@@ -4,12 +4,13 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/config/app_configs.dart';
 import 'package:jobs_pot/config/providers.dart';
-import 'package:jobs_pot/routes/route_config.dart';
 import 'package:jobs_pot/routes/route_providers.dart';
 
+late ProviderContainer appContainer;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  appContainer = await appProviderContainer();
 
   runApp(
     EasyLocalization(
@@ -20,14 +21,12 @@ void main() async {
       path: AppConfigs.pathLanguage,
       fallbackLocale: AppConfigs.appLanguageEn,
       child: UncontrolledProviderScope(
-        container: await appProviderContainer(),
+        container: appContainer,
         child: const MyApp(),
       ),
     ),
   );
 }
-
-final appRouter = AppRouter();
 
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
@@ -39,8 +38,6 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
-    // final appRouter = ref.watch(routeControllerProvider);
-
     EasyLoading.instance.maskType = EasyLoadingMaskType.black;
     EasyLoading.instance.loadingStyle = EasyLoadingStyle.light;
 
@@ -49,7 +46,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routerConfig: appRouter.config(),
+      routerConfig: appContainer.read(routeControllerProvider)?.config(),
     );
   }
 }

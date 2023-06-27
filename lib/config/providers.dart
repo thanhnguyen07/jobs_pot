@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/routes/route_providers.dart';
 
 Future<ProviderContainer> appProviderContainer() async {
@@ -13,4 +14,5 @@ Future<ProviderContainer> appProviderContainer() async {
 
 Future<void> initializeProviders(ProviderContainer container) async {
   container.read(routeControllerProvider);
+  container.read(authControllerProvider);
 }
