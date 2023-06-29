@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/infrastructure/auth_respository.dart';
 import 'package:jobs_pot/main.dart';
+import 'package:jobs_pot/networks/api_util.dart';
 import '../utils/logger.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
@@ -81,7 +82,8 @@ class ApiInterceptors extends InterceptorsWrapper {
           headers: err.requestOptions.headers,
         );
 
-        final cloneReq = await Dio().request(err.requestOptions.uri.toString(),
+        final cloneReq = await ApiUtil().getDio().request(
+            err.requestOptions.uri.toString(),
             options: opts,
             data: err.requestOptions.data,
             queryParameters: err.requestOptions.queryParameters);

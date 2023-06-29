@@ -15,7 +15,7 @@ class ApiUtil {
     return _apiUtil;
   }
 
-  static Dio getDio() {
+  Dio getDio() {
     if (dio == null) {
       dio = Dio();
       dio!.options.connectTimeout = const Duration(seconds: 60);
