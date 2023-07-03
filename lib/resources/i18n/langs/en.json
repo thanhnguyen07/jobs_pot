@@ -12,6 +12,7 @@
   "authenticationPasswordInputTitle": "Password",
   "authenticationRememberMe": "Remember me",
   "authenticationForgotPassword": "Forgot Password?",
+  "authenticationForgotPasswordSubTitle": "To reset your password, you need your email or mobile number that can be authenticated.",
   "authenticationLoginButtonTitle": "LOGIN",
   "authenticationGoogleButtonTitle": "SIGN IN WITH GOOGLE",
   "authenticationSuggestionsSignUp": "You don't have an account yet?",

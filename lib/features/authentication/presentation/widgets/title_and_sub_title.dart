@@ -17,7 +17,7 @@ class TitleAndSubTitle extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text: title,
+          text: "$title\n",
           style: AppTextStyle.darkPurpleBoldS30,
           children: <TextSpan>[
             TextSpan(

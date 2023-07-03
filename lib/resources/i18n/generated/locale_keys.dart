@@ -14,6 +14,7 @@ abstract class  LocaleKeys {
   static const authenticationPasswordInputTitle = 'authenticationPasswordInputTitle';
   static const authenticationRememberMe = 'authenticationRememberMe';
   static const authenticationForgotPassword = 'authenticationForgotPassword';
+  static const authenticationForgotPasswordSubTitle = 'authenticationForgotPasswordSubTitle';
   static const authenticationLoginButtonTitle = 'authenticationLoginButtonTitle';
   static const authenticationGoogleButtonTitle = 'authenticationGoogleButtonTitle';
   static const authenticationSuggestionsSignUp = 'authenticationSuggestionsSignUp';

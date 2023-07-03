@@ -12,6 +12,7 @@
   "authenticationPasswordInputTitle": "Mật khẩu",
   "authenticationRememberMe": "Ghi nhớ đăng nhập",
   "authenticationForgotPassword": "Quên mật khẩu?",
+  "authenticationForgotPasswordSubTitle": "Để đặt lại mật khẩu, bạn cần có email hoặc số điện thoại di động có thể được xác thực.",
   "authenticationLoginButtonTitle": "ĐĂNG NHẬP",
   "authenticationGoogleButtonTitle": "ĐĂNG NHẬP VỚI GOOGLE",
   "authenticationSuggestionsSignUp": "Bạn chưa có tài khoản?",
