@@ -9,7 +9,9 @@ import 'package:jobs_pot/routes/route_providers.dart';
 late ProviderContainer appContainer;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await EasyLocalization.ensureInitialized();
+
   appContainer = await appProviderContainer();
 
   runApp(
