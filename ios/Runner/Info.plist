@@ -52,5 +52,16 @@
 		<string>en</string>
 		<string>vi</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.178268151172-tk1hsakgu52j3l5sb4vr19tpdl78qgca</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

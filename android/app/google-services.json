@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "178268151172-fnq1v9cml8v4id697dpttjrdnkoeatk1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jobs_pot",
+            "certificate_hash": "61bfbff789ad4e13dad88d65cd825078f40c3fb0"
+          }
+        },
+        {
           "client_id": "178268151172-k81n2jh5fpnisqv59a2pu6ktqjk3ujj7.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_colors.dart';
@@ -32,8 +33,12 @@ class _LoginWithGoogleState extends ConsumerState<LoginWithGoogle> {
           style: AppTextStyle.egglantBoldS14,
         ),
         backgroundColor: AppColors.lavenderColor,
-        onPressed: () {
-          ref.read(loginWithGoogleController.notifier).signInWithGoogle();
+        onPressed: () async {
+          // ref.read(loginWithGoogleController.notifier).loginWithGoogle();
+          final UserCredential user = await ref
+              .read(loginWithGoogleController.notifier)
+              .signInWithGoogle();
+          print(user.user);
         },
         icon: Container(
           margin: const EdgeInsets.only(right: 10),

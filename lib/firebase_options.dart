@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '178268151172',
     projectId: 'jobs-pot-6f2b3',
     storageBucket: 'jobs-pot-6f2b3.appspot.com',
+    androidClientId: '178268151172-fnq1v9cml8v4id697dpttjrdnkoeatk1.apps.googleusercontent.com',
     iosClientId: '178268151172-tk1hsakgu52j3l5sb4vr19tpdl78qgca.apps.googleusercontent.com',
     iosBundleId: 'com.example.jobsPot',
   );
@@ -77,6 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '178268151172',
     projectId: 'jobs-pot-6f2b3',
     storageBucket: 'jobs-pot-6f2b3.appspot.com',
+    androidClientId: '178268151172-fnq1v9cml8v4id697dpttjrdnkoeatk1.apps.googleusercontent.com',
     iosClientId: '178268151172-tkn05hvsi6367ld1s8t1743o31okiov2.apps.googleusercontent.com',
     iosBundleId: 'com.example.jobsPot.RunnerTests',
   );
