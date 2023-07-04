@@ -15,9 +15,16 @@ class LoginWithGoogleController extends StateNotifier {
         print('User is signed in!');
       }
     });
+    // await FirebaseAuth.instance.signOut();
   }
 
   Future<UserCredential> signInWithGoogle() async {
+    // GoogleSignIn _googleSignIn = GoogleSignIn(
+    //   scopes: [
+    //     'email',
+    //     'https://www.googleapis.com/auth/contacts.readonly',
+    //   ],
+    // );
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
