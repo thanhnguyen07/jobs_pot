@@ -9,6 +9,7 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
+import 'dart:developer';
 
 class LoginWithGoogle extends ConsumerStatefulWidget {
   const LoginWithGoogle({
@@ -38,7 +39,9 @@ class _LoginWithGoogleState extends ConsumerState<LoginWithGoogle> {
           final UserCredential user = await ref
               .read(loginWithGoogleController.notifier)
               .signInWithGoogle();
-          print(user.user);
+          final token = await user.user?.getIdTokenResult();
+          
+          print(token);
         },
         icon: Container(
           margin: const EdgeInsets.only(right: 10),
