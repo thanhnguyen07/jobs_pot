@@ -1,11 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 
 class LoginWithGoogleController extends StateNotifier {
   LoginWithGoogleController(this.ref) : super(null);
 
   final Ref ref;
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   void loginWithGoogle() async {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
@@ -18,8 +22,8 @@ class LoginWithGoogleController extends StateNotifier {
     // await FirebaseAuth.instance.signOut();
   }
 
-  Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  Future signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
@@ -29,6 +33,22 @@ class LoginWithGoogleController extends StateNotifier {
       idToken: googleAuth?.idToken,
     );
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    final UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    final String? idToken = await userCredential.user?.getIdToken();
+
+    final String? uid = userCredential.user?.uid;
+
+    if (idToken != null && uid != null) {
+      final signInWithGoogleRes = await ref
+          .read(authRepositoryProvider)
+          .signInWithGoogle(idToken, uid);
+      signInWithGoogleRes.fold((l) {
+        print(l);
+      }, (r) {
+        print(r);
+      });
+    }
   }
 }

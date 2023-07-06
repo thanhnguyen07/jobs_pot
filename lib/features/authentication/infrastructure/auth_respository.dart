@@ -152,4 +152,22 @@ class AuthRepository implements AuthRepositoryInterface {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, UserResponseEntity>> signInWithGoogle(
+      String idToken, String uid) async {
+    try {
+      final Map<String, String> body = {"idToken": idToken, "uid": uid};
+      final signInWithGoogleRes = await _apiClient.signInWithGoogle(body);
+
+      return right(UserResponseEntity.fromJson(signInWithGoogleRes));
+    } catch (error) {
+      if (error is DioException) {
+        final resError = ErrorResponseEntity.fromJson(error.response?.data);
+
+        return left(Failure.message(message: resError.msg));
+      }
+      return left(Failure.message(message: error.toString()));
+    }
+  }
 }

@@ -12,11 +12,11 @@ import 'package:auto_route/auto_route.dart' as _i12;
 import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/email_verification_screen.dart'
     as _i6;
 import 'package:jobs_pot/features/authentication/presentation/screens/forgotPassword/forgot_password_screen.dart'
-    as _i5;
+    as _i2;
 import 'package:jobs_pot/features/authentication/presentation/screens/login/login_screen.dart'
-    as _i4;
+    as _i5;
 import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart'
-    as _i1;
+    as _i4;
 import 'package:jobs_pot/features/authentication/presentation/screens/signUp/sign_up_screen.dart'
     as _i3;
 import 'package:jobs_pot/features/authentication/presentation/screens/splash_screen.dart'
@@ -30,6 +30,9 @@ import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart'
 import 'package:jobs_pot/features/post/presentation/screens/post.dart' as _i9;
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job.dart'
     as _i11;
+    as _i7;
+import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart'
+    as _i1;
 
 abstract class $AppRouter extends _i12.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -38,20 +41,31 @@ abstract class $AppRouter extends _i12.RootStackRouter {
   final Map<String, _i12.PageFactory> pagesMap = {
     OnboardingRoute.name: (routeData) {
       return _i12.AutoRoutePage<dynamic>(
+  final Map<String, _i8.PageFactory> pagesMap = {
+    HomeRoute.name: (routeData) {
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.OnboardingScreen(),
+        child: const _i1.HomeScreen(),
       );
     },
     SplashRoute.name: (routeData) {
       return _i12.AutoRoutePage<dynamic>(
+    ForgotPasswordRoute.name: (routeData) {
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.SplashScreen(),
+        child: const _i2.ForgotPasswordScreen(),
       );
     },
     SignUpRoute.name: (routeData) {
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i3.SignUpScreen(),
+      );
+    },
+    OnboardingRoute.name: (routeData) {
+      return _i8.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i4.OnboardingScreen(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -64,6 +78,7 @@ abstract class $AppRouter extends _i12.RootStackRouter {
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i5.ForgotPasswordScreen(),
+        child: const _i5.LoginScreen(),
       );
     },
     EmailVerificationRoute.name: (routeData) {
@@ -74,8 +89,10 @@ abstract class $AppRouter extends _i12.RootStackRouter {
     },
     HomeRoute.name: (routeData) {
       return _i12.AutoRoutePage<dynamic>(
+    SplashRoute.name: (routeData) {
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.HomeScreen(),
+        child: const _i7.SplashScreen(),
       );
     },
     BottomTabBar.name: (routeData) {
@@ -109,12 +126,15 @@ abstract class $AppRouter extends _i12.RootStackRouter {
 /// [_i1.OnboardingScreen]
 class OnboardingRoute extends _i12.PageRouteInfo<void> {
   const OnboardingRoute({List<_i12.PageRouteInfo>? children})
+/// [_i1.HomeScreen]
+class HomeRoute extends _i8.PageRouteInfo<void> {
+  const HomeRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          OnboardingRoute.name,
+          HomeRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'OnboardingRoute';
+  static const String name = 'HomeRoute';
 
   static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
 }
@@ -123,12 +143,15 @@ class OnboardingRoute extends _i12.PageRouteInfo<void> {
 /// [_i2.SplashScreen]
 class SplashRoute extends _i12.PageRouteInfo<void> {
   const SplashRoute({List<_i12.PageRouteInfo>? children})
+/// [_i2.ForgotPasswordScreen]
+class ForgotPasswordRoute extends _i8.PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          SplashRoute.name,
+          ForgotPasswordRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SplashRoute';
+  static const String name = 'ForgotPasswordRoute';
 
   static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
 }
@@ -151,6 +174,23 @@ class SignUpRoute extends _i12.PageRouteInfo<void> {
 /// [_i4.LoginScreen]
 class LoginRoute extends _i12.PageRouteInfo<void> {
   const LoginRoute({List<_i12.PageRouteInfo>? children})
+/// [_i4.OnboardingScreen]
+class OnboardingRoute extends _i8.PageRouteInfo<void> {
+  const OnboardingRoute({List<_i8.PageRouteInfo>? children})
+      : super(
+          OnboardingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OnboardingRoute';
+
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i5.LoginScreen]
+class LoginRoute extends _i8.PageRouteInfo<void> {
+  const LoginRoute({List<_i8.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -193,12 +233,15 @@ class EmailVerificationRoute extends _i12.PageRouteInfo<void> {
 /// [_i7.HomeScreen]
 class HomeRoute extends _i12.PageRouteInfo<void> {
   const HomeRoute({List<_i12.PageRouteInfo>? children})
+/// [_i7.SplashScreen]
+class SplashRoute extends _i8.PageRouteInfo<void> {
+  const SplashRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          HomeRoute.name,
+          SplashRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomeRoute';
+  static const String name = 'SplashRoute';
 
   static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
 }

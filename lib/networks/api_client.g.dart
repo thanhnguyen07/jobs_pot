@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://server-jobs-pot.vercel.app/';
+    baseUrl ??= 'http://localhost:7002/';
   }
 
   final Dio _dio;
@@ -34,7 +34,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          'user/signup',
+          'user/signup-with-email',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -57,7 +57,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          'user/signin',
+          'user/signin-with-email',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -102,7 +102,30 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          'user/refreshtoken',
+          'user/refresh-token',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> signInWithGoogle(Map<String, dynamic> body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'user/signin-with-google',
           queryParameters: queryParameters,
           data: _data,
         )
