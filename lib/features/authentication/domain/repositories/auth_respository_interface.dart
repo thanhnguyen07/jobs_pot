@@ -39,4 +39,7 @@ abstract class AuthRepositoryInterface {
   Future<Either<Failure, UserResponseEntity>> getUserProfile();
 
   Future<Either<Failure, String>> refreshToken();
+
+  Future<Either<Failure, UserResponseEntity>> signInWithGoogle(
+      String idToken, String uid);
 }

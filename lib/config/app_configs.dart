@@ -7,8 +7,8 @@ class AppConfigs {
 
   ///STAGING
   static const envName = "Staging";
-  static const baseUrl = "https://server-jobs-pot.vercel.app/";
-  // static const baseUrl = "http://localhost:7002/";
+  // static const baseUrl = "https://server-jobs-pot.vercel.app/";
+  static const baseUrl = "http://localhost:7002/";
 
   ///PRODUCTION
 
