@@ -11,8 +11,8 @@ import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class SignUpController extends StateNotifier {
-  SignUpController(this.ref) : super(null);
+class SignUpWithEmailController extends StateNotifier {
+  SignUpWithEmailController(this.ref) : super(null);
   final Ref ref;
 
   final signUpForm = FormGroup(
