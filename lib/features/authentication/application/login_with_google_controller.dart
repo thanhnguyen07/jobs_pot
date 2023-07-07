@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 
 class LoginWithGoogleController extends StateNotifier {
   LoginWithGoogleController(this.ref) : super(null);
@@ -14,9 +13,9 @@ class LoginWithGoogleController extends StateNotifier {
   void loginWithGoogle() async {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
-        print('User is currently signed out!');
+        // print('User is currently signed out!');
       } else {
-        print('User is signed in!');
+        // print('User is signed in!');
       }
     });
     // await FirebaseAuth.instance.signOut();
@@ -41,13 +40,12 @@ class LoginWithGoogleController extends StateNotifier {
     final String? uid = userCredential.user?.uid;
 
     if (idToken != null && uid != null) {
-      final signInWithGoogleRes = await ref
-          .read(authRepositoryProvider)
-          .signInWithGoogle(idToken, uid);
+      final signInWithGoogleRes =
+          await ref.read(authRepositoryProvider).signInWithGoogle(idToken, uid);
       signInWithGoogleRes.fold((l) {
-        print(l);
+        // print(l);
       }, (r) {
-        print(r);
+        // print(r);
       });
     }
   }
