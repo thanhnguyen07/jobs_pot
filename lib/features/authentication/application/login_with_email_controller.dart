@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/app_validation_keys.dart';
+import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
@@ -71,13 +71,8 @@ class LoginWithEmailController extends StateNotifier {
       (r) {
         ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
 
-        ref
-            .read(authRepositoryProvider)
-            .saveBothToken(r.token, r.refreshToken)
-            .then((value) {
-          context.router.removeLast();
-          context.router.pushNamed(HomeScreen.path);
-        });
+        context.router.removeLast();
+        context.router.pushNamed(HomeScreen.path);
       },
     );
 

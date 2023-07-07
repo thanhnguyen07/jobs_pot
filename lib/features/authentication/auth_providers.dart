@@ -39,11 +39,11 @@ final loginWithGoogleControllerProvider =
 );
 
 final signUpWithEmailControllerProvider =
-    StateNotifierProvider<SignUpWithEmailController, dynamic>(
+    StateNotifierProvider<SignUpWithEmailController, int>(
   (ref) => SignUpWithEmailController(ref),
 );
 
 final rememberLoginController =
-    AutoDisposeStateNotifierProvider<RememberLoginController, bool>(
-  (ref) => RememberLoginController(),
+    StateNotifierProvider<RememberLoginController, bool>(
+  (ref) => RememberLoginController(ref),
 );

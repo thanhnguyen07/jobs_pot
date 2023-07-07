@@ -12,6 +12,8 @@ class UserEntity with _$UserEntity {
     required String id,
     required String userName,
     required String email,
+    required String type,
+    required String uid,
   }) = _UserEntity;
 
   /// factory method to create entity from JSON

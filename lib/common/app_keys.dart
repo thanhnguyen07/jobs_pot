@@ -9,3 +9,8 @@ class ValidationKeys {
   static const String password = 'psassword';
   static const String fullName = 'fullName';
 }
+
+class FirebaseKeys {
+  static const String weakPassword = 'weak-password';
+  static const String emailAlreadyInUse = 'email-already-in-use';
+}

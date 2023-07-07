@@ -1,5 +1,6 @@
 {
   "changeLanguageTitle": "English",
+  "generalError": "Đã có lỗi xảy ra!!!",
   "splashTitle": "Jobspot",
   "onboardingTitle1": "Find Your",
   "onboardingTitle2": "Dream Job",
@@ -7,6 +8,8 @@
   "onboardingSubTitle": "Khám phá tất cả các vai trò công việc thú vị nhất dựa trên sở thích và chuyên ngành học của bạn.",
   "authenticationLoginTitle": "Chào mừng trở lại",
   "authenticationSignUpTitle": "Tạo một tài khoản",
+  "authenticationSignUpError": "Email này đã được đăng ký. Vui lòng sử dụng email khác.",
+  "authenticationSignUpError2": "Mật khẩu được cung cấp quá yếu.",
   "authenticationEmailInputTitle": "Email",
   "authenticationFullNameInputTitle": "Họ và tên",
   "authenticationPasswordInputTitle": "Mật khẩu",
@@ -30,6 +33,12 @@
   "authenticationPasswordValidationMessages3": "Mật khẩu phải có ít nhất một chữ cái ('a'-'z').",
   "authenticationPasswordValidationMessages4": "Mật khẩu phải có ít nhất một chữ hoa ('A'-Z').",
   "authenticationPasswordValidationMessages5": "Mật khẩu phải nhiều hơn 3 ký tự.",
-  "authenticationPasswordValidationMessages6": "Tên đầy đủ phải nhiều hơn 3 ký tự."
-
+  "authenticationPasswordValidationMessages6": "Tên đầy đủ phải nhiều hơn 3 ký tự.",
+  "authenticationVerifyEmailButtonTitle": "TIẾP TỤC",
+  "authenticationVerifyEmailBackButtonTitle": "QUAY LẠI ĐĂNG KÝ",
+  "authenticationVerifyEmailTitle": "Xác thực email của bạn",
+  "authenticationVerifyEmailSubTitle": "Chúng tôi đã gửi liên kết xác minh đến địa chỉ email",
+  "authenticationVerifyEmailSuggestions": "Nhấn TIẾP TỤC khi bạn hoàn tất quy trình xác minh",
+  "authenticationVerifyEmailSuggestionsResend": "Bạn chưa nhận được email??",
+  "authenticationVerifyEmailResendTitle": "Gửi lại"
 }

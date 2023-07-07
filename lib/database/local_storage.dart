@@ -5,11 +5,17 @@ class LocalStorageHelper {
   static const _tokenKey = 'token';
   static const _refreshTokenKey = 'refresh_token';
   static const _onboarding = '_onboarding';
+  static const _remember = '_remember';
 
   //SAVE
   static Future<void> saveOnboadingStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_onboarding, true);
+  }
+  
+  static Future<void> saveRememberStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_remember, true);
   }
 
   static Future<void> saveToken(String token) async {
@@ -33,6 +39,20 @@ class LocalStorageHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       final onboadingStatusEncoded = prefs.getBool(_onboarding);
+      if (onboadingStatusEncoded == null) {
+        return null;
+      } else {
+        return onboadingStatusEncoded;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<bool?> getRememberStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      final onboadingStatusEncoded = prefs.getBool(_remember);
       if (onboadingStatusEncoded == null) {
         return null;
       } else {
@@ -75,6 +95,11 @@ class LocalStorageHelper {
   static Future<void> removeOnboadingStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(_onboarding);
+  }
+
+  static Future<void> removeRememberStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_remember);
   }
 
   static Future<void> removeToken() async {

@@ -13,27 +13,4 @@ class AuthController extends StateNotifier {
   void updateAuthState(bool? value) {
     authStateListenable.value = value;
   }
-
-  Future<dynamic> refreshToken() async {
-    EasyLoading.show();
-
-    final resRefreshToken =
-        await ref.read(authRepositoryProvider).refreshToken();
-
-    EasyLoading.dismiss();
-    return resRefreshToken.fold(
-      (l) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
-
-        final appRouter = ref.read(routeControllerProvider);
-        appRouter!.removeLast();
-        appRouter.replaceNamed(LoginScreen.path);
-
-        return null;
-      },
-      (r) {
-        return r;
-      },
-    );
-  }
 }

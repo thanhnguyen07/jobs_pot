@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
-import 'package:jobs_pot/common/app_validation_keys.dart';
+import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/button_submit_form.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/email_input.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/password_input.dart';

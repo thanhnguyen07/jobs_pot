@@ -1,5 +1,6 @@
 {
   "changeLanguageTitle": "Tiếng Việt",
+  "generalError": "Something wrong!!!",
   "splashTitle": "Jobspot",
   "onboardingTitle1": "Find Your",
   "onboardingTitle2": "Dream Job",
@@ -7,6 +8,8 @@
   "onboardingSubTitle": "Explore all the most exciting job roles based on your interest and study major.",
   "authenticationLoginTitle": "Welcome Back",
   "authenticationSignUpTitle": "Create an Account",
+  "authenticationSignUpError": "This email is already registered. Please use another email.",
+  "authenticationSignUpError2": "The password provided is too weak.",
   "authenticationEmailInputTitle": "Email",
   "authenticationFullNameInputTitle": "Full name",
   "authenticationPasswordInputTitle": "Password",
@@ -30,5 +33,12 @@
   "authenticationPasswordValidationMessages3": "Passwords must have at least one letter ('a'-'z').",
   "authenticationPasswordValidationMessages4": "Passwords must have at least one uppercase ('A'-Z').",
   "authenticationPasswordValidationMessages5": "Password must be more than 3 characters.",
-  "authenticationPasswordValidationMessages6": "Full name must be more than 3 characters."
+  "authenticationPasswordValidationMessages6": "Full name must be more than 3 characters.",
+  "authenticationVerifyEmailButtonTitle": "CONTINUE",
+  "authenticationVerifyEmailBackButtonTitle": "BACK TO SIGNUP",
+  "authenticationVerifyEmailTitle": "Verify your email",
+  "authenticationVerifyEmailSubTitle": "We have sent the verification link to the email address",
+  "authenticationVerifyEmailSuggestions": "Press CONTINUE when you complete the verification process",
+  "authenticationVerifyEmailSuggestionsResend": "You have not received the email?",
+  "authenticationVerifyEmailResendTitle": "Resend"
 }
