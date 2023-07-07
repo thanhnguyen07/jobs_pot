@@ -23,16 +23,22 @@ final splashControllerProvider = StateNotifierProvider<SplashController, bool>(
   (ref) => SplashController(ref),
 );
 
-final loginControllerProvider = StateNotifierProvider<LoginWithEmailController, dynamic>(
+final onboardingController =
+    AutoDisposeStateNotifierProvider<OnboardingController, dynamic>(
+  (ref) => OnboardingController(ref),
+);
+
+final loginWithEmailControllerProvider =
+    StateNotifierProvider<LoginWithEmailController, dynamic>(
   (ref) => LoginWithEmailController(ref),
 );
 
-final loginWithGoogleController =
+final loginWithGoogleControllerProvider =
     StateNotifierProvider<LoginWithGoogleController, dynamic>(
   (ref) => LoginWithGoogleController(ref),
 );
 
-final signUpControllerProvider =
+final signUpWithEmailControllerProvider =
     StateNotifierProvider<SignUpWithEmailController, dynamic>(
   (ref) => SignUpWithEmailController(ref),
 );
@@ -40,9 +46,4 @@ final signUpControllerProvider =
 final rememberLoginController =
     AutoDisposeStateNotifierProvider<RememberLoginController, bool>(
   (ref) => RememberLoginController(),
-);
-
-final onboardingController =
-    AutoDisposeStateNotifierProvider<OnboardingController, dynamic>(
-  (ref) => OnboardingController(ref),
 );

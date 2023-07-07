@@ -32,7 +32,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   void initState() {
     super.initState();
 
-    final controller = ref.read(signUpControllerProvider.notifier);
+    final controller = ref.read(signUpWithEmailControllerProvider.notifier);
 
     signUpForm = controller.signUpForm;
 
@@ -64,7 +64,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               style: AppTextStyle.whiteBoldS14,
             ),
             onLogin: () {
-              ref.read(signUpControllerProvider.notifier).onSignUp(context);
+              ref.read(signUpWithEmailControllerProvider.notifier).onSignUp(context);
             },
           ),
         ],

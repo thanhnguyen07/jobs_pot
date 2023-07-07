@@ -30,7 +30,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   void initState() {
     super.initState();
 
-    final controller = ref.read(loginControllerProvider.notifier);
+    final controller = ref.read(loginWithEmailControllerProvider.notifier);
 
     loginForm = controller.loginForm;
 
@@ -57,8 +57,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               Utils.getLocaleMessage(LocaleKeys.authenticationLoginButtonTitle),
               style: AppTextStyle.whiteBoldS14,
             ),
-            onLogin: () =>
-                ref.read(loginControllerProvider.notifier).onLogin(context),
+            onLogin: () => ref
+                .read(loginWithEmailControllerProvider.notifier)
+                .onLogin(context),
           )
         ],
       ),
