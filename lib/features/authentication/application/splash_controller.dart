@@ -19,15 +19,21 @@ class SplashController extends StateNotifier<bool> {
       const Duration(seconds: 2),
       () async {
         ref.read(authRepositoryProvider).getOnboadingStatus().then(
-          (onboadingStatus) {
+          (onboadingStatus) async {
             if (onboadingStatus != null) {
-              ref.read(authRepositoryProvider).getToken().then((token) {
-                if (token != null) {
-                  getUserProfile(context);
-                } else {
-                  context.router.replaceNamed(LoginScreen.path);
-                }
-              });
+              ref.read(authRepositoryProvider).getToken().then(
+                (token) {
+                  ref.read(authRepositoryProvider).getRememberStatus().then(
+                    (rememberStatus) {
+                      if (token != null && rememberStatus != null) {
+                        getUserProfile(context);
+                      } else {
+                        context.router.replaceNamed(LoginScreen.path);
+                      }
+                    },
+                  );
+                },
+              );
             } else {
               context.router.replaceNamed(OnboardingScreen.path);
             }
@@ -52,13 +58,8 @@ class SplashController extends StateNotifier<bool> {
       (r) {
         ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
 
-        ref
-            .read(authRepositoryProvider)
-            .saveBothToken(r.token, r.refreshToken)
-            .then((value) {
-          context.router.removeLast();
-          context.router.pushNamed(HomeScreen.path);
-        });
+        context.router.removeLast();
+        context.router.pushNamed(HomeScreen.path);
       },
     );
 

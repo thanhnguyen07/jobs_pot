@@ -6,10 +6,12 @@ class TitleAndSubTitle extends StatelessWidget {
     super.key,
     required this.title,
     required this.subTitle,
+    this.subTitle2,
   });
 
   final String title;
   final String subTitle;
+  final String? subTitle2;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,12 +19,18 @@ class TitleAndSubTitle extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text: title,
+          text: '$title\n',
           style: AppTextStyle.darkPurpleBoldS30,
           children: <TextSpan>[
             TextSpan(
-              text: subTitle,
+              text: '$subTitle\n',
               style: AppTextStyle.textColor1RegularS14,
+              children: <TextSpan>[
+                TextSpan(
+                  text: subTitle2,
+                  style: AppTextStyle.darkPurpleBoldS14,
+                )
+              ],
             )
           ],
         ),

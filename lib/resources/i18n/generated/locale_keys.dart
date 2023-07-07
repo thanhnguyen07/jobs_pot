@@ -2,6 +2,7 @@
 
 abstract class  LocaleKeys {
   static const changeLanguageTitle = 'changeLanguageTitle';
+  static const generalError = 'generalError';
   static const splashTitle = 'splashTitle';
   static const onboardingTitle1 = 'onboardingTitle1';
   static const onboardingTitle2 = 'onboardingTitle2';
@@ -9,6 +10,8 @@ abstract class  LocaleKeys {
   static const onboardingSubTitle = 'onboardingSubTitle';
   static const authenticationLoginTitle = 'authenticationLoginTitle';
   static const authenticationSignUpTitle = 'authenticationSignUpTitle';
+  static const authenticationSignUpError = 'authenticationSignUpError';
+  static const authenticationSignUpError2 = 'authenticationSignUpError2';
   static const authenticationEmailInputTitle = 'authenticationEmailInputTitle';
   static const authenticationFullNameInputTitle = 'authenticationFullNameInputTitle';
   static const authenticationPasswordInputTitle = 'authenticationPasswordInputTitle';
@@ -32,5 +35,12 @@ abstract class  LocaleKeys {
   static const authenticationPasswordValidationMessages4 = 'authenticationPasswordValidationMessages4';
   static const authenticationPasswordValidationMessages5 = 'authenticationPasswordValidationMessages5';
   static const authenticationPasswordValidationMessages6 = 'authenticationPasswordValidationMessages6';
+  static const authenticationVerifyEmailButtonTitle = 'authenticationVerifyEmailButtonTitle';
+  static const authenticationVerifyEmailBackButtonTitle = 'authenticationVerifyEmailBackButtonTitle';
+  static const authenticationVerifyEmailTitle = 'authenticationVerifyEmailTitle';
+  static const authenticationVerifyEmailSubTitle = 'authenticationVerifyEmailSubTitle';
+  static const authenticationVerifyEmailSuggestions = 'authenticationVerifyEmailSuggestions';
+  static const authenticationVerifyEmailSuggestionsResend = 'authenticationVerifyEmailSuggestionsResend';
+  static const authenticationVerifyEmailResendTitle = 'authenticationVerifyEmailResendTitle';
 
 }

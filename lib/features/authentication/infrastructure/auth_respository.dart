@@ -36,6 +36,11 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
+  Future saveRememberStatus() {
+    return LocalStorageHelper.saveRememberStatus();
+  }
+
+  @override
   Future<String?> getToken() {
     return LocalStorageHelper.getToken();
   }
@@ -48,6 +53,11 @@ class AuthRepository implements AuthRepositoryInterface {
   @override
   Future<bool?> getOnboadingStatus() {
     return LocalStorageHelper.getOnboadingStatus();
+  }
+
+  @override
+  Future<bool?> getRememberStatus() {
+    return LocalStorageHelper.getRememberStatus();
   }
 
   @override
@@ -71,13 +81,16 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
+  Future removeRememberStatus() {
+    return LocalStorageHelper.removeRememberStatus();
+  }
+
+  @override
   Future<Either<Failure, UserResponseEntity>> signUpWithEmail(
-      String fullName, String email, String password) async {
+      String fullName) async {
     try {
       final Map<String, String> body = {
-        "userName": fullName,
-        "email": email,
-        "password": password
+        "fullName": fullName,
       };
       final signUpRes = await _apiClient.signUpWithEmail(body);
 
@@ -123,33 +136,6 @@ class AuthRepository implements AuthRepositoryInterface {
         return left(Failure.message(message: resError.msg));
       }
       return left(Failure.message(message: error.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, String>> refreshToken() async {
-    try {
-      final String? refreshToken = await getRefreshToken();
-      if (refreshToken != null) {
-        final Map<String, String?> body = {"refreshToken": refreshToken};
-
-        final userProfileResponse = await _apiClient.refreshToken(body);
-
-        final dataRes = UserResponseEntity.fromJson(userProfileResponse);
-
-        await saveBothToken(dataRes.token, dataRes.refreshToken);
-
-        return right(dataRes.token);
-      }
-      return left(
-        const Failure.message(
-            message: "An error occurred. Please login again!!!"),
-      );
-    } catch (error) {
-      return left(
-        const Failure.message(
-            message: "An error occurred. Please login again!!!"),
-      );
     }
   }
 

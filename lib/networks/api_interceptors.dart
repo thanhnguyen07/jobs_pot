@@ -71,25 +71,25 @@ class ApiInterceptors extends InterceptorsWrapper {
     apiLogger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
 
     if (statusCode == 401) {
-      final newToken =
-          await appContainer.read(authControllerProvider).refreshToken();
+      // final newToken =
+      //     await appContainer.read(authControllerProvider).refreshToken();
 
-      if (newToken != null) {
-        err.requestOptions.headers['Authorization'] = 'Bearer $newToken';
+      // if (newToken != null) {
+      //   err.requestOptions.headers['Authorization'] = 'Bearer $newToken';
 
-        final opts = Options(
-          method: err.requestOptions.method,
-          headers: err.requestOptions.headers,
-        );
+      //   final opts = Options(
+      //     method: err.requestOptions.method,
+      //     headers: err.requestOptions.headers,
+      //   );
 
-        final cloneReq = await ApiUtil().getDio().request(
-            err.requestOptions.uri.toString(),
-            options: opts,
-            data: err.requestOptions.data,
-            queryParameters: err.requestOptions.queryParameters);
+      //   final cloneReq = await ApiUtil().getDio().request(
+      //       err.requestOptions.uri.toString(),
+      //       options: opts,
+      //       data: err.requestOptions.data,
+      //       queryParameters: err.requestOptions.queryParameters);
 
-        return handler.resolve(cloneReq);
-      }
+      //   return handler.resolve(cloneReq);
+      // }
     }
     super.onError(err, handler);
   }

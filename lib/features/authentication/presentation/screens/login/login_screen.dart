@@ -64,7 +64,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   Widget _loginTitle() {
     return TitleAndSubTitle(
-      title: '${Utils.getLocaleMessage(LocaleKeys.authenticationLoginTitle)}\n',
+      title: Utils.getLocaleMessage(LocaleKeys.authenticationLoginTitle),
       subTitle: Utils.getLocaleMessage(LocaleKeys.onboardingSubTitle),
     );
   }

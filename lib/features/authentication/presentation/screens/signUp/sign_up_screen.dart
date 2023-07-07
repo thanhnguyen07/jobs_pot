@@ -77,8 +77,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
   Widget _signUpTitle() {
     return TitleAndSubTitle(
-      title:
-          '${Utils.getLocaleMessage(LocaleKeys.authenticationSignUpTitle)}\n',
+      title: Utils.getLocaleMessage(LocaleKeys.authenticationSignUpTitle),
       subTitle: Utils.getLocaleMessage(LocaleKeys.onboardingSubTitle),
     );
   }
