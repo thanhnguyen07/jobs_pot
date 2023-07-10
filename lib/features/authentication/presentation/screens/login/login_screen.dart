@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/signUp/sign_up_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/change_language.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/suggestions_text.dart';
@@ -30,13 +31,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     ref.watch(languageControllerProvider);
 
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-      },
+    return UnFocusKeyboard(
+      context: context,
       child: Scaffold(
         body: Container(
           width: double.infinity,

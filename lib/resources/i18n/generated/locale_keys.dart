@@ -18,6 +18,8 @@ abstract class  LocaleKeys {
   static const authenticationRememberMe = 'authenticationRememberMe';
   static const authenticationForgotPassword = 'authenticationForgotPassword';
   static const authenticationForgotPasswordSubTitle = 'authenticationForgotPasswordSubTitle';
+  static const authenticationForgotPasswordButtonTitle = 'authenticationForgotPasswordButtonTitle';
+  static const authenticationButtonBackToLogin = 'authenticationButtonBackToLogin';
   static const authenticationLoginButtonTitle = 'authenticationLoginButtonTitle';
   static const authenticationGoogleButtonTitle = 'authenticationGoogleButtonTitle';
   static const authenticationSuggestionsSignUp = 'authenticationSuggestionsSignUp';
@@ -44,5 +46,6 @@ abstract class  LocaleKeys {
   static const authenticationVerifyEmailSuggestionsResend = 'authenticationVerifyEmailSuggestionsResend';
   static const authenticationVerifyEmailResendTitle = 'authenticationVerifyEmailResendTitle';
   static const authenticationVerifyEmailError = 'authenticationVerifyEmailError';
+  static const authenticationForgotPasswordError = 'authenticationForgotPasswordError';
 
 }

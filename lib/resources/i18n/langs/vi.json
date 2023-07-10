@@ -16,6 +16,8 @@
   "authenticationRememberMe": "Ghi nhớ đăng nhập",
   "authenticationForgotPassword": "Quên mật khẩu?",
   "authenticationForgotPasswordSubTitle": "Để đặt lại mật khẩu, bạn cần có email hoặc số điện thoại di động có thể được xác thực.",
+  "authenticationForgotPasswordButtonTitle": "Đặt lại mật khẩu",
+  "authenticationButtonBackToLogin": "QUAY LẠI ĐĂNG NHẬP",
   "authenticationLoginButtonTitle": "ĐĂNG NHẬP",
   "authenticationGoogleButtonTitle": "ĐĂNG NHẬP VỚI GOOGLE",
   "authenticationSuggestionsSignUp": "Bạn chưa có tài khoản?",
@@ -41,5 +43,6 @@
   "authenticationVerifyEmailSuggestions": "Nhấn TIẾP TỤC khi bạn hoàn tất quy trình xác minh",
   "authenticationVerifyEmailSuggestionsResend": "Bạn chưa nhận được email??",
   "authenticationVerifyEmailResendTitle": "Gửi lại",
-  "authenticationVerifyEmailError": "Email chưa được xác minh!"
+  "authenticationVerifyEmailError": "Email chưa được xác minh!",
+  "authenticationForgotPasswordError": "Email chưa được đăng ký!"
 }

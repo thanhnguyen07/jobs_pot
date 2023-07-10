@@ -16,6 +16,8 @@
   "authenticationRememberMe": "Remember me",
   "authenticationForgotPassword": "Forgot Password?",
   "authenticationForgotPasswordSubTitle": "To reset your password, you need your email or mobile number that can be authenticated.",
+  "authenticationForgotPasswordButtonTitle": "RESET PASSWORD",
+  "authenticationButtonBackToLogin": "BACK TO LOGIN",
   "authenticationLoginButtonTitle": "LOGIN",
   "authenticationGoogleButtonTitle": "SIGN IN WITH GOOGLE",
   "authenticationSuggestionsSignUp": "You don't have an account yet?",
@@ -41,5 +43,6 @@
   "authenticationVerifyEmailSuggestions": "Press CONTINUE when you complete the verification process",
   "authenticationVerifyEmailSuggestionsResend": "You have not received the email?",
   "authenticationVerifyEmailResendTitle": "Resend",
-  "authenticationVerifyEmailError": "Email is not verified!"
+  "authenticationVerifyEmailError": "Email is not verified!",
+  "authenticationForgotPasswordError": "Email is not registered!"
 }
