@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/infrastructure/auth_respository.dart';
-import 'package:jobs_pot/main.dart';
-import 'package:jobs_pot/networks/api_util.dart';
 import '../utils/logger.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {

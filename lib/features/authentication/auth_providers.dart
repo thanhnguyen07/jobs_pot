@@ -17,7 +17,7 @@ final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepository(),
 );
 
-final authControllerProvider = Provider<AuthController>(
+final authControllerProvider = StateNotifierProvider<AuthController, dynamic>(
   (ref) => AuthController(ref),
 );
 

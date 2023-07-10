@@ -10,6 +10,9 @@
   "authenticationSignUpTitle": "Create an Account",
   "authenticationSignUpError": "This email is already registered. Please use another email.",
   "authenticationSignUpError2": "The password provided is too weak.",
+  "authenticationSignUpError3": "Email does not exist!",
+  "authenticationSignUpError4": "Email or password is incorrect!",
+  "authenticationSignUpError5": "Entered the wrong password too many times, please try again later!!!",
   "authenticationEmailInputTitle": "Email",
   "authenticationFullNameInputTitle": "Full name",
   "authenticationPasswordInputTitle": "Password",
@@ -44,5 +47,6 @@
   "authenticationVerifyEmailSuggestionsResend": "You have not received the email?",
   "authenticationVerifyEmailResendTitle": "Resend",
   "authenticationVerifyEmailError": "Email is not verified!",
-  "authenticationForgotPasswordError": "Email is not registered!"
+  "authenticationForgotPasswordError": "Email is not registered!",
+  "authenticationBackButtonTitle": "GO BACK"
 }

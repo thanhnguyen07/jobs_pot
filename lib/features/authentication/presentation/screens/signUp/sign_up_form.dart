@@ -1,9 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/email_verification_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/button_submit_form.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/email_input.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/password_input.dart';
@@ -69,7 +67,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               ref
                   .read(signUpWithEmailControllerProvider.notifier)
                   .onSignUp(context);
-            }, 
+            },
           ),
         ],
       ),

@@ -10,17 +10,6 @@ class LoginWithGoogleController extends StateNotifier {
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  void loginWithGoogle() async {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        // print('User is currently signed out!');
-      } else {
-        // print('User is signed in!');
-      }
-    });
-    // await FirebaseAuth.instance.signOut();
-  }
-
   Future signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 

@@ -12,6 +12,9 @@ abstract class  LocaleKeys {
   static const authenticationSignUpTitle = 'authenticationSignUpTitle';
   static const authenticationSignUpError = 'authenticationSignUpError';
   static const authenticationSignUpError2 = 'authenticationSignUpError2';
+  static const authenticationSignUpError3 = 'authenticationSignUpError3';
+  static const authenticationSignUpError4 = 'authenticationSignUpError4';
+  static const authenticationSignUpError5 = 'authenticationSignUpError5';
   static const authenticationEmailInputTitle = 'authenticationEmailInputTitle';
   static const authenticationFullNameInputTitle = 'authenticationFullNameInputTitle';
   static const authenticationPasswordInputTitle = 'authenticationPasswordInputTitle';
@@ -47,5 +50,6 @@ abstract class  LocaleKeys {
   static const authenticationVerifyEmailResendTitle = 'authenticationVerifyEmailResendTitle';
   static const authenticationVerifyEmailError = 'authenticationVerifyEmailError';
   static const authenticationForgotPasswordError = 'authenticationForgotPasswordError';
+  static const authenticationBackButtonTitle = 'authenticationBackButtonTitle';
 
 }
