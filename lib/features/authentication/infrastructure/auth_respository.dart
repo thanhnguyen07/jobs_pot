@@ -16,18 +16,8 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future saveBothToken(String token, String refreshToken) {
-    return LocalStorageHelper.saveBothToken(token, refreshToken);
-  }
-
-  @override
   Future saveToken(String token) {
     return LocalStorageHelper.saveToken(token);
-  }
-
-  @override
-  Future saveRefreshToken(String token) {
-    return LocalStorageHelper.saveRefreshToken(token);
   }
 
   @override
@@ -46,11 +36,6 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<String?> getRefreshToken() {
-    return LocalStorageHelper.getRefreshToken();
-  }
-
-  @override
   Future<bool?> getOnboadingStatus() {
     return LocalStorageHelper.getOnboadingStatus();
   }
@@ -61,18 +46,8 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future removeBothToken() {
-    return LocalStorageHelper.removeBothToken();
-  }
-
-  @override
   Future removeToken() {
     return LocalStorageHelper.removeToken();
-  }
-
-  @override
-  Future removeRefreshToken() {
-    return LocalStorageHelper.removeRefreshToken();
   }
 
   @override

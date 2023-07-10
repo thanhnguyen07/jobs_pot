@@ -47,6 +47,10 @@ class SignUpWithEmailController extends StateNotifier {
     FocusManager.instance.primaryFocus?.unfocus();
     final isValid = signUpForm.valid;
     if (isValid) {
+      final String email = getInputEmail();
+      ref
+          .read(emailVerificationControllerProvider.notifier)
+          .setCurrentEmail(email);
       signUpWithEmail(context);
     } else {
       signUpForm.controls.forEach((key, value) {
@@ -73,43 +77,22 @@ class SignUpWithEmailController extends StateNotifier {
     final password =
         signUpForm.controls[ValidationKeys.password]?.value.toString() ?? "";
 
-    final encryptPassword = Utils.encryptPassword(password);
-
     Utils.showLoading();
 
     try {
-      final userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
-        password: encryptPassword,
+        password: password,
       );
 
-      final String? idToken = await userCredential.user?.getIdToken();
-      if (idToken != null) {
-        await ref
-            .read(authRepositoryProvider)
-            .saveToken(idToken)
-            .then((value) async {
-          await ref
-              .read(emailVerificationControllerProvider.notifier)
-              .sendVerifyMail()
-              .then((value) {
-            context.router.pushNamed(EmailVerificationScreen.path);
-          });
-        });
-      } else {
-        ref.read(systemControllerProvider.notifier).showToastGeneralError();
-      }
+      await ref
+          .read(emailVerificationControllerProvider.notifier)
+          .sendVerifyMail()
+          .then((value) {
+        context.router.pushNamed(EmailVerificationScreen.path);
+      });
     } on FirebaseAuthException catch (e) {
-      if (e.code == FirebaseKeys.weakPassword) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(
-              Utils.getLocaleMessage(LocaleKeys.authenticationSignUpError2),
-            );
-      } else if (e.code == FirebaseKeys.emailAlreadyInUse) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(
-              Utils.getLocaleMessage(LocaleKeys.authenticationSignUpError),
-            );
-      }
+      ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
     } catch (e) {
       ref.read(systemControllerProvider.notifier).showToastGeneralError();
     }

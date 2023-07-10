@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,8 +32,9 @@ class _EmailVerificationScreenState
 
   @override
   Widget build(BuildContext context) {
-    final emailUser =
-        ref.read(signUpWithEmailControllerProvider.notifier).getInputEmail();
+    final emailUser = ref
+        .read(emailVerificationControllerProvider.notifier)
+        .getCurrentEmail();
 
     final count = ref.watch(emailVerificationControllerProvider);
 
@@ -68,7 +68,9 @@ class _EmailVerificationScreenState
           LocaleKeys.authenticationVerifyEmailResendTitle),
       textTime: count,
       action: () {
-        ref.read(emailVerificationControllerProvider.notifier).reSendVerifyMail();
+        ref
+            .read(emailVerificationControllerProvider.notifier)
+            .reSendVerifyMail();
       },
     );
   }
@@ -95,11 +97,12 @@ class _EmailVerificationScreenState
           CutomButton(
             backgroundColor: AppColors.lavenderColor,
             title: Text(
-              Utils.getLocaleMessage(
-                  LocaleKeys.authenticationVerifyEmailBackButtonTitle),
+              Utils.getLocaleMessage(LocaleKeys.authenticationBackButtonTitle),
               style: AppTextStyle.whiteBoldS14,
             ),
-            onPressed: () {},
+            onPressed: () {
+              context.router.back();
+            },
           ),
         ],
       ),
