@@ -40,5 +40,6 @@
   "authenticationVerifyEmailSubTitle": "Chúng tôi đã gửi liên kết xác minh đến địa chỉ email",
   "authenticationVerifyEmailSuggestions": "Nhấn TIẾP TỤC khi bạn hoàn tất quy trình xác minh",
   "authenticationVerifyEmailSuggestionsResend": "Bạn chưa nhận được email??",
-  "authenticationVerifyEmailResendTitle": "Gửi lại"
+  "authenticationVerifyEmailResendTitle": "Gửi lại",
+  "authenticationVerifyEmailError": "Email chưa được xác minh!"
 }

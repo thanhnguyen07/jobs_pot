@@ -43,5 +43,6 @@ abstract class  LocaleKeys {
   static const authenticationVerifyEmailSuggestions = 'authenticationVerifyEmailSuggestions';
   static const authenticationVerifyEmailSuggestionsResend = 'authenticationVerifyEmailSuggestionsResend';
   static const authenticationVerifyEmailResendTitle = 'authenticationVerifyEmailResendTitle';
+  static const authenticationVerifyEmailError = 'authenticationVerifyEmailError';
 
 }

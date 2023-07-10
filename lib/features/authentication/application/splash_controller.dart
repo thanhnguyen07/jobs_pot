@@ -8,6 +8,7 @@ import 'package:jobs_pot/features/authentication/presentation/screens/login/logi
 import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart';
 import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart';
 import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 
 class SplashController extends StateNotifier<bool> {
   SplashController(this.ref) : super(false);
@@ -44,7 +45,7 @@ class SplashController extends StateNotifier<bool> {
   }
 
   Future getUserProfile(BuildContext context) async {
-    EasyLoading.show();
+    Utils.showLoading();
 
     final resGetUserProfile =
         await ref.read(authRepositoryProvider).getUserProfile();
@@ -63,6 +64,6 @@ class SplashController extends StateNotifier<bool> {
       },
     );
 
-    EasyLoading.dismiss();
+    Utils.hideLoading();
   }
 }
