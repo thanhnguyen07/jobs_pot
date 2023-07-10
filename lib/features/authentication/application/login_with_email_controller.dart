@@ -58,7 +58,7 @@ class LoginWithEmailController extends StateNotifier {
 
     final encryptPassword = Utils.encryptPassword(password);
 
-    EasyLoading.show();
+    Utils.showLoading();
 
     final resSignUp = await ref
         .read(authRepositoryProvider)
@@ -76,6 +76,6 @@ class LoginWithEmailController extends StateNotifier {
       },
     );
 
-    EasyLoading.dismiss();
+    Utils.hideLoading();
   }
 }

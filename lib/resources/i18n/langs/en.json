@@ -39,5 +39,6 @@
   "authenticationVerifyEmailSubTitle": "We have sent the verification link to the email address",
   "authenticationVerifyEmailSuggestions": "Press CONTINUE when you complete the verification process",
   "authenticationVerifyEmailSuggestionsResend": "You have not received the email?",
-  "authenticationVerifyEmailResendTitle": "Resend"
+  "authenticationVerifyEmailResendTitle": "Resend",
+  "authenticationVerifyEmailError": "Email is not verified!"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/application/auth_controller.dart';
+import 'package:jobs_pot/features/authentication/application/email_verification_controller.dart';
 import 'package:jobs_pot/features/authentication/application/login_with_email_controller.dart';
 import 'package:jobs_pot/features/authentication/application/login_with_google_controller.dart';
 import 'package:jobs_pot/features/authentication/application/onboarding_controller.dart';
@@ -39,8 +40,13 @@ final loginWithGoogleControllerProvider =
 );
 
 final signUpWithEmailControllerProvider =
-    StateNotifierProvider<SignUpWithEmailController, int>(
+    StateNotifierProvider<SignUpWithEmailController, dynamic>(
   (ref) => SignUpWithEmailController(ref),
+);
+
+final emailVerificationControllerProvider =
+    StateNotifierProvider<EmailVerificationController, int>(
+  (ref) => EmailVerificationController(ref),
 );
 
 final rememberLoginController =
