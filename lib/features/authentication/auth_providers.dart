@@ -9,6 +9,7 @@ import 'package:jobs_pot/features/authentication/application/onboarding_controll
 import 'package:jobs_pot/features/authentication/application/remember_logIn_controller.dart';
 import 'package:jobs_pot/features/authentication/application/sign_up_with_email_controller.dart';
 import 'package:jobs_pot/features/authentication/application/splash_controller.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/authentication/infrastructure/auth_respository.dart';
 
 final authStateListenable = ValueNotifier<bool?>(null);
@@ -17,7 +18,8 @@ final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepository(),
 );
 
-final authControllerProvider = StateNotifierProvider<AuthController, dynamic>(
+final authControllerProvider =
+    StateNotifierProvider<AuthController, UserEntity?>(
   (ref) => AuthController(ref),
 );
 
