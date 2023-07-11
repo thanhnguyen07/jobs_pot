@@ -49,7 +49,7 @@ class ForgotPasswordController extends StateNotifier<int> {
     });
   }
 
-  final loginForm = FormGroup(
+  final _forgotPasswordForm = FormGroup(
     {
       ValidationKeys.email: FormControl<String>(
         value: '',
@@ -59,8 +59,10 @@ class ForgotPasswordController extends StateNotifier<int> {
     },
   );
 
+  FormGroup getForm() => _forgotPasswordForm;
+
   String _getEmail() {
-    return loginForm.controls[ValidationKeys.email]?.value.toString() ?? "";
+    return _forgotPasswordForm.controls[ValidationKeys.email]?.value.toString() ?? "";
   }
 
   void reSendRestPasswordMail() async {
@@ -88,7 +90,7 @@ class ForgotPasswordController extends StateNotifier<int> {
   void onResetPassword(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final isValid = loginForm.valid;
+    final isValid = _forgotPasswordForm.valid;
     if (isValid) {
       await _sendRestPasswordMail().then((sendMailResult) {
         if (sendMailResult) {
@@ -96,7 +98,7 @@ class ForgotPasswordController extends StateNotifier<int> {
         }
       });
     } else {
-      loginForm.controls.forEach((key, value) {
+      _forgotPasswordForm.controls.forEach((key, value) {
         if (value.invalid) {
           value.setErrors({
             ValidationKeys.required: LocaleKeys.authenticationInputRequired

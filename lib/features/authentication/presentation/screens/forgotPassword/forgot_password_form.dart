@@ -21,19 +21,18 @@ class ForgotPasswordForm extends ConsumerStatefulWidget {
 class _ForgotPasswordFormState extends ConsumerState<ForgotPasswordForm> {
   FormControl<dynamic>? formControlEmail;
 
-  late FormGroup loginForm;
+  late FormGroup forgotPasswordForm;
 
   @override
   void initState() {
     super.initState();
 
-    final controller = ref.read(forgotPasswordControllerProvider.notifier);
+    final forgotPasswordForm =
+        ref.read(forgotPasswordControllerProvider.notifier).getForm();
 
-    loginForm = controller.loginForm;
+    forgotPasswordForm.reset();
 
-    loginForm.reset();
-
-    formControlEmail = loginForm.control(ValidationKeys.email) as FormControl?;
+    formControlEmail = forgotPasswordForm.control(ValidationKeys.email) as FormControl?;
   }
 
   @override
@@ -41,7 +40,7 @@ class _ForgotPasswordFormState extends ConsumerState<ForgotPasswordForm> {
     ref.watch(languageControllerProvider);
 
     return ReactiveForm(
-      formGroup: loginForm,
+      formGroup: forgotPasswordForm,
       child: Column(
         children: [
           EmailInput(formControlEmail: formControlEmail),

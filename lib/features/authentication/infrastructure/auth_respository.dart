@@ -81,24 +81,6 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, UserResponseEntity>> signInWithEmail(
-      String email, String password) async {
-    try {
-      final Map<String, String> body = {"email": email, "password": password};
-      final signUpRes = await _apiClient.signInWithEmail(body);
-
-      return right(UserResponseEntity.fromJson(signUpRes));
-    } catch (error) {
-      if (error is DioException) {
-        final resError = ErrorResponseEntity.fromJson(error.response?.data);
-
-        return left(Failure.message(message: resError.msg));
-      }
-      return left(Failure.message(message: error.toString()));
-    }
-  }
-
-  @override
   Future<Either<Failure, UserResponseEntity>> getUserProfile() async {
     try {
       final userProfileResponse = await _apiClient.getUserProfile();
@@ -115,11 +97,9 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, UserResponseEntity>> signInWithGoogle(
-      String idToken, String uid) async {
+  Future<Either<Failure, UserResponseEntity>> signInWithGoogle() async {
     try {
-      final Map<String, String> body = {"idToken": idToken, "uid": uid};
-      final signInWithGoogleRes = await _apiClient.signInWithGoogle(body);
+      final signInWithGoogleRes = await _apiClient.signInWithGoogle();
 
       return right(UserResponseEntity.fromJson(signInWithGoogleRes));
     } catch (error) {

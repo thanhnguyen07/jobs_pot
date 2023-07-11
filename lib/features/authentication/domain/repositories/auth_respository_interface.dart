@@ -21,17 +21,11 @@ abstract class AuthRepositoryInterface {
 
   void removeRememberStatus();
 
-  Future<Either<Failure, UserResponseEntity>> signInWithEmail(
-    String email,
-    String password,
-  );
-
   Future<Either<Failure, UserResponseEntity>> signUpWithEmail(
     String fullName,
   );
 
   Future<Either<Failure, UserResponseEntity>> getUserProfile();
 
-  Future<Either<Failure, UserResponseEntity>> signInWithGoogle(
-      String idToken, String uid);
+  Future<Either<Failure, UserResponseEntity>> signInWithGoogle();
 }
