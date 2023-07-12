@@ -8,7 +8,6 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/email_verification_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -16,7 +15,7 @@ class SignUpWithEmailController extends StateNotifier {
   SignUpWithEmailController(this.ref) : super(null);
   final Ref ref;
 
-  final signUpForm = FormGroup(
+  final _signUpForm = FormGroup(
     {
       ValidationKeys.fullName: FormControl<String>(
         value: '',
@@ -43,17 +42,23 @@ class SignUpWithEmailController extends StateNotifier {
     },
   );
 
+  FormGroup getSignUpForm() => _signUpForm;
+
   void onSignUp(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    final isValid = signUpForm.valid;
+
+    final isValid = _signUpForm.valid;
+
     if (isValid) {
       final String email = getInputEmail();
+
       ref
           .read(emailVerificationControllerProvider.notifier)
           .setCurrentEmail(email);
+
       signUpWithEmail(context);
     } else {
-      signUpForm.controls.forEach((key, value) {
+      _signUpForm.controls.forEach((key, value) {
         if (value.invalid) {
           value.setErrors({
             ValidationKeys.required: LocaleKeys.authenticationInputRequired
@@ -64,27 +69,28 @@ class SignUpWithEmailController extends StateNotifier {
   }
 
   String getInputName() {
-    return signUpForm.controls[ValidationKeys.fullName]?.value.toString() ?? "";
+    return _signUpForm.controls[ValidationKeys.fullName]?.value.toString() ??
+        "";
   }
 
   String getInputEmail() {
-    return signUpForm.controls[ValidationKeys.email]?.value.toString() ?? "";
+    return _signUpForm.controls[ValidationKeys.email]?.value.toString() ?? "";
   }
 
   Future signUpWithEmail(BuildContext context) async {
     final email =
-        signUpForm.controls[ValidationKeys.email]?.value.toString() ?? "";
-    final password =
-        signUpForm.controls[ValidationKeys.password]?.value.toString() ?? "";
+        _signUpForm.controls[ValidationKeys.email]?.value.toString() ?? "";
 
-    Utils.showLoading();
+    final password =
+        _signUpForm.controls[ValidationKeys.password]?.value.toString() ?? "";
+
+    ref.read(systemControllerProvider.notifier).showLoading();
 
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-
       await ref
           .read(emailVerificationControllerProvider.notifier)
           .sendVerifyMail()
@@ -93,10 +99,7 @@ class SignUpWithEmailController extends StateNotifier {
       });
     } on FirebaseAuthException catch (e) {
       ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
-    } catch (e) {
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
     }
-
-    Utils.hideLoading();
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 }

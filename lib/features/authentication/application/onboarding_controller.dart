@@ -10,6 +10,7 @@ class OnboardingController extends StateNotifier {
 
   void goLogin(BuildContext context) async {
     ref.read(authRepositoryProvider).saveOnboadingStatus();
+
     context.router.pushNamed(LoginScreen.path);
   }
 }

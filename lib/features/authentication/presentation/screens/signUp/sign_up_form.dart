@@ -26,25 +26,25 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   FormControl<dynamic>? formControlPassword;
 
   late bool rememberState = true;
-  late FormGroup signUpForm;
+  late FormGroup _signUpForm;
 
   @override
   void initState() {
     super.initState();
 
-    final controller = ref.read(signUpWithEmailControllerProvider.notifier);
+    _signUpForm =
+        ref.read(signUpWithEmailControllerProvider.notifier).getSignUpForm();
 
-    signUpForm = controller.signUpForm;
-
-    signUpForm.reset();
+    _signUpForm.reset();
 
     formControlFullName =
-        signUpForm.control(ValidationKeys.fullName) as FormControl?;
+        _signUpForm.control(ValidationKeys.fullName) as FormControl?;
 
-    formControlEmail = signUpForm.control(ValidationKeys.email) as FormControl?;
+    formControlEmail =
+        _signUpForm.control(ValidationKeys.email) as FormControl?;
 
     formControlPassword =
-        signUpForm.control(ValidationKeys.password) as FormControl?;
+        _signUpForm.control(ValidationKeys.password) as FormControl?;
   }
 
   @override
@@ -52,7 +52,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
     ref.watch(languageControllerProvider);
 
     return ReactiveForm(
-      formGroup: signUpForm,
+      formGroup: _signUpForm,
       child: Column(
         children: [
           _formInput(),

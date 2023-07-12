@@ -22,33 +22,33 @@ class LoginWithGoogleController extends StateNotifier {
       idToken: googleAuth?.idToken,
     );
 
-    await FirebaseAuth.instance
-        .signInWithCredential(credential)
-        .then((userCredential) async {
-      final String? idToken = await userCredential.user?.getIdToken();
+    try {
+      await FirebaseAuth.instance.signInWithCredential(credential).then(
+        (userCredential) async {
+          final String? idToken = await userCredential.user?.getIdToken();
 
-      if (idToken != null) {
-        ref.read(authRepositoryProvider).saveToken(idToken).then(
-          (value) async {
-            final signInWithGoogleRes =
-                await ref.read(authRepositoryProvider).signInWithGoogle();
-
-            signInWithGoogleRes.fold(
-              (l) {
-                ref
-                    .read(systemControllerProvider.notifier)
-                    .showToastMessage(l.error);
-              },
-              (r) {
-                // print(r);
+          if (idToken != null) {
+            ref.read(authRepositoryProvider).saveToken(idToken).then(
+              (value) async {
+                await ref.read(authRepositoryProvider).signInWithGoogle().then(
+                  (res) {
+                    res.fold(
+                      (l) {},
+                      (r) {
+                        ref
+                            .read(authControllerProvider.notifier)
+                            .setDataUser(r.results);
+                      },
+                    );
+                  },
+                );
               },
             );
-          },
-        );
-      }
-    }).catchError((e) {
-      e as FirebaseException;
+          }
+        },
+      );
+    } on FirebaseAuthException catch (e) {
       ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
-    });
+    }
   }
 }

@@ -32,7 +32,8 @@ class _ForgotPasswordFormState extends ConsumerState<ForgotPasswordForm> {
 
     forgotPasswordForm.reset();
 
-    formControlEmail = forgotPasswordForm.control(ValidationKeys.email) as FormControl?;
+    formControlEmail =
+        forgotPasswordForm.control(ValidationKeys.email) as FormControl?;
   }
 
   @override

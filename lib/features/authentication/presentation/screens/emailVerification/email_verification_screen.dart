@@ -26,11 +26,6 @@ class EmailVerificationScreen extends ConsumerStatefulWidget {
 class _EmailVerificationScreenState
     extends ConsumerState<EmailVerificationScreen> {
   @override
-  // void initState() {
-  //   super.initState();
-  // }
-
-  @override
   Widget build(BuildContext context) {
     final emailUser = ref
         .read(emailVerificationControllerProvider.notifier)

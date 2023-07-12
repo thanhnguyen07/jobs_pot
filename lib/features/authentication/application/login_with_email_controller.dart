@@ -7,7 +7,6 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/email_verification_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -15,7 +14,7 @@ class LoginWithEmailController extends StateNotifier {
   LoginWithEmailController(this.ref) : super(null);
   final Ref ref;
 
-  final loginForm = FormGroup(
+  final _loginForm = FormGroup(
     {
       ValidationKeys.email: FormControl<String>(
         value: '',
@@ -34,17 +33,23 @@ class LoginWithEmailController extends StateNotifier {
     },
   );
 
+  FormGroup getLoginForm() => _loginForm;
+
   void onLogin(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    final isValid = loginForm.valid;
+
+    final isValid = _loginForm.valid;
+
     if (isValid) {
-    final email = _getEmail();
+      final email = _getEmail();
+
       ref
           .read(emailVerificationControllerProvider.notifier)
           .setCurrentEmail(email);
+
       signInWithEmail(context);
     } else {
-      loginForm.controls.forEach((key, value) {
+      _loginForm.controls.forEach((key, value) {
         if (value.invalid) {
           value.setErrors({
             ValidationKeys.required: LocaleKeys.authenticationInputRequired
@@ -55,21 +60,25 @@ class LoginWithEmailController extends StateNotifier {
   }
 
   String _getEmail() {
-    return loginForm.controls[ValidationKeys.email]?.value.toString() ?? "";
+    return _loginForm.controls[ValidationKeys.email]?.value.toString() ?? "";
   }
 
   Future signInWithEmail(BuildContext context) async {
     final email = _getEmail();
+
     final password =
-        loginForm.controls[ValidationKeys.password]?.value.toString() ?? "";
+        _loginForm.controls[ValidationKeys.password]?.value.toString() ?? "";
 
     try {
       final UserCredential credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+
       final User? user = credential.user;
+
       if (user != null) {
         if (user.emailVerified) {
           final idToken = await credential.user?.getIdToken();
+
           if (idToken != null) {
             await ref
                 .read(authRepositoryProvider)
@@ -93,21 +102,18 @@ class LoginWithEmailController extends StateNotifier {
   }
 
   void _getProfileUser(BuildContext context) async {
-    Utils.showLoading();
+    ref.read(systemControllerProvider.notifier).showLoading();
 
     final resSignUp = await ref.read(authRepositoryProvider).getUserProfile();
 
     resSignUp.fold(
-      (l) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
-      },
+      (l) {},
       (r) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+        ref.read(authControllerProvider.notifier).setDataUser(r.results);
         // context.router.removeLast();
         // context.router.pushNamed(HomeScreen.path);
       },
     );
-
-    Utils.hideLoading();
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 }
