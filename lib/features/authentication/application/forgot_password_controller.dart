@@ -7,7 +7,6 @@ import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/forgotPassword/check_mail_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -31,22 +30,27 @@ class ForgotPasswordController extends StateNotifier<int> {
 
   Future<bool> _sendRestPasswordMail() async {
     _cancelCountDown();
+
     final email = _getEmail();
-    Utils.showLoading();
-    return await FirebaseAuth.instance
-        .sendPasswordResetEmail(email: email)
-        .then(
-      (value) {
-        countDown();
-        Utils.hideLoading();
-        return true;
-      },
-    ).catchError((e) {
-      e as FirebaseException;
+
+    ref.read(systemControllerProvider.notifier).showLoading();
+
+    try {
+      return await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: email)
+          .then(
+        (value) {
+          countDown();
+
+          ref.read(systemControllerProvider.notifier).hideLoading();
+
+          return true;
+        },
+      );
+    } on FirebaseAuthException catch (e) {
       ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
-      Utils.hideLoading();
       return false;
-    });
+    }
   }
 
   final _forgotPasswordForm = FormGroup(
@@ -62,7 +66,9 @@ class ForgotPasswordController extends StateNotifier<int> {
   FormGroup getForm() => _forgotPasswordForm;
 
   String _getEmail() {
-    return _forgotPasswordForm.controls[ValidationKeys.email]?.value.toString() ?? "";
+    return _forgotPasswordForm.controls[ValidationKeys.email]?.value
+            .toString() ??
+        "";
   }
 
   void reSendRestPasswordMail() async {
@@ -91,6 +97,7 @@ class ForgotPasswordController extends StateNotifier<int> {
     FocusManager.instance.primaryFocus?.unfocus();
 
     final isValid = _forgotPasswordForm.valid;
+
     if (isValid) {
       await _sendRestPasswordMail().then((sendMailResult) {
         if (sendMailResult) {

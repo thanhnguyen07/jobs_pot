@@ -27,6 +27,7 @@ class CheckMailScreen extends ConsumerStatefulWidget {
 class _CheckMailScreenState extends ConsumerState<CheckMailScreen> {
   void _backToLogin() {
     context.router.removeLast();
+
     context.router.pushNamed(LoginScreen.path);
   }
 

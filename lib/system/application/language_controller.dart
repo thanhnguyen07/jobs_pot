@@ -10,11 +10,14 @@ class LanguageController extends StateNotifier<bool> {
   void changeLanguege(BuildContext context) async {
     if (Localizations.localeOf(context) == AppConfigs.appLanguageEn) {
       context.setLocale(AppConfigs.appLanguageVi);
+
       await FirebaseAuth.instance
           .setLanguageCode(AppConfigs.appLanguageVi.toString());
+
       state = !state;
     } else {
       context.setLocale(AppConfigs.appLanguageEn);
+
       await FirebaseAuth.instance
           .setLanguageCode(AppConfigs.appLanguageEn.toString());
 

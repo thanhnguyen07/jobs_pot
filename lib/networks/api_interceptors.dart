@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:jobs_pot/features/authentication/infrastructure/auth_respository.dart';
+import 'package:jobs_pot/main.dart';
+import 'package:jobs_pot/system/system_providers.dart';
 import '../utils/logger.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
@@ -56,38 +58,10 @@ class ApiInterceptors extends InterceptorsWrapper {
   @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
-    final statusCode = err.response?.statusCode;
-    final uri = err.requestOptions.path;
-    var data = "";
-    try {
-      data = jsonEncode(err.response.toString());
-    } catch (e) {
-      logger.e(e);
-    }
+    appContainer
+        .read(systemControllerProvider.notifier)
+        .handlerDioException(err);
 
-    apiLogger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
-
-    if (statusCode == 401) {
-      // final newToken =
-      //     await appContainer.read(authControllerProvider).refreshToken();
-
-      // if (newToken != null) {
-      //   err.requestOptions.headers['Authorization'] = 'Bearer $newToken';
-
-      //   final opts = Options(
-      //     method: err.requestOptions.method,
-      //     headers: err.requestOptions.headers,
-      //   );
-
-      //   final cloneReq = await ApiUtil().getDio().request(
-      //       err.requestOptions.uri.toString(),
-      //       options: opts,
-      //       data: err.requestOptions.data,
-      //       queryParameters: err.requestOptions.queryParameters);
-
-      //   return handler.resolve(cloneReq);
-      // }
-    }
     super.onError(err, handler);
   }
 }

@@ -17,7 +17,7 @@ class AuthController extends StateNotifier<UserEntity?> {
     authStateListenable.value = value;
   }
 
-  User? getCurrentUser() {
+  User? getCurrentFirebaseUser() {
     final User? currenUser = FirebaseAuth.instance.currentUser;
     if (currenUser != null) {
       return currenUser;

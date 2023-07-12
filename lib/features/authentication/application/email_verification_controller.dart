@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 
 class EmailVerificationController extends StateNotifier<int> {
   EmailVerificationController(this.ref) : super(0);
@@ -29,14 +28,17 @@ class EmailVerificationController extends StateNotifier<int> {
 
   Future sendVerifyMail() async {
     _cancelTimer();
-    Utils.showLoading();
+
+    ref.read(systemControllerProvider.notifier).showLoading();
+
     final User? user =
-        ref.read(authControllerProvider.notifier).getCurrentUser();
+        ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
+
     if (user != null) {
       await user.sendEmailVerification();
       _countDownResend();
     }
-    Utils.hideLoading();
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
   void reSendVerifyMail() {
@@ -46,15 +48,17 @@ class EmailVerificationController extends StateNotifier<int> {
   }
 
   void checkVerifyEmail() async {
-    Utils.showLoading();
+    ref.read(systemControllerProvider.notifier).showLoading();
+
     await _reloadUser();
 
     final User? currenUserNew =
-        ref.read(authControllerProvider.notifier).getCurrentUser();
+        ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
+
     if (currenUserNew != null) {
       if (currenUserNew.emailVerified) {
         final User? user =
-            ref.read(authControllerProvider.notifier).getCurrentUser();
+            ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
 
         final String? idToken = await user?.getIdToken();
 
@@ -68,17 +72,20 @@ class EmailVerificationController extends StateNotifier<int> {
           ref.read(systemControllerProvider.notifier).showToastGeneralError();
         }
       } else {
-        ref.read(systemControllerProvider.notifier).showToastMessage(
-              Utils.getLocaleMessage(LocaleKeys.authenticationVerifyEmailError),
+        ref
+            .read(systemControllerProvider.notifier)
+            .showToastMessageWithLocaleKeys(
+              LocaleKeys.authenticationVerifyEmailError,
             );
       }
     }
-    Utils.hideLoading();
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
   Future _reloadUser() async {
     final User? currenUser =
-        ref.read(authControllerProvider.notifier).getCurrentUser();
+        ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
+
     if (currenUser != null) {
       return await currenUser.reload();
     }
@@ -93,7 +100,7 @@ class EmailVerificationController extends StateNotifier<int> {
   void _createUserOnServer() async {
     _cancelTimer();
 
-    Utils.showLoading();
+    ref.read(systemControllerProvider.notifier).showLoading();
 
     final fullName =
         ref.read(signUpWithEmailControllerProvider.notifier).getInputName();
@@ -101,17 +108,15 @@ class EmailVerificationController extends StateNotifier<int> {
     final resSignUp =
         await ref.read(authRepositoryProvider).signUpWithEmail(fullName);
 
-    resSignUp.fold((l) {
-      ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
-    }, (r) {
-      ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+    resSignUp.fold((l) {}, (r) {
+      ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
       final User? user =
-          ref.read(authControllerProvider.notifier).getCurrentUser();
+          ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
+
       debugPrint('$user');
     });
-
-    Utils.hideLoading();
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
   void _countDownResend() {

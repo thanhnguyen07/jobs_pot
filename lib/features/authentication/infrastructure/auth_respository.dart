@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
@@ -67,16 +65,12 @@ class AuthRepository implements AuthRepositoryInterface {
       final Map<String, String> body = {
         "fullName": fullName,
       };
+
       final signUpRes = await _apiClient.signUpWithEmail(body);
 
       return right(UserResponseEntity.fromJson(signUpRes));
     } catch (error) {
-      if (error is DioException) {
-        final resError = ErrorResponseEntity.fromJson(error.response?.data);
-
-        return left(Failure.message(message: resError.msg));
-      }
-      return left(Failure.message(message: error.toString()));
+      return left(const Failure.empty());
     }
   }
 
@@ -87,12 +81,7 @@ class AuthRepository implements AuthRepositoryInterface {
 
       return right(UserResponseEntity.fromJson(userProfileResponse));
     } catch (error) {
-      if (error is DioException) {
-        final resError = ErrorResponseEntity.fromJson(error.response?.data);
-
-        return left(Failure.message(message: resError.msg));
-      }
-      return left(Failure.message(message: error.toString()));
+      return left(const Failure.empty());
     }
   }
 
@@ -103,12 +92,7 @@ class AuthRepository implements AuthRepositoryInterface {
 
       return right(UserResponseEntity.fromJson(signInWithGoogleRes));
     } catch (error) {
-      if (error is DioException) {
-        final resError = ErrorResponseEntity.fromJson(error.response?.data);
-
-        return left(Failure.message(message: resError.msg));
-      }
-      return left(Failure.message(message: error.toString()));
+      return left(const Failure.empty());
     }
   }
 }

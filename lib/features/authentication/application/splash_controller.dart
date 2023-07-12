@@ -7,7 +7,6 @@ import 'package:jobs_pot/features/authentication/presentation/screens/login/logi
 import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart';
 import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 
 class SplashController extends StateNotifier<bool> {
   SplashController(this.ref) : super(false);
@@ -44,25 +43,26 @@ class SplashController extends StateNotifier<bool> {
   }
 
   Future getUserProfile(BuildContext context) async {
-    Utils.showLoading();
+    ref.read(systemControllerProvider.notifier).showLoading();
 
-    final resGetUserProfile =
-        await ref.read(authRepositoryProvider).getUserProfile();
+    await ref.read(authRepositoryProvider).getUserProfile().then(
+      (res) {
+        res.fold(
+          (l) {
+            context.router.replaceNamed(LoginScreen.path);
+          },
+          (r) {
+            ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
 
-    resGetUserProfile.fold(
-      (l) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
+            ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-        context.router.replaceNamed(LoginScreen.path);
-      },
-      (r) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+            context.router.removeLast();
 
-        context.router.removeLast();
-        context.router.pushNamed(HomeScreen.path);
+            context.router.pushNamed(HomeScreen.path);
+          },
+        );
       },
     );
-
-    Utils.hideLoading();
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 }
