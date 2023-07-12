@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/login/login_screen.dart';
@@ -19,15 +18,21 @@ class SplashController extends StateNotifier<bool> {
       const Duration(seconds: 2),
       () async {
         ref.read(authRepositoryProvider).getOnboadingStatus().then(
-          (onboadingStatus) {
+          (onboadingStatus) async {
             if (onboadingStatus != null) {
-              ref.read(authRepositoryProvider).getToken().then((token) {
-                if (token != null) {
-                  getUserProfile(context);
-                } else {
-                  context.router.replaceNamed(LoginScreen.path);
-                }
-              });
+              ref.read(authRepositoryProvider).getToken().then(
+                (token) {
+                  ref.read(authRepositoryProvider).getRememberStatus().then(
+                    (rememberStatus) {
+                      if (token != null && rememberStatus != null) {
+                        getUserProfile(context);
+                      } else {
+                        context.router.replaceNamed(LoginScreen.path);
+                      }
+                    },
+                  );
+                },
+              );
             } else {
               context.router.replaceNamed(OnboardingScreen.path);
             }
@@ -38,30 +43,26 @@ class SplashController extends StateNotifier<bool> {
   }
 
   Future getUserProfile(BuildContext context) async {
-    EasyLoading.show();
+    ref.read(systemControllerProvider.notifier).showLoading();
 
-    final resGetUserProfile =
-        await ref.read(authRepositoryProvider).getUserProfile();
+    await ref.read(authRepositoryProvider).getUserProfile().then(
+      (res) {
+        res.fold(
+          (l) {
+            context.router.replaceNamed(LoginScreen.path);
+          },
+          (r) {
+            ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
 
-    resGetUserProfile.fold(
-      (l) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
+            ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-        context.router.replaceNamed(LoginScreen.path);
-      },
-      (r) {
-        ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+            context.router.removeLast();
 
-        ref
-            .read(authRepositoryProvider)
-            .saveBothToken(r.token, r.refreshToken)
-            .then((value) {
-          context.router.removeLast();
-          context.router.pushNamed(HomeScreen.path);
-        });
+            context.router.pushNamed(HomeScreen.path);
+          },
+        );
       },
     );
-
-    EasyLoading.dismiss();
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 }

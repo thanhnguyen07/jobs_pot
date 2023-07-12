@@ -11,8 +11,6 @@ class UserResponseEntity with _$UserResponseEntity {
   /// Factory Constructor
   const factory UserResponseEntity({
     required UserEntity results,
-    required String token,
-    required String refreshToken,
     required String msg,
   }) = _UserResponseEntity;
 

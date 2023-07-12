@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
@@ -16,18 +14,8 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future saveBothToken(String token, String refreshToken) {
-    return LocalStorageHelper.saveBothToken(token, refreshToken);
-  }
-
-  @override
   Future saveToken(String token) {
     return LocalStorageHelper.saveToken(token);
-  }
-
-  @override
-  Future saveRefreshToken(String token) {
-    return LocalStorageHelper.saveRefreshToken(token);
   }
 
   @override
@@ -36,13 +24,13 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<String?> getToken() {
-    return LocalStorageHelper.getToken();
+  Future saveRememberStatus() {
+    return LocalStorageHelper.saveRememberStatus();
   }
 
   @override
-  Future<String?> getRefreshToken() {
-    return LocalStorageHelper.getRefreshToken();
+  Future<String?> getToken() {
+    return LocalStorageHelper.getToken();
   }
 
   @override
@@ -51,8 +39,8 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future removeBothToken() {
-    return LocalStorageHelper.removeBothToken();
+  Future<bool?> getRememberStatus() {
+    return LocalStorageHelper.getRememberStatus();
   }
 
   @override
@@ -61,52 +49,28 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future removeRefreshToken() {
-    return LocalStorageHelper.removeRefreshToken();
-  }
-
-  @override
   Future removeOnboadingStatus() {
     return LocalStorageHelper.removeOnboadingStatus();
   }
 
   @override
+  Future removeRememberStatus() {
+    return LocalStorageHelper.removeRememberStatus();
+  }
+
+  @override
   Future<Either<Failure, UserResponseEntity>> signUpWithEmail(
-      String fullName, String email, String password) async {
+      String fullName) async {
     try {
       final Map<String, String> body = {
-        "userName": fullName,
-        "email": email,
-        "password": password
+        "fullName": fullName,
       };
+
       final signUpRes = await _apiClient.signUpWithEmail(body);
 
       return right(UserResponseEntity.fromJson(signUpRes));
     } catch (error) {
-      if (error is DioException) {
-        final resError = ErrorResponseEntity.fromJson(error.response?.data);
-
-        return left(Failure.message(message: resError.msg));
-      }
-      return left(Failure.message(message: error.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, UserResponseEntity>> signInWithEmail(
-      String email, String password) async {
-    try {
-      final Map<String, String> body = {"email": email, "password": password};
-      final signUpRes = await _apiClient.signInWithEmail(body);
-
-      return right(UserResponseEntity.fromJson(signUpRes));
-    } catch (error) {
-      if (error is DioException) {
-        final resError = ErrorResponseEntity.fromJson(error.response?.data);
-
-        return left(Failure.message(message: resError.msg));
-      }
-      return left(Failure.message(message: error.toString()));
+      return left(const Failure.empty());
     }
   }
 
@@ -117,39 +81,18 @@ class AuthRepository implements AuthRepositoryInterface {
 
       return right(UserResponseEntity.fromJson(userProfileResponse));
     } catch (error) {
-      if (error is DioException) {
-        final resError = ErrorResponseEntity.fromJson(error.response?.data);
-
-        return left(Failure.message(message: resError.msg));
-      }
-      return left(Failure.message(message: error.toString()));
+      return left(const Failure.empty());
     }
   }
 
   @override
-  Future<Either<Failure, String>> refreshToken() async {
+  Future<Either<Failure, UserResponseEntity>> signInWithGoogle() async {
     try {
-      final String? refreshToken = await getRefreshToken();
-      if (refreshToken != null) {
-        final Map<String, String?> body = {"refreshToken": refreshToken};
+      final signInWithGoogleRes = await _apiClient.signInWithGoogle();
 
-        final userProfileResponse = await _apiClient.refreshToken(body);
-
-        final dataRes = UserResponseEntity.fromJson(userProfileResponse);
-
-        await saveBothToken(dataRes.token, dataRes.refreshToken);
-
-        return right(dataRes.token);
-      }
-      return left(
-        const Failure.message(
-            message: "An error occurred. Please login again!!!"),
-      );
+      return right(UserResponseEntity.fromJson(signInWithGoogleRes));
     } catch (error) {
-      return left(
-        const Failure.message(
-            message: "An error occurred. Please login again!!!"),
-      );
+      return left(const Failure.empty());
     }
   }
 }

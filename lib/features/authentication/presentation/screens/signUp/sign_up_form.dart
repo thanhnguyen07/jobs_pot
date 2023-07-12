@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
-import 'package:jobs_pot/common/app_validation_keys.dart';
+import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/button_submit_form.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/email_input.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/password_input.dart';
@@ -26,25 +26,25 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   FormControl<dynamic>? formControlPassword;
 
   late bool rememberState = true;
-  late FormGroup signUpForm;
+  late FormGroup _signUpForm;
 
   @override
   void initState() {
     super.initState();
 
-    final controller = ref.read(signUpControllerProvider.notifier);
+    _signUpForm =
+        ref.read(signUpWithEmailControllerProvider.notifier).getSignUpForm();
 
-    signUpForm = controller.signUpForm;
-
-    signUpForm.reset();
+    _signUpForm.reset();
 
     formControlFullName =
-        signUpForm.control(ValidationKeys.fullName) as FormControl?;
+        _signUpForm.control(ValidationKeys.fullName) as FormControl?;
 
-    formControlEmail = signUpForm.control(ValidationKeys.email) as FormControl?;
+    formControlEmail =
+        _signUpForm.control(ValidationKeys.email) as FormControl?;
 
     formControlPassword =
-        signUpForm.control(ValidationKeys.password) as FormControl?;
+        _signUpForm.control(ValidationKeys.password) as FormControl?;
   }
 
   @override
@@ -52,7 +52,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
     ref.watch(languageControllerProvider);
 
     return ReactiveForm(
-      formGroup: signUpForm,
+      formGroup: _signUpForm,
       child: Column(
         children: [
           _formInput(),
@@ -64,7 +64,9 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               style: AppTextStyle.whiteBoldS14,
             ),
             onLogin: () {
-              ref.read(signUpControllerProvider.notifier).onSignUp(context);
+              ref
+                  .read(signUpWithEmailControllerProvider.notifier)
+                  .onSignUp(context);
             },
           ),
         ],

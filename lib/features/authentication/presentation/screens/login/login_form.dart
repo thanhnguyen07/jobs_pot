@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
-import 'package:jobs_pot/common/app_validation_keys.dart';
+import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/button_submit_form.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/email_input.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/password_input.dart';
@@ -29,15 +29,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   @override
   void initState() {
     super.initState();
-
-    final controller = ref.read(loginControllerProvider.notifier);
-
-    loginForm = controller.loginForm;
-
+    final loginForm =
+        ref.read(loginWithEmailControllerProvider.notifier).getLoginForm();
     loginForm.reset();
-
     formControlEmail = loginForm.control(ValidationKeys.email) as FormControl?;
-
     formControlPassword =
         loginForm.control(ValidationKeys.password) as FormControl?;
   }
@@ -57,8 +52,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               Utils.getLocaleMessage(LocaleKeys.authenticationLoginButtonTitle),
               style: AppTextStyle.whiteBoldS14,
             ),
-            onLogin: () =>
-                ref.read(loginControllerProvider.notifier).onLogin(context),
+            onLogin: () => ref
+                .read(loginWithEmailControllerProvider.notifier)
+                .onLogin(context),
           )
         ],
       ),

@@ -8,10 +8,12 @@ class SuggestionsText extends StatelessWidget {
     required this.textSuggestions,
     required this.textAction,
     required this.action,
+    this.textTime,
   }) : super(key: key);
 
   final String textSuggestions;
   final String textAction;
+  final int? textTime;
   final void Function()? action;
 
   @override
@@ -30,10 +32,18 @@ class SuggestionsText extends StatelessWidget {
                 text: ' ',
               ),
               TextSpan(
-                text: textAction,
-                style: AppTextStyle.fireYellowUnderlineRegularS14,
-                recognizer: TapGestureRecognizer()..onTap = action,
-              ),
+                  text: textAction,
+                  style: AppTextStyle.fireYellowUnderlineRegularS14,
+                  recognizer: TapGestureRecognizer()..onTap = action,
+                  children: [
+                    TextSpan(
+                      text: textTime != null
+                          ? textTime! > 0
+                              ? " ($textTime)"
+                              : ''
+                          : '',
+                    )
+                  ]),
             ],
           ),
         ),

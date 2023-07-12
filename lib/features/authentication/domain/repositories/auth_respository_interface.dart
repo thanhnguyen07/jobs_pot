@@ -3,40 +3,29 @@ import 'package:jobs_pot/features/authentication/domain/entities/user_response_e
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 
 abstract class AuthRepositoryInterface {
-  void saveBothToken(String token, String refreshToken);
-
   void saveToken(String token);
-
-  void saveRefreshToken(String token);
 
   void saveOnboadingStatus();
 
-  Future<String?> getToken();
+  void saveRememberStatus();
 
-  Future<String?> getRefreshToken();
+  Future<String?> getToken();
 
   Future<bool?> getOnboadingStatus();
 
-  void removeBothToken();
+  Future<bool?> getRememberStatus();
 
   void removeToken();
 
-  void removeRefreshToken();
-
   void removeOnboadingStatus();
 
-  Future<Either<Failure, UserResponseEntity>> signInWithEmail(
-    String email,
-    String password,
-  );
+  void removeRememberStatus();
 
   Future<Either<Failure, UserResponseEntity>> signUpWithEmail(
     String fullName,
-    String email,
-    String password,
   );
 
   Future<Either<Failure, UserResponseEntity>> getUserProfile();
 
-  Future<Either<Failure, String>> refreshToken();
+  Future<Either<Failure, UserResponseEntity>> signInWithGoogle();
 }
