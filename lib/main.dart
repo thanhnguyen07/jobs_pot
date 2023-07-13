@@ -42,7 +42,6 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     EasyLoading.instance.maskType = EasyLoadingMaskType.black;
     EasyLoading.instance.loadingStyle = EasyLoadingStyle.light;
-    EasyLoading.instance.indicatorType = EasyLoadingIndicatorType.threeBounce;
 
     return MaterialApp.router(
       builder: EasyLoading.init(),

@@ -27,7 +27,7 @@ class _ForgotPasswordFormState extends ConsumerState<ForgotPasswordForm> {
   void initState() {
     super.initState();
 
-    final forgotPasswordForm =
+    forgotPasswordForm =
         ref.read(forgotPasswordControllerProvider.notifier).getForm();
 
     forgotPasswordForm.reset();

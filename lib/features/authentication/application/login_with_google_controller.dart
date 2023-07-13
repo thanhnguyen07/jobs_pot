@@ -30,6 +30,7 @@ class LoginWithGoogleController extends StateNotifier {
           if (idToken != null) {
             ref.read(authRepositoryProvider).saveToken(idToken).then(
               (value) async {
+                ref.read(systemControllerProvider.notifier).showLoading();
                 await ref.read(authRepositoryProvider).signInWithGoogle().then(
                   (res) {
                     res.fold(
@@ -42,6 +43,7 @@ class LoginWithGoogleController extends StateNotifier {
                     );
                   },
                 );
+                ref.read(systemControllerProvider.notifier).hideLoading();
               },
             );
           }

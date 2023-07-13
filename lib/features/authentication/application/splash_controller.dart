@@ -52,13 +52,13 @@ class SplashController extends StateNotifier<bool> {
             context.router.replaceNamed(LoginScreen.path);
           },
           (r) {
-            ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
-
             ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-            context.router.removeLast();
+            // context.router.removeLast();
 
-            context.router.pushNamed(HomeScreen.path);
+            // context.router.pushNamed(HomeScreen.path);
+
+            context.router.replaceNamed(LoginScreen.path);
           },
         );
       },
