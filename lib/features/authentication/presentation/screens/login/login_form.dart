@@ -29,10 +29,14 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   @override
   void initState() {
     super.initState();
-    final loginForm =
+
+    loginForm =
         ref.read(loginWithEmailControllerProvider.notifier).getLoginForm();
+
     loginForm.reset();
+
     formControlEmail = loginForm.control(ValidationKeys.email) as FormControl?;
+
     formControlPassword =
         loginForm.control(ValidationKeys.password) as FormControl?;
   }
