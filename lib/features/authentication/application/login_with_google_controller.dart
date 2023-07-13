@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 
 class LoginWithGoogleController extends StateNotifier {
@@ -11,7 +14,7 @@ class LoginWithGoogleController extends StateNotifier {
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future signInWithGoogle() async {
+  Future signInWithGoogle(BuildContext context) async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     final GoogleSignInAuthentication? googleAuth =
@@ -39,6 +42,9 @@ class LoginWithGoogleController extends StateNotifier {
                         ref
                             .read(authControllerProvider.notifier)
                             .setDataUser(r.results);
+
+                        context.router.removeLast();
+                        context.router.pushNamed(HomeScreen.path);
                       },
                     );
                   },

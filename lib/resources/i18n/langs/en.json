@@ -48,5 +48,7 @@
   "authenticationVerifyEmailResendTitle": "Resend",
   "authenticationVerifyEmailError": "Email is not verified!",
   "authenticationForgotPasswordError": "Email is not registered!",
-  "authenticationBackButtonTitle": "GO BACK"
+  "authenticationBackButtonTitle": "GO BACK",
+  "authenticationCheckMailTitle": "Check Your Email",
+  "authenticationCheckMailSubTitle": "We have sent the reset password link to the email address"
 }

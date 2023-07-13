@@ -51,5 +51,7 @@ abstract class  LocaleKeys {
   static const authenticationVerifyEmailError = 'authenticationVerifyEmailError';
   static const authenticationForgotPasswordError = 'authenticationForgotPasswordError';
   static const authenticationBackButtonTitle = 'authenticationBackButtonTitle';
+  static const authenticationCheckMailTitle = 'authenticationCheckMailTitle';
+  static const authenticationCheckMailSubTitle = 'authenticationCheckMailSubTitle';
 
 }

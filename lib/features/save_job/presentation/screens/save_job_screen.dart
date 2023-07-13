@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SaveJobScreen extends ConsumerStatefulWidget {
   const SaveJobScreen({Key? key}) : super(key: key);
 
-  static const String path = '/SaveJobScreen';
+  static const String path = 'SaveJobScreen';
 
   @override
   ConsumerState<SaveJobScreen> createState() => _SaveJobScreenState();

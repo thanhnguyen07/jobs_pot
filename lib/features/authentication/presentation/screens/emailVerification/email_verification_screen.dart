@@ -85,7 +85,7 @@ class _EmailVerificationScreenState
             onPressed: () {
               ref
                   .read(emailVerificationControllerProvider.notifier)
-                  .checkVerifyEmail();
+                  .checkVerifyEmail(context);
             },
           ),
           const SizedBox(height: 15),

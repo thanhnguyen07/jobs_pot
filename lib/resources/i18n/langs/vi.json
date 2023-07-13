@@ -48,5 +48,7 @@
   "authenticationVerifyEmailResendTitle": "Gửi lại",
   "authenticationVerifyEmailError": "Email chưa được xác minh!",
   "authenticationForgotPasswordError": "Email chưa được đăng ký!",
-  "authenticationBackButtonTitle": "QUAY LẠI"
+  "authenticationBackButtonTitle": "QUAY LẠI",
+  "authenticationCheckMailTitle": "Kiểm tra Email của bạn",
+  "authenticationCheckMailSubTitle": "Chúng tôi đã gửi liên kết đặt lại mật khẩu đến địa chỉ email"
 }

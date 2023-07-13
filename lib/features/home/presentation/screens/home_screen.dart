@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  static const String path = '/HomeScreen';
+  static const String path = 'HomeScreen';
 
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();

@@ -33,7 +33,9 @@ class _LoginWithGoogleState extends ConsumerState<LoginWithGoogle> {
         ),
         backgroundColor: AppColors.lavenderColor,
         onPressed: () async {
-          await ref.read(loginWithGoogleControllerProvider.notifier).signInWithGoogle();
+          await ref
+              .read(loginWithGoogleControllerProvider.notifier)
+              .signInWithGoogle(context);
         },
         icon: Container(
           margin: const EdgeInsets.only(right: 10),

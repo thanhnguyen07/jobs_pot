@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class PostJobScreen extends ConsumerStatefulWidget {
   const PostJobScreen({Key? key}) : super(key: key);
 
-  static const String path = '/PostJobScreen';
+  static const String path = 'PostJobScreen';
 
   @override
   ConsumerState<PostJobScreen> createState() => _PostJobScreenState();

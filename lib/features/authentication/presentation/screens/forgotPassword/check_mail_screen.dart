@@ -42,8 +42,7 @@ class _CheckMailScreenState extends ConsumerState<CheckMailScreen> {
     return UnFocusKeyboard(
       context: context,
       child: Scaffold(
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
+        body: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: SingleChildScrollView(
@@ -52,9 +51,14 @@ class _CheckMailScreenState extends ConsumerState<CheckMailScreen> {
               children: [
                 _checkEmailTitle(emailUser),
                 SvgPicture.asset(AppImages.verifiedMail),
-                _buttonActions(),
-                const SizedBox(height: 15),
-                _checkMailSuggestion(count),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(children: [
+                    _buttonActions(),
+                    const SizedBox(height: 15),
+                    _checkMailSuggestion(count),
+                  ]),
+                )
               ],
             ),
           ),
@@ -65,9 +69,9 @@ class _CheckMailScreenState extends ConsumerState<CheckMailScreen> {
 
   Widget _checkEmailTitle(String emailUser) {
     return TitleAndSubTitle(
-      title: Utils.getLocaleMessage(LocaleKeys.authenticationVerifyEmailTitle),
+      title: Utils.getLocaleMessage(LocaleKeys.authenticationCheckMailTitle),
       subTitle:
-          Utils.getLocaleMessage(LocaleKeys.authenticationVerifyEmailSubTitle),
+          Utils.getLocaleMessage(LocaleKeys.authenticationCheckMailSubTitle),
       subTitle2: emailUser,
     );
   }

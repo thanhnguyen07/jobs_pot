@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/home_stack/presentation/screens/home_stack_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 
@@ -10,7 +12,7 @@ class EmailVerificationController extends StateNotifier<int> {
   EmailVerificationController(this.ref) : super(0);
   final Ref ref;
   Timer? _timerCountDown;
-  late String _cureentEmail;
+  String _cureentEmail = '';
 
   @override
   void dispose() {
@@ -47,7 +49,7 @@ class EmailVerificationController extends StateNotifier<int> {
     }
   }
 
-  void checkVerifyEmail() async {
+  void checkVerifyEmail(BuildContext context) async {
     ref.read(systemControllerProvider.notifier).showLoading();
 
     await _reloadUser();
@@ -65,7 +67,7 @@ class EmailVerificationController extends StateNotifier<int> {
         if (idToken != null) {
           await ref.read(authRepositoryProvider).saveToken(idToken).then(
             (value) async {
-              _createUserOnServer();
+              _createUserOnServer(context);
             },
           );
         } else {
@@ -97,7 +99,7 @@ class EmailVerificationController extends StateNotifier<int> {
     state = 0;
   }
 
-  void _createUserOnServer() async {
+  void _createUserOnServer(BuildContext context) async {
     _cancelTimer();
 
     ref.read(systemControllerProvider.notifier).showLoading();
@@ -105,16 +107,14 @@ class EmailVerificationController extends StateNotifier<int> {
     final fullName =
         ref.read(signUpWithEmailControllerProvider.notifier).getInputName();
 
-    final resSignUp =
+    final resCreateUserOnServer =
         await ref.read(authRepositoryProvider).signUpWithEmail(fullName);
 
-    resSignUp.fold((l) {}, (r) {
+    resCreateUserOnServer.fold((l) {}, (r) {
       ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-      final User? user =
-          ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
-
-      debugPrint('$user');
+      context.router.removeLast();
+      context.router.pushNamed(HomeStackScreen.path);
     });
     ref.read(systemControllerProvider.notifier).hideLoading();
   }

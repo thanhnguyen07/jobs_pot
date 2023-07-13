@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/forgotPassword/check_mail_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
@@ -101,6 +102,11 @@ class ForgotPasswordController extends StateNotifier<int> {
     if (isValid) {
       await _sendRestPasswordMail().then((sendMailResult) {
         if (sendMailResult) {
+          final email = _getEmail();
+          ref
+              .read(emailVerificationControllerProvider.notifier)
+              .setCurrentEmail(email);
+
           context.router.pushNamed(CheckMailScreen.path);
         }
       });

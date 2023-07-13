@@ -33,7 +33,7 @@ final onboardingController =
 );
 
 final loginWithEmailControllerProvider =
-    AutoDisposeStateNotifierProvider<LoginWithEmailController, dynamic>(
+    StateNotifierProvider<LoginWithEmailController, dynamic>(
   (ref) => LoginWithEmailController(ref),
 );
 
