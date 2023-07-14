@@ -16,4 +16,5 @@ class FirebaseKeys {
   static const String userNotFound = "user-not-found";
   static const String wrongPassword = "wrong-password";
   static const String tooManyRequests = "too-many-requests";
+  static const String googleType = "google";
 }

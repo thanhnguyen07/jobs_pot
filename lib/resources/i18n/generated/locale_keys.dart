@@ -2,6 +2,7 @@
 
 abstract class  LocaleKeys {
   static const changeLanguageTitle = 'changeLanguageTitle';
+  static const changeLanguageTitle2 = 'changeLanguageTitle2';
   static const generalError = 'generalError';
   static const splashTitle = 'splashTitle';
   static const onboardingTitle1 = 'onboardingTitle1';
@@ -53,5 +54,24 @@ abstract class  LocaleKeys {
   static const authenticationBackButtonTitle = 'authenticationBackButtonTitle';
   static const authenticationCheckMailTitle = 'authenticationCheckMailTitle';
   static const authenticationCheckMailSubTitle = 'authenticationCheckMailSubTitle';
+  static const homeHelloTitle = 'homeHelloTitle';
+  static const homeJoinNowTitle = 'homeJoinNowTitle';
+  static const homeFinJobTitle = 'homeFinJobTitle';
+  static const homeRecentFinJobTitle = 'homeRecentFinJobTitle';
+  static const homeRemoteJobTitle = 'homeRemoteJobTitle';
+  static const homeFullTimeTitle = 'homeFullTimeTitle';
+  static const homePartTimeTitle = 'homePartTimeTitle';
+  static const homePercentSaleTitle = 'homePercentSaleTitle';
+  static const settingTitle = 'settingTitle';
+  static const settingNotificationsTitle = 'settingNotificationsTitle';
+  static const settingDarkmodeTitle = 'settingDarkmodeTitle';
+  static const settingLightmodeTitle = 'settingLightmodeTitle';
+  static const settingPasswordTitle = 'settingPasswordTitle';
+  static const settingLogoutTitle = 'settingLogoutTitle';
+  static const settingLogoutModalSubTitle = 'settingLogoutModalSubTitle';
+  static const settingLanguagesTitle = 'settingLanguagesTitle';
+  static const settingSelectLanguage = 'settingSelectLanguage';
+  static const yesButtonTitle = 'yesButtonTitle';
+  static const cancelButtonTitle = 'cancelButtonTitle';
 
 }

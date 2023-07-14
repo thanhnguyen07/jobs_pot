@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/login/login_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart';
-import 'package:jobs_pot/features/home_stack/presentation/screens/home_stack_screen.dart';
+import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 
 class SplashController extends StateNotifier<bool> {
@@ -56,7 +56,7 @@ class SplashController extends StateNotifier<bool> {
 
             context.router.removeLast();
 
-            context.router.pushNamed(HomeStackScreen.path);
+            context.router.replaceAll([const HomeStackRoute()]);
           },
         );
       },

@@ -10,6 +10,12 @@ class AppTextStyle {
     fontSize: 12,
     fontFamily: AppFontFamily.dMSansItalic,
   );
+
+  static const textBlackColorRegularS12 = TextStyle(
+    color: AppColors.blackColor,
+    fontSize: 12,
+    fontFamily: AppFontFamily.dMSansRegular,
+  );
   static const textColor1RegularS12 = TextStyle(
     color: AppColors.textColor1,
     fontSize: 12,
@@ -69,16 +75,37 @@ class AppTextStyle {
     fontSize: 14,
     fontFamily: AppFontFamily.dMSansBold,
   );
+  //16
+  static const textColor3MediumS16 = TextStyle(
+    color: AppColors.darkPurpleColor,
+    fontSize: 16,
+    fontFamily: AppFontFamily.dMSansMedium,
+  );
+  static const blackBoldS16 = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
   //18
   static const darkPurpleBoldS18 = TextStyle(
     color: AppColors.darkPurpleColor,
     fontSize: 18,
     fontFamily: AppFontFamily.dMSansBold,
   );
+  static const whiteMediumS18 = TextStyle(
+    color: Colors.white,
+    fontSize: 18,
+    fontFamily: AppFontFamily.dMSansMedium,
+  );
   //22
   static const blackBoldS22 = TextStyle(
     color: Colors.black,
-    fontSize: 18,
+    fontSize: 22,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
+  static const egglantBoldS22 = TextStyle(
+    color: AppColors.egglantColor,
+    fontSize: 22,
     fontFamily: AppFontFamily.dMSansBold,
   );
   //26

@@ -11,67 +11,83 @@ import 'package:jobs_pot/features/create_job/presentation/screens/create_screen.
 import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart';
 import 'package:jobs_pot/features/home_stack/presentation/screens/home_stack_screen.dart';
 import 'package:jobs_pot/features/post/presentation/screens/post_screen.dart';
+import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
+import 'package:jobs_pot/features/setting/presentation/screens/setting_screen.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
+        ..._authRoutesList,
+        _homeStack,
         AutoRoute(
-          page: SplashRoute.page,
-          initial: true,
-          path: SplashScreen.path,
+          page: ProfileRoute.page,
+          path: ProfileScreen.path,
         ),
         AutoRoute(
-          page: OnboardingRoute.page,
-          path: OnboardingScreen.path,
-        ),
-        AutoRoute(
-          page: LoginRoute.page,
-          path: LoginScreen.path,
-        ),
-        AutoRoute(
-          page: SignUpRoute.page,
-          path: SignUpScreen.path,
-        ),
-        AutoRoute(
-          page: ForgotPasswordRoute.page,
-          path: ForgotPasswordScreen.path,
-        ),
-        AutoRoute(
-          page: EmailVerificationRoute.page,
-          path: EmailVerificationScreen.path,
-        ),
-        AutoRoute(
-          page: CheckMailRoute.page,
-          path: CheckMailScreen.path,
-        ),
-        AutoRoute(
-          page: HomeStackRoute.page,
-          path: HomeStackScreen.path,
-          children: [
-            AutoRoute(
-              page: HomeRoute.page,
-              path: HomeScreen.path,
-            ),
-            AutoRoute(
-              page: PostJobRoute.page,
-              path: PostJobScreen.path,
-            ),
-            AutoRoute(
-              page: CreateJobRoute.page,
-              path: CreateJobScreen.path,
-            ),
-            AutoRoute(
-              page: ChatRoute.page,
-              path: ChatScreen.path,
-            ),
-            AutoRoute(
-              page: SaveJobRoute.page,
-              path: SaveJobScreen.path,
-            ),
-          ],
-        ),
+          page: SettingRoute.page,
+          path: SettingScreen.path,
+        )
       ];
+
+  final List<AutoRoute> _authRoutesList = [
+    AutoRoute(
+      page: SplashRoute.page,
+      initial: true,
+      path: SplashScreen.path,
+    ),
+    AutoRoute(
+      page: OnboardingRoute.page,
+      path: OnboardingScreen.path,
+    ),
+    AutoRoute(
+      page: LoginRoute.page,
+      path: LoginScreen.path,
+    ),
+    AutoRoute(
+      page: SignUpRoute.page,
+      path: SignUpScreen.path,
+    ),
+    AutoRoute(
+      page: ForgotPasswordRoute.page,
+      path: ForgotPasswordScreen.path,
+    ),
+    AutoRoute(
+      page: EmailVerificationRoute.page,
+      path: EmailVerificationScreen.path,
+    ),
+    AutoRoute(
+      page: CheckMailRoute.page,
+      path: CheckMailScreen.path,
+    ),
+  ];
+
+  final AutoRoute _homeStack = AutoRoute(
+    page: HomeStackRoute.page,
+    path: HomeStackScreen.path,
+    children: [
+      AutoRoute(
+        page: HomeRoute.page,
+        path: HomeScreen.path,
+      ),
+      AutoRoute(
+        page: PostJobRoute.page,
+        path: PostJobScreen.path,
+      ),
+      AutoRoute(
+        page: CreateJobRoute.page,
+        path: CreateJobScreen.path,
+      ),
+      AutoRoute(
+        page: ChatRoute.page,
+        path: ChatScreen.path,
+      ),
+      AutoRoute(
+        page: SaveJobRoute.page,
+        path: SaveJobScreen.path,
+      ),
+    ],
+  );
 }

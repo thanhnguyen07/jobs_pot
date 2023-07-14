@@ -1,5 +1,6 @@
 {
   "changeLanguageTitle": "English",
+  "changeLanguageTitle2": "Tiếng Việt",
   "generalError": "Đã có lỗi xảy ra!!!",
   "splashTitle": "Jobspot",
   "onboardingTitle1": "Find Your",
@@ -50,5 +51,26 @@
   "authenticationForgotPasswordError": "Email chưa được đăng ký!",
   "authenticationBackButtonTitle": "QUAY LẠI",
   "authenticationCheckMailTitle": "Kiểm tra Email của bạn",
-  "authenticationCheckMailSubTitle": "Chúng tôi đã gửi liên kết đặt lại mật khẩu đến địa chỉ email"
+  "authenticationCheckMailSubTitle": "Chúng tôi đã gửi liên kết đặt lại mật khẩu đến địa chỉ email",
+  "homeHelloTitle": { "zero": "Xin chào\n{}." },
+  "homeJoinNowTitle": "Tham gia ngay",
+  "homeFinJobTitle": "Tìm việc của bạn",
+  "homeRecentFinJobTitle": "Danh sách công việc gần đây",
+  "homeRemoteJobTitle": "Công việc từ xa",
+  "homeFullTimeTitle": "Toàn thời gian",
+  "homePartTimeTitle": "Bán thời gian",
+  "homePercentSaleTitle": {
+    "other": "Giảm giá{}%\nkhi tham gia bất kỳ khóa học nào"
+  },
+  "settingTitle": "Cài đặt",
+  "settingNotificationsTitle": "Thông báo",
+  "settingDarkmodeTitle": "Chế độ tối",
+  "settingLightmodeTitle": "Chế độ sáng",
+  "settingPasswordTitle": "Mật khẩu",
+  "settingLogoutTitle": "Đăng xuất",
+  "settingLogoutModalSubTitle": "Bạn có chắc bạn muốn thoát??",
+  "settingLanguagesTitle": "Ngôn ngữ",
+  "settingSelectLanguage": "Chọn Ngôn Ngữ",
+  "yesButtonTitle": "CÓ",
+  "cancelButtonTitle": "KHÔNG"
 }

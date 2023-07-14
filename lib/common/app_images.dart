@@ -5,6 +5,7 @@ class AppImages {
   static const company2 = 'lib/assets/imagesPng/company_2.png';
   static const cardDefault = 'lib/assets/imagesPng/card_default.png';
   static const cardBackground = 'lib/assets/imagesSvg/card_background.svg';
+  static const cardBackground2 = 'lib/assets/imagesPng/card_background.png';
   static const forgotPassword = 'lib/assets/imagesSvg/forgot_password.svg';
   static const noMessage = 'lib/assets/imagesSvg/no_message.svg';
   static const noNotification = 'lib/assets/imagesSvg/no_notification.svg';

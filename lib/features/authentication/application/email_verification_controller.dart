@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/home_stack/presentation/screens/home_stack_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 
 class EmailVerificationController extends StateNotifier<int> {
@@ -113,8 +114,7 @@ class EmailVerificationController extends StateNotifier<int> {
     resCreateUserOnServer.fold((l) {}, (r) {
       ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-      context.router.removeLast();
-      context.router.pushNamed(HomeStackScreen.path);
+      context.router.replaceAll([const HomeStackRoute()]);
     });
     ref.read(systemControllerProvider.notifier).hideLoading();
   }
