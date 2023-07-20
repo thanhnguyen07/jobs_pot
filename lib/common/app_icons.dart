@@ -4,6 +4,7 @@ class AppIcons {
   static const arrowRight = 'lib/assets/iconsSvg/arrow/arrow_right.svg';
   static const arrowUp = 'lib/assets/iconsSvg/arrow/arrow_up.svg';
   static const back = 'lib/assets/iconsSvg/arrow/back.svg';
+  static const backLeft = 'lib/assets/iconsSvg/arrow/back-left.svg';
 
   static const design = 'lib/assets/iconsSvg/specialization/design.svg';
   static const education = 'lib/assets/iconsSvg/specialization/education.svg';

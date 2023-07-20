@@ -16,6 +16,11 @@ class AppTextStyle {
     fontSize: 12,
     fontFamily: AppFontFamily.dMSansRegular,
   );
+  static const whiteRegularS12 = TextStyle(
+    color: Colors.white,
+    fontSize: 12,
+    fontFamily: AppFontFamily.dMSansRegular,
+  );
   static const textColor1RegularS12 = TextStyle(
     color: AppColors.textColor1,
     fontSize: 12,
@@ -49,6 +54,11 @@ class AppTextStyle {
     fontFamily: AppFontFamily.dMSansRegular,
   );
   //14
+  static const whiteMediumS14 = TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontFamily: AppFontFamily.dMSansMedium,
+  );
   static const fireYellowUnderlineRegularS14 = TextStyle(
     color: AppColors.fireYellowColor,
     fontSize: 14,
@@ -60,6 +70,11 @@ class AppTextStyle {
     color: AppColors.darkPurpleColor,
     fontSize: 14,
     fontFamily: AppFontFamily.dMSansBold,
+  );
+  static const darkPurpleRegularS14 = TextStyle(
+    color: AppColors.darkPurpleColor,
+    fontSize: 14,
+    fontFamily: AppFontFamily.dMSansRegular,
   );
   static const textColor1RegularS14 = TextStyle(
       color: AppColors.textColor1,
@@ -110,7 +125,10 @@ class AppTextStyle {
   );
   //26
   static const whiteBoldS26 = TextStyle(
-      color: Colors.white, fontSize: 26, fontFamily: AppFontFamily.dMSansBold);
+    color: Colors.white,
+    fontSize: 26,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
   //30
   static const darkPurpleBoldS30 = TextStyle(
     color: AppColors.darkPurpleColor,

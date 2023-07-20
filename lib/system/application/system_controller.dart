@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/networks/api_util.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/logger.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -59,7 +62,8 @@ class SystemController extends StateNotifier<AppStateEntity> {
     }
   }
 
-  void handlerDioException(DioException error) {
+  Future handlerDioException(
+      DioException error, ErrorInterceptorHandler handler) async {
     final statusCode = error.response?.statusCode;
 
     final uri = error.requestOptions.path;
@@ -81,26 +85,29 @@ class SystemController extends StateNotifier<AppStateEntity> {
 
     apiLogger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
 
-    // if (statusCode == 401) {
-    // final newToken =
-    //     await appContainer.read(authControllerProvider).refreshToken();
+    if (statusCode == 401) {
+      final User? userFirebase =
+          ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
+      final String? idToken = await userFirebase?.getIdToken();
 
-    // if (newToken != null) {
-    //   err.requestOptions.headers['Authorization'] = 'Bearer $newToken';
+      if (idToken != null) {
+        await ref.read(authRepositoryProvider).saveToken(idToken);
 
-    //   final opts = Options(
-    //     method: err.requestOptions.method,
-    //     headers: err.requestOptions.headers,
-    //   );
+        error.requestOptions.headers['authorization'] = 'Bearer $idToken';
 
-    //   final cloneReq = await ApiUtil().getDio().request(
-    //       err.requestOptions.uri.toString(),
-    //       options: opts,
-    //       data: err.requestOptions.data,
-    //       queryParameters: err.requestOptions.queryParameters);
+        final opts = Options(
+          method: error.requestOptions.method,
+          headers: error.requestOptions.headers,
+        );
 
-    //   return handler.resolve(cloneReq);
-    // }
-    // }
+        final cloneReq = await ApiUtil().getDio().request(
+            error.requestOptions.uri.toString(),
+            options: opts,
+            data: error.requestOptions.data,
+            queryParameters: error.requestOptions.queryParameters);
+
+        return handler.resolve(cloneReq);
+      }
+    }
   }
 }

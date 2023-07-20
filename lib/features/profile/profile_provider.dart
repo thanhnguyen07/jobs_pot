@@ -1,0 +1,12 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobs_pot/features/profile/application/profile_controller.dart';
+import 'package:jobs_pot/features/profile/infrastructure/profile_respository.dart';
+
+final profileResponsitoryProvider = Provider<ProfileResponsitory>(
+  (ref) => ProfileResponsitory(),
+);
+
+final profileControllerProvider =
+    StateNotifierProvider<ProfileController, dynamic>(
+  (ref) => ProfileController(ref),
+);

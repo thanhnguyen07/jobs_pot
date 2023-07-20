@@ -58,9 +58,9 @@ class ApiInterceptors extends InterceptorsWrapper {
   @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
-    appContainer
+    await appContainer
         .read(systemControllerProvider.notifier)
-        .handlerDioException(err);
+        .handlerDioException(err, handler);
 
     super.onError(err, handler);
   }

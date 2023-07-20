@@ -14,6 +14,7 @@ class UserEntity with _$UserEntity {
     required String email,
     required String type,
     required String uid,
+    required String? avatarLink,
   }) = _UserEntity;
 
   /// factory method to create entity from JSON

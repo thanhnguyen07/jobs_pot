@@ -73,5 +73,6 @@ abstract class  LocaleKeys {
   static const settingSelectLanguage = 'settingSelectLanguage';
   static const yesButtonTitle = 'yesButtonTitle';
   static const cancelButtonTitle = 'cancelButtonTitle';
+  static const profileChangeImageTitle = 'profileChangeImageTitle';
 
 }

@@ -72,5 +72,6 @@
   "settingLanguagesTitle": "Language",
   "settingSelectLanguage": "Select Language",
   "yesButtonTitle": "YES",
-  "cancelButtonTitle": "CANCEL"
+  "cancelButtonTitle": "CANCEL",
+  "profileChangeImageTitle": "Change image"
 }

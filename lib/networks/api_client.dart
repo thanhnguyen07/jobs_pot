@@ -13,6 +13,9 @@ abstract class ApiClient {
   @POST("user/signup-with-email")
   Future<dynamic> signUpWithEmail(@Body() Map<String, dynamic> body);
 
+  @POST("user/update-avatar")
+  Future<dynamic> updateAvatar(@Body() Map<String, dynamic> body);
+
   @GET("user/profile")
   Future<dynamic> getUserProfile();
 
