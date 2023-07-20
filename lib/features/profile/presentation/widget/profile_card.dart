@@ -23,6 +23,55 @@ class ProfileCard extends ConsumerStatefulWidget {
 }
 
 class _ProfileCardState extends ConsumerState<ProfileCard> {
+  @override
+  Widget build(BuildContext context) {
+    final UserEntity? userData = ref.watch(authControllerProvider);
+    ref.watch(languageControllerProvider);
+
+    return Stack(
+      children: [
+        Image.asset(
+          AppImages.cardBackground2,
+          fit: BoxFit.fitHeight,
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 50, right: 20, left: 20),
+          child: Column(children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _avatarUser(userData?.avatarLink),
+                    _userName(userData?.userName ?? ''),
+                    _location(),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+                Row(
+                  children: [
+                    _shareButton(),
+                    const SizedBox(width: 15),
+                    _setingButton(context),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buttonChangeImage(),
+                _buttonEditProfile(),
+              ],
+            )
+          ]),
+        ),
+      ],
+    );
+  }
+
   Container _userName(String userName) {
     return Container(
       margin: const EdgeInsets.only(top: 10),
@@ -58,11 +107,40 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white.withOpacity(0.2),
+        minimumSize: const Size(80, 30),
       ),
       child: Text(
         Utils.getLocaleMessage(LocaleKeys.profileChangeImageTitle),
         style: AppTextStyle.whiteRegularS12,
       ),
+    );
+  }
+
+  ElevatedButton _buttonEditProfile() {
+    return ElevatedButton(
+      onPressed: () async {
+        // await ref.read(profileControllerProvider.notifier).updateAvatar();
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white.withOpacity(0.2),
+        minimumSize: const Size(50, 30),
+      ),
+      child: Row(children: [
+        Text(
+          Utils.getLocaleMessage(LocaleKeys.profileEditProfileTitle),
+          style: AppTextStyle.whiteRegularS12,
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        SvgPicture.asset(
+          AppIcons.edit,
+          colorFilter: const ColorFilter.mode(
+            Colors.white,
+            BlendMode.srcIn,
+          ),
+        ),
+      ]),
     );
   }
 
@@ -91,44 +169,6 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
           BlendMode.srcIn,
         ),
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final UserEntity? userData = ref.watch(authControllerProvider);
-    ref.watch(languageControllerProvider);
-
-    return Stack(
-      children: [
-        Image.asset(AppImages.cardBackground2),
-        Container(
-          margin: const EdgeInsets.only(top: 50, right: 20, left: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _avatarUser(userData?.avatarLink),
-                  _userName(userData?.userName ?? ''),
-                  _location(),
-                  const SizedBox(height: 10),
-                  _buttonChangeImage()
-                ],
-              ),
-              Row(
-                children: [
-                  _shareButton(),
-                  const SizedBox(width: 15),
-                  _setingButton(context),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

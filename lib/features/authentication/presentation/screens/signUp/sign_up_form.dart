@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/features/authentication/presentation/widgets/button_submit_form.dart';
-import 'package:jobs_pot/features/authentication/presentation/widgets/email_input.dart';
-import 'package:jobs_pot/features/authentication/presentation/widgets/password_input.dart';
+import 'package:jobs_pot/common/widgets/button_submit_form.dart';
+import 'package:jobs_pot/common/widgets/email_input.dart';
+import 'package:jobs_pot/common/widgets/full_name_input.dart';
+import 'package:jobs_pot/common/widgets/password_input.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/remember_and_forgot.dart';
-import 'package:jobs_pot/features/authentication/presentation/widgets/input_reactive_forms.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
@@ -77,29 +77,18 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   Widget _formInput() {
     return Column(
       children: [
-        _fullNameInput(),
-        EmailInput(formControlEmail: formControlEmail),
+        FullNameInput(
+          formControlFullName: formControlFullName,
+          hintName: Utils.getLocaleMessage(
+              LocaleKeys.authenticationInputFullNameHintText),
+        ),
+        EmailInput(
+          formControlEmail: formControlEmail,
+          hintEmail: Utils.getLocaleMessage(
+              LocaleKeys.authenticationInputEmailHintText),
+        ),
         PasswordInput(formControlPassword: formControlPassword)
       ],
-    );
-  }
-
-  InputReactiveForms _fullNameInput() {
-    return InputReactiveForms(
-      hintText: Utils.getLocaleMessage(
-          LocaleKeys.authenticationInputFullNameHintText),
-      obscureText: false,
-      formController: formControlFullName,
-      title: Text(
-        Utils.getLocaleMessage(LocaleKeys.authenticationFullNameInputTitle),
-        style: AppTextStyle.darkPurpleBoldS14,
-      ),
-      validationMessages: {
-        ValidationKeys.required: (error) =>
-            Utils.getLocaleMessage(LocaleKeys.authenticationInputRequired),
-        ValidationKeys.min: (error) => Utils.getLocaleMessage(
-            LocaleKeys.authenticationPasswordValidationMessages6),
-      },
     );
   }
 }

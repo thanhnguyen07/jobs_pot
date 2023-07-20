@@ -11,16 +11,17 @@ class EmailInput extends StatelessWidget {
   const EmailInput({
     Key? key,
     required this.formControlEmail,
+    required this.hintEmail,
   }) : super(key: key);
   final FormControl<dynamic>? formControlEmail;
+  final String hintEmail;
 
   @override
   Widget build(BuildContext context) {
     return InputReactiveForms(
       formController: formControlEmail,
       keyboardType: TextInputType.emailAddress,
-      hintText:
-          Utils.getLocaleMessage(LocaleKeys.authenticationInputEmailHintText),
+      hintText: hintEmail,
       obscureText: false,
       title: Text(
         Utils.getLocaleMessage(LocaleKeys.authenticationEmailInputTitle),

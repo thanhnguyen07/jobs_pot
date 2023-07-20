@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/features/authentication/presentation/widgets/button_submit_form.dart';
-import 'package:jobs_pot/features/authentication/presentation/widgets/email_input.dart';
-import 'package:jobs_pot/features/authentication/presentation/widgets/password_input.dart';
+import 'package:jobs_pot/common/widgets/button_submit_form.dart';
+import 'package:jobs_pot/common/widgets/email_input.dart';
+import 'package:jobs_pot/common/widgets/password_input.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/remember_and_forgot.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
@@ -68,7 +68,11 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   Widget _formInput() {
     return Column(
       children: [
-        EmailInput(formControlEmail: formControlEmail),
+        EmailInput(
+          formControlEmail: formControlEmail,
+          hintEmail: Utils.getLocaleMessage(
+              LocaleKeys.authenticationInputEmailHintText),
+        ),
         PasswordInput(formControlPassword: formControlPassword),
       ],
     );
