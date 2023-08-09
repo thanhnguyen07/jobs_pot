@@ -87,7 +87,9 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
           hintEmail: Utils.getLocaleMessage(
               LocaleKeys.authenticationInputEmailHintText),
         ),
-        PasswordInput(formControlPassword: formControlPassword)
+        PasswordInput(
+          formControlPassword: formControlPassword,
+        )
       ],
     );
   }

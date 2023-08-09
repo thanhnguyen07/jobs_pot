@@ -54,7 +54,8 @@
   "authenticationCheckMailSubTitle": "We have sent the reset password link to the email address",
   "homeHelloTitle": { "zero": "Hello\n{}." },
   "homeJoinNowTitle": "Join Now",
-  "homeFinJobTitle": "Find Your Job",
+  "homeFindJobTitle": "Find Your Job",
+  "homeRecentJobList": "Recent Job List",
   "homeRecentFinJobTitle": "Recent Job List",
   "homeRemoteJobTitle": "Remote Job",
   "homeFullTimeTitle": "Full Time",
@@ -74,5 +75,44 @@
   "yesButtonTitle": "YES",
   "cancelButtonTitle": "CANCEL",
   "profileChangeImageTitle": "Change image",
-  "profileEditProfileTitle": "Edit profile"
+  "profileEditProfileTitle": "Edit profile",
+  "profileDateOfBirthTitle": "Date of birth",
+  "profileDateOfBirthDialogTitle": "Select Date of birth",
+  "profileGenderTitle": "Gender",
+  "profileGenderMale": "Male",
+  "profileGenderFemale": "Female",
+  "profilePhoneNumberTitle": "Phone Number",
+  "profileLocationTitle": "Location",
+  "profileSaveTitle": "Save",
+  "profilePhoneNumberHintText": "Phone Number",
+  "profileEmailNotVerifiedTitle": "Not verified",
+  "profileCardEmailTitle": {
+    "zero": "Email: {}"
+  },
+  "profileCardDateOfBirthTitle": {
+    "zero": "Date of Birth: {}"
+  },
+  "profileCardGenderTitle": {
+    "zero": "Gender: {}"
+  },
+  "profileCardPhoneTitle": {
+    "zero": "Phone: {}"
+  },
+  "profileCardLocationTitle": {
+    "zero": "Location: {}"
+  },
+  "postTitle": "What would you like to add?",
+  "postSubTitle": "Would you like to post your tips and experiences or create a job?",
+  "postButtonTitle": "POST",
+  "postMakeAJob": "MAKE A JOB",
+  "postButtonPost": "Post",
+  "postAddPostTitle": "Add Post",
+  "postPostTitle": "Post title",
+  "postPostTitleHint": "Write the title of your post here",
+  "postDescriptionTitle": "Description",
+  "postDescriptionHint": "What do you want to talk about?",
+  "postAddHashtagTitle": "Add hashtag",
+  "postImagesTitle": "Images",
+  "postImagesCancelButtonTitle": "Cancel",
+  "postImagesDeleteButtonTitle": "Delete"
 }

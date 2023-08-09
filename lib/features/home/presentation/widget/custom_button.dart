@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class CustomButton1 extends StatelessWidget {
+  const CustomButton1({
     super.key,
     required this.topButton,
     required this.count,
@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
   });
 
   final bool topButton;
-  final String count;
+  final String? count;
   final String title;
 
   @override
@@ -29,21 +29,24 @@ class CustomButton extends StatelessWidget {
             Radius.circular(6),
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 5),
-              child: Text(
-                count,
-                style: AppTextStyle.textColor3MediumS16,
+        child: TextButton(
+          onPressed: () {},
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 5),
+                child: Text(
+                  count ?? "",
+                  style: AppTextStyle.textColor3MediumS16,
+                ),
               ),
-            ),
-            Text(
-              title,
-              style: AppTextStyle.darkPurpleRegularS14,
-            )
-          ],
+              Text(
+                title,
+                style: AppTextStyle.darkPurpleRegularS14,
+              )
+            ],
+          ),
         ),
       ),
     );

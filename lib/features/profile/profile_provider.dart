@@ -7,6 +7,6 @@ final profileResponsitoryProvider = Provider<ProfileResponsitory>(
 );
 
 final profileControllerProvider =
-    StateNotifierProvider<ProfileController, dynamic>(
+    AutoDisposeStateNotifierProvider<ProfileController, bool>(
   (ref) => ProfileController(ref),
 );

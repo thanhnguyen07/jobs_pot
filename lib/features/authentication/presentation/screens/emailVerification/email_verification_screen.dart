@@ -75,7 +75,7 @@ class _EmailVerificationScreenState
       margin: const EdgeInsets.only(top: 80, right: 30, left: 30),
       child: Column(
         children: [
-          CutomButton(
+          CustomButton(
             backgroundColor: AppColors.egglantColor,
             title: Text(
               Utils.getLocaleMessage(
@@ -89,7 +89,7 @@ class _EmailVerificationScreenState
             },
           ),
           const SizedBox(height: 15),
-          CutomButton(
+          CustomButton(
             backgroundColor: AppColors.lavenderColor,
             title: Text(
               Utils.getLocaleMessage(LocaleKeys.authenticationBackButtonTitle),

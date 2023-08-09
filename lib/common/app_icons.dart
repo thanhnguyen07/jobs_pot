@@ -25,7 +25,7 @@ class AppIcons {
   static const calendar = 'lib/assets/iconsSvg/calendar.svg';
   static const camera = 'lib/assets/iconsSvg/camera.svg';
   static const checked = 'lib/assets/iconsSvg/checked.svg';
-  static const doubleChecked = 'lib/assets/iconsSvg/double_checked.svg';
+  static const doubleChecked = 'lib/assets/iconsSvg/double_check.svg';
   static const clock = 'lib/assets/iconsSvg/clock.svg';
   static const comment = 'lib/assets/iconsSvg/comment.svg';
   static const darkMode = 'lib/assets/iconsSvg/dark_mode.svg';

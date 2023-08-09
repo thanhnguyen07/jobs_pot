@@ -54,7 +54,8 @@
   "authenticationCheckMailSubTitle": "Chúng tôi đã gửi liên kết đặt lại mật khẩu đến địa chỉ email",
   "homeHelloTitle": { "zero": "Xin chào\n{}." },
   "homeJoinNowTitle": "Tham gia ngay",
-  "homeFinJobTitle": "Tìm việc của bạn",
+  "homeFindJobTitle": "Tìm việc của bạn",
+  "homeRecentJobList": "Danh sách công việc gần đây",
   "homeRecentFinJobTitle": "Danh sách công việc gần đây",
   "homeRemoteJobTitle": "Công việc từ xa",
   "homeFullTimeTitle": "Toàn thời gian",
@@ -74,5 +75,44 @@
   "yesButtonTitle": "CÓ",
   "cancelButtonTitle": "KHÔNG",
   "profileChangeImageTitle": "Thay đổi hình ảnh",
-  "profileEditProfileTitle": "Chỉnh sửa hồ sơ"
+  "profileEditProfileTitle": "Chỉnh sửa hồ sơ",
+  "profileDateOfBirthTitle": "Ngày Sinh",
+  "profileDateOfBirthDialogTitle": "Chọn Ngày Sinh",
+  "profileGenderTitle": "Giới tính",
+  "profileGenderMale": "Nam",
+  "profileGenderFemale": "Nữ",
+  "profilePhoneNumberTitle": "Số điện thoại",
+  "profileLocationTitle": "Địa chỉ",
+  "profileSaveTitle": "Lưu",
+  "profilePhoneNumberHintText": "Số điện thoại",
+  "profileEmailNotVerifiedTitle": "Chưa xác thực",
+  "profileCardEmailTitle": {
+    "zero": "Email: {}"
+  },
+  "profileCardDateOfBirthTitle": {
+    "zero": "Ngày sinh: {}"
+  },
+  "profileCardGenderTitle": {
+    "zero": "Giới tính: {}"
+  },
+  "profileCardPhoneTitle": {
+    "zero": "Số điện thoại: {}"
+  },
+  "profileCardLocationTitle": {
+    "zero": "Địa chỉ: {}"
+  },
+  "postTitle": "Bạn muốn thêm gì?",
+  "postSubTitle": "Bạn có muốn đăng các mẹo và kinh nghiệm của mình hoặc tạo một công việc không?",
+  "postButtonTitle": "BÀI ĐĂNG",
+  "postMakeAJob": "TẠO MỘT CÔNG VIỆC",
+  "postButtonPost": "Đăng",
+  "postAddPostTitle": "Thêm bài viết",
+  "postPostTitle": "Tiêu đề bài viết",
+  "postPostTitleHint": "Viết tiêu đề bài viết của bạn ở đây",
+  "postDescriptionTitle": "Mô tả",
+  "postDescriptionHint": "Bạn muốn nói về điều gì?",
+  "postAddHashtagTitle": "Thêm hashtag",
+  "postImagesTitle": "Hình ảnh",
+  "postImagesCancelButtonTitle": "Huỷ",
+  "postImagesDeleteButtonTitle": "Xoá"
 }

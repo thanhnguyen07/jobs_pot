@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/common/widgets/button_submit_form.dart';
-import 'package:jobs_pot/common/widgets/email_input.dart';
 import 'package:jobs_pot/common/widgets/full_name_input.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/profile/presentation/widgets/gender_form.dart';
+import 'package:jobs_pot/features/profile/presentation/widgets/location_input.dart';
+import 'package:jobs_pot/features/profile/presentation/widgets/phone_number_input.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import 'date_of_birth_box.dart';
 
 class ProfileInputForm extends ConsumerStatefulWidget {
   const ProfileInputForm({Key? key}) : super(key: key);
@@ -23,10 +23,8 @@ class ProfileInputForm extends ConsumerStatefulWidget {
 
 class _ProfileInputFormState extends ConsumerState<ProfileInputForm> {
   FormControl<dynamic>? formControlFullName;
-  FormControl<dynamic>? formControlEmail;
-  FormControl<dynamic>? formControlPassword;
+  FormControl<dynamic>? formControlLocation;
 
-  late bool rememberState = true;
   late FormGroup _profileInputForm;
 
   @override
@@ -41,11 +39,8 @@ class _ProfileInputFormState extends ConsumerState<ProfileInputForm> {
     formControlFullName =
         _profileInputForm.control(ValidationKeys.fullName) as FormControl?;
 
-    formControlEmail =
-        _profileInputForm.control(ValidationKeys.email) as FormControl?;
-
-    formControlPassword =
-        _profileInputForm.control(ValidationKeys.password) as FormControl?;
+    formControlLocation =
+        _profileInputForm.control(ValidationKeys.location) as FormControl?;
   }
 
   @override
@@ -56,45 +51,24 @@ class _ProfileInputFormState extends ConsumerState<ProfileInputForm> {
     return ReactiveForm(
       formGroup: _profileInputForm,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 20,
+            FullNameInput(
+              formControlFullName: formControlFullName,
+              hintName: userData!.userName,
             ),
-            _formInput(),
-            ButtonSubmitForm(
-              title: Text(
-                Utils.getLocaleMessage(
-                    LocaleKeys.authenticationSignUpButtonTitle),
-                style: AppTextStyle.whiteBoldS14,
-              ),
-              onLogin: () {
-                ref
-                    .read(signUpWithEmailControllerProvider.notifier)
-                    .onSignUp(context);
-              },
+            const DateOfBirthBox(),
+            const GenderForm(),
+            const PhoneNumberInput(),
+            LocationInput(
+              formControlLocation: formControlLocation,
+              hintText: userData.location ?? '',
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _formInput() {
-    final UserEntity? userData = ref.watch(authControllerProvider);
-
-    return Column(
-      children: [
-        FullNameInput(
-          formControlFullName: formControlFullName,
-          hintName: userData!.userName,
-        ),
-        EmailInput(
-          formControlEmail: formControlEmail,
-          hintEmail: userData.email,
-        ),
-      ],
     );
   }
 }

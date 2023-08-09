@@ -153,7 +153,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             const SizedBox(height: 40),
             Container(
               margin: const EdgeInsets.only(left: 25, right: 25),
-              child: CutomButton(
+              child: CustomButton(
                 title: Text(
                   Utils.getLocaleMessage(
                     LocaleKeys.yesButtonTitle,
@@ -171,7 +171,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             Container(
               margin: const EdgeInsets.only(
                   left: 25, right: 25, top: 10, bottom: 20),
-              child: CutomButton(
+              child: CustomButton(
                 title: Text(
                   Utils.getLocaleMessage(
                     LocaleKeys.cancelButtonTitle,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CutomButton extends StatelessWidget {
-  const CutomButton({
+class CustomButton extends StatelessWidget {
+  const CustomButton({
     Key? key,
     required this.title,
     required this.backgroundColor,

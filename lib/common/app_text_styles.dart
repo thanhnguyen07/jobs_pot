@@ -10,7 +10,6 @@ class AppTextStyle {
     fontSize: 12,
     fontFamily: AppFontFamily.dMSansItalic,
   );
-
   static const textBlackColorRegularS12 = TextStyle(
     color: AppColors.blackColor,
     fontSize: 12,
@@ -23,6 +22,11 @@ class AppTextStyle {
   );
   static const textColor1RegularS12 = TextStyle(
     color: AppColors.textColor1,
+    fontSize: 12,
+    fontFamily: AppFontFamily.dMSansRegular,
+  );
+  static const textColor5RegularS12 = TextStyle(
+    color: AppColors.textColor5,
     fontSize: 12,
     fontFamily: AppFontFamily.dMSansRegular,
   );
@@ -53,11 +57,32 @@ class AppTextStyle {
     fontSize: 12,
     fontFamily: AppFontFamily.dMSansRegular,
   );
+  static const fireYellowRegS12 = TextStyle(
+    color: AppColors.fireYellowColor,
+    fontSize: 12,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
+
   //14
   static const whiteMediumS14 = TextStyle(
     color: Colors.white,
     fontSize: 14,
     fontFamily: AppFontFamily.dMSansMedium,
+  );
+  static const redBoldS14 = TextStyle(
+    color: Colors.red,
+    fontSize: 14,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
+  static const textColor6BoldS14 = TextStyle(
+    color: AppColors.textColor6,
+    fontSize: 14,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
+  static const textErrorS14 = TextStyle(
+    color: Colors.red,
+    fontSize: 14,
+    fontFamily: AppFontFamily.dMSansBoldItalic,
   );
   static const fireYellowUnderlineRegularS14 = TextStyle(
     color: AppColors.fireYellowColor,
@@ -98,6 +123,11 @@ class AppTextStyle {
   );
   static const blackBoldS16 = TextStyle(
     color: Colors.black,
+    fontSize: 16,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
+  static const text4BoldS16 = TextStyle(
+    color: AppColors.textColor4,
     fontSize: 16,
     fontFamily: AppFontFamily.dMSansBold,
   );

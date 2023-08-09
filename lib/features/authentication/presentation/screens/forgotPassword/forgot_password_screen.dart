@@ -60,7 +60,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   Container _buttonActions() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15),
-      child: CutomButton(
+      child: CustomButton(
         backgroundColor: AppColors.lavenderColor,
         title: Text(
           Utils.getLocaleMessage(LocaleKeys.authenticationButtonBackToLogin),

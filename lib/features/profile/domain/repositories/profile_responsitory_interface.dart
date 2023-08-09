@@ -6,4 +6,12 @@ abstract class ProfileResponsitoryInterface {
   Future<Either<Failure, UserResponseEntity>> updateAvatar(
     String avatarLink,
   );
+  Future<Either<Failure, UserResponseEntity>> updateInformations({
+    required String userName,
+    required String dateOfBirth,
+    required String gender,
+    required String email,
+    required String phoneNumber,
+    required String location,
+  });
 }

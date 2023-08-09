@@ -8,6 +8,9 @@ class ValidationKeys {
   static const String email = 'email';
   static const String password = 'psassword';
   static const String fullName = 'fullName';
+  static const String location = 'location';
+  static const String postTitle = 'postTitle';
+  static const String postDescription = 'postDescription';
 }
 
 class FirebaseKeys {
@@ -17,4 +20,5 @@ class FirebaseKeys {
   static const String wrongPassword = "wrong-password";
   static const String tooManyRequests = "too-many-requests";
   static const String googleType = "google";
+  static const String pathFolderAvatarImage = "avatar_images";
 }

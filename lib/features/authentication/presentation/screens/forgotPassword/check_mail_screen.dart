@@ -79,7 +79,7 @@ class _CheckMailScreenState extends ConsumerState<CheckMailScreen> {
   Container _buttonActions() {
     return Container(
       margin: const EdgeInsets.only(top: 80),
-      child: CutomButton(
+      child: CustomButton(
         backgroundColor: AppColors.lavenderColor,
         title: Text(
           Utils.getLocaleMessage(LocaleKeys.authenticationButtonBackToLogin),

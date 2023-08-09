@@ -14,6 +14,10 @@ _$_UserEntity _$$_UserEntityFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       uid: json['uid'] as String,
       avatarLink: json['avatarLink'] as String?,
+      location: json['location'] as String?,
+      dateOfBirth: json['dateOfBirth'] as String?,
+      gender: json['gender'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
     );
 
 Map<String, dynamic> _$$_UserEntityToJson(_$_UserEntity instance) =>
@@ -24,4 +28,8 @@ Map<String, dynamic> _$$_UserEntityToJson(_$_UserEntity instance) =>
       'type': instance.type,
       'uid': instance.uid,
       'avatarLink': instance.avatarLink,
+      'location': instance.location,
+      'dateOfBirth': instance.dateOfBirth,
+      'gender': instance.gender,
+      'phoneNumber': instance.phoneNumber,
     };

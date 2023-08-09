@@ -12,9 +12,11 @@ class EmailInput extends StatelessWidget {
     Key? key,
     required this.formControlEmail,
     required this.hintEmail,
+    this.suffixIcon,
   }) : super(key: key);
   final FormControl<dynamic>? formControlEmail;
   final String hintEmail;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class EmailInput extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       hintText: hintEmail,
       obscureText: false,
+      suffixIcon: suffixIcon,
       title: Text(
         Utils.getLocaleMessage(LocaleKeys.authenticationEmailInputTitle),
         style: AppTextStyle.darkPurpleBoldS14,

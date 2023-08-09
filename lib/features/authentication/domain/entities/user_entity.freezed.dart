@@ -26,6 +26,10 @@ mixin _$UserEntity {
   String get type => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String? get avatarLink => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  String? get dateOfBirth => throw _privateConstructorUsedError;
+  String? get gender => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +49,11 @@ abstract class $UserEntityCopyWith<$Res> {
       String email,
       String type,
       String uid,
-      String? avatarLink});
+      String? avatarLink,
+      String? location,
+      String? dateOfBirth,
+      String? gender,
+      String? phoneNumber});
 }
 
 /// @nodoc
@@ -67,6 +75,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? type = null,
     Object? uid = null,
     Object? avatarLink = freezed,
+    Object? location = freezed,
+    Object? dateOfBirth = freezed,
+    Object? gender = freezed,
+    Object? phoneNumber = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -93,6 +105,22 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.avatarLink
           : avatarLink // ignore: cast_nullable_to_non_nullable
               as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateOfBirth: freezed == dateOfBirth
+          ? _value.dateOfBirth
+          : dateOfBirth // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -111,7 +139,11 @@ abstract class _$$_UserEntityCopyWith<$Res>
       String email,
       String type,
       String uid,
-      String? avatarLink});
+      String? avatarLink,
+      String? location,
+      String? dateOfBirth,
+      String? gender,
+      String? phoneNumber});
 }
 
 /// @nodoc
@@ -131,6 +163,10 @@ class __$$_UserEntityCopyWithImpl<$Res>
     Object? type = null,
     Object? uid = null,
     Object? avatarLink = freezed,
+    Object? location = freezed,
+    Object? dateOfBirth = freezed,
+    Object? gender = freezed,
+    Object? phoneNumber = freezed,
   }) {
     return _then(_$_UserEntity(
       id: null == id
@@ -157,6 +193,22 @@ class __$$_UserEntityCopyWithImpl<$Res>
           ? _value.avatarLink
           : avatarLink // ignore: cast_nullable_to_non_nullable
               as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateOfBirth: freezed == dateOfBirth
+          ? _value.dateOfBirth
+          : dateOfBirth // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -170,7 +222,11 @@ class _$_UserEntity implements _UserEntity {
       required this.email,
       required this.type,
       required this.uid,
-      required this.avatarLink});
+      required this.avatarLink,
+      required this.location,
+      required this.dateOfBirth,
+      required this.gender,
+      required this.phoneNumber});
 
   factory _$_UserEntity.fromJson(Map<String, dynamic> json) =>
       _$$_UserEntityFromJson(json);
@@ -187,10 +243,18 @@ class _$_UserEntity implements _UserEntity {
   final String uid;
   @override
   final String? avatarLink;
+  @override
+  final String? location;
+  @override
+  final String? dateOfBirth;
+  @override
+  final String? gender;
+  @override
+  final String? phoneNumber;
 
   @override
   String toString() {
-    return 'UserEntity(id: $id, userName: $userName, email: $email, type: $type, uid: $uid, avatarLink: $avatarLink)';
+    return 'UserEntity(id: $id, userName: $userName, email: $email, type: $type, uid: $uid, avatarLink: $avatarLink, location: $location, dateOfBirth: $dateOfBirth, gender: $gender, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -205,13 +269,20 @@ class _$_UserEntity implements _UserEntity {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.avatarLink, avatarLink) ||
-                other.avatarLink == avatarLink));
+                other.avatarLink == avatarLink) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.dateOfBirth, dateOfBirth) ||
+                other.dateOfBirth == dateOfBirth) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, userName, email, type, uid, avatarLink);
+  int get hashCode => Object.hash(runtimeType, id, userName, email, type, uid,
+      avatarLink, location, dateOfBirth, gender, phoneNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -234,7 +305,11 @@ abstract class _UserEntity implements UserEntity {
       required final String email,
       required final String type,
       required final String uid,
-      required final String? avatarLink}) = _$_UserEntity;
+      required final String? avatarLink,
+      required final String? location,
+      required final String? dateOfBirth,
+      required final String? gender,
+      required final String? phoneNumber}) = _$_UserEntity;
 
   factory _UserEntity.fromJson(Map<String, dynamic> json) =
       _$_UserEntity.fromJson;
@@ -251,6 +326,14 @@ abstract class _UserEntity implements UserEntity {
   String get uid;
   @override
   String? get avatarLink;
+  @override
+  String? get location;
+  @override
+  String? get dateOfBirth;
+  @override
+  String? get gender;
+  @override
+  String? get phoneNumber;
   @override
   @JsonKey(ignore: true)
   _$$_UserEntityCopyWith<_$_UserEntity> get copyWith =>

@@ -13,7 +13,7 @@ class EmailValidator extends Validator<dynamic> {
             control.value.toString().isEmpty ||
             emailRegex.hasMatch(control.value.toString()))
         ? null
-        : <String, dynamic>{ValidationKeys.email: control.value};
+        : <String, dynamic>{ValidationKeys.email.toString(): control.value};
   }
 }
 
@@ -31,16 +31,22 @@ class PasswordValidator extends Validator<dynamic> {
       return null;
     }
     if (!digitRegex.hasMatch(control.value.toString())) {
-      return <String, dynamic>{ValidationKeys.number: control.value};
+      return <String, dynamic>{ValidationKeys.number.toString(): control.value};
     }
     if (!lowerCaseRegex.hasMatch(control.value.toString())) {
-      return <String, dynamic>{ValidationKeys.lowerCase: control.value};
+      return <String, dynamic>{
+        ValidationKeys.lowerCase.toString(): control.value
+      };
     }
     if (!upperCaseRegex.hasMatch(control.value.toString())) {
-      return <String, dynamic>{ValidationKeys.upperCase: control.value};
+      return <String, dynamic>{
+        ValidationKeys.upperCase.toString(): control.value
+      };
     }
     if (!nonAlphanumericRegex.hasMatch(control.value.toString())) {
-      return <String, dynamic>{ValidationKeys.nonAlphanumeric: control.value};
+      return <String, dynamic>{
+        ValidationKeys.nonAlphanumeric.toString(): control.value
+      };
     }
     return null;
   }

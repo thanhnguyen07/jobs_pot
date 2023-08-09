@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_icons.dart';
+import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 
 @RoutePage()
@@ -23,7 +24,7 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
       routes: const [
         HomeRoute(),
         PostJobRoute(),
-        CreateJobRoute(),
+        CreateRoute(),
         ChatRoute(),
         SaveJobRoute(),
       ],
@@ -31,7 +32,17 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
         return BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: tabsRouter.activeIndex,
-          onTap: tabsRouter.setActiveIndex,
+          onTap: (index) async {
+            if (index != 2) {
+              tabsRouter.setActiveIndex(index);
+            } else {
+              await ref
+                  .read(bottomNavigationController.notifier)
+                  .actionButtonCreate(context);
+
+              tabsRouter.setActiveIndex(2);
+            }
+          },
           showUnselectedLabels: false,
           items: [
             _homeIcon(),

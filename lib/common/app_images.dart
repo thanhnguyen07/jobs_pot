@@ -19,8 +19,8 @@ class AppImages {
   static const adobe = 'lib/assets/iconsPng/company/adobe.png';
   static const allianz = 'lib/assets/iconsPng/company/allianz.png';
   static const amazon = 'lib/assets/iconsPng/company/amazon.png';
-  static const aplle2 = 'lib/assets/iconsPng/company/aplle2.png';
-  static const aplle = 'lib/assets/iconsPng/company/aplle.png';
+  static const aplle2 = 'lib/assets/iconsPng/company/apple2.png';
+  static const aplle = 'lib/assets/iconsPng/company/apple.png';
   static const axa = 'lib/assets/iconsPng/company/axa.png';
   static const dribbble = 'lib/assets/iconsPng/company/dribbble.png';
   static const facebook = 'lib/assets/iconsPng/company/facebook2.png';

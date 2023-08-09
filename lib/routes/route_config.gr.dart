@@ -25,20 +25,20 @@ import 'package:jobs_pot/features/authentication/presentation/screens/splash_scr
     as _i15;
 import 'package:jobs_pot/features/chat/persentation/screens/chat_screen.dart'
     as _i3;
-import 'package:jobs_pot/features/create_job/presentation/screens/create_screen.dart'
-    as _i4;
+import 'package:jobs_pot/features/create/presentation/screens/create_screen.dart'
+    as _i8;
 import 'package:jobs_pot/features/home/presentation/screens/home_screen.dart'
     as _i1;
-import 'package:jobs_pot/features/home_stack/presentation/screens/home_stack_screen.dart'
-    as _i6;
+import 'package:jobs_pot/features/home_stack/presentation/screens/bottom_navigation_screen.dart'
+    as _i5;
 import 'package:jobs_pot/features/post/presentation/screens/post_screen.dart'
     as _i2;
 import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart'
-    as _i5;
+    as _i4;
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart'
-    as _i7;
+    as _i6;
 import 'package:jobs_pot/features/setting/presentation/screens/setting_screen.dart'
-    as _i8;
+    as _i7;
 
 abstract class $AppRouter extends _i16.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -63,34 +63,34 @@ abstract class $AppRouter extends _i16.RootStackRouter {
         child: const _i3.ChatScreen(),
       );
     },
-    CreateJobRoute.name: (routeData) {
-      return _i16.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i4.CreateJobScreen(),
-      );
-    },
     ProfileRoute.name: (routeData) {
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.ProfileScreen(),
+        child: const _i4.ProfileScreen(),
       );
     },
     HomeStackRoute.name: (routeData) {
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.HomeStackScreen(),
+        child: const _i5.HomeStackScreen(),
       );
     },
     SaveJobRoute.name: (routeData) {
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.SaveJobScreen(),
+        child: const _i6.SaveJobScreen(),
       );
     },
     SettingRoute.name: (routeData) {
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.SettingScreen(),
+        child: const _i7.SettingScreen(),
+      );
+    },
+    CreateRoute.name: (routeData) {
+      return _i16.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i8.CreateScreen(),
       );
     },
     CheckMailRoute.name: (routeData) {
@@ -181,21 +181,7 @@ class ChatRoute extends _i16.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.CreateJobScreen]
-class CreateJobRoute extends _i16.PageRouteInfo<void> {
-  const CreateJobRoute({List<_i16.PageRouteInfo>? children})
-      : super(
-          CreateJobRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CreateJobRoute';
-
-  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i5.ProfileScreen]
+/// [_i4.ProfileScreen]
 class ProfileRoute extends _i16.PageRouteInfo<void> {
   const ProfileRoute({List<_i16.PageRouteInfo>? children})
       : super(
@@ -209,7 +195,7 @@ class ProfileRoute extends _i16.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.HomeStackScreen]
+/// [_i5.HomeStackScreen]
 class HomeStackRoute extends _i16.PageRouteInfo<void> {
   const HomeStackRoute({List<_i16.PageRouteInfo>? children})
       : super(
@@ -223,7 +209,7 @@ class HomeStackRoute extends _i16.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.SaveJobScreen]
+/// [_i6.SaveJobScreen]
 class SaveJobRoute extends _i16.PageRouteInfo<void> {
   const SaveJobRoute({List<_i16.PageRouteInfo>? children})
       : super(
@@ -237,7 +223,7 @@ class SaveJobRoute extends _i16.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.SettingScreen]
+/// [_i7.SettingScreen]
 class SettingRoute extends _i16.PageRouteInfo<void> {
   const SettingRoute({List<_i16.PageRouteInfo>? children})
       : super(
@@ -246,6 +232,20 @@ class SettingRoute extends _i16.PageRouteInfo<void> {
         );
 
   static const String name = 'SettingRoute';
+
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i8.CreateScreen]
+class CreateRoute extends _i16.PageRouteInfo<void> {
+  const CreateRoute({List<_i16.PageRouteInfo>? children})
+      : super(
+          CreateRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CreateRoute';
 
   static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }

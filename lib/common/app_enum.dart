@@ -1,0 +1,4 @@
+enum CreateScreenType {
+  post,
+  createJob,
+}

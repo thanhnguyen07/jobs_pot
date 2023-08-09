@@ -56,7 +56,8 @@ abstract class  LocaleKeys {
   static const authenticationCheckMailSubTitle = 'authenticationCheckMailSubTitle';
   static const homeHelloTitle = 'homeHelloTitle';
   static const homeJoinNowTitle = 'homeJoinNowTitle';
-  static const homeFinJobTitle = 'homeFinJobTitle';
+  static const homeFindJobTitle = 'homeFindJobTitle';
+  static const homeRecentJobList = 'homeRecentJobList';
   static const homeRecentFinJobTitle = 'homeRecentFinJobTitle';
   static const homeRemoteJobTitle = 'homeRemoteJobTitle';
   static const homeFullTimeTitle = 'homeFullTimeTitle';
@@ -75,5 +76,34 @@ abstract class  LocaleKeys {
   static const cancelButtonTitle = 'cancelButtonTitle';
   static const profileChangeImageTitle = 'profileChangeImageTitle';
   static const profileEditProfileTitle = 'profileEditProfileTitle';
+  static const profileDateOfBirthTitle = 'profileDateOfBirthTitle';
+  static const profileDateOfBirthDialogTitle = 'profileDateOfBirthDialogTitle';
+  static const profileGenderTitle = 'profileGenderTitle';
+  static const profileGenderMale = 'profileGenderMale';
+  static const profileGenderFemale = 'profileGenderFemale';
+  static const profilePhoneNumberTitle = 'profilePhoneNumberTitle';
+  static const profileLocationTitle = 'profileLocationTitle';
+  static const profileSaveTitle = 'profileSaveTitle';
+  static const profilePhoneNumberHintText = 'profilePhoneNumberHintText';
+  static const profileEmailNotVerifiedTitle = 'profileEmailNotVerifiedTitle';
+  static const profileCardEmailTitle = 'profileCardEmailTitle';
+  static const profileCardDateOfBirthTitle = 'profileCardDateOfBirthTitle';
+  static const profileCardGenderTitle = 'profileCardGenderTitle';
+  static const profileCardPhoneTitle = 'profileCardPhoneTitle';
+  static const profileCardLocationTitle = 'profileCardLocationTitle';
+  static const postTitle = 'postTitle';
+  static const postSubTitle = 'postSubTitle';
+  static const postButtonTitle = 'postButtonTitle';
+  static const postMakeAJob = 'postMakeAJob';
+  static const postButtonPost = 'postButtonPost';
+  static const postAddPostTitle = 'postAddPostTitle';
+  static const postPostTitle = 'postPostTitle';
+  static const postPostTitleHint = 'postPostTitleHint';
+  static const postDescriptionTitle = 'postDescriptionTitle';
+  static const postDescriptionHint = 'postDescriptionHint';
+  static const postAddHashtagTitle = 'postAddHashtagTitle';
+  static const postImagesTitle = 'postImagesTitle';
+  static const postImagesCancelButtonTitle = 'postImagesCancelButtonTitle';
+  static const postImagesDeleteButtonTitle = 'postImagesDeleteButtonTitle';
 
 }

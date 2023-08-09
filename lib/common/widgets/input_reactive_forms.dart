@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobs_pot/common/app_colors.dart';
+import 'package:jobs_pot/common/app_style.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -13,6 +13,7 @@ class InputReactiveForms extends StatefulWidget {
     this.suffixIcon,
     this.hintText,
     this.keyboardType,
+    this.maxLine,
   });
 
   final FormControl? formController;
@@ -22,6 +23,7 @@ class InputReactiveForms extends StatefulWidget {
   final Widget? suffixIcon;
   final String? hintText;
   final TextInputType? keyboardType;
+  final int? maxLine;
 
   @override
   State<StatefulWidget> createState() => _InputReactiveFormsState();
@@ -92,7 +94,7 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
 
   Container _input() {
     return Container(
-      decoration: _boxInputContainerStyle(),
+      decoration: AppStyles.boxStyle,
       child: ReactiveTextField(
         formControl: widget.formController,
         keyboardType: widget.keyboardType,
@@ -101,6 +103,7 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
         onChanged: _onChanged,
         validationMessages: widget.validationMessages,
         decoration: _boxInputStyle(),
+        maxLines: widget.maxLine ?? 1,
       ),
     );
   }
@@ -115,29 +118,14 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide.none,
       ),
-      contentPadding: const EdgeInsets.only(left: 15, right: 15),
-    );
-  }
-
-  BoxDecoration _boxInputContainerStyle() {
-    return const BoxDecoration(
-      borderRadius: BorderRadius.all(
-        Radius.circular(10),
-      ),
-      color: Colors.white,
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.shadowColor,
-          blurRadius: 4,
-          offset: Offset(2, 4), // Shadow position
-        ),
-      ],
+      contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      fillColor: Colors.white,
     );
   }
 
   Container _title() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10, top: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
       child: widget.title,
     );

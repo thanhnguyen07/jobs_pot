@@ -15,7 +15,7 @@ class ButtonSubmitForm extends StatelessWidget {
       builder: (context, form, child) {
         return Container(
           margin: const EdgeInsets.all(15),
-          child: CutomButton(
+          child: CustomButton(
             title: title,
             backgroundColor: AppColors.egglantColor,
             onPressed: () {

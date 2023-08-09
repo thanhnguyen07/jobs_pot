@@ -26,7 +26,7 @@ class _LoginWithGoogleState extends ConsumerState<LoginWithGoogle> {
 
     return Container(
       margin: const EdgeInsets.only(left: 15, right: 15, top: 5),
-      child: CutomButton(
+      child: CustomButton(
         title: Text(
           Utils.getLocaleMessage(LocaleKeys.authenticationGoogleButtonTitle),
           style: AppTextStyle.egglantBoldS14,

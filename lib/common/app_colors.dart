@@ -14,8 +14,16 @@ class AppColors {
   static const textColor1 = Color(0xFF524B6B);
   static const textColor2 = Color(0x99524B6B);
   static const textColor3 = Color(0xFF150A33);
+  static const textColor4 = Color(0xFF150B3D);
+  static const textColor5 = Color(0xFF524B6B);
+  static const textColor6 = Color(0xFFFF9228);
 
   static const shadowColor = Color(0x2099ABC6);
 
   static const blackColor = Color(0xFF150B3D);
+
+  static const iconColor = Color(0xFF3E495A);
+  static const iconColor2 = Color(0xFFFF9228);
+
+  static const whiteColor1 = Color(0xFFF9F9F9);
 }

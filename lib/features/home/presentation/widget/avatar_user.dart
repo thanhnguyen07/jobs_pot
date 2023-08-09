@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
 
@@ -26,13 +27,9 @@ class AvatarUser extends StatelessWidget {
             borderRadius: BorderRadius.circular(40),
           ),
         ),
-        child: ClipOval(
-          child: Image.network(
-            userData!.avatarLink!,
-            width: 40,
-            height: 40,
-            fit: BoxFit.cover,
-          ),
+        child: AvatarImage(
+          avatarLink: userData?.avatarLink,
+          size: 40,
         ),
       ),
     );

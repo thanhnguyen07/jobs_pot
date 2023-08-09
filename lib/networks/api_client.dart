@@ -16,9 +16,15 @@ abstract class ApiClient {
   @POST("user/update-avatar")
   Future<dynamic> updateAvatar(@Body() Map<String, dynamic> body);
 
+  @POST("user/update-informations")
+  Future<dynamic> updateInformations(@Body() Map<String, dynamic> body);
+
   @GET("user/profile")
   Future<dynamic> getUserProfile();
 
   @GET("user/signin-with-google")
   Future<dynamic> signInWithGoogle();
+
+  @GET("job/summary")
+  Future<dynamic> getJobsSummary();
 }

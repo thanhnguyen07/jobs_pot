@@ -73,7 +73,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           hintEmail: Utils.getLocaleMessage(
               LocaleKeys.authenticationInputEmailHintText),
         ),
-        PasswordInput(formControlPassword: formControlPassword),
+        PasswordInput(
+          formControlPassword: formControlPassword,
+        ),
       ],
     );
   }
