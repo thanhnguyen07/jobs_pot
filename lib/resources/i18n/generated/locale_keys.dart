@@ -105,5 +105,11 @@ abstract class  LocaleKeys {
   static const postImagesTitle = 'postImagesTitle';
   static const postImagesCancelButtonTitle = 'postImagesCancelButtonTitle';
   static const postImagesDeleteButtonTitle = 'postImagesDeleteButtonTitle';
+  static const postAddImageTitle = 'postAddImageTitle';
+  static const postTakePictureTitle = 'postTakePictureTitle';
+  static const postPickFromGalleryTitle = 'postPickFromGalleryTitle';
+  static const postPostingProcessTitle = 'postPostingProcessTitle';
+  static const postPostingProcessStep1Title = 'postPostingProcessStep1Title';
+  static const postPostingProcessStep2Title = 'postPostingProcessStep2Title';
 
 }

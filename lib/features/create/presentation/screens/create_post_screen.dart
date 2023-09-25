@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
@@ -26,7 +28,8 @@ class CreatePostScreen extends ConsumerStatefulWidget {
   ConsumerState<CreatePostScreen> createState() => _CreatePostScreenState();
 }
 
-class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
+class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
+    with TickerProviderStateMixin {
   late FormGroup _createPostInputForm;
 
   @override
@@ -43,6 +46,8 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
   Widget build(BuildContext context) {
     final UserEntity? userData = ref.watch(authControllerProvider);
     final List<XFile>? imagesData = ref.watch(createPostController);
+    final List<String>? uploadsData =
+        ref.watch(uploadImageToFirebaseController);
 
     return Scaffold(
       appBar: const PreferredSize(
@@ -62,6 +67,56 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  imagesData != null && uploadsData != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              Utils.getLocaleMessage(
+                                  LocaleKeys.postPostingProcessTitle),
+                              style: AppTextStyle.text4BoldS16,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        LocaleKeys.postPostingProcessStep1Title
+                                            .plural(0, args: [
+                                          uploadsData.length.toString(),
+                                          (imagesData.length - 1).toString()
+                                        ]),
+                                        style: AppTextStyle.darkPurpleBoldS12,
+                                      ),
+                                      Container(
+                                        width: 10,
+                                        height: 10,
+                                        margin: const EdgeInsets.only(left: 10),
+                                        child: uploadsData.length ==
+                                                (imagesData.length - 1)
+                                            ? SvgPicture.asset(AppIcons.checked)
+                                            : const CircularProgressIndicator(
+                                                color:
+                                                    AppColors.fireYellowColor,
+                                                strokeWidth: 2,
+                                              ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    Utils.getLocaleMessage(LocaleKeys
+                                        .postPostingProcessStep2Title),
+                                    style: AppTextStyle.darkPurpleBoldS12,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
                   const SizedBox(height: 20),
                   _addPostTitle(),
                   const SizedBox(height: 30),

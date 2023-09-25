@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/create/create_provider.dart';
 import 'package:jobs_pot/features/create/presentation/widgets/post_description_input.dart';
 import 'package:jobs_pot/features/create/presentation/widgets/post_title_input.dart';
-import 'package:jobs_pot/system/system_providers.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class CraetePostInputForm extends ConsumerStatefulWidget {
@@ -29,8 +28,6 @@ class _CraetePostInputFormState extends ConsumerState<CraetePostInputForm> {
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(languageControllerProvider);
-
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
       child: const Column(

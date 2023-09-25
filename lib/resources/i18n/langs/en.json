@@ -114,5 +114,13 @@
   "postAddHashtagTitle": "Add hashtag",
   "postImagesTitle": "Images",
   "postImagesCancelButtonTitle": "Cancel",
-  "postImagesDeleteButtonTitle": "Delete"
+  "postImagesDeleteButtonTitle": "Delete",
+  "postAddImageTitle": "Take a new photo or select one from the gallery",
+  "postTakePictureTitle": "Take Picture",
+  "postPickFromGalleryTitle": "Pick from Gallery",
+  "postPostingProcessTitle":"Posting process",
+  "postPostingProcessStep1Title":{
+    "zero":"Step  1 - Upload images {}/{}"
+  },
+  "postPostingProcessStep2Title":"Step 2 - Upload post"
 }

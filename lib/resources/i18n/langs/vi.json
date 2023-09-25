@@ -114,5 +114,13 @@
   "postAddHashtagTitle": "Thêm hashtag",
   "postImagesTitle": "Hình ảnh",
   "postImagesCancelButtonTitle": "Huỷ",
-  "postImagesDeleteButtonTitle": "Xoá"
+  "postImagesDeleteButtonTitle": "Xoá",
+  "postAddImageTitle": "Chụp ảnh mới hoặc chọn ảnh từ thư viện",
+  "postTakePictureTitle": "Chụp ảnh",
+  "postPickFromGalleryTitle": "Chọn từ Thư viện",
+  "postPostingProcessTitle": "Quá trình đăng",
+  "postPostingProcessStep1Title": {
+    "zero": "Bước 1 - Tải lên hình ảnh {}/{}"
+  },
+  "postPostingProcessStep2Title": "Bước 2 - Tải lên bài viết"
 }

@@ -3,11 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jobs_pot/common/app_colors.dart';
+import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/features/create/create_provider.dart';
+import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class CreatePostController extends StateNotifier<List<XFile>?> {
@@ -56,9 +60,23 @@ class CreatePostController extends StateNotifier<List<XFile>?> {
   void onPost(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
 
+    final CreateScreenType? createScreenType =
+        ref.watch(bottomNavigationController);
+
     final isValid = _createPostInputForm.valid;
 
     if (isValid) {
+      if (createScreenType == CreateScreenType.post) {
+        if (state != null) {
+          final List<XFile> newData = [...state!];
+
+          newData.removeAt(state!.length - 1);
+
+          ref
+              .read(uploadImageToFirebaseController.notifier)
+              .uploadImages(newData);
+        }
+      }
     } else {
       _createPostInputForm.controls.forEach((key, value) {
         if (value.invalid) {
@@ -79,8 +97,8 @@ class CreatePostController extends StateNotifier<List<XFile>?> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const Text(
-                'Take a new photo or select one from the gallery',
+              Text(
+                Utils.getLocaleMessage(LocaleKeys.postAddImageTitle),
                 style: AppTextStyle.blackBoldS16,
               ),
               Container(
@@ -101,8 +119,9 @@ class CreatePostController extends StateNotifier<List<XFile>?> {
                             height: 40,
                           ),
                           const SizedBox(width: 10),
-                          const Text(
-                            "Take Picture",
+                          Text(
+                            Utils.getLocaleMessage(
+                                LocaleKeys.postTakePictureTitle),
                             style: AppTextStyle.darkPurpleBoldS14,
                           )
                         ],
@@ -125,8 +144,9 @@ class CreatePostController extends StateNotifier<List<XFile>?> {
                             height: 40,
                           ),
                           const SizedBox(width: 10),
-                          const Text(
-                            "Pick from Gallery",
+                          Text(
+                            Utils.getLocaleMessage(
+                                LocaleKeys.postPickFromGalleryTitle),
                             style: AppTextStyle.darkPurpleBoldS14,
                           )
                         ],

@@ -20,6 +20,8 @@ class CreateHeader extends ConsumerStatefulWidget {
 class _CreateHeaderState extends ConsumerState<CreateHeader> {
   @override
   Widget build(BuildContext context) {
+    final List<String>? uploadsData =
+        ref.watch(uploadImageToFirebaseController);
     return Container(
       margin: const EdgeInsets.only(top: 40),
       child: Row(
@@ -35,8 +37,15 @@ class _CreateHeaderState extends ConsumerState<CreateHeader> {
           ),
           TextButton(
             onPressed: () {
-              ref.read(createPostController.notifier).onPost(context);
+              if (uploadsData != null) {
+              } else {
+                ref.read(createPostController.notifier).onPost(context);
+              }
             },
+            style: TextButton.styleFrom(
+              foregroundColor:
+                  uploadsData != null ? Colors.white : null, // foreground
+            ),
             child: Text(
               Utils.getLocaleMessage(LocaleKeys.postButtonPost),
               style: AppTextStyle.textColor6BoldS14,

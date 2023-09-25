@@ -21,4 +21,5 @@ class FirebaseKeys {
   static const String tooManyRequests = "too-many-requests";
   static const String googleType = "google";
   static const String pathFolderAvatarImage = "avatar_images";
+  static const String pathFolderPostImage = "post_images";
 }
