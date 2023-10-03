@@ -22,6 +22,13 @@ class EyeSuffixIcon extends StatelessWidget {
         ),
       ),
       child: TextButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
         onPressed: setShowPassword,
         child: SvgPicture.asset(
           showPassword ? AppIcons.showEye : AppIcons.hideEye,
