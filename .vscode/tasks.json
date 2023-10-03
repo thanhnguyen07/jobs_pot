@@ -22,6 +22,16 @@
       }
     },
     {
+      "label": "flutter - precache ios",
+      "type": "shell",
+      "command": "fvm flutter precache --ios",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
       "label": "flutter - pub get",
       "type": "shell",
       "command": "fvm flutter pub get",
