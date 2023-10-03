@@ -2,6 +2,26 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "ios - pod",
+      "type": "shell",
+      "command": "cd ios && pod install && cd ..",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "ios - pod update",
+      "type": "shell",
+      "command": "cd ios && pod install --repo-update && cd ..",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
       "label": "flutter - pub get",
       "type": "shell",
       "command": "fvm flutter pub get",
