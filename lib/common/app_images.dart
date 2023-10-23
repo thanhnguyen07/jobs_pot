@@ -19,17 +19,20 @@ class AppImages {
   static const adobe = 'lib/assets/iconsPng/company/adobe.png';
   static const allianz = 'lib/assets/iconsPng/company/allianz.png';
   static const amazon = 'lib/assets/iconsPng/company/amazon.png';
-  static const aplle2 = 'lib/assets/iconsPng/company/apple2.png';
-  static const aplle = 'lib/assets/iconsPng/company/apple.png';
+  static const apple2 = 'lib/assets/iconsPng/company/apple2.png';
+  static const apple = 'lib/assets/iconsPng/company/apple.png';
   static const axa = 'lib/assets/iconsPng/company/axa.png';
   static const dribbble = 'lib/assets/iconsPng/company/dribbble.png';
-  static const facebook = 'lib/assets/iconsPng/company/facebook2.png';
-  static const facebook2 = 'lib/assets/iconsPng/company/facebook.png';
+  static const facebook = 'lib/assets/iconsPng/company/facebook.png';
+  static const facebook2 = 'lib/assets/iconsPng/company/faceboo2.png';
   static const microsoft = 'lib/assets/iconsPng/company/microsoft.png';
   static const twitter = 'lib/assets/iconsPng/company/twitter.png';
   static const google = 'lib/assets/iconsPng/company/google.png';
   static const google2 = 'lib/assets/iconsPng/company/google2.png';
   static const google3 = 'lib/assets/iconsPng/company/google3.png';
+  static const googleLogo = 'lib/assets/iconsPng/company/google_logo.png';
+  static const facebookLogo = 'lib/assets/iconsPng/company/facebook_logo.png';
+  static const appleLogo = 'lib/assets/iconsPng/company/apple_logo.png';
 
   static const arabic = 'lib/assets/iconsPng/languages/arabic.svg';
   static const english = 'lib/assets/iconsPng/languages/english.svg';

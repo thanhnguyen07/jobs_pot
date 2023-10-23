@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobs_pot/common/app_colors.dart';
+import 'package:jobs_pot/common/app_images.dart';
+import 'package:jobs_pot/common/widgets/social_icon.dart';
 import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/suggestions_text.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/change_language.dart';
@@ -51,13 +54,59 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       children: [
         _signUpTitle(),
         const SignUpForm(),
-        const LoginWithGoogle(),
+        signUpWith(),
         const SizedBox(
-          height: 15,
+          height: 10,
+        ),
+        socialSignUpButtons(),
+        // const LoginWithGoogle(),
+        const SizedBox(
+          height: 40,
         ),
         _loginSuggestion(),
         const ChangeLanguage(),
       ],
+    );
+  }
+
+  Widget socialSignUpButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SocialIcon(icon: AppImages.googleLogo, onPress: () {}),
+        SocialIcon(icon: AppImages.facebookLogo, onPress: () {}),
+        SocialIcon(icon: AppImages.appleLogo, onPress: () {}),
+      ],
+    );
+  }
+
+  Widget signUpWith() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: 1,
+              color: AppColors.egglantColor,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+                Utils.getLocaleMessage(LocaleKeys.authenticationSignUpWith)),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: 1,
+              color: AppColors.egglantColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

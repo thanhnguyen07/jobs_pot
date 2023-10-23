@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends StatefulWidget {
   const CustomButton({
     Key? key,
     required this.title,
@@ -11,9 +11,14 @@ class CustomButton extends StatelessWidget {
 
   final Text title;
   final Color backgroundColor;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final Widget? icon;
 
+  @override
+  State<CustomButton> createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -23,17 +28,17 @@ class CustomButton extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 50,
-        color: backgroundColor,
+        color: widget.backgroundColor,
         child: TextButton(
-          onPressed: onPressed,
+          onPressed: widget.onPressed,
           style: ButtonStyle(
             padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              icon ?? const SizedBox(),
-              title,
+              widget.icon ?? const SizedBox(),
+              widget.title,
             ],
           ),
         ),

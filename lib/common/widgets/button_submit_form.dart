@@ -4,23 +4,32 @@ import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ButtonSubmitForm extends StatelessWidget {
-  const ButtonSubmitForm({Key? key, required this.title, required this.onLogin})
-      : super(key: key);
+  const ButtonSubmitForm({
+    Key? key,
+    required this.title,
+    required this.onLogin,
+  }) : super(key: key);
   final Text title;
-  final Function onLogin;
+  final void Function() onLogin;
 
   @override
   Widget build(BuildContext context) {
+    Color checkBackgroundColor(FormGroup form) {
+      if (form.dirty) {
+        return form.valid ? AppColors.egglantColor : AppColors.shadowColor;
+      } else {
+        return AppColors.egglantColor;
+      }
+    }
+
     return ReactiveFormConsumer(
       builder: (context, form, child) {
         return Container(
           margin: const EdgeInsets.all(15),
           child: CustomButton(
             title: title,
-            backgroundColor: AppColors.egglantColor,
-            onPressed: () {
-              onLogin();
-            },
+            backgroundColor: checkBackgroundColor(form),
+            onPressed: form.valid ? onLogin : null,
           ),
         );
       },

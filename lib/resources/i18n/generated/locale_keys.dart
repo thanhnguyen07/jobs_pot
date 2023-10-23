@@ -11,6 +11,7 @@ abstract class  LocaleKeys {
   static const onboardingSubTitle = 'onboardingSubTitle';
   static const authenticationLoginTitle = 'authenticationLoginTitle';
   static const authenticationSignUpTitle = 'authenticationSignUpTitle';
+  static const authenticationSignUpWith = 'authenticationSignUpWith';
   static const authenticationSignUpError = 'authenticationSignUpError';
   static const authenticationSignUpError2 = 'authenticationSignUpError2';
   static const authenticationSignUpError3 = 'authenticationSignUpError3';
@@ -25,6 +26,7 @@ abstract class  LocaleKeys {
   static const authenticationForgotPasswordButtonTitle = 'authenticationForgotPasswordButtonTitle';
   static const authenticationButtonBackToLogin = 'authenticationButtonBackToLogin';
   static const authenticationLoginButtonTitle = 'authenticationLoginButtonTitle';
+  static const authenticationSignInWith = 'authenticationSignInWith';
   static const authenticationGoogleButtonTitle = 'authenticationGoogleButtonTitle';
   static const authenticationSuggestionsSignUp = 'authenticationSuggestionsSignUp';
   static const authenticationSuggestionsLogin = 'authenticationSuggestionsLogin';

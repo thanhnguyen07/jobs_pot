@@ -25,6 +25,9 @@ mixin _$UserEntity {
   String get email => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
+  bool get isVerifiedEmail => throw _privateConstructorUsedError;
+  bool get isVerifiedFacebook => throw _privateConstructorUsedError;
+  bool get isVerifiedGoogle => throw _privateConstructorUsedError;
   String? get avatarLink => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   String? get dateOfBirth => throw _privateConstructorUsedError;
@@ -49,6 +52,9 @@ abstract class $UserEntityCopyWith<$Res> {
       String email,
       String type,
       String uid,
+      bool isVerifiedEmail,
+      bool isVerifiedFacebook,
+      bool isVerifiedGoogle,
       String? avatarLink,
       String? location,
       String? dateOfBirth,
@@ -74,6 +80,9 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? email = null,
     Object? type = null,
     Object? uid = null,
+    Object? isVerifiedEmail = null,
+    Object? isVerifiedFacebook = null,
+    Object? isVerifiedGoogle = null,
     Object? avatarLink = freezed,
     Object? location = freezed,
     Object? dateOfBirth = freezed,
@@ -101,6 +110,18 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
+      isVerifiedEmail: null == isVerifiedEmail
+          ? _value.isVerifiedEmail
+          : isVerifiedEmail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isVerifiedFacebook: null == isVerifiedFacebook
+          ? _value.isVerifiedFacebook
+          : isVerifiedFacebook // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isVerifiedGoogle: null == isVerifiedGoogle
+          ? _value.isVerifiedGoogle
+          : isVerifiedGoogle // ignore: cast_nullable_to_non_nullable
+              as bool,
       avatarLink: freezed == avatarLink
           ? _value.avatarLink
           : avatarLink // ignore: cast_nullable_to_non_nullable
@@ -139,6 +160,9 @@ abstract class _$$_UserEntityCopyWith<$Res>
       String email,
       String type,
       String uid,
+      bool isVerifiedEmail,
+      bool isVerifiedFacebook,
+      bool isVerifiedGoogle,
       String? avatarLink,
       String? location,
       String? dateOfBirth,
@@ -162,6 +186,9 @@ class __$$_UserEntityCopyWithImpl<$Res>
     Object? email = null,
     Object? type = null,
     Object? uid = null,
+    Object? isVerifiedEmail = null,
+    Object? isVerifiedFacebook = null,
+    Object? isVerifiedGoogle = null,
     Object? avatarLink = freezed,
     Object? location = freezed,
     Object? dateOfBirth = freezed,
@@ -189,6 +216,18 @@ class __$$_UserEntityCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
+      isVerifiedEmail: null == isVerifiedEmail
+          ? _value.isVerifiedEmail
+          : isVerifiedEmail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isVerifiedFacebook: null == isVerifiedFacebook
+          ? _value.isVerifiedFacebook
+          : isVerifiedFacebook // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isVerifiedGoogle: null == isVerifiedGoogle
+          ? _value.isVerifiedGoogle
+          : isVerifiedGoogle // ignore: cast_nullable_to_non_nullable
+              as bool,
       avatarLink: freezed == avatarLink
           ? _value.avatarLink
           : avatarLink // ignore: cast_nullable_to_non_nullable
@@ -222,6 +261,9 @@ class _$_UserEntity implements _UserEntity {
       required this.email,
       required this.type,
       required this.uid,
+      required this.isVerifiedEmail,
+      required this.isVerifiedFacebook,
+      required this.isVerifiedGoogle,
       required this.avatarLink,
       required this.location,
       required this.dateOfBirth,
@@ -242,6 +284,12 @@ class _$_UserEntity implements _UserEntity {
   @override
   final String uid;
   @override
+  final bool isVerifiedEmail;
+  @override
+  final bool isVerifiedFacebook;
+  @override
+  final bool isVerifiedGoogle;
+  @override
   final String? avatarLink;
   @override
   final String? location;
@@ -254,7 +302,7 @@ class _$_UserEntity implements _UserEntity {
 
   @override
   String toString() {
-    return 'UserEntity(id: $id, userName: $userName, email: $email, type: $type, uid: $uid, avatarLink: $avatarLink, location: $location, dateOfBirth: $dateOfBirth, gender: $gender, phoneNumber: $phoneNumber)';
+    return 'UserEntity(id: $id, userName: $userName, email: $email, type: $type, uid: $uid, isVerifiedEmail: $isVerifiedEmail, isVerifiedFacebook: $isVerifiedFacebook, isVerifiedGoogle: $isVerifiedGoogle, avatarLink: $avatarLink, location: $location, dateOfBirth: $dateOfBirth, gender: $gender, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -268,6 +316,12 @@ class _$_UserEntity implements _UserEntity {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.isVerifiedEmail, isVerifiedEmail) ||
+                other.isVerifiedEmail == isVerifiedEmail) &&
+            (identical(other.isVerifiedFacebook, isVerifiedFacebook) ||
+                other.isVerifiedFacebook == isVerifiedFacebook) &&
+            (identical(other.isVerifiedGoogle, isVerifiedGoogle) ||
+                other.isVerifiedGoogle == isVerifiedGoogle) &&
             (identical(other.avatarLink, avatarLink) ||
                 other.avatarLink == avatarLink) &&
             (identical(other.location, location) ||
@@ -281,8 +335,21 @@ class _$_UserEntity implements _UserEntity {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userName, email, type, uid,
-      avatarLink, location, dateOfBirth, gender, phoneNumber);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      userName,
+      email,
+      type,
+      uid,
+      isVerifiedEmail,
+      isVerifiedFacebook,
+      isVerifiedGoogle,
+      avatarLink,
+      location,
+      dateOfBirth,
+      gender,
+      phoneNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -305,6 +372,9 @@ abstract class _UserEntity implements UserEntity {
       required final String email,
       required final String type,
       required final String uid,
+      required final bool isVerifiedEmail,
+      required final bool isVerifiedFacebook,
+      required final bool isVerifiedGoogle,
       required final String? avatarLink,
       required final String? location,
       required final String? dateOfBirth,
@@ -324,6 +394,12 @@ abstract class _UserEntity implements UserEntity {
   String get type;
   @override
   String get uid;
+  @override
+  bool get isVerifiedEmail;
+  @override
+  bool get isVerifiedFacebook;
+  @override
+  bool get isVerifiedGoogle;
   @override
   String? get avatarLink;
   @override

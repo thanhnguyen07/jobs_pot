@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_style.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -120,6 +121,11 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       fillColor: Colors.white,
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+            color: errorText.isNotEmpty ? Colors.red : AppColors.egglantColor),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+      ),
     );
   }
 

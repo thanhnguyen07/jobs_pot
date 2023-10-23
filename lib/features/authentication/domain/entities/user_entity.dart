@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_entity.freezed.dart';
@@ -14,6 +16,9 @@ class UserEntity with _$UserEntity {
     required String email,
     required String type,
     required String uid,
+    required bool isVerifiedEmail,
+    required bool isVerifiedFacebook,
+    required bool isVerifiedGoogle,
     required String? avatarLink,
     required String? location,
     required String? dateOfBirth,
