@@ -15,17 +15,17 @@ dependencies:
   retrofit: ^4.0.1
   email_validator: ^2.1.17
   flutter_easyloading: ^3.0.5
-  reactive_forms: ^15.0.0
-  retrofit_generator: ^7.0.1
+  reactive_forms: ^16.1.1
+  retrofit_generator: ^8.0.2
   fluttertoast: ^8.2.2
   json_annotation: ^4.8.1
   freezed_annotation: ^2.2.0
-  riverpod_annotation: ^1.2.1
-  logger: ^1.4.0
+  riverpod_annotation: ^2.2.1
+  logger: ^2.0.2+1
   shared_preferences: ^2.1.2
   flutter_riverpod: ^2.2.0
-  auto_route: ^7.4.0
-  fpdart: ^0.6.0
+  auto_route: ^7.8.4
+  fpdart: ^1.1.0
   crypto: ^3.0.3
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
@@ -40,10 +40,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
   build_runner: ^2.4.5
   freezed: ^2.3.5
-  riverpod_generator: ^1.1.1
+  riverpod_generator: ^2.3.5
   json_serializable: ^6.7.0
   auto_route_generator: ^7.1.1
 
