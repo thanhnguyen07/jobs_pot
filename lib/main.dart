@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/config/app_configs.dart';
 import 'package:jobs_pot/config/providers.dart';
 import 'package:jobs_pot/routes/route_providers.dart';
@@ -40,8 +41,13 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
-    EasyLoading.instance.maskType = EasyLoadingMaskType.black;
-    EasyLoading.instance.loadingStyle = EasyLoadingStyle.light;
+    EasyLoading.instance
+      ..maskType = EasyLoadingMaskType.none
+      ..loadingStyle = EasyLoadingStyle.custom
+      ..toastPosition = EasyLoadingToastPosition.bottom
+      ..backgroundColor = AppColors.purpleColor
+      ..indicatorColor = Colors.white
+      ..textColor = Colors.white;
 
     return MaterialApp.router(
       builder: EasyLoading.init(),

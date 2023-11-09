@@ -13,7 +13,7 @@ import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class ProfileScreen extends ConsumerStatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: null);
 
   static const String path = '/ProfileScreen';
 

@@ -16,7 +16,7 @@ import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: null);
 
   static const String path = 'HomeScreen';
 

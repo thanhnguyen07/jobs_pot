@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class UnFocusKeyboard extends StatelessWidget {
   const UnFocusKeyboard({Key? key, required this.context, required this.child})
-      : super(key: key);
+      : super(key: null);
 
   final BuildContext context;
   final Widget child;

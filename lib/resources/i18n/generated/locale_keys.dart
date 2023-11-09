@@ -9,6 +9,7 @@ abstract class  LocaleKeys {
   static const onboardingTitle2 = 'onboardingTitle2';
   static const onboardingTitle3 = 'onboardingTitle3';
   static const onboardingSubTitle = 'onboardingSubTitle';
+  static const authenticationComingSoon = 'authenticationComingSoon';
   static const authenticationLoginTitle = 'authenticationLoginTitle';
   static const authenticationSignUpTitle = 'authenticationSignUpTitle';
   static const authenticationSignUpWith = 'authenticationSignUpWith';

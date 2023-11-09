@@ -45,7 +45,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _avatarUser(userData?.avatarLink),
+                  _avatarUser(userData?.photoUrl),
                   _userName(userData?.userName ?? ''),
                   _customText2(
                     userData?.dateOfBirth?.split(' ')[0] != null

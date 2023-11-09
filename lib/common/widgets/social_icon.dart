@@ -3,10 +3,10 @@ import 'package:jobs_pot/common/app_colors.dart';
 
 class SocialIcon extends StatelessWidget {
   const SocialIcon({
-    Key? key,
+    super.key,
     required this.icon,
     required this.onPress,
-  }) : super(key: key);
+  });
 
   final String icon;
   final void Function() onPress;

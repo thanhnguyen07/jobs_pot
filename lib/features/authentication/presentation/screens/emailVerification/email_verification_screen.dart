@@ -14,7 +14,7 @@ import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class EmailVerificationScreen extends ConsumerStatefulWidget {
-  const EmailVerificationScreen({Key? key}) : super(key: key);
+  const EmailVerificationScreen({Key? key}) : super(key: null);
 
   static const String path = '/EmailVerificationScreen';
 

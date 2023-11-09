@@ -12,7 +12,7 @@ import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class RememberAndForgot extends ConsumerStatefulWidget {
-  const RememberAndForgot({Key? key}) : super(key: key);
+  const RememberAndForgot({Key? key}) : super(key: null);
 
   @override
   ConsumerState<RememberAndForgot> createState() => _RememberAndForgotState();

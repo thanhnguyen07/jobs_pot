@@ -6,16 +6,20 @@ part of 'user_response_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserResponseEntity _$$_UserResponseEntityFromJson(
+_$UserResponseEntityImpl _$$UserResponseEntityImplFromJson(
         Map<String, dynamic> json) =>
-    _$_UserResponseEntity(
+    _$UserResponseEntityImpl(
       results: UserEntity.fromJson(json['results'] as Map<String, dynamic>),
+      token: json['token'] as String,
+      refreshToken: json['refresh_token'] as String,
       msg: json['msg'] as String,
     );
 
-Map<String, dynamic> _$$_UserResponseEntityToJson(
-        _$_UserResponseEntity instance) =>
+Map<String, dynamic> _$$UserResponseEntityImplToJson(
+        _$UserResponseEntityImpl instance) =>
     <String, dynamic>{
       'results': instance.results,
+      'token': instance.token,
+      'refresh_token': instance.refreshToken,
       'msg': instance.msg,
     };

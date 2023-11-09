@@ -14,7 +14,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'date_of_birth_box.dart';
 
 class ProfileInputForm extends ConsumerStatefulWidget {
-  const ProfileInputForm({Key? key}) : super(key: key);
+  const ProfileInputForm({Key? key}) : super(key: null);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>

@@ -9,7 +9,7 @@ import 'create_post_screen.dart';
 
 @RoutePage()
 class CreateScreen extends ConsumerStatefulWidget {
-  const CreateScreen({Key? key}) : super(key: key);
+  const CreateScreen({Key? key}) : super(key: null);
 
   static const String path = 'CreateJobScreen';
 

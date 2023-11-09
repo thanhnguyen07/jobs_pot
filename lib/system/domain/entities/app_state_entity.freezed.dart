@@ -57,22 +57,22 @@ class _$AppStateEntityCopyWithImpl<$Res, $Val extends AppStateEntity>
 }
 
 /// @nodoc
-abstract class _$$_AppStateEntityCopyWith<$Res>
+abstract class _$$AppStateEntityImplCopyWith<$Res>
     implements $AppStateEntityCopyWith<$Res> {
-  factory _$$_AppStateEntityCopyWith(
-          _$_AppStateEntity value, $Res Function(_$_AppStateEntity) then) =
-      __$$_AppStateEntityCopyWithImpl<$Res>;
+  factory _$$AppStateEntityImplCopyWith(_$AppStateEntityImpl value,
+          $Res Function(_$AppStateEntityImpl) then) =
+      __$$AppStateEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_AppStateEntityCopyWithImpl<$Res>
-    extends _$AppStateEntityCopyWithImpl<$Res, _$_AppStateEntity>
-    implements _$$_AppStateEntityCopyWith<$Res> {
-  __$$_AppStateEntityCopyWithImpl(
-      _$_AppStateEntity _value, $Res Function(_$_AppStateEntity) _then)
+class __$$AppStateEntityImplCopyWithImpl<$Res>
+    extends _$AppStateEntityCopyWithImpl<$Res, _$AppStateEntityImpl>
+    implements _$$AppStateEntityImplCopyWith<$Res> {
+  __$$AppStateEntityImplCopyWithImpl(
+      _$AppStateEntityImpl _value, $Res Function(_$AppStateEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_AppStateEntityCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_AppStateEntity(
+    return _then(_$AppStateEntityImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_AppStateEntityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AppStateEntity implements _AppStateEntity {
-  const _$_AppStateEntity({required this.message});
+class _$AppStateEntityImpl implements _AppStateEntity {
+  const _$AppStateEntityImpl({required this.message});
 
   @override
   final String message;
@@ -106,7 +106,7 @@ class _$_AppStateEntity implements _AppStateEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppStateEntity &&
+            other is _$AppStateEntityImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -116,18 +116,19 @@ class _$_AppStateEntity implements _AppStateEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AppStateEntityCopyWith<_$_AppStateEntity> get copyWith =>
-      __$$_AppStateEntityCopyWithImpl<_$_AppStateEntity>(this, _$identity);
+  _$$AppStateEntityImplCopyWith<_$AppStateEntityImpl> get copyWith =>
+      __$$AppStateEntityImplCopyWithImpl<_$AppStateEntityImpl>(
+          this, _$identity);
 }
 
 abstract class _AppStateEntity implements AppStateEntity {
   const factory _AppStateEntity({required final String message}) =
-      _$_AppStateEntity;
+      _$AppStateEntityImpl;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_AppStateEntityCopyWith<_$_AppStateEntity> get copyWith =>
+  _$$AppStateEntityImplCopyWith<_$AppStateEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

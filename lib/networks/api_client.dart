@@ -22,8 +22,8 @@ abstract class ApiClient {
   @GET("user/profile")
   Future<dynamic> getUserProfile();
 
-  @GET("user/signin-with-google")
-  Future<dynamic> signInWithGoogle();
+  @POST("user/signin-with-firebase")
+  Future<dynamic> signInWithFirebase(@Body() Map<String, dynamic> body);
 
   @GET("job/summary")
   Future<dynamic> getJobsSummary();

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
 class PostJobScreen extends ConsumerStatefulWidget {
-  const PostJobScreen({Key? key}) : super(key: key);
+  const PostJobScreen({Key? key}) : super(key: null);
 
   static const String path = 'PostJobScreen';
 

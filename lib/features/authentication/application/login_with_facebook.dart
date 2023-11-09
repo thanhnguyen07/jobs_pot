@@ -1,40 +1,31 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 
-class LoginWithGoogleController extends StateNotifier {
-  LoginWithGoogleController(this.ref) : super(null);
+class LoginWithFacebookController extends StateNotifier {
+  LoginWithFacebookController(this.ref) : super(null);
 
   final Ref ref;
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-  Future<void> disconnect() async {
-    _googleSignIn.disconnect();
-  }
-
-  Future signInWithGoogle(BuildContext context) async {
+  Future signInWithFacebook(BuildContext context) async {
     ref.read(systemControllerProvider.notifier).showLoading();
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    await FacebookAuth.instance.login().then((value) async {
+      final AccessToken? accessToken = value.accessToken;
 
-    if (googleUser != null) {
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      await linkUser(credential);
-      if (context.mounted) {
-        await signIn(credential, context);
+      if (accessToken != null) {
+        final OAuthCredential facebookAuthCredential =
+            FacebookAuthProvider.credential(accessToken.token);
+        await linkUser(facebookAuthCredential);
+        if (context.mounted) {
+          await signIn(facebookAuthCredential, context);
+        }
       }
-    }
+    });
     ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
@@ -57,19 +48,15 @@ class LoginWithGoogleController extends StateNotifier {
                 .then(
               (res) {
                 res.fold(
-                  (l) {
-                    ref
-                        .read(systemControllerProvider.notifier)
-                        .showToastGeneralError();
-                  },
-                  (r) async {
+                  (l) {},
+                  (r) {
                     ref
                         .read(authControllerProvider.notifier)
                         .setDataUser(r.results);
-                    await ref
+                    ref
                         .read(authRepositoryProvider)
                         .saveBothToken(r.token, r.refreshToken)
-                        .then((value) async {
+                        .then((value) {
                       context.router.replaceAll([const HomeStackRoute()]);
                     });
                   },

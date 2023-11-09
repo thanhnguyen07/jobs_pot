@@ -86,25 +86,25 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
 }
 
 /// @nodoc
-abstract class _$$_EmptyFailureCopyWith<$Res> {
-  factory _$$_EmptyFailureCopyWith(
-          _$_EmptyFailure value, $Res Function(_$_EmptyFailure) then) =
-      __$$_EmptyFailureCopyWithImpl<$Res>;
+abstract class _$$EmptyFailureImplCopyWith<$Res> {
+  factory _$$EmptyFailureImplCopyWith(
+          _$EmptyFailureImpl value, $Res Function(_$EmptyFailureImpl) then) =
+      __$$EmptyFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_EmptyFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_EmptyFailure>
-    implements _$$_EmptyFailureCopyWith<$Res> {
-  __$$_EmptyFailureCopyWithImpl(
-      _$_EmptyFailure _value, $Res Function(_$_EmptyFailure) _then)
+class __$$EmptyFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$EmptyFailureImpl>
+    implements _$$EmptyFailureImplCopyWith<$Res> {
+  __$$EmptyFailureImplCopyWithImpl(
+      _$EmptyFailureImpl _value, $Res Function(_$EmptyFailureImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_EmptyFailure extends _EmptyFailure {
-  const _$_EmptyFailure() : super._();
+class _$EmptyFailureImpl extends _EmptyFailure {
+  const _$EmptyFailureImpl() : super._();
 
   @override
   String toString() {
@@ -114,7 +114,7 @@ class _$_EmptyFailure extends _EmptyFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_EmptyFailure);
+        (other.runtimeType == runtimeType && other is _$EmptyFailureImpl);
   }
 
   @override
@@ -196,25 +196,26 @@ class _$_EmptyFailure extends _EmptyFailure {
 }
 
 abstract class _EmptyFailure extends Failure {
-  const factory _EmptyFailure() = _$_EmptyFailure;
+  const factory _EmptyFailure() = _$EmptyFailureImpl;
   const _EmptyFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_MessageRequestFailureCopyWith<$Res> {
-  factory _$$_MessageRequestFailureCopyWith(_$_MessageRequestFailure value,
-          $Res Function(_$_MessageRequestFailure) then) =
-      __$$_MessageRequestFailureCopyWithImpl<$Res>;
+abstract class _$$MessageRequestFailureImplCopyWith<$Res> {
+  factory _$$MessageRequestFailureImplCopyWith(
+          _$MessageRequestFailureImpl value,
+          $Res Function(_$MessageRequestFailureImpl) then) =
+      __$$MessageRequestFailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_MessageRequestFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_MessageRequestFailure>
-    implements _$$_MessageRequestFailureCopyWith<$Res> {
-  __$$_MessageRequestFailureCopyWithImpl(_$_MessageRequestFailure _value,
-      $Res Function(_$_MessageRequestFailure) _then)
+class __$$MessageRequestFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$MessageRequestFailureImpl>
+    implements _$$MessageRequestFailureImplCopyWith<$Res> {
+  __$$MessageRequestFailureImplCopyWithImpl(_$MessageRequestFailureImpl _value,
+      $Res Function(_$MessageRequestFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -222,7 +223,7 @@ class __$$_MessageRequestFailureCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_MessageRequestFailure(
+    return _then(_$MessageRequestFailureImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -233,8 +234,8 @@ class __$$_MessageRequestFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MessageRequestFailure extends _MessageRequestFailure {
-  const _$_MessageRequestFailure({required this.message}) : super._();
+class _$MessageRequestFailureImpl extends _MessageRequestFailure {
+  const _$MessageRequestFailureImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -248,7 +249,7 @@ class _$_MessageRequestFailure extends _MessageRequestFailure {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MessageRequestFailure &&
+            other is _$MessageRequestFailureImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -258,9 +259,9 @@ class _$_MessageRequestFailure extends _MessageRequestFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MessageRequestFailureCopyWith<_$_MessageRequestFailure> get copyWith =>
-      __$$_MessageRequestFailureCopyWithImpl<_$_MessageRequestFailure>(
-          this, _$identity);
+  _$$MessageRequestFailureImplCopyWith<_$MessageRequestFailureImpl>
+      get copyWith => __$$MessageRequestFailureImplCopyWithImpl<
+          _$MessageRequestFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -339,35 +340,35 @@ class _$_MessageRequestFailure extends _MessageRequestFailure {
 
 abstract class _MessageRequestFailure extends Failure {
   const factory _MessageRequestFailure({required final String message}) =
-      _$_MessageRequestFailure;
+      _$MessageRequestFailureImpl;
   const _MessageRequestFailure._() : super._();
 
   String get message;
   @JsonKey(ignore: true)
-  _$$_MessageRequestFailureCopyWith<_$_MessageRequestFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MessageRequestFailureImplCopyWith<_$MessageRequestFailureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UnauthorizedFailureCopyWith<$Res> {
-  factory _$$_UnauthorizedFailureCopyWith(_$_UnauthorizedFailure value,
-          $Res Function(_$_UnauthorizedFailure) then) =
-      __$$_UnauthorizedFailureCopyWithImpl<$Res>;
+abstract class _$$UnauthorizedFailureImplCopyWith<$Res> {
+  factory _$$UnauthorizedFailureImplCopyWith(_$UnauthorizedFailureImpl value,
+          $Res Function(_$UnauthorizedFailureImpl) then) =
+      __$$UnauthorizedFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_UnauthorizedFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_UnauthorizedFailure>
-    implements _$$_UnauthorizedFailureCopyWith<$Res> {
-  __$$_UnauthorizedFailureCopyWithImpl(_$_UnauthorizedFailure _value,
-      $Res Function(_$_UnauthorizedFailure) _then)
+class __$$UnauthorizedFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$UnauthorizedFailureImpl>
+    implements _$$UnauthorizedFailureImplCopyWith<$Res> {
+  __$$UnauthorizedFailureImplCopyWithImpl(_$UnauthorizedFailureImpl _value,
+      $Res Function(_$UnauthorizedFailureImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_UnauthorizedFailure extends _UnauthorizedFailure {
-  const _$_UnauthorizedFailure() : super._();
+class _$UnauthorizedFailureImpl extends _UnauthorizedFailure {
+  const _$UnauthorizedFailureImpl() : super._();
 
   @override
   String toString() {
@@ -377,7 +378,8 @@ class _$_UnauthorizedFailure extends _UnauthorizedFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_UnauthorizedFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$UnauthorizedFailureImpl);
   }
 
   @override
@@ -459,30 +461,30 @@ class _$_UnauthorizedFailure extends _UnauthorizedFailure {
 }
 
 abstract class _UnauthorizedFailure extends Failure {
-  const factory _UnauthorizedFailure() = _$_UnauthorizedFailure;
+  const factory _UnauthorizedFailure() = _$UnauthorizedFailureImpl;
   const _UnauthorizedFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_BadRequestFailureCopyWith<$Res> {
-  factory _$$_BadRequestFailureCopyWith(_$_BadRequestFailure value,
-          $Res Function(_$_BadRequestFailure) then) =
-      __$$_BadRequestFailureCopyWithImpl<$Res>;
+abstract class _$$BadRequestFailureImplCopyWith<$Res> {
+  factory _$$BadRequestFailureImplCopyWith(_$BadRequestFailureImpl value,
+          $Res Function(_$BadRequestFailureImpl) then) =
+      __$$BadRequestFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_BadRequestFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_BadRequestFailure>
-    implements _$$_BadRequestFailureCopyWith<$Res> {
-  __$$_BadRequestFailureCopyWithImpl(
-      _$_BadRequestFailure _value, $Res Function(_$_BadRequestFailure) _then)
+class __$$BadRequestFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$BadRequestFailureImpl>
+    implements _$$BadRequestFailureImplCopyWith<$Res> {
+  __$$BadRequestFailureImplCopyWithImpl(_$BadRequestFailureImpl _value,
+      $Res Function(_$BadRequestFailureImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_BadRequestFailure extends _BadRequestFailure {
-  const _$_BadRequestFailure() : super._();
+class _$BadRequestFailureImpl extends _BadRequestFailure {
+  const _$BadRequestFailureImpl() : super._();
 
   @override
   String toString() {
@@ -492,7 +494,7 @@ class _$_BadRequestFailure extends _BadRequestFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_BadRequestFailure);
+        (other.runtimeType == runtimeType && other is _$BadRequestFailureImpl);
   }
 
   @override
@@ -574,6 +576,6 @@ class _$_BadRequestFailure extends _BadRequestFailure {
 }
 
 abstract class _BadRequestFailure extends Failure {
-  const factory _BadRequestFailure() = _$_BadRequestFailure;
+  const factory _BadRequestFailure() = _$BadRequestFailureImpl;
   const _BadRequestFailure._() : super._();
 }

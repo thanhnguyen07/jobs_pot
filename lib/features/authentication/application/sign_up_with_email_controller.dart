@@ -7,12 +7,14 @@ import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/email_verification_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class SignUpWithEmailController extends StateNotifier {
-  SignUpWithEmailController(this.ref) : super(null);
+class SignWithEmailController extends StateNotifier {
+  SignWithEmailController(this.ref) : super(null);
+
   final Ref ref;
 
   final _signUpForm = FormGroup(
@@ -44,7 +46,17 @@ class SignUpWithEmailController extends StateNotifier {
 
   FormGroup getSignUpForm() => _signUpForm;
 
+  String getInputName() {
+    return _signUpForm.controls[ValidationKeys.fullName]?.value.toString() ??
+        "";
+  }
+
+  String getInputEmail() {
+    return _signUpForm.controls[ValidationKeys.email]?.value.toString() ?? "";
+  }
+
   void onSignUp(BuildContext context) async {
+    ref.read(systemControllerProvider.notifier).showLoading();
     FocusManager.instance.primaryFocus?.unfocus();
 
     final isValid = _signUpForm.valid;
@@ -56,7 +68,7 @@ class SignUpWithEmailController extends StateNotifier {
           .read(emailVerificationControllerProvider.notifier)
           .setCurrentEmail(email);
 
-      signUpWithEmail(context);
+      await signUpWithEmail(context);
     } else {
       _signUpForm.controls.forEach((key, value) {
         if (value.invalid) {
@@ -66,15 +78,7 @@ class SignUpWithEmailController extends StateNotifier {
         }
       });
     }
-  }
-
-  String getInputName() {
-    return _signUpForm.controls[ValidationKeys.fullName]?.value.toString() ??
-        "";
-  }
-
-  String getInputEmail() {
-    return _signUpForm.controls[ValidationKeys.email]?.value.toString() ?? "";
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
   Future signUpWithEmail(BuildContext context) async {
@@ -84,22 +88,53 @@ class SignUpWithEmailController extends StateNotifier {
     final password =
         _signUpForm.controls[ValidationKeys.password]?.value.toString() ?? "";
 
-    ref.read(systemControllerProvider.notifier).showLoading();
-
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then(
+        (value) async {
+          await _createUserOnServer(context);
+        },
       );
-      await ref
-          .read(emailVerificationControllerProvider.notifier)
-          .sendVerifyMail()
-          .then((value) {
-        context.router.pushNamed(EmailVerificationScreen.path);
-      });
     } on FirebaseAuthException catch (e) {
       ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
     }
-    ref.read(systemControllerProvider.notifier).hideLoading();
+  }
+
+  Future _createUserOnServer(BuildContext context) async {
+    final fullName = ref.read(signUpWithEmailProvider.notifier).getInputName();
+    final User? user =
+        ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
+
+    final String? tokenFirebase = await user?.getIdToken();
+
+    if (tokenFirebase != null) {
+      final resCreateUserOnServer = await ref
+          .read(authRepositoryProvider)
+          .signUpWithEmail(fullName, tokenFirebase);
+
+      resCreateUserOnServer.fold((l) {
+        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      }, (r) async {
+        ref.read(authControllerProvider.notifier).setDataUser(r.results);
+        if (r.results.emailVerified) {
+          ref
+              .read(authRepositoryProvider)
+              .saveBothToken(r.token, r.refreshToken)
+              .then((value) {
+            context.router.replaceAll([const HomeStackRoute()]);
+          });
+        } else {
+          await ref
+              .read(emailVerificationControllerProvider.notifier)
+              .sendVerifyMail()
+              .then(
+            (value) {
+              context.router.pushNamed(EmailVerificationScreen.path);
+            },
+          );
+        }
+      });
+    }
   }
 }

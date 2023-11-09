@@ -6,8 +6,9 @@ part of 'jobs_summary_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_JobsSummaryEntity _$$_JobsSummaryEntityFromJson(Map<String, dynamic> json) =>
-    _$_JobsSummaryEntity(
+_$JobsSummaryEntityImpl _$$JobsSummaryEntityImplFromJson(
+        Map<String, dynamic> json) =>
+    _$JobsSummaryEntityImpl(
       fullTime:
           JobSummaryEntity.fromJson(json['fullTime'] as Map<String, dynamic>),
       partTime:
@@ -16,8 +17,8 @@ _$_JobsSummaryEntity _$$_JobsSummaryEntityFromJson(Map<String, dynamic> json) =>
           JobSummaryEntity.fromJson(json['remoteJob'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_JobsSummaryEntityToJson(
-        _$_JobsSummaryEntity instance) =>
+Map<String, dynamic> _$$JobsSummaryEntityImplToJson(
+        _$JobsSummaryEntityImpl instance) =>
     <String, dynamic>{
       'fullTime': instance.fullTime,
       'partTime': instance.partTime,

@@ -14,7 +14,7 @@ import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class ForgotPasswordScreen extends ConsumerStatefulWidget {
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+  const ForgotPasswordScreen({Key? key}) : super(key: null);
 
   static const String path = '/ForgotPasswordScreen';
 

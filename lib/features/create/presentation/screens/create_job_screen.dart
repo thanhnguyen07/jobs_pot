@@ -5,7 +5,7 @@ import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/features/create/presentation/widgets/create_header.dart';
 
 class CreateJobScreen extends ConsumerStatefulWidget {
-  const CreateJobScreen({Key? key}) : super(key: key);
+  const CreateJobScreen({Key? key}) : super(key: null);
 
   @override
   ConsumerState<CreateJobScreen> createState() => _CreateJobScreenState();

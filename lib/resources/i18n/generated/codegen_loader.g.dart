@@ -25,6 +25,7 @@ class CodegenLoader extends AssetLoader{
   "onboardingSubTitle": "Explore all the most exciting job roles based on your interest and study major.",
   "authenticationLoginTitle": "Welcome Back",
   "authenticationSignUpTitle": "Create an Account",
+  "authenticationSignUpWith": "Sign up with",
   "authenticationSignUpError": "This email is already registered. Please use another email.",
   "authenticationSignUpError2": "The password provided is too weak.",
   "authenticationSignUpError3": "Email does not exist!",
@@ -39,6 +40,7 @@ class CodegenLoader extends AssetLoader{
   "authenticationForgotPasswordButtonTitle": "RESET PASSWORD",
   "authenticationButtonBackToLogin": "BACK TO LOGIN",
   "authenticationLoginButtonTitle": "LOGIN",
+  "authenticationSignInWith": "Or",
   "authenticationGoogleButtonTitle": "SIGN IN WITH GOOGLE",
   "authenticationSuggestionsSignUp": "You don't have an account yet?",
   "authenticationSuggestionsLogin": "You are have account?",
@@ -72,7 +74,8 @@ class CodegenLoader extends AssetLoader{
     "zero": "Hello\n{}."
   },
   "homeJoinNowTitle": "Join Now",
-  "homeFinJobTitle": "Find Your Job",
+  "homeFindJobTitle": "Find Your Job",
+  "homeRecentJobList": "Recent Job List",
   "homeRecentFinJobTitle": "Recent Job List",
   "homeRemoteJobTitle": "Remote Job",
   "homeFullTimeTitle": "Full Time",
@@ -101,7 +104,45 @@ class CodegenLoader extends AssetLoader{
   "profilePhoneNumberTitle": "Phone Number",
   "profileLocationTitle": "Location",
   "profileSaveTitle": "Save",
-  "profilePhoneNumberHintText": "Phone Number"
+  "profilePhoneNumberHintText": "Phone Number",
+  "profileEmailNotVerifiedTitle": "Not verified",
+  "profileCardEmailTitle": {
+    "zero": "Email: {}"
+  },
+  "profileCardDateOfBirthTitle": {
+    "zero": "Date of Birth: {}"
+  },
+  "profileCardGenderTitle": {
+    "zero": "Gender: {}"
+  },
+  "profileCardPhoneTitle": {
+    "zero": "Phone: {}"
+  },
+  "profileCardLocationTitle": {
+    "zero": "Location: {}"
+  },
+  "postTitle": "What would you like to add?",
+  "postSubTitle": "Would you like to post your tips and experiences or create a job?",
+  "postButtonTitle": "POST",
+  "postMakeAJob": "MAKE A JOB",
+  "postButtonPost": "Post",
+  "postAddPostTitle": "Add Post",
+  "postPostTitle": "Post title",
+  "postPostTitleHint": "Write the title of your post here",
+  "postDescriptionTitle": "Description",
+  "postDescriptionHint": "What do you want to talk about?",
+  "postAddHashtagTitle": "Add hashtag",
+  "postImagesTitle": "Images",
+  "postImagesCancelButtonTitle": "Cancel",
+  "postImagesDeleteButtonTitle": "Delete",
+  "postAddImageTitle": "Take a new photo or select one from the gallery",
+  "postTakePictureTitle": "Take Picture",
+  "postPickFromGalleryTitle": "Pick from Gallery",
+  "postPostingProcessTitle": "Posting process",
+  "postPostingProcessStep1Title": {
+    "zero": "Step  1 - Upload images {}/{}"
+  },
+  "postPostingProcessStep2Title": "Step 2 - Upload post"
 };
 static const Map<String,dynamic> vi = {
   "changeLanguageTitle": "English",
@@ -114,6 +155,7 @@ static const Map<String,dynamic> vi = {
   "onboardingSubTitle": "Khám phá tất cả các vai trò công việc thú vị nhất dựa trên sở thích và chuyên ngành học của bạn.",
   "authenticationLoginTitle": "Chào mừng trở lại",
   "authenticationSignUpTitle": "Tạo một tài khoản",
+  "authenticationSignUpWith": "Đăng ký với",
   "authenticationSignUpError": "Email này đã được đăng ký. Vui lòng sử dụng email khác.",
   "authenticationSignUpError2": "Mật khẩu được cung cấp quá yếu.",
   "authenticationSignUpError3": "Email không tồn tại!",
@@ -128,6 +170,7 @@ static const Map<String,dynamic> vi = {
   "authenticationForgotPasswordButtonTitle": "Đặt lại mật khẩu",
   "authenticationButtonBackToLogin": "QUAY LẠI ĐĂNG NHẬP",
   "authenticationLoginButtonTitle": "ĐĂNG NHẬP",
+  "authenticationSignInWith": "Hoặc",
   "authenticationGoogleButtonTitle": "ĐĂNG NHẬP VỚI GOOGLE",
   "authenticationSuggestionsSignUp": "Bạn chưa có tài khoản?",
   "authenticationSuggestionsLogin": "Bạn đã có tài khoản?",
@@ -161,7 +204,8 @@ static const Map<String,dynamic> vi = {
     "zero": "Xin chào\n{}."
   },
   "homeJoinNowTitle": "Tham gia ngay",
-  "homeFinJobTitle": "Tìm việc của bạn",
+  "homeFindJobTitle": "Tìm việc của bạn",
+  "homeRecentJobList": "Danh sách công việc gần đây",
   "homeRecentFinJobTitle": "Danh sách công việc gần đây",
   "homeRemoteJobTitle": "Công việc từ xa",
   "homeFullTimeTitle": "Toàn thời gian",
@@ -190,7 +234,45 @@ static const Map<String,dynamic> vi = {
   "profilePhoneNumberTitle": "Số điện thoại",
   "profileLocationTitle": "Địa chỉ",
   "profileSaveTitle": "Lưu",
-  "profilePhoneNumberHintText": "Số điện thoại"
+  "profilePhoneNumberHintText": "Số điện thoại",
+  "profileEmailNotVerifiedTitle": "Chưa xác thực",
+  "profileCardEmailTitle": {
+    "zero": "Email: {}"
+  },
+  "profileCardDateOfBirthTitle": {
+    "zero": "Ngày sinh: {}"
+  },
+  "profileCardGenderTitle": {
+    "zero": "Giới tính: {}"
+  },
+  "profileCardPhoneTitle": {
+    "zero": "Số điện thoại: {}"
+  },
+  "profileCardLocationTitle": {
+    "zero": "Địa chỉ: {}"
+  },
+  "postTitle": "Bạn muốn thêm gì?",
+  "postSubTitle": "Bạn có muốn đăng các mẹo và kinh nghiệm của mình hoặc tạo một công việc không?",
+  "postButtonTitle": "BÀI ĐĂNG",
+  "postMakeAJob": "TẠO MỘT CÔNG VIỆC",
+  "postButtonPost": "Đăng",
+  "postAddPostTitle": "Thêm bài viết",
+  "postPostTitle": "Tiêu đề bài viết",
+  "postPostTitleHint": "Viết tiêu đề bài viết của bạn ở đây",
+  "postDescriptionTitle": "Mô tả",
+  "postDescriptionHint": "Bạn muốn nói về điều gì?",
+  "postAddHashtagTitle": "Thêm hashtag",
+  "postImagesTitle": "Hình ảnh",
+  "postImagesCancelButtonTitle": "Huỷ",
+  "postImagesDeleteButtonTitle": "Xoá",
+  "postAddImageTitle": "Chụp ảnh mới hoặc chọn ảnh từ thư viện",
+  "postTakePictureTitle": "Chụp ảnh",
+  "postPickFromGalleryTitle": "Chọn từ Thư viện",
+  "postPostingProcessTitle": "Quá trình đăng",
+  "postPostingProcessStep1Title": {
+    "zero": "Bước 1 - Tải lên hình ảnh {}/{}"
+  },
+  "postPostingProcessStep2Title": "Bước 2 - Tải lên bài viết"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "vi": vi};
 }

@@ -13,7 +13,7 @@ import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
+  const LoginForm({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _LoginFormState();

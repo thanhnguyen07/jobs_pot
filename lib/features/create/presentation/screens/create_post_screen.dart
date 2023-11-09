@@ -258,7 +258,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
       children: [
         AvatarImage(
           size: 60,
-          avatarLink: userData?.avatarLink,
+          avatarLink: userData?.photoUrl,
         ),
         Container(
           margin: const EdgeInsets.only(left: 10),

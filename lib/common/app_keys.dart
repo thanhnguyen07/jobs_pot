@@ -22,4 +22,7 @@ class FirebaseKeys {
   static const String googleType = "google";
   static const String pathFolderAvatarImage = "avatar_images";
   static const String pathFolderPostImage = "post_images";
+  static const String accountExistsWithDifferentCredential =
+      "account-exists-with-different-credential";
+  static const String providerAlreadyLinked = "provider-already-linked";
 }

@@ -13,7 +13,7 @@ import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class DateOfBirthBox extends ConsumerStatefulWidget {
-  const DateOfBirthBox({Key? key}) : super(key: key);
+  const DateOfBirthBox({Key? key}) : super(key: null);
 
   @override
   ConsumerState<DateOfBirthBox> createState() => _DateOfBirthBoxState();

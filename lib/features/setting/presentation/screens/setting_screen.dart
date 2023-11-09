@@ -14,7 +14,7 @@ import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class SettingScreen extends ConsumerStatefulWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+  const SettingScreen({Key? key}) : super(key: null);
 
   static const String path = '/SettingScreen';
 

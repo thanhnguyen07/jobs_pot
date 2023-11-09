@@ -13,7 +13,6 @@ class UploadImageToFirebaseControllef extends StateNotifier<List<String>?> {
   Future<void> uploadImages(List<XFile> imagesData) async {
     state = [];
     for (var imageFile in imagesData) {
-      print("File name ${imageFile.name}");
       final String? imageLink = await uploadImageToFirebase(imageFile);
       if (imageLink != null) {
         if (state!.isNotEmpty) {
@@ -35,8 +34,6 @@ class UploadImageToFirebaseControllef extends StateNotifier<List<String>?> {
     try {
       String storagePath =
           "${FirebaseKeys.pathFolderPostImage}/${userData?.uid}/${imageFile.name}";
-
-      print("File path $storagePath");
 
       Reference refStorage = FirebaseStorage.instance.ref().child(storagePath);
 

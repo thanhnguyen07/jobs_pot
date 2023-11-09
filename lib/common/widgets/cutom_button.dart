@@ -7,7 +7,7 @@ class CustomButton extends StatefulWidget {
     required this.backgroundColor,
     required this.onPressed,
     this.icon,
-  }) : super(key: key);
+  }) : super(key: null);
 
   final Text title;
   final Color backgroundColor;

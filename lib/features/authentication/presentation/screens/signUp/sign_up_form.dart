@@ -14,7 +14,7 @@ import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class SignUpForm extends ConsumerStatefulWidget {
-  const SignUpForm({Key? key}) : super(key: key);
+  const SignUpForm({Key? key}) : super(key: null);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SignUpFormState();
@@ -32,8 +32,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   void initState() {
     super.initState();
 
-    _signUpForm =
-        ref.read(signUpWithEmailControllerProvider.notifier).getSignUpForm();
+    _signUpForm = ref.read(signUpWithEmailProvider.notifier).getSignUpForm();
 
     _signUpForm.reset();
 
@@ -64,9 +63,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               style: AppTextStyle.whiteBoldS14,
             ),
             onLogin: () {
-              ref
-                  .read(signUpWithEmailControllerProvider.notifier)
-                  .onSignUp(context);
+              ref.read(signUpWithEmailProvider.notifier).onSignUp(context);
             },
           ),
         ],

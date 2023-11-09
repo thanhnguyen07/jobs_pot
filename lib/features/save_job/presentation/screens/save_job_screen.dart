@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
 class SaveJobScreen extends ConsumerStatefulWidget {
-  const SaveJobScreen({Key? key}) : super(key: key);
+  const SaveJobScreen({Key? key}) : super(key: null);
 
   static const String path = 'SaveJobScreen';
 

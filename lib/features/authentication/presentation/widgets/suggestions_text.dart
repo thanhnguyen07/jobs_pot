@@ -9,7 +9,7 @@ class SuggestionsText extends StatelessWidget {
     required this.textAction,
     required this.action,
     this.textTime,
-  }) : super(key: key);
+  }) : super(key: null);
 
   final String textSuggestions;
   final String textAction;

@@ -6,13 +6,15 @@ part of 'job_summary_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_JobSummaryEntity _$$_JobSummaryEntityFromJson(Map<String, dynamic> json) =>
-    _$_JobSummaryEntity(
+_$JobSummaryEntityImpl _$$JobSummaryEntityImplFromJson(
+        Map<String, dynamic> json) =>
+    _$JobSummaryEntityImpl(
       title: json['title'] as String,
       count: json['count'] as int,
     );
 
-Map<String, dynamic> _$$_JobSummaryEntityToJson(_$_JobSummaryEntity instance) =>
+Map<String, dynamic> _$$JobSummaryEntityImplToJson(
+        _$JobSummaryEntityImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
       'count': instance.count,

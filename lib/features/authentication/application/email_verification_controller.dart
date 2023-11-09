@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
-import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 
 class EmailVerificationController extends StateNotifier<int> {
@@ -104,18 +102,17 @@ class EmailVerificationController extends StateNotifier<int> {
 
     ref.read(systemControllerProvider.notifier).showLoading();
 
-    final fullName =
-        ref.read(signUpWithEmailControllerProvider.notifier).getInputName();
+    // final fullName = ref.read(signUpWithEmailProvider.notifier).getInputName();
 
-    final resCreateUserOnServer =
-        await ref.read(authRepositoryProvider).signUpWithEmail(fullName);
+    // final resCreateUserOnServer =
+    //     await ref.read(authRepositoryProvider).signUpWithEmail(fullName);
 
-    resCreateUserOnServer.fold((l) {}, (r) {
-      ref.read(authControllerProvider.notifier).setDataUser(r.results);
+    // resCreateUserOnServer.fold((l) {}, (r) {
+    //   ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-      context.router.replaceAll([const HomeStackRoute()]);
-    });
-    ref.read(systemControllerProvider.notifier).hideLoading();
+    //   context.router.replaceAll([const HomeStackRoute()]);
+    // });
+    // ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
   void _countDownResend() {

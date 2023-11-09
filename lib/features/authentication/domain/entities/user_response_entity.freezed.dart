@@ -21,6 +21,9 @@ UserResponseEntity _$UserResponseEntityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserResponseEntity {
   UserEntity get results => throw _privateConstructorUsedError;
+  String get token => throw _privateConstructorUsedError;
+  @JsonKey(name: "refresh_token")
+  String get refreshToken => throw _privateConstructorUsedError;
   String get msg => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +38,11 @@ abstract class $UserResponseEntityCopyWith<$Res> {
           UserResponseEntity value, $Res Function(UserResponseEntity) then) =
       _$UserResponseEntityCopyWithImpl<$Res, UserResponseEntity>;
   @useResult
-  $Res call({UserEntity results, String msg});
+  $Res call(
+      {UserEntity results,
+      String token,
+      @JsonKey(name: "refresh_token") String refreshToken,
+      String msg});
 
   $UserEntityCopyWith<$Res> get results;
 }
@@ -54,6 +61,8 @@ class _$UserResponseEntityCopyWithImpl<$Res, $Val extends UserResponseEntity>
   @override
   $Res call({
     Object? results = null,
+    Object? token = null,
+    Object? refreshToken = null,
     Object? msg = null,
   }) {
     return _then(_value.copyWith(
@@ -61,6 +70,14 @@ class _$UserResponseEntityCopyWithImpl<$Res, $Val extends UserResponseEntity>
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as UserEntity,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      refreshToken: null == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String,
       msg: null == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -78,38 +95,52 @@ class _$UserResponseEntityCopyWithImpl<$Res, $Val extends UserResponseEntity>
 }
 
 /// @nodoc
-abstract class _$$_UserResponseEntityCopyWith<$Res>
+abstract class _$$UserResponseEntityImplCopyWith<$Res>
     implements $UserResponseEntityCopyWith<$Res> {
-  factory _$$_UserResponseEntityCopyWith(_$_UserResponseEntity value,
-          $Res Function(_$_UserResponseEntity) then) =
-      __$$_UserResponseEntityCopyWithImpl<$Res>;
+  factory _$$UserResponseEntityImplCopyWith(_$UserResponseEntityImpl value,
+          $Res Function(_$UserResponseEntityImpl) then) =
+      __$$UserResponseEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserEntity results, String msg});
+  $Res call(
+      {UserEntity results,
+      String token,
+      @JsonKey(name: "refresh_token") String refreshToken,
+      String msg});
 
   @override
   $UserEntityCopyWith<$Res> get results;
 }
 
 /// @nodoc
-class __$$_UserResponseEntityCopyWithImpl<$Res>
-    extends _$UserResponseEntityCopyWithImpl<$Res, _$_UserResponseEntity>
-    implements _$$_UserResponseEntityCopyWith<$Res> {
-  __$$_UserResponseEntityCopyWithImpl(
-      _$_UserResponseEntity _value, $Res Function(_$_UserResponseEntity) _then)
+class __$$UserResponseEntityImplCopyWithImpl<$Res>
+    extends _$UserResponseEntityCopyWithImpl<$Res, _$UserResponseEntityImpl>
+    implements _$$UserResponseEntityImplCopyWith<$Res> {
+  __$$UserResponseEntityImplCopyWithImpl(_$UserResponseEntityImpl _value,
+      $Res Function(_$UserResponseEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? results = null,
+    Object? token = null,
+    Object? refreshToken = null,
     Object? msg = null,
   }) {
-    return _then(_$_UserResponseEntity(
+    return _then(_$UserResponseEntityImpl(
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as UserEntity,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      refreshToken: null == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String,
       msg: null == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -120,45 +151,58 @@ class __$$_UserResponseEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserResponseEntity implements _UserResponseEntity {
-  const _$_UserResponseEntity({required this.results, required this.msg});
+class _$UserResponseEntityImpl implements _UserResponseEntity {
+  const _$UserResponseEntityImpl(
+      {required this.results,
+      required this.token,
+      @JsonKey(name: "refresh_token") required this.refreshToken,
+      required this.msg});
 
-  factory _$_UserResponseEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_UserResponseEntityFromJson(json);
+  factory _$UserResponseEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserResponseEntityImplFromJson(json);
 
   @override
   final UserEntity results;
+  @override
+  final String token;
+  @override
+  @JsonKey(name: "refresh_token")
+  final String refreshToken;
   @override
   final String msg;
 
   @override
   String toString() {
-    return 'UserResponseEntity(results: $results, msg: $msg)';
+    return 'UserResponseEntity(results: $results, token: $token, refreshToken: $refreshToken, msg: $msg)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserResponseEntity &&
+            other is _$UserResponseEntityImpl &&
             (identical(other.results, results) || other.results == results) &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.refreshToken, refreshToken) ||
+                other.refreshToken == refreshToken) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, results, msg);
+  int get hashCode =>
+      Object.hash(runtimeType, results, token, refreshToken, msg);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserResponseEntityCopyWith<_$_UserResponseEntity> get copyWith =>
-      __$$_UserResponseEntityCopyWithImpl<_$_UserResponseEntity>(
+  _$$UserResponseEntityImplCopyWith<_$UserResponseEntityImpl> get copyWith =>
+      __$$UserResponseEntityImplCopyWithImpl<_$UserResponseEntityImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserResponseEntityToJson(
+    return _$$UserResponseEntityImplToJson(
       this,
     );
   }
@@ -167,17 +211,24 @@ class _$_UserResponseEntity implements _UserResponseEntity {
 abstract class _UserResponseEntity implements UserResponseEntity {
   const factory _UserResponseEntity(
       {required final UserEntity results,
-      required final String msg}) = _$_UserResponseEntity;
+      required final String token,
+      @JsonKey(name: "refresh_token") required final String refreshToken,
+      required final String msg}) = _$UserResponseEntityImpl;
 
   factory _UserResponseEntity.fromJson(Map<String, dynamic> json) =
-      _$_UserResponseEntity.fromJson;
+      _$UserResponseEntityImpl.fromJson;
 
   @override
   UserEntity get results;
   @override
+  String get token;
+  @override
+  @JsonKey(name: "refresh_token")
+  String get refreshToken;
+  @override
   String get msg;
   @override
   @JsonKey(ignore: true)
-  _$$_UserResponseEntityCopyWith<_$_UserResponseEntity> get copyWith =>
+  _$$UserResponseEntityImplCopyWith<_$UserResponseEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

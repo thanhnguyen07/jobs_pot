@@ -19,6 +19,11 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
+  Future saveBothToken(String token, String refreshToken) {
+    return LocalStorageHelper.saveBothToken(token, refreshToken);
+  }
+
+  @override
   Future saveOnboadingStatus() {
     return LocalStorageHelper.saveOnboadingStatus();
   }
@@ -60,10 +65,11 @@ class AuthRepository implements AuthRepositoryInterface {
 
   @override
   Future<Either<Failure, UserResponseEntity>> signUpWithEmail(
-      String fullName) async {
+      String fullName, String tokenFirebase) async {
     try {
       final Map<String, String> body = {
-        "fullName": fullName,
+        "user_name": fullName,
+        "token_firebase": tokenFirebase,
       };
 
       final signUpRes = await _apiClient.signUpWithEmail(body);
@@ -86,9 +92,13 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, UserResponseEntity>> signInWithGoogle() async {
+  Future<Either<Failure, UserResponseEntity>> signInWithFirebase(
+      String tokenFirebase) async {
     try {
-      final signInWithGoogleRes = await _apiClient.signInWithGoogle();
+      final Map<String, dynamic> body = {
+        "token_firebase": tokenFirebase,
+      };
+      final signInWithGoogleRes = await _apiClient.signInWithFirebase(body);
 
       return right(UserResponseEntity.fromJson(signInWithGoogleRes));
     } catch (error) {

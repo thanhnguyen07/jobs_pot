@@ -68,22 +68,22 @@ class _$JobSummaryEntityCopyWithImpl<$Res, $Val extends JobSummaryEntity>
 }
 
 /// @nodoc
-abstract class _$$_JobSummaryEntityCopyWith<$Res>
+abstract class _$$JobSummaryEntityImplCopyWith<$Res>
     implements $JobSummaryEntityCopyWith<$Res> {
-  factory _$$_JobSummaryEntityCopyWith(
-          _$_JobSummaryEntity value, $Res Function(_$_JobSummaryEntity) then) =
-      __$$_JobSummaryEntityCopyWithImpl<$Res>;
+  factory _$$JobSummaryEntityImplCopyWith(_$JobSummaryEntityImpl value,
+          $Res Function(_$JobSummaryEntityImpl) then) =
+      __$$JobSummaryEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String title, int count});
 }
 
 /// @nodoc
-class __$$_JobSummaryEntityCopyWithImpl<$Res>
-    extends _$JobSummaryEntityCopyWithImpl<$Res, _$_JobSummaryEntity>
-    implements _$$_JobSummaryEntityCopyWith<$Res> {
-  __$$_JobSummaryEntityCopyWithImpl(
-      _$_JobSummaryEntity _value, $Res Function(_$_JobSummaryEntity) _then)
+class __$$JobSummaryEntityImplCopyWithImpl<$Res>
+    extends _$JobSummaryEntityCopyWithImpl<$Res, _$JobSummaryEntityImpl>
+    implements _$$JobSummaryEntityImplCopyWith<$Res> {
+  __$$JobSummaryEntityImplCopyWithImpl(_$JobSummaryEntityImpl _value,
+      $Res Function(_$JobSummaryEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_JobSummaryEntityCopyWithImpl<$Res>
     Object? title = null,
     Object? count = null,
   }) {
-    return _then(_$_JobSummaryEntity(
+    return _then(_$JobSummaryEntityImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,11 @@ class __$$_JobSummaryEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_JobSummaryEntity implements _JobSummaryEntity {
-  const _$_JobSummaryEntity({required this.title, required this.count});
+class _$JobSummaryEntityImpl implements _JobSummaryEntity {
+  const _$JobSummaryEntityImpl({required this.title, required this.count});
 
-  factory _$_JobSummaryEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_JobSummaryEntityFromJson(json);
+  factory _$JobSummaryEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobSummaryEntityImplFromJson(json);
 
   @override
   final String title;
@@ -127,7 +127,7 @@ class _$_JobSummaryEntity implements _JobSummaryEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_JobSummaryEntity &&
+            other is _$JobSummaryEntityImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.count, count) || other.count == count));
   }
@@ -139,12 +139,13 @@ class _$_JobSummaryEntity implements _JobSummaryEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_JobSummaryEntityCopyWith<_$_JobSummaryEntity> get copyWith =>
-      __$$_JobSummaryEntityCopyWithImpl<_$_JobSummaryEntity>(this, _$identity);
+  _$$JobSummaryEntityImplCopyWith<_$JobSummaryEntityImpl> get copyWith =>
+      __$$JobSummaryEntityImplCopyWithImpl<_$JobSummaryEntityImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_JobSummaryEntityToJson(
+    return _$$JobSummaryEntityImplToJson(
       this,
     );
   }
@@ -153,10 +154,10 @@ class _$_JobSummaryEntity implements _JobSummaryEntity {
 abstract class _JobSummaryEntity implements JobSummaryEntity {
   const factory _JobSummaryEntity(
       {required final String title,
-      required final int count}) = _$_JobSummaryEntity;
+      required final int count}) = _$JobSummaryEntityImpl;
 
   factory _JobSummaryEntity.fromJson(Map<String, dynamic> json) =
-      _$_JobSummaryEntity.fromJson;
+      _$JobSummaryEntityImpl.fromJson;
 
   @override
   String get title;
@@ -164,6 +165,6 @@ abstract class _JobSummaryEntity implements JobSummaryEntity {
   int get count;
   @override
   @JsonKey(ignore: true)
-  _$$_JobSummaryEntityCopyWith<_$_JobSummaryEntity> get copyWith =>
+  _$$JobSummaryEntityImplCopyWith<_$JobSummaryEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

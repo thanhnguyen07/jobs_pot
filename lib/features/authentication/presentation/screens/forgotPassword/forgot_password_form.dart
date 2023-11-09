@@ -11,7 +11,7 @@ import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ForgotPasswordForm extends ConsumerStatefulWidget {
-  const ForgotPasswordForm({Key? key}) : super(key: key);
+  const ForgotPasswordForm({Key? key}) : super(key: null);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>

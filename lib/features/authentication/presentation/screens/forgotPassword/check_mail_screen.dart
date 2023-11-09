@@ -16,7 +16,7 @@ import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class CheckMailScreen extends ConsumerStatefulWidget {
-  const CheckMailScreen({Key? key}) : super(key: key);
+  const CheckMailScreen({Key? key}) : super(key: null);
 
   static const String path = '/CheckMailScreen';
 

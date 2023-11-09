@@ -105,11 +105,11 @@ class _$JobsSummaryEntityCopyWithImpl<$Res, $Val extends JobsSummaryEntity>
 }
 
 /// @nodoc
-abstract class _$$_JobsSummaryEntityCopyWith<$Res>
+abstract class _$$JobsSummaryEntityImplCopyWith<$Res>
     implements $JobsSummaryEntityCopyWith<$Res> {
-  factory _$$_JobsSummaryEntityCopyWith(_$_JobsSummaryEntity value,
-          $Res Function(_$_JobsSummaryEntity) then) =
-      __$$_JobsSummaryEntityCopyWithImpl<$Res>;
+  factory _$$JobsSummaryEntityImplCopyWith(_$JobsSummaryEntityImpl value,
+          $Res Function(_$JobsSummaryEntityImpl) then) =
+      __$$JobsSummaryEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -126,11 +126,11 @@ abstract class _$$_JobsSummaryEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_JobsSummaryEntityCopyWithImpl<$Res>
-    extends _$JobsSummaryEntityCopyWithImpl<$Res, _$_JobsSummaryEntity>
-    implements _$$_JobsSummaryEntityCopyWith<$Res> {
-  __$$_JobsSummaryEntityCopyWithImpl(
-      _$_JobsSummaryEntity _value, $Res Function(_$_JobsSummaryEntity) _then)
+class __$$JobsSummaryEntityImplCopyWithImpl<$Res>
+    extends _$JobsSummaryEntityCopyWithImpl<$Res, _$JobsSummaryEntityImpl>
+    implements _$$JobsSummaryEntityImplCopyWith<$Res> {
+  __$$JobsSummaryEntityImplCopyWithImpl(_$JobsSummaryEntityImpl _value,
+      $Res Function(_$JobsSummaryEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -140,7 +140,7 @@ class __$$_JobsSummaryEntityCopyWithImpl<$Res>
     Object? partTime = null,
     Object? remoteJob = null,
   }) {
-    return _then(_$_JobsSummaryEntity(
+    return _then(_$JobsSummaryEntityImpl(
       fullTime: null == fullTime
           ? _value.fullTime
           : fullTime // ignore: cast_nullable_to_non_nullable
@@ -159,14 +159,14 @@ class __$$_JobsSummaryEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_JobsSummaryEntity implements _JobsSummaryEntity {
-  const _$_JobsSummaryEntity(
+class _$JobsSummaryEntityImpl implements _JobsSummaryEntity {
+  const _$JobsSummaryEntityImpl(
       {required this.fullTime,
       required this.partTime,
       required this.remoteJob});
 
-  factory _$_JobsSummaryEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_JobsSummaryEntityFromJson(json);
+  factory _$JobsSummaryEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobsSummaryEntityImplFromJson(json);
 
   @override
   final JobSummaryEntity fullTime;
@@ -184,7 +184,7 @@ class _$_JobsSummaryEntity implements _JobsSummaryEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_JobsSummaryEntity &&
+            other is _$JobsSummaryEntityImpl &&
             (identical(other.fullTime, fullTime) ||
                 other.fullTime == fullTime) &&
             (identical(other.partTime, partTime) ||
@@ -200,13 +200,13 @@ class _$_JobsSummaryEntity implements _JobsSummaryEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_JobsSummaryEntityCopyWith<_$_JobsSummaryEntity> get copyWith =>
-      __$$_JobsSummaryEntityCopyWithImpl<_$_JobsSummaryEntity>(
+  _$$JobsSummaryEntityImplCopyWith<_$JobsSummaryEntityImpl> get copyWith =>
+      __$$JobsSummaryEntityImplCopyWithImpl<_$JobsSummaryEntityImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_JobsSummaryEntityToJson(
+    return _$$JobsSummaryEntityImplToJson(
       this,
     );
   }
@@ -216,10 +216,10 @@ abstract class _JobsSummaryEntity implements JobsSummaryEntity {
   const factory _JobsSummaryEntity(
       {required final JobSummaryEntity fullTime,
       required final JobSummaryEntity partTime,
-      required final JobSummaryEntity remoteJob}) = _$_JobsSummaryEntity;
+      required final JobSummaryEntity remoteJob}) = _$JobsSummaryEntityImpl;
 
   factory _JobsSummaryEntity.fromJson(Map<String, dynamic> json) =
-      _$_JobsSummaryEntity.fromJson;
+      _$JobsSummaryEntityImpl.fromJson;
 
   @override
   JobSummaryEntity get fullTime;
@@ -229,6 +229,6 @@ abstract class _JobsSummaryEntity implements JobsSummaryEntity {
   JobSummaryEntity get remoteJob;
   @override
   @JsonKey(ignore: true)
-  _$$_JobsSummaryEntityCopyWith<_$_JobsSummaryEntity> get copyWith =>
+  _$$JobsSummaryEntityImplCopyWith<_$JobsSummaryEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

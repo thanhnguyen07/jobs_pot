@@ -4,6 +4,7 @@ import 'package:jobs_pot/features/authentication/application/auth_controller.dar
 import 'package:jobs_pot/features/authentication/application/email_verification_controller.dart';
 import 'package:jobs_pot/features/authentication/application/forgot_password_controller.dart';
 import 'package:jobs_pot/features/authentication/application/login_with_email_controller.dart';
+import 'package:jobs_pot/features/authentication/application/login_with_facebook.dart';
 import 'package:jobs_pot/features/authentication/application/login_with_google_controller.dart';
 import 'package:jobs_pot/features/authentication/application/onboarding_controller.dart';
 import 'package:jobs_pot/features/authentication/application/remember_logIn_controller.dart';
@@ -41,10 +42,14 @@ final loginWithGoogleControllerProvider =
     StateNotifierProvider<LoginWithGoogleController, dynamic>(
   (ref) => LoginWithGoogleController(ref),
 );
+final loginWithFacebookControllerProvider =
+    StateNotifierProvider<LoginWithFacebookController, dynamic>(
+  (ref) => LoginWithFacebookController(ref),
+);
 
-final signUpWithEmailControllerProvider =
-    StateNotifierProvider<SignUpWithEmailController, dynamic>(
-  (ref) => SignUpWithEmailController(ref),
+final signUpWithEmailProvider =
+    StateNotifierProvider<SignWithEmailController, dynamic>(
+  (ref) => SignWithEmailController(ref),
 );
 
 final emailVerificationControllerProvider =

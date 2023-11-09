@@ -12,7 +12,7 @@ import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class OnboardingScreen extends ConsumerStatefulWidget {
-  const OnboardingScreen({Key? key}) : super(key: key);
+  const OnboardingScreen({Key? key}) : super(key: null);
 
   static const String path = "/OnboardingScreen";
 
@@ -21,7 +21,6 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

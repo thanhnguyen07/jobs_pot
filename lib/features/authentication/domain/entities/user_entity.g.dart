@@ -6,36 +6,36 @@ part of 'user_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserEntity _$$_UserEntityFromJson(Map<String, dynamic> json) =>
-    _$_UserEntity(
-      id: json['id'] as String,
-      userName: json['userName'] as String,
+_$UserEntityImpl _$$UserEntityImplFromJson(Map<String, dynamic> json) =>
+    _$UserEntityImpl(
+      userName: json['user_name'] as String,
       email: json['email'] as String,
-      type: json['type'] as String,
       uid: json['uid'] as String,
-      isVerifiedEmail: json['isVerifiedEmail'] as bool,
-      isVerifiedFacebook: json['isVerifiedFacebook'] as bool,
-      isVerifiedGoogle: json['isVerifiedGoogle'] as bool,
-      avatarLink: json['avatarLink'] as String?,
-      location: json['location'] as String?,
-      dateOfBirth: json['dateOfBirth'] as String?,
+      emailVerified: json['email_verified'] as bool,
+      providerData: (json['provider_data'] as List<dynamic>)
+          .map((e) => ProviderInfoEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      fcmToken: json['fcm_token'] as String?,
+      photoUrl: json['photo_url'] as String?,
+      dateOfBirth: json['date_of_birth'] as String?,
       gender: json['gender'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
+      phoneNumber: json['phone_number'] as String?,
+      location: json['location'] as String?,
+      id: json['_id'] as String?,
     );
 
-Map<String, dynamic> _$$_UserEntityToJson(_$_UserEntity instance) =>
+Map<String, dynamic> _$$UserEntityImplToJson(_$UserEntityImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'userName': instance.userName,
+      'user_name': instance.userName,
       'email': instance.email,
-      'type': instance.type,
       'uid': instance.uid,
-      'isVerifiedEmail': instance.isVerifiedEmail,
-      'isVerifiedFacebook': instance.isVerifiedFacebook,
-      'isVerifiedGoogle': instance.isVerifiedGoogle,
-      'avatarLink': instance.avatarLink,
-      'location': instance.location,
-      'dateOfBirth': instance.dateOfBirth,
+      'email_verified': instance.emailVerified,
+      'provider_data': instance.providerData,
+      'fcm_token': instance.fcmToken,
+      'photo_url': instance.photoUrl,
+      'date_of_birth': instance.dateOfBirth,
       'gender': instance.gender,
-      'phoneNumber': instance.phoneNumber,
+      'phone_number': instance.phoneNumber,
+      'location': instance.location,
+      '_id': instance.id,
     };

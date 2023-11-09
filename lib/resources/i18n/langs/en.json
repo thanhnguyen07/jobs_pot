@@ -7,6 +7,7 @@
   "onboardingTitle2": "Dream Job",
   "onboardingTitle3": "Here!",
   "onboardingSubTitle": "Explore all the most exciting job roles based on your interest and study major.",
+  "authenticationComingSoon": "Coming soon!",
   "authenticationLoginTitle": "Welcome Back",
   "authenticationSignUpTitle": "Create an Account",
   "authenticationSignUpWith": "Sign up with",
@@ -24,7 +25,7 @@
   "authenticationForgotPasswordButtonTitle": "RESET PASSWORD",
   "authenticationButtonBackToLogin": "BACK TO LOGIN",
   "authenticationLoginButtonTitle": "LOGIN",
-  "authenticationSignInWith": "LOGIN",
+  "authenticationSignInWith": "Or",
   "authenticationGoogleButtonTitle": "SIGN IN WITH GOOGLE",
   "authenticationSuggestionsSignUp": "You don't have an account yet?",
   "authenticationSuggestionsLogin": "You are have account?",
@@ -120,9 +121,9 @@
   "postAddImageTitle": "Take a new photo or select one from the gallery",
   "postTakePictureTitle": "Take Picture",
   "postPickFromGalleryTitle": "Pick from Gallery",
-  "postPostingProcessTitle":"Posting process",
-  "postPostingProcessStep1Title":{
-    "zero":"Step  1 - Upload images {}/{}"
+  "postPostingProcessTitle": "Posting process",
+  "postPostingProcessStep1Title": {
+    "zero": "Step  1 - Upload images {}/{}"
   },
-  "postPostingProcessStep2Title":"Step 2 - Upload post"
+  "postPostingProcessStep2Title": "Step 2 - Upload post"
 }

@@ -80,12 +80,12 @@ class _$JobsSummaryResponseEntityCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_JobsSummaryResponseEntityCopyWith<$Res>
+abstract class _$$JobsSummaryResponseEntityImplCopyWith<$Res>
     implements $JobsSummaryResponseEntityCopyWith<$Res> {
-  factory _$$_JobsSummaryResponseEntityCopyWith(
-          _$_JobsSummaryResponseEntity value,
-          $Res Function(_$_JobsSummaryResponseEntity) then) =
-      __$$_JobsSummaryResponseEntityCopyWithImpl<$Res>;
+  factory _$$JobsSummaryResponseEntityImplCopyWith(
+          _$JobsSummaryResponseEntityImpl value,
+          $Res Function(_$JobsSummaryResponseEntityImpl) then) =
+      __$$JobsSummaryResponseEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({JobsSummaryEntity results, String msg});
@@ -95,13 +95,13 @@ abstract class _$$_JobsSummaryResponseEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_JobsSummaryResponseEntityCopyWithImpl<$Res>
+class __$$JobsSummaryResponseEntityImplCopyWithImpl<$Res>
     extends _$JobsSummaryResponseEntityCopyWithImpl<$Res,
-        _$_JobsSummaryResponseEntity>
-    implements _$$_JobsSummaryResponseEntityCopyWith<$Res> {
-  __$$_JobsSummaryResponseEntityCopyWithImpl(
-      _$_JobsSummaryResponseEntity _value,
-      $Res Function(_$_JobsSummaryResponseEntity) _then)
+        _$JobsSummaryResponseEntityImpl>
+    implements _$$JobsSummaryResponseEntityImplCopyWith<$Res> {
+  __$$JobsSummaryResponseEntityImplCopyWithImpl(
+      _$JobsSummaryResponseEntityImpl _value,
+      $Res Function(_$JobsSummaryResponseEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +110,7 @@ class __$$_JobsSummaryResponseEntityCopyWithImpl<$Res>
     Object? results = null,
     Object? msg = null,
   }) {
-    return _then(_$_JobsSummaryResponseEntity(
+    return _then(_$JobsSummaryResponseEntityImpl(
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
@@ -125,12 +125,12 @@ class __$$_JobsSummaryResponseEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_JobsSummaryResponseEntity implements _JobsSummaryResponseEntity {
-  const _$_JobsSummaryResponseEntity(
+class _$JobsSummaryResponseEntityImpl implements _JobsSummaryResponseEntity {
+  const _$JobsSummaryResponseEntityImpl(
       {required this.results, required this.msg});
 
-  factory _$_JobsSummaryResponseEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_JobsSummaryResponseEntityFromJson(json);
+  factory _$JobsSummaryResponseEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobsSummaryResponseEntityImplFromJson(json);
 
   @override
   final JobsSummaryEntity results;
@@ -146,7 +146,7 @@ class _$_JobsSummaryResponseEntity implements _JobsSummaryResponseEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_JobsSummaryResponseEntity &&
+            other is _$JobsSummaryResponseEntityImpl &&
             (identical(other.results, results) || other.results == results) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
@@ -158,13 +158,13 @@ class _$_JobsSummaryResponseEntity implements _JobsSummaryResponseEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_JobsSummaryResponseEntityCopyWith<_$_JobsSummaryResponseEntity>
-      get copyWith => __$$_JobsSummaryResponseEntityCopyWithImpl<
-          _$_JobsSummaryResponseEntity>(this, _$identity);
+  _$$JobsSummaryResponseEntityImplCopyWith<_$JobsSummaryResponseEntityImpl>
+      get copyWith => __$$JobsSummaryResponseEntityImplCopyWithImpl<
+          _$JobsSummaryResponseEntityImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_JobsSummaryResponseEntityToJson(
+    return _$$JobsSummaryResponseEntityImplToJson(
       this,
     );
   }
@@ -173,10 +173,10 @@ class _$_JobsSummaryResponseEntity implements _JobsSummaryResponseEntity {
 abstract class _JobsSummaryResponseEntity implements JobsSummaryResponseEntity {
   const factory _JobsSummaryResponseEntity(
       {required final JobsSummaryEntity results,
-      required final String msg}) = _$_JobsSummaryResponseEntity;
+      required final String msg}) = _$JobsSummaryResponseEntityImpl;
 
   factory _JobsSummaryResponseEntity.fromJson(Map<String, dynamic> json) =
-      _$_JobsSummaryResponseEntity.fromJson;
+      _$JobsSummaryResponseEntityImpl.fromJson;
 
   @override
   JobsSummaryEntity get results;
@@ -184,6 +184,6 @@ abstract class _JobsSummaryResponseEntity implements JobsSummaryResponseEntity {
   String get msg;
   @override
   @JsonKey(ignore: true)
-  _$$_JobsSummaryResponseEntityCopyWith<_$_JobsSummaryResponseEntity>
+  _$$JobsSummaryResponseEntityImplCopyWith<_$JobsSummaryResponseEntityImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

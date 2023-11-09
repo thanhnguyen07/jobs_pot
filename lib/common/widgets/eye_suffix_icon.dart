@@ -7,7 +7,7 @@ class EyeSuffixIcon extends StatelessWidget {
     Key? key,
     required this.showPassword,
     required this.setShowPassword,
-  }) : super(key: key);
+  }) : super(key: null);
 
   final bool showPassword;
   final void Function() setShowPassword;

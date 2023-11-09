@@ -20,19 +20,27 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserEntity {
-  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "user_name")
   String get userName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
-  bool get isVerifiedEmail => throw _privateConstructorUsedError;
-  bool get isVerifiedFacebook => throw _privateConstructorUsedError;
-  bool get isVerifiedGoogle => throw _privateConstructorUsedError;
-  String? get avatarLink => throw _privateConstructorUsedError;
-  String? get location => throw _privateConstructorUsedError;
+  @JsonKey(name: "email_verified")
+  bool get emailVerified => throw _privateConstructorUsedError;
+  @JsonKey(name: "provider_data")
+  List<ProviderInfoEntity> get providerData =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: "fcm_token")
+  String? get fcmToken => throw _privateConstructorUsedError;
+  @JsonKey(name: "photo_url")
+  String? get photoUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: "date_of_birth")
   String? get dateOfBirth => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
+  @JsonKey(name: "phone_number")
   String? get phoneNumber => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  @JsonKey(name: "_id")
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,19 +55,18 @@ abstract class $UserEntityCopyWith<$Res> {
       _$UserEntityCopyWithImpl<$Res, UserEntity>;
   @useResult
   $Res call(
-      {String id,
-      String userName,
+      {@JsonKey(name: "user_name") String userName,
       String email,
-      String type,
       String uid,
-      bool isVerifiedEmail,
-      bool isVerifiedFacebook,
-      bool isVerifiedGoogle,
-      String? avatarLink,
-      String? location,
-      String? dateOfBirth,
+      @JsonKey(name: "email_verified") bool emailVerified,
+      @JsonKey(name: "provider_data") List<ProviderInfoEntity> providerData,
+      @JsonKey(name: "fcm_token") String? fcmToken,
+      @JsonKey(name: "photo_url") String? photoUrl,
+      @JsonKey(name: "date_of_birth") String? dateOfBirth,
       String? gender,
-      String? phoneNumber});
+      @JsonKey(name: "phone_number") String? phoneNumber,
+      String? location,
+      @JsonKey(name: "_id") String? id});
 }
 
 /// @nodoc
@@ -75,25 +82,20 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? userName = null,
     Object? email = null,
-    Object? type = null,
     Object? uid = null,
-    Object? isVerifiedEmail = null,
-    Object? isVerifiedFacebook = null,
-    Object? isVerifiedGoogle = null,
-    Object? avatarLink = freezed,
-    Object? location = freezed,
+    Object? emailVerified = null,
+    Object? providerData = null,
+    Object? fcmToken = freezed,
+    Object? photoUrl = freezed,
     Object? dateOfBirth = freezed,
     Object? gender = freezed,
     Object? phoneNumber = freezed,
+    Object? location = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -102,33 +104,25 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      isVerifiedEmail: null == isVerifiedEmail
-          ? _value.isVerifiedEmail
-          : isVerifiedEmail // ignore: cast_nullable_to_non_nullable
+      emailVerified: null == emailVerified
+          ? _value.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
               as bool,
-      isVerifiedFacebook: null == isVerifiedFacebook
-          ? _value.isVerifiedFacebook
-          : isVerifiedFacebook // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isVerifiedGoogle: null == isVerifiedGoogle
-          ? _value.isVerifiedGoogle
-          : isVerifiedGoogle // ignore: cast_nullable_to_non_nullable
-              as bool,
-      avatarLink: freezed == avatarLink
-          ? _value.avatarLink
-          : avatarLink // ignore: cast_nullable_to_non_nullable
+      providerData: null == providerData
+          ? _value.providerData
+          : providerData // ignore: cast_nullable_to_non_nullable
+              as List<ProviderInfoEntity>,
+      fcmToken: freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
@@ -141,65 +135,67 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_UserEntityCopyWith<$Res>
+abstract class _$$UserEntityImplCopyWith<$Res>
     implements $UserEntityCopyWith<$Res> {
-  factory _$$_UserEntityCopyWith(
-          _$_UserEntity value, $Res Function(_$_UserEntity) then) =
-      __$$_UserEntityCopyWithImpl<$Res>;
+  factory _$$UserEntityImplCopyWith(
+          _$UserEntityImpl value, $Res Function(_$UserEntityImpl) then) =
+      __$$UserEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String id,
-      String userName,
+      {@JsonKey(name: "user_name") String userName,
       String email,
-      String type,
       String uid,
-      bool isVerifiedEmail,
-      bool isVerifiedFacebook,
-      bool isVerifiedGoogle,
-      String? avatarLink,
-      String? location,
-      String? dateOfBirth,
+      @JsonKey(name: "email_verified") bool emailVerified,
+      @JsonKey(name: "provider_data") List<ProviderInfoEntity> providerData,
+      @JsonKey(name: "fcm_token") String? fcmToken,
+      @JsonKey(name: "photo_url") String? photoUrl,
+      @JsonKey(name: "date_of_birth") String? dateOfBirth,
       String? gender,
-      String? phoneNumber});
+      @JsonKey(name: "phone_number") String? phoneNumber,
+      String? location,
+      @JsonKey(name: "_id") String? id});
 }
 
 /// @nodoc
-class __$$_UserEntityCopyWithImpl<$Res>
-    extends _$UserEntityCopyWithImpl<$Res, _$_UserEntity>
-    implements _$$_UserEntityCopyWith<$Res> {
-  __$$_UserEntityCopyWithImpl(
-      _$_UserEntity _value, $Res Function(_$_UserEntity) _then)
+class __$$UserEntityImplCopyWithImpl<$Res>
+    extends _$UserEntityCopyWithImpl<$Res, _$UserEntityImpl>
+    implements _$$UserEntityImplCopyWith<$Res> {
+  __$$UserEntityImplCopyWithImpl(
+      _$UserEntityImpl _value, $Res Function(_$UserEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? userName = null,
     Object? email = null,
-    Object? type = null,
     Object? uid = null,
-    Object? isVerifiedEmail = null,
-    Object? isVerifiedFacebook = null,
-    Object? isVerifiedGoogle = null,
-    Object? avatarLink = freezed,
-    Object? location = freezed,
+    Object? emailVerified = null,
+    Object? providerData = null,
+    Object? fcmToken = freezed,
+    Object? photoUrl = freezed,
     Object? dateOfBirth = freezed,
     Object? gender = freezed,
     Object? phoneNumber = freezed,
+    Object? location = freezed,
+    Object? id = freezed,
   }) {
-    return _then(_$_UserEntity(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$UserEntityImpl(
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -208,33 +204,25 @@ class __$$_UserEntityCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      isVerifiedEmail: null == isVerifiedEmail
-          ? _value.isVerifiedEmail
-          : isVerifiedEmail // ignore: cast_nullable_to_non_nullable
+      emailVerified: null == emailVerified
+          ? _value.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
               as bool,
-      isVerifiedFacebook: null == isVerifiedFacebook
-          ? _value.isVerifiedFacebook
-          : isVerifiedFacebook // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isVerifiedGoogle: null == isVerifiedGoogle
-          ? _value.isVerifiedGoogle
-          : isVerifiedGoogle // ignore: cast_nullable_to_non_nullable
-              as bool,
-      avatarLink: freezed == avatarLink
-          ? _value.avatarLink
-          : avatarLink // ignore: cast_nullable_to_non_nullable
+      providerData: null == providerData
+          ? _value._providerData
+          : providerData // ignore: cast_nullable_to_non_nullable
+              as List<ProviderInfoEntity>,
+      fcmToken: freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
@@ -247,6 +235,14 @@ class __$$_UserEntityCopyWithImpl<$Res>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -254,112 +250,123 @@ class __$$_UserEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserEntity implements _UserEntity {
-  const _$_UserEntity(
-      {required this.id,
-      required this.userName,
+class _$UserEntityImpl implements _UserEntity {
+  const _$UserEntityImpl(
+      {@JsonKey(name: "user_name") required this.userName,
       required this.email,
-      required this.type,
       required this.uid,
-      required this.isVerifiedEmail,
-      required this.isVerifiedFacebook,
-      required this.isVerifiedGoogle,
-      required this.avatarLink,
-      required this.location,
-      required this.dateOfBirth,
-      required this.gender,
-      required this.phoneNumber});
+      @JsonKey(name: "email_verified") required this.emailVerified,
+      @JsonKey(name: "provider_data")
+      required final List<ProviderInfoEntity> providerData,
+      @JsonKey(name: "fcm_token") this.fcmToken,
+      @JsonKey(name: "photo_url") this.photoUrl,
+      @JsonKey(name: "date_of_birth") this.dateOfBirth,
+      this.gender,
+      @JsonKey(name: "phone_number") this.phoneNumber,
+      this.location,
+      @JsonKey(name: "_id") this.id})
+      : _providerData = providerData;
 
-  factory _$_UserEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_UserEntityFromJson(json);
+  factory _$UserEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserEntityImplFromJson(json);
 
   @override
-  final String id;
-  @override
+  @JsonKey(name: "user_name")
   final String userName;
   @override
   final String email;
   @override
-  final String type;
-  @override
   final String uid;
   @override
-  final bool isVerifiedEmail;
+  @JsonKey(name: "email_verified")
+  final bool emailVerified;
+  final List<ProviderInfoEntity> _providerData;
   @override
-  final bool isVerifiedFacebook;
+  @JsonKey(name: "provider_data")
+  List<ProviderInfoEntity> get providerData {
+    if (_providerData is EqualUnmodifiableListView) return _providerData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_providerData);
+  }
+
   @override
-  final bool isVerifiedGoogle;
+  @JsonKey(name: "fcm_token")
+  final String? fcmToken;
   @override
-  final String? avatarLink;
+  @JsonKey(name: "photo_url")
+  final String? photoUrl;
   @override
-  final String? location;
-  @override
+  @JsonKey(name: "date_of_birth")
   final String? dateOfBirth;
   @override
   final String? gender;
   @override
+  @JsonKey(name: "phone_number")
   final String? phoneNumber;
+  @override
+  final String? location;
+  @override
+  @JsonKey(name: "_id")
+  final String? id;
 
   @override
   String toString() {
-    return 'UserEntity(id: $id, userName: $userName, email: $email, type: $type, uid: $uid, isVerifiedEmail: $isVerifiedEmail, isVerifiedFacebook: $isVerifiedFacebook, isVerifiedGoogle: $isVerifiedGoogle, avatarLink: $avatarLink, location: $location, dateOfBirth: $dateOfBirth, gender: $gender, phoneNumber: $phoneNumber)';
+    return 'UserEntity(userName: $userName, email: $email, uid: $uid, emailVerified: $emailVerified, providerData: $providerData, fcmToken: $fcmToken, photoUrl: $photoUrl, dateOfBirth: $dateOfBirth, gender: $gender, phoneNumber: $phoneNumber, location: $location, id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserEntity &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$UserEntityImpl &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.type, type) || other.type == type) &&
             (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.isVerifiedEmail, isVerifiedEmail) ||
-                other.isVerifiedEmail == isVerifiedEmail) &&
-            (identical(other.isVerifiedFacebook, isVerifiedFacebook) ||
-                other.isVerifiedFacebook == isVerifiedFacebook) &&
-            (identical(other.isVerifiedGoogle, isVerifiedGoogle) ||
-                other.isVerifiedGoogle == isVerifiedGoogle) &&
-            (identical(other.avatarLink, avatarLink) ||
-                other.avatarLink == avatarLink) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.emailVerified, emailVerified) ||
+                other.emailVerified == emailVerified) &&
+            const DeepCollectionEquality()
+                .equals(other._providerData, _providerData) &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl) &&
             (identical(other.dateOfBirth, dateOfBirth) ||
                 other.dateOfBirth == dateOfBirth) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber));
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
       userName,
       email,
-      type,
       uid,
-      isVerifiedEmail,
-      isVerifiedFacebook,
-      isVerifiedGoogle,
-      avatarLink,
-      location,
+      emailVerified,
+      const DeepCollectionEquality().hash(_providerData),
+      fcmToken,
+      photoUrl,
       dateOfBirth,
       gender,
-      phoneNumber);
+      phoneNumber,
+      location,
+      id);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserEntityCopyWith<_$_UserEntity> get copyWith =>
-      __$$_UserEntityCopyWithImpl<_$_UserEntity>(this, _$identity);
+  _$$UserEntityImplCopyWith<_$UserEntityImpl> get copyWith =>
+      __$$UserEntityImplCopyWithImpl<_$UserEntityImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserEntityToJson(
+    return _$$UserEntityImplToJson(
       this,
     );
   }
@@ -367,51 +374,57 @@ class _$_UserEntity implements _UserEntity {
 
 abstract class _UserEntity implements UserEntity {
   const factory _UserEntity(
-      {required final String id,
-      required final String userName,
+      {@JsonKey(name: "user_name") required final String userName,
       required final String email,
-      required final String type,
       required final String uid,
-      required final bool isVerifiedEmail,
-      required final bool isVerifiedFacebook,
-      required final bool isVerifiedGoogle,
-      required final String? avatarLink,
-      required final String? location,
-      required final String? dateOfBirth,
-      required final String? gender,
-      required final String? phoneNumber}) = _$_UserEntity;
+      @JsonKey(name: "email_verified") required final bool emailVerified,
+      @JsonKey(name: "provider_data")
+      required final List<ProviderInfoEntity> providerData,
+      @JsonKey(name: "fcm_token") final String? fcmToken,
+      @JsonKey(name: "photo_url") final String? photoUrl,
+      @JsonKey(name: "date_of_birth") final String? dateOfBirth,
+      final String? gender,
+      @JsonKey(name: "phone_number") final String? phoneNumber,
+      final String? location,
+      @JsonKey(name: "_id") final String? id}) = _$UserEntityImpl;
 
   factory _UserEntity.fromJson(Map<String, dynamic> json) =
-      _$_UserEntity.fromJson;
+      _$UserEntityImpl.fromJson;
 
   @override
-  String get id;
-  @override
+  @JsonKey(name: "user_name")
   String get userName;
   @override
   String get email;
   @override
-  String get type;
-  @override
   String get uid;
   @override
-  bool get isVerifiedEmail;
+  @JsonKey(name: "email_verified")
+  bool get emailVerified;
   @override
-  bool get isVerifiedFacebook;
+  @JsonKey(name: "provider_data")
+  List<ProviderInfoEntity> get providerData;
   @override
-  bool get isVerifiedGoogle;
+  @JsonKey(name: "fcm_token")
+  String? get fcmToken;
   @override
-  String? get avatarLink;
+  @JsonKey(name: "photo_url")
+  String? get photoUrl;
   @override
-  String? get location;
-  @override
+  @JsonKey(name: "date_of_birth")
   String? get dateOfBirth;
   @override
   String? get gender;
   @override
+  @JsonKey(name: "phone_number")
   String? get phoneNumber;
   @override
+  String? get location;
+  @override
+  @JsonKey(name: "_id")
+  String? get id;
+  @override
   @JsonKey(ignore: true)
-  _$$_UserEntityCopyWith<_$_UserEntity> get copyWith =>
+  _$$UserEntityImplCopyWith<_$UserEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

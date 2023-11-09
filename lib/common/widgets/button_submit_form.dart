@@ -8,7 +8,7 @@ class ButtonSubmitForm extends StatelessWidget {
     Key? key,
     required this.title,
     required this.onLogin,
-  }) : super(key: key);
+  }) : super(key: null);
   final Text title;
   final void Function() onLogin;
 

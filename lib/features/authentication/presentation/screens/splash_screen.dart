@@ -11,7 +11,7 @@ import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class SplashScreen extends ConsumerStatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: null);
 
   static const String path = "/SplashScreen";
 

@@ -4,17 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/signUp/sign_up_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/change_language.dart';
+import 'package:jobs_pot/features/authentication/presentation/widgets/or_social_login.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/suggestions_text.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/title_and_sub_title.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/login/login_form.dart';
-import 'package:jobs_pot/features/authentication/presentation/widgets/login_with_google.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()
 class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: null);
 
   static const String path = "/LoginScreen";
 
@@ -44,7 +44,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               children: [
                 _loginTitle(),
                 const LoginForm(),
-                const LoginWithGoogle(),
+                const OrSocialLogin(),
                 const SizedBox(
                   height: 15,
                 ),

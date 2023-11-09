@@ -13,7 +13,7 @@ class EmailInput extends StatelessWidget {
     required this.formControlEmail,
     required this.hintEmail,
     this.suffixIcon,
-  }) : super(key: key);
+  }) : super(key: null);
   final FormControl<dynamic>? formControlEmail;
   final String hintEmail;
   final Widget? suffixIcon;

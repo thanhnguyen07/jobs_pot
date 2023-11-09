@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
 class ChatScreen extends ConsumerStatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  const ChatScreen({Key? key}) : super(key: null);
 
   static const String path = 'ChatScreen';
 

@@ -28,7 +28,7 @@ class AvatarUser extends StatelessWidget {
           ),
         ),
         child: AvatarImage(
-          avatarLink: userData?.avatarLink,
+          avatarLink: userData?.photoUrl,
           size: 40,
         ),
       ),

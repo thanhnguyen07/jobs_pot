@@ -6,7 +6,7 @@ import 'package:jobs_pot/features/create/presentation/widgets/post_title_input.d
 import 'package:reactive_forms/reactive_forms.dart';
 
 class CraetePostInputForm extends ConsumerStatefulWidget {
-  const CraetePostInputForm({Key? key}) : super(key: key);
+  const CraetePostInputForm({Key? key}) : super(key: null);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>

@@ -62,22 +62,22 @@ class _$ErrorResponseEntityCopyWithImpl<$Res, $Val extends ErrorResponseEntity>
 }
 
 /// @nodoc
-abstract class _$$_ErrorResponseEntityCopyWith<$Res>
+abstract class _$$ErrorResponseEntityImplCopyWith<$Res>
     implements $ErrorResponseEntityCopyWith<$Res> {
-  factory _$$_ErrorResponseEntityCopyWith(_$_ErrorResponseEntity value,
-          $Res Function(_$_ErrorResponseEntity) then) =
-      __$$_ErrorResponseEntityCopyWithImpl<$Res>;
+  factory _$$ErrorResponseEntityImplCopyWith(_$ErrorResponseEntityImpl value,
+          $Res Function(_$ErrorResponseEntityImpl) then) =
+      __$$ErrorResponseEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String msg});
 }
 
 /// @nodoc
-class __$$_ErrorResponseEntityCopyWithImpl<$Res>
-    extends _$ErrorResponseEntityCopyWithImpl<$Res, _$_ErrorResponseEntity>
-    implements _$$_ErrorResponseEntityCopyWith<$Res> {
-  __$$_ErrorResponseEntityCopyWithImpl(_$_ErrorResponseEntity _value,
-      $Res Function(_$_ErrorResponseEntity) _then)
+class __$$ErrorResponseEntityImplCopyWithImpl<$Res>
+    extends _$ErrorResponseEntityCopyWithImpl<$Res, _$ErrorResponseEntityImpl>
+    implements _$$ErrorResponseEntityImplCopyWith<$Res> {
+  __$$ErrorResponseEntityImplCopyWithImpl(_$ErrorResponseEntityImpl _value,
+      $Res Function(_$ErrorResponseEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_ErrorResponseEntityCopyWithImpl<$Res>
   $Res call({
     Object? msg = null,
   }) {
-    return _then(_$_ErrorResponseEntity(
+    return _then(_$ErrorResponseEntityImpl(
       msg: null == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -96,11 +96,11 @@ class __$$_ErrorResponseEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ErrorResponseEntity implements _ErrorResponseEntity {
-  const _$_ErrorResponseEntity({required this.msg});
+class _$ErrorResponseEntityImpl implements _ErrorResponseEntity {
+  const _$ErrorResponseEntityImpl({required this.msg});
 
-  factory _$_ErrorResponseEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_ErrorResponseEntityFromJson(json);
+  factory _$ErrorResponseEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ErrorResponseEntityImplFromJson(json);
 
   @override
   final String msg;
@@ -114,7 +114,7 @@ class _$_ErrorResponseEntity implements _ErrorResponseEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ErrorResponseEntity &&
+            other is _$ErrorResponseEntityImpl &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
@@ -125,13 +125,13 @@ class _$_ErrorResponseEntity implements _ErrorResponseEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorResponseEntityCopyWith<_$_ErrorResponseEntity> get copyWith =>
-      __$$_ErrorResponseEntityCopyWithImpl<_$_ErrorResponseEntity>(
+  _$$ErrorResponseEntityImplCopyWith<_$ErrorResponseEntityImpl> get copyWith =>
+      __$$ErrorResponseEntityImplCopyWithImpl<_$ErrorResponseEntityImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ErrorResponseEntityToJson(
+    return _$$ErrorResponseEntityImplToJson(
       this,
     );
   }
@@ -139,15 +139,15 @@ class _$_ErrorResponseEntity implements _ErrorResponseEntity {
 
 abstract class _ErrorResponseEntity implements ErrorResponseEntity {
   const factory _ErrorResponseEntity({required final String msg}) =
-      _$_ErrorResponseEntity;
+      _$ErrorResponseEntityImpl;
 
   factory _ErrorResponseEntity.fromJson(Map<String, dynamic> json) =
-      _$_ErrorResponseEntity.fromJson;
+      _$ErrorResponseEntityImpl.fromJson;
 
   @override
   String get msg;
   @override
   @JsonKey(ignore: true)
-  _$$_ErrorResponseEntityCopyWith<_$_ErrorResponseEntity> get copyWith =>
+  _$$ErrorResponseEntityImplCopyWith<_$ErrorResponseEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

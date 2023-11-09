@@ -37,6 +37,7 @@ class LoginWithEmailController extends StateNotifier {
   FormGroup getLoginForm() => _loginForm;
 
   void onLogin(BuildContext context) async {
+    ref.read(systemControllerProvider.notifier).showLoading();
     FocusManager.instance.primaryFocus?.unfocus();
 
     final isValid = _loginForm.valid;
@@ -58,6 +59,8 @@ class LoginWithEmailController extends StateNotifier {
         }
       });
     }
+
+    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
   String _getEmail() {
@@ -78,15 +81,30 @@ class LoginWithEmailController extends StateNotifier {
 
       if (user != null) {
         if (user.emailVerified) {
-          final idToken = await credential.user?.getIdToken();
+          final tokenFirebase = await credential.user?.getIdToken();
 
-          if (idToken != null) {
+          if (tokenFirebase != null) {
             await ref
                 .read(authRepositoryProvider)
-                .saveToken(idToken)
-                .then((value) {
-              _getProfileUser(context);
-            });
+                .signInWithFirebase(tokenFirebase)
+                .then(
+              (res) {
+                res.fold(
+                  (l) {},
+                  (r) {
+                    ref
+                        .read(authControllerProvider.notifier)
+                        .setDataUser(r.results);
+                    ref
+                        .read(authRepositoryProvider)
+                        .saveBothToken(r.token, r.refreshToken)
+                        .then((value) {
+                      context.router.replaceAll([const HomeStackRoute()]);
+                    });
+                  },
+                );
+              },
+            );
           }
         } else {
           await ref
@@ -100,20 +118,5 @@ class LoginWithEmailController extends StateNotifier {
     } on FirebaseAuthException catch (e) {
       ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
     }
-  }
-
-  void _getProfileUser(BuildContext context) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
-
-    final resSignUp = await ref.read(authRepositoryProvider).getUserProfile();
-
-    resSignUp.fold(
-      (l) {},
-      (r) {
-        ref.read(authControllerProvider.notifier).setDataUser(r.results);
-        context.router.replaceAll([const HomeStackRoute()]);
-      },
-    );
-    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 }

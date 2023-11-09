@@ -9,9 +9,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 class PasswordInput extends StatefulWidget {
   const PasswordInput({
-    Key? key,
     required this.formControlPassword,
-  }) : super(key: key);
+  }) : super(key: null);
 
   final FormControl<dynamic>? formControlPassword;
 

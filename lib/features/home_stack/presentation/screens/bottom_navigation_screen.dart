@@ -9,7 +9,7 @@ import 'package:jobs_pot/routes/route_config.gr.dart';
 
 @RoutePage()
 class HomeStackScreen extends ConsumerStatefulWidget {
-  const HomeStackScreen({Key? key}) : super(key: key);
+  const HomeStackScreen({Key? key}) : super(key: null);
 
   static const String path = '/HomeStackScreen';
 
