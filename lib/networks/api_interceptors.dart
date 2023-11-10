@@ -22,7 +22,7 @@ class ApiInterceptors extends InterceptorsWrapper {
     }
 
     apiLogger.log(
-        "\n\n--------------------------------------------------------------------------------------------------------");
+        "\n--------------------------------------------------------------------------------------------------------");
     if (method == 'GET') {
       apiLogger.log(
           "✈️ REQUEST[$method] => PATH: $uri \n Token: ${options.headers}",
@@ -48,7 +48,7 @@ class ApiInterceptors extends InterceptorsWrapper {
     final data = jsonEncode(response.data);
 
     apiLogger.log(
-        "\n\n--------------------------------------------------------------------------------------------------------");
+        "\n--------------------------------------------------------------------------------------------------------");
 
     apiLogger.log("✅ RESPONSE[$statusCode] => PATH: $uri\n DATA: $data");
 

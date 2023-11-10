@@ -1,17 +1,20 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/verification_code_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 
 abstract class AuthRepositoryInterface {
   void saveToken(String token);
 
-  void saveBothToken(String token, String refreshToken);
+  void saveDataUser(String token, String refreshToken, String idUser);
 
   void saveOnboadingStatus();
 
   void saveRememberStatus();
 
   Future<String?> getToken();
+
+  Future<String?> getIdUser();
 
   Future<bool?> getOnboadingStatus();
 
@@ -28,8 +31,13 @@ abstract class AuthRepositoryInterface {
     String tokenFirebase,
   );
 
-  Future<Either<Failure, UserResponseEntity>> getUserProfile();
+  Future<Either<Failure, UserResponseEntity>> getUserProfile(String id);
 
   Future<Either<Failure, UserResponseEntity>> signInWithFirebase(
       String tokenFirebase);
+
+  Future<Either<Failure, VerificationCodeEntity>> sendVerificationCode(
+      String email);
+
+  Future<Either<Failure, VerificationCodeEntity>> sendVerifyCode(String code);
 }

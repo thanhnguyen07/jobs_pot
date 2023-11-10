@@ -53,7 +53,7 @@ final signUpWithEmailProvider =
 );
 
 final emailVerificationControllerProvider =
-    StateNotifierProvider<EmailVerificationController, int>(
+    StateNotifierProvider<EmailVerificationController, bool>(
   (ref) => EmailVerificationController(ref),
 );
 

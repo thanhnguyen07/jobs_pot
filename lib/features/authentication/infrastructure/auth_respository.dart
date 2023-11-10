@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/verification_code_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/authentication/domain/repositories/auth_respository_interface.dart';
 import 'package:jobs_pot/networks/api_client.dart';
@@ -19,8 +20,8 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future saveBothToken(String token, String refreshToken) {
-    return LocalStorageHelper.saveBothToken(token, refreshToken);
+  Future saveDataUser(String token, String refreshToken, String idUser) {
+    return LocalStorageHelper.saveDataUser(token, refreshToken, idUser);
   }
 
   @override
@@ -36,6 +37,11 @@ class AuthRepository implements AuthRepositoryInterface {
   @override
   Future<String?> getToken() {
     return LocalStorageHelper.getToken();
+  }
+
+  @override
+  Future<String?> getIdUser() {
+    return LocalStorageHelper.getIdUser();
   }
 
   @override
@@ -81,9 +87,9 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, UserResponseEntity>> getUserProfile() async {
+  Future<Either<Failure, UserResponseEntity>> getUserProfile(String id) async {
     try {
-      final userProfileResponse = await _apiClient.getUserProfile();
+      final userProfileResponse = await _apiClient.getUserProfile(id);
 
       return right(UserResponseEntity.fromJson(userProfileResponse));
     } catch (error) {
@@ -101,6 +107,37 @@ class AuthRepository implements AuthRepositoryInterface {
       final signInWithGoogleRes = await _apiClient.signInWithFirebase(body);
 
       return right(UserResponseEntity.fromJson(signInWithGoogleRes));
+    } catch (error) {
+      return left(const Failure.empty());
+    }
+  }
+
+  @override
+  Future<Either<Failure, VerificationCodeEntity>> sendVerificationCode(
+      String email) async {
+    try {
+      final Map<String, dynamic> body = {
+        "email": email,
+      };
+      final sendVerificationCodeRes =
+          await _apiClient.sendVerificationCode(body);
+
+      return right(VerificationCodeEntity.fromJson(sendVerificationCodeRes));
+    } catch (error) {
+      return left(const Failure.empty());
+    }
+  }
+
+  @override
+  Future<Either<Failure, VerificationCodeEntity>> sendVerifyCode(
+      String code) async {
+    try {
+      final Map<String, dynamic> body = {
+        "code": code,
+      };
+      final sendVerificationCodeRes = await _apiClient.sendVerifyCode(body);
+
+      return right(VerificationCodeEntity.fromJson(sendVerificationCodeRes));
     } catch (error) {
       return left(const Failure.empty());
     }

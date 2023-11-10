@@ -62,9 +62,7 @@ class _DateOfBirthBoxState extends ConsumerState<DateOfBirthBox> {
             .read(profileControllerProvider.notifier)
             .setDateOfBirth(picked.toString());
         setState(() {
-          setState(() {
-            selectedDate = picked;
-          });
+          selectedDate = picked;
         });
       }
     }

@@ -35,7 +35,8 @@ dependencies:
   intl_phone_number_input: ^0.7.3+1
   dotted_border: ^2.0.0+3
   flutter_facebook_auth: ^6.0.2
-  flutter_secure_storage: ^9.0.0
+  pinput: ^3.0.1
+  fluttertoast: ^8.2.3
 
 dev_dependencies:
   flutter_test:

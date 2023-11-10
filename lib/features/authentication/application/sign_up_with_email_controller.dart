@@ -93,7 +93,7 @@ class SignWithEmailController extends StateNotifier {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then(
         (value) async {
-          await _createUserOnServer(context);
+          await _createUserOnServer(context, email);
         },
       );
     } on FirebaseAuthException catch (e) {
@@ -101,7 +101,7 @@ class SignWithEmailController extends StateNotifier {
     }
   }
 
-  Future _createUserOnServer(BuildContext context) async {
+  Future _createUserOnServer(BuildContext context, String email) async {
     final fullName = ref.read(signUpWithEmailProvider.notifier).getInputName();
     final User? user =
         ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
@@ -117,19 +117,25 @@ class SignWithEmailController extends StateNotifier {
         ref.read(systemControllerProvider.notifier).showToastGeneralError();
       }, (r) async {
         ref.read(authControllerProvider.notifier).setDataUser(r.results);
+        await ref
+            .read(authRepositoryProvider)
+            .saveDataUser(r.token, r.refreshToken, r.results.id);
         if (r.results.emailVerified) {
-          ref
-              .read(authRepositoryProvider)
-              .saveBothToken(r.token, r.refreshToken)
-              .then((value) {
+          if (context.mounted) {
             context.router.replaceAll([const HomeStackRoute()]);
-          });
+          }
         } else {
-          await ref
-              .read(emailVerificationControllerProvider.notifier)
-              .sendVerifyMail()
-              .then(
-            (value) {
+          final sendVerificationCodeRes = await ref
+              .read(authRepositoryProvider)
+              .sendVerificationCode(email);
+
+          sendVerificationCodeRes.fold(
+            (l) {},
+            (r) {
+              ref.read(emailVerificationControllerProvider.notifier);
+              ref
+                  .read(systemControllerProvider.notifier)
+                  .showToastMessage(r.msg);
               context.router.pushNamed(EmailVerificationScreen.path);
             },
           );

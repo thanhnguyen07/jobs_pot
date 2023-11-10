@@ -38,6 +38,7 @@ class LoginWithEmailController extends StateNotifier {
 
   void onLogin(BuildContext context) async {
     ref.read(systemControllerProvider.notifier).showLoading();
+
     FocusManager.instance.primaryFocus?.unfocus();
 
     final isValid = _loginForm.valid;
@@ -49,7 +50,7 @@ class LoginWithEmailController extends StateNotifier {
           .read(emailVerificationControllerProvider.notifier)
           .setCurrentEmail(email);
 
-      signInWithEmail(context);
+      await signInWithEmail(context);
     } else {
       _loginForm.controls.forEach((key, value) {
         if (value.invalid) {
@@ -59,7 +60,6 @@ class LoginWithEmailController extends StateNotifier {
         }
       });
     }
-
     ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
@@ -80,39 +80,44 @@ class LoginWithEmailController extends StateNotifier {
       final User? user = credential.user;
 
       if (user != null) {
-        if (user.emailVerified) {
-          final tokenFirebase = await credential.user?.getIdToken();
+        final tokenFirebase = await credential.user?.getIdToken();
 
-          if (tokenFirebase != null) {
-            await ref
-                .read(authRepositoryProvider)
-                .signInWithFirebase(tokenFirebase)
-                .then(
-              (res) {
-                res.fold(
-                  (l) {},
-                  (r) {
-                    ref
-                        .read(authControllerProvider.notifier)
-                        .setDataUser(r.results);
-                    ref
+        if (tokenFirebase != null) {
+          final signInWithFirebaseRes = await ref
+              .read(authRepositoryProvider)
+              .signInWithFirebase(tokenFirebase);
+
+          await signInWithFirebaseRes.fold(
+            (l) {},
+            (r) async {
+              ref.read(authControllerProvider.notifier).setDataUser(r.results);
+              await ref
+                  .read(authRepositoryProvider)
+                  .saveDataUser(r.token, r.refreshToken, r.results.id)
+                  .then(
+                (value) async {
+                  if (r.results.emailVerified) {
+                    context.router.replaceAll([const HomeStackRoute()]);
+                  } else {
+                    final sendVerificationCodeRes = await ref
                         .read(authRepositoryProvider)
-                        .saveBothToken(r.token, r.refreshToken)
-                        .then((value) {
-                      context.router.replaceAll([const HomeStackRoute()]);
-                    });
-                  },
-                );
-              },
-            );
-          }
-        } else {
-          await ref
-              .read(emailVerificationControllerProvider.notifier)
-              .sendVerifyMail()
-              .then((value) {
-            context.router.pushNamed(EmailVerificationScreen.path);
-          });
+                        .sendVerificationCode(email);
+
+                    sendVerificationCodeRes.fold(
+                      (l) {},
+                      (r) {
+                        ref.read(emailVerificationControllerProvider.notifier);
+                        ref
+                            .read(systemControllerProvider.notifier)
+                            .showToastMessage(r.msg);
+                        context.router.pushNamed(EmailVerificationScreen.path);
+                      },
+                    );
+                  }
+                },
+              );
+            },
+          );
         }
       }
     } on FirebaseAuthException catch (e) {

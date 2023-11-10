@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/networks/api_util.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/logger.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -26,11 +25,15 @@ class SystemController extends StateNotifier<AppStateEntity> {
   }
 
   void showToastMessage(String message) {
-    EasyLoading.showToast(message);
+    Fluttertoast.showToast(
+      msg: message,
+      backgroundColor: AppColors.purpleColor,
+      timeInSecForIosWeb: 3,
+    );
   }
 
   void showToastMessageWithLocaleKeys(String localeKeys) {
-    EasyLoading.showToast(Utils.getLocaleMessage(localeKeys));
+    showToastMessage(Utils.getLocaleMessage(localeKeys));
   }
 
   void showToastGeneralError() {
@@ -74,6 +77,9 @@ class SystemController extends StateNotifier<AppStateEntity> {
 
     if (error.response != null) {
       try {
+        final res = error.response?.data;
+        showToastMessage(res!["msg"]);
+
         data = jsonEncode(error.response.toString());
       } catch (e) {
         logger.e(e);

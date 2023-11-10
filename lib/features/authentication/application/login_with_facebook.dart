@@ -55,7 +55,7 @@ class LoginWithFacebookController extends StateNotifier {
                         .setDataUser(r.results);
                     ref
                         .read(authRepositoryProvider)
-                        .saveBothToken(r.token, r.refreshToken)
+                        .saveDataUser(r.token, r.refreshToken, r.results.id)
                         .then((value) {
                       context.router.replaceAll([const HomeStackRoute()]);
                     });

@@ -40,21 +40,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                _loginTitle(),
-                const LoginForm(),
-                const OrSocialLogin(),
-                const SizedBox(
-                  height: 15,
-                ),
-                _signUpSuggestion(),
-                const ChangeLanguage(),
-              ],
-            ),
+            child: _body(),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _body() {
+    return Column(
+      children: [
+        _loginTitle(),
+        const LoginForm(),
+        const OrSocialLogin(),
+        const SizedBox(
+          height: 15,
+        ),
+        _signUpSuggestion(),
+        const ChangeLanguage(),
+      ],
     );
   }
 

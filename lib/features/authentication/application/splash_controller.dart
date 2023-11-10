@@ -20,19 +20,20 @@ class SplashController extends StateNotifier<bool> {
         ref.read(authRepositoryProvider).getOnboadingStatus().then(
           (onboadingStatus) async {
             if (onboadingStatus != null) {
-              ref.read(authRepositoryProvider).getToken().then(
-                (token) {
-                  ref.read(authRepositoryProvider).getRememberStatus().then(
-                    (rememberStatus) {
-                      if (token != null && rememberStatus != null) {
-                        getUserProfile(context);
-                      } else {
-                        context.router.replaceNamed(LoginScreen.path);
-                      }
-                    },
-                  );
-                },
-              );
+              final token = await ref.read(authRepositoryProvider).getToken();
+              final idUser = await ref.read(authRepositoryProvider).getIdUser();
+              final rememberStatus =
+                  await ref.read(authRepositoryProvider).getRememberStatus();
+
+              if (token != null && idUser != null && rememberStatus != null) {
+                if (context.mounted) {
+                  getUserProfile(context, idUser);
+                }
+              } else {
+                if (context.mounted) {
+                  context.router.replaceNamed(LoginScreen.path);
+                }
+              }
             } else {
               context.router.replaceNamed(OnboardingScreen.path);
             }
@@ -42,10 +43,10 @@ class SplashController extends StateNotifier<bool> {
     );
   }
 
-  Future getUserProfile(BuildContext context) async {
+  Future getUserProfile(BuildContext context, String idUser) async {
     ref.read(systemControllerProvider.notifier).showLoading();
 
-    await ref.read(authRepositoryProvider).getUserProfile().then(
+    await ref.read(authRepositoryProvider).getUserProfile(idUser).then(
       (res) {
         res.fold(
           (l) {

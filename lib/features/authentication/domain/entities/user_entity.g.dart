@@ -21,7 +21,7 @@ _$UserEntityImpl _$$UserEntityImplFromJson(Map<String, dynamic> json) =>
       gender: json['gender'] as String?,
       phoneNumber: json['phone_number'] as String?,
       location: json['location'] as String?,
-      id: json['_id'] as String?,
+      id: json['_id'] as String,
     );
 
 Map<String, dynamic> _$$UserEntityImplToJson(_$UserEntityImpl instance) =>

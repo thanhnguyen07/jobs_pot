@@ -19,7 +19,7 @@ class UserEntity with _$UserEntity {
     String? gender,
     @JsonKey(name: "phone_number") String? phoneNumber,
     String? location,
-    @JsonKey(name: "_id") String? id,
+    @JsonKey(name: "_id") required String id,
   }) = _UserEntity;
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>

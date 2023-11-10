@@ -53,6 +53,7 @@ abstract class  LocaleKeys {
   static const authenticationVerifyEmailSuggestionsResend = 'authenticationVerifyEmailSuggestionsResend';
   static const authenticationVerifyEmailResendTitle = 'authenticationVerifyEmailResendTitle';
   static const authenticationVerifyEmailError = 'authenticationVerifyEmailError';
+  static const authenticationVerifyCodeError = 'authenticationVerifyCodeError';
   static const authenticationForgotPasswordError = 'authenticationForgotPasswordError';
   static const authenticationBackButtonTitle = 'authenticationBackButtonTitle';
   static const authenticationCheckMailTitle = 'authenticationCheckMailTitle';

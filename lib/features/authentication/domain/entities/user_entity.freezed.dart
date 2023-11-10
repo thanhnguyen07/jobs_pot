@@ -40,7 +40,7 @@ mixin _$UserEntity {
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   @JsonKey(name: "_id")
-  String? get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +66,7 @@ abstract class $UserEntityCopyWith<$Res> {
       String? gender,
       @JsonKey(name: "phone_number") String? phoneNumber,
       String? location,
-      @JsonKey(name: "_id") String? id});
+      @JsonKey(name: "_id") String id});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? gender = freezed,
     Object? phoneNumber = freezed,
     Object? location = freezed,
-    Object? id = freezed,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
       userName: null == userName
@@ -140,10 +140,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -168,7 +168,7 @@ abstract class _$$UserEntityImplCopyWith<$Res>
       String? gender,
       @JsonKey(name: "phone_number") String? phoneNumber,
       String? location,
-      @JsonKey(name: "_id") String? id});
+      @JsonKey(name: "_id") String id});
 }
 
 /// @nodoc
@@ -193,7 +193,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? gender = freezed,
     Object? phoneNumber = freezed,
     Object? location = freezed,
-    Object? id = freezed,
+    Object? id = null,
   }) {
     return _then(_$UserEntityImpl(
       userName: null == userName
@@ -240,10 +240,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -264,7 +264,7 @@ class _$UserEntityImpl implements _UserEntity {
       this.gender,
       @JsonKey(name: "phone_number") this.phoneNumber,
       this.location,
-      @JsonKey(name: "_id") this.id})
+      @JsonKey(name: "_id") required this.id})
       : _providerData = providerData;
 
   factory _$UserEntityImpl.fromJson(Map<String, dynamic> json) =>
@@ -307,7 +307,7 @@ class _$UserEntityImpl implements _UserEntity {
   final String? location;
   @override
   @JsonKey(name: "_id")
-  final String? id;
+  final String id;
 
   @override
   String toString() {
@@ -386,7 +386,7 @@ abstract class _UserEntity implements UserEntity {
       final String? gender,
       @JsonKey(name: "phone_number") final String? phoneNumber,
       final String? location,
-      @JsonKey(name: "_id") final String? id}) = _$UserEntityImpl;
+      @JsonKey(name: "_id") required final String id}) = _$UserEntityImpl;
 
   factory _UserEntity.fromJson(Map<String, dynamic> json) =
       _$UserEntityImpl.fromJson;
@@ -422,7 +422,7 @@ abstract class _UserEntity implements UserEntity {
   String? get location;
   @override
   @JsonKey(name: "_id")
-  String? get id;
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$UserEntityImplCopyWith<_$UserEntityImpl> get copyWith =>

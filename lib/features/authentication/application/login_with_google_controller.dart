@@ -68,7 +68,7 @@ class LoginWithGoogleController extends StateNotifier {
                         .setDataUser(r.results);
                     await ref
                         .read(authRepositoryProvider)
-                        .saveBothToken(r.token, r.refreshToken)
+                        .saveDataUser(r.token, r.refreshToken, r.results.id)
                         .then((value) async {
                       context.router.replaceAll([const HomeStackRoute()]);
                     });

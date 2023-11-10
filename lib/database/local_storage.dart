@@ -6,13 +6,14 @@ class LocalStorageHelper {
   static const _refreshTokenKey = 'refresh_token';
   static const _onboarding = '_onboarding';
   static const _remember = '_remember';
+  static const _idUser = '_idUser';
 
   //SAVE
   static Future<void> saveOnboadingStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_onboarding, true);
   }
-  
+
   static Future<void> saveRememberStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_remember, true);
@@ -28,10 +29,15 @@ class LocalStorageHelper {
     await prefs.setString(_refreshTokenKey, jsonEncode(token));
   }
 
-  static Future<void> saveBothToken(String token, String refreshToken) async {
+  static Future<void> saveDataUser(
+    String token,
+    String refreshToken,
+    String idUser,
+  ) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_tokenKey, jsonEncode(token));
     await prefs.setString(_refreshTokenKey, jsonEncode(refreshToken));
+    await prefs.setString(_idUser, jsonEncode(idUser));
   }
 
   //GET
@@ -91,6 +97,20 @@ class LocalStorageHelper {
     }
   }
 
+  static Future<String?> getIdUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      final idUSerEncoded = prefs.getString(_idUser);
+      if (idUSerEncoded == null) {
+        return null;
+      } else {
+        return jsonDecode(idUSerEncoded);
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   //REMOVE
   static Future<void> removeOnboadingStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -112,9 +132,15 @@ class LocalStorageHelper {
     await prefs.remove(_refreshTokenKey);
   }
 
-  static Future<void> removeBothToken() async {
+  static Future<void> removeIdUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_idUser);
+  }
+
+  static Future<void> removeDataUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(_tokenKey);
     await prefs.remove(_refreshTokenKey);
+    await prefs.remove(_idUser);
   }
 }

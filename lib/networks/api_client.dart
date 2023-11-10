@@ -13,17 +13,26 @@ abstract class ApiClient {
   @POST("user/signup-with-email")
   Future<dynamic> signUpWithEmail(@Body() Map<String, dynamic> body);
 
+  @POST("user/signin-with-firebase")
+  Future<dynamic> signInWithFirebase(@Body() Map<String, dynamic> body);
+
+  @POST("user/send-verification-code")
+  Future<dynamic> sendVerificationCode(@Body() Map<String, dynamic> body);
+
+  @PUT("user/verify-code")
+  Future<dynamic> sendVerifyCode(@Body() Map<String, dynamic> body);
+
+  @GET("user/profile")
+  Future<dynamic> getUserProfile(@Query("id") String id);
+
   @POST("user/update-avatar")
   Future<dynamic> updateAvatar(@Body() Map<String, dynamic> body);
 
   @POST("user/update-informations")
   Future<dynamic> updateInformations(@Body() Map<String, dynamic> body);
 
-  @GET("user/profile")
-  Future<dynamic> getUserProfile();
-
-  @POST("user/signin-with-firebase")
-  Future<dynamic> signInWithFirebase(@Body() Map<String, dynamic> body);
+  // @GET("user/profile")
+  // Future<dynamic> getUserProfile();
 
   @GET("job/summary")
   Future<dynamic> getJobsSummary();

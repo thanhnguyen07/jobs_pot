@@ -1,22 +1,17 @@
 import 'dart:async';
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 
-class EmailVerificationController extends StateNotifier<int> {
-  EmailVerificationController(this.ref) : super(0);
+class EmailVerificationController extends StateNotifier<bool> {
+  EmailVerificationController(this.ref) : super(false);
   final Ref ref;
-  Timer? _timerCountDown;
   String _cureentEmail = '';
-
-  @override
-  void dispose() {
-    _cancelTimer();
-    super.dispose();
-  }
 
   void setCurrentEmail(String email) {
     _cureentEmail = email;
@@ -26,105 +21,63 @@ class EmailVerificationController extends StateNotifier<int> {
     return _cureentEmail;
   }
 
-  Future sendVerifyMail() async {
-    _cancelTimer();
-
+  Future<bool> reSendVerifyMail() async {
     ref.read(systemControllerProvider.notifier).showLoading();
+    final sendVerificationCodeRes = await ref
+        .read(authRepositoryProvider)
+        .sendVerificationCode(_cureentEmail);
 
-    final User? user =
-        ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
-
-    if (user != null) {
-      await user.sendEmailVerification();
-      _countDownResend();
-    }
-    ref.read(systemControllerProvider.notifier).hideLoading();
+    return sendVerificationCodeRes.fold(
+      (l) {
+        ref.read(systemControllerProvider.notifier).hideLoading();
+        return false;
+      },
+      (r) {
+        ref.read(systemControllerProvider.notifier).hideLoading();
+        return true;
+      },
+    );
   }
 
-  void reSendVerifyMail() {
-    if (state == 0) {
-      sendVerifyMail();
+  void clearErrorCode() {
+    if (state) {
+      state = false;
     }
   }
 
-  void checkVerifyEmail(BuildContext context) async {
+  void checkVerifyEmail(BuildContext context, String code) async {
     ref.read(systemControllerProvider.notifier).showLoading();
 
-    await _reloadUser();
+    final sendVerifyCodeRes =
+        await ref.read(authRepositoryProvider).sendVerifyCode(code);
 
-    final User? currenUserNew =
-        ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
-
-    if (currenUserNew != null) {
-      if (currenUserNew.emailVerified) {
-        final User? user =
-            ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
-
-        final String? idToken = await user?.getIdToken();
-
-        if (idToken != null) {
-          await ref.read(authRepositoryProvider).saveToken(idToken).then(
-            (value) async {
-              _createUserOnServer(context);
-            },
-          );
-        } else {
-          ref.read(systemControllerProvider.notifier).showToastGeneralError();
+    sendVerifyCodeRes.fold(
+      (l) {
+        state = true;
+      },
+      (r) async {
+        UserEntity? userData = ref.read(authControllerProvider);
+        ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+        if (userData?.id != null) {
+          await getProfile(context, userData!.id);
         }
-      } else {
-        ref
-            .read(systemControllerProvider.notifier)
-            .showToastMessageWithLocaleKeys(
-              LocaleKeys.authenticationVerifyEmailError,
-            );
-      }
-    }
+      },
+    );
+
     ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
-  Future _reloadUser() async {
-    final User? currenUser =
-        ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
-
-    if (currenUser != null) {
-      return await currenUser.reload();
-    }
-    return null;
-  }
-
-  void _cancelTimer() {
-    _timerCountDown?.cancel();
-    state = 0;
-  }
-
-  void _createUserOnServer(BuildContext context) async {
-    _cancelTimer();
-
-    ref.read(systemControllerProvider.notifier).showLoading();
-
-    // final fullName = ref.read(signUpWithEmailProvider.notifier).getInputName();
-
-    // final resCreateUserOnServer =
-    //     await ref.read(authRepositoryProvider).signUpWithEmail(fullName);
-
-    // resCreateUserOnServer.fold((l) {}, (r) {
-    //   ref.read(authControllerProvider.notifier).setDataUser(r.results);
-
-    //   context.router.replaceAll([const HomeStackRoute()]);
-    // });
-    // ref.read(systemControllerProvider.notifier).hideLoading();
-  }
-
-  void _countDownResend() {
-    if (state != 60) {
-      state = 60;
-    }
-    _timerCountDown = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      if (state == 0) {
-        _timerCountDown?.cancel();
-      } else {
-        state = --state;
-      }
-    });
+  Future getProfile(BuildContext context, String idUser) async {
+    await ref.read(authRepositoryProvider).getUserProfile(idUser).then(
+      (res) {
+        res.fold(
+          (l) {},
+          (r) {
+            context.router.replaceAll([const HomeStackRoute()]);
+            ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+          },
+        );
+      },
+    );
   }
 }

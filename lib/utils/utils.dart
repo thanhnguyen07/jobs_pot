@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/features/home/domain/entities/job_summary_entity.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 
 class Utils {
   static String getLocaleMessage(String key) {
@@ -23,7 +21,6 @@ class Utils {
       return DateFormat('dd MMMM yyyy')
           .format(DateTime.parse(date.toString()).toLocal());
     } catch (e) {
-      EasyLoading.showToast(getLocaleMessage(LocaleKeys.generalError));
       return '';
     }
   }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +8,9 @@ import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
+import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/pin_code.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/suggestions_text.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/title_and_sub_title.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
@@ -25,81 +29,132 @@ class EmailVerificationScreen extends ConsumerStatefulWidget {
 
 class _EmailVerificationScreenState
     extends ConsumerState<EmailVerificationScreen> {
+  bool error = false;
+
+  int countDown = 0;
+  Timer? _timerCountDown;
+
+  void _countDownResend() {
+    if (countDown != 60) {
+      setState(() {
+        countDown = 60;
+      });
+    }
+    _timerCountDown = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      if (countDown == 0) {
+        _timerCountDown?.cancel();
+      } else {
+        setState(() {
+          countDown = --countDown;
+        });
+      }
+    });
+  }
+
+  void _cancelTimer() {
+    _timerCountDown?.cancel();
+    countDown = 0;
+  }
+
+  @override
+  void initState() {
+    ref.read(emailVerificationControllerProvider.notifier).clearErrorCode();
+    _countDownResend();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ref.read(emailVerificationControllerProvider.notifier).clearErrorCode();
+    _cancelTimer();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final emailUser = ref
         .read(emailVerificationControllerProvider.notifier)
         .getCurrentEmail();
 
-    final count = ref.watch(emailVerificationControllerProvider);
+    bool errorPin = ref.watch(emailVerificationControllerProvider);
 
-    return WillPopScope(
-      onWillPop: () async {
-        return true;
-      },
+    return UnFocusKeyboard(
+      context: context,
       child: Scaffold(
         body: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: Column(
-            children: [
-              _emailVerificationTitle(emailUser),
-              SvgPicture.asset(AppImages.sendMail),
-              _buttonActions(),
-              const SizedBox(height: 30),
-              _verifySuggestion(count),
-            ],
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: _body(emailUser, countDown, errorPin),
           ),
         ),
       ),
     );
   }
 
-  SuggestionsText _verifySuggestion(int count) {
+  Widget _body(String emailUser, int countDown, bool errorPin) {
+    return Column(
+      children: [
+        _emailVerificationTitle(emailUser),
+        SvgPicture.asset(AppImages.sendMail),
+        const SizedBox(height: 30),
+        PinCode(
+          error: errorPin,
+          onCompleted: (pin) {
+            ref
+                .read(emailVerificationControllerProvider.notifier)
+                .checkVerifyEmail(context, pin);
+          },
+          clearError: () {
+            ref
+                .read(emailVerificationControllerProvider.notifier)
+                .clearErrorCode();
+          },
+        ),
+        _buttonActions(),
+        const SizedBox(height: 30),
+        _verifySuggestion(countDown),
+      ],
+    );
+  }
+
+  SuggestionsText _verifySuggestion(int countDown) {
     return SuggestionsText(
       textSuggestions: Utils.getLocaleMessage(
           LocaleKeys.authenticationVerifyEmailSuggestionsResend),
       textAction: Utils.getLocaleMessage(
           LocaleKeys.authenticationVerifyEmailResendTitle),
-      textTime: count,
+      textTime: countDown,
       action: () {
-        ref
-            .read(emailVerificationControllerProvider.notifier)
-            .reSendVerifyMail();
+        if (countDown == 0) {
+          ref
+              .read(emailVerificationControllerProvider.notifier)
+              .reSendVerifyMail()
+              .then(
+            (res) {
+              if (res) {
+                _countDownResend();
+              }
+            },
+          );
+        }
       },
     );
   }
 
   Container _buttonActions() {
     return Container(
-      margin: const EdgeInsets.only(top: 80, right: 30, left: 30),
-      child: Column(
-        children: [
-          CustomButton(
-            backgroundColor: AppColors.egglantColor,
-            title: Text(
-              Utils.getLocaleMessage(
-                  LocaleKeys.authenticationVerifyEmailButtonTitle),
-              style: AppTextStyle.whiteBoldS14,
-            ),
-            onPressed: () {
-              ref
-                  .read(emailVerificationControllerProvider.notifier)
-                  .checkVerifyEmail(context);
-            },
-          ),
-          const SizedBox(height: 15),
-          CustomButton(
-            backgroundColor: AppColors.lavenderColor,
-            title: Text(
-              Utils.getLocaleMessage(LocaleKeys.authenticationBackButtonTitle),
-              style: AppTextStyle.whiteBoldS14,
-            ),
-            onPressed: () {
-              context.router.back();
-            },
-          ),
-        ],
+      margin: const EdgeInsets.only(top: 30, right: 30, left: 30),
+      child: CustomButton(
+        backgroundColor: AppColors.lavenderColor,
+        title: Text(
+          Utils.getLocaleMessage(LocaleKeys.authenticationBackButtonTitle),
+          style: AppTextStyle.whiteBoldS14,
+        ),
+        onPressed: () {
+          context.router.back();
+        },
       ),
     );
   }
