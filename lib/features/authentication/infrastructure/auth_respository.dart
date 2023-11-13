@@ -20,7 +20,7 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future saveDataUser(String token, String refreshToken, String idUser) {
+  Future saveDataUser(String? token, String? refreshToken, String idUser) {
     return LocalStorageHelper.saveDataUser(token, refreshToken, idUser);
   }
 

@@ -4,7 +4,8 @@ import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 
 abstract class ProfileResponsitoryInterface {
   Future<Either<Failure, UserResponseEntity>> updateAvatar(
-    String avatarLink,
+    String imageUrl,
+    String id,
   );
   Future<Either<Failure, UserResponseEntity>> updateInformations({
     required String userName,

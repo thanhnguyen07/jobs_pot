@@ -21,9 +21,9 @@ UserResponseEntity _$UserResponseEntityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserResponseEntity {
   UserEntity get results => throw _privateConstructorUsedError;
-  String get token => throw _privateConstructorUsedError;
+  String? get token => throw _privateConstructorUsedError;
   @JsonKey(name: "refresh_token")
-  String get refreshToken => throw _privateConstructorUsedError;
+  String? get refreshToken => throw _privateConstructorUsedError;
   String get msg => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,8 +40,8 @@ abstract class $UserResponseEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {UserEntity results,
-      String token,
-      @JsonKey(name: "refresh_token") String refreshToken,
+      String? token,
+      @JsonKey(name: "refresh_token") String? refreshToken,
       String msg});
 
   $UserEntityCopyWith<$Res> get results;
@@ -61,8 +61,8 @@ class _$UserResponseEntityCopyWithImpl<$Res, $Val extends UserResponseEntity>
   @override
   $Res call({
     Object? results = null,
-    Object? token = null,
-    Object? refreshToken = null,
+    Object? token = freezed,
+    Object? refreshToken = freezed,
     Object? msg = null,
   }) {
     return _then(_value.copyWith(
@@ -70,14 +70,14 @@ class _$UserResponseEntityCopyWithImpl<$Res, $Val extends UserResponseEntity>
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as UserEntity,
-      token: null == token
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      refreshToken: null == refreshToken
+              as String?,
+      refreshToken: freezed == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       msg: null == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -104,8 +104,8 @@ abstract class _$$UserResponseEntityImplCopyWith<$Res>
   @useResult
   $Res call(
       {UserEntity results,
-      String token,
-      @JsonKey(name: "refresh_token") String refreshToken,
+      String? token,
+      @JsonKey(name: "refresh_token") String? refreshToken,
       String msg});
 
   @override
@@ -124,8 +124,8 @@ class __$$UserResponseEntityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? results = null,
-    Object? token = null,
-    Object? refreshToken = null,
+    Object? token = freezed,
+    Object? refreshToken = freezed,
     Object? msg = null,
   }) {
     return _then(_$UserResponseEntityImpl(
@@ -133,14 +133,14 @@ class __$$UserResponseEntityImplCopyWithImpl<$Res>
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as UserEntity,
-      token: null == token
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      refreshToken: null == refreshToken
+              as String?,
+      refreshToken: freezed == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       msg: null == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -164,10 +164,10 @@ class _$UserResponseEntityImpl implements _UserResponseEntity {
   @override
   final UserEntity results;
   @override
-  final String token;
+  final String? token;
   @override
   @JsonKey(name: "refresh_token")
-  final String refreshToken;
+  final String? refreshToken;
   @override
   final String msg;
 
@@ -211,8 +211,8 @@ class _$UserResponseEntityImpl implements _UserResponseEntity {
 abstract class _UserResponseEntity implements UserResponseEntity {
   const factory _UserResponseEntity(
       {required final UserEntity results,
-      required final String token,
-      @JsonKey(name: "refresh_token") required final String refreshToken,
+      required final String? token,
+      @JsonKey(name: "refresh_token") required final String? refreshToken,
       required final String msg}) = _$UserResponseEntityImpl;
 
   factory _UserResponseEntity.fromJson(Map<String, dynamic> json) =
@@ -221,10 +221,10 @@ abstract class _UserResponseEntity implements UserResponseEntity {
   @override
   UserEntity get results;
   @override
-  String get token;
+  String? get token;
   @override
   @JsonKey(name: "refresh_token")
-  String get refreshToken;
+  String? get refreshToken;
   @override
   String get msg;
   @override

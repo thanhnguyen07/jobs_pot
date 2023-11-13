@@ -30,8 +30,8 @@ class LocalStorageHelper {
   }
 
   static Future<void> saveDataUser(
-    String token,
-    String refreshToken,
+    String? token,
+    String? refreshToken,
     String idUser,
   ) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -6,7 +6,28 @@ class RememberLoginController extends StateNotifier<bool> {
 
   final Ref ref;
 
+  Future initData() async {
+    final rememberStatus =
+        await ref.read(authRepositoryProvider).getRememberStatus();
+    if (rememberStatus != state) {
+      if (state) {
+        ref.read(authRepositoryProvider).saveRememberStatus();
+      } else {
+        ref.read(authRepositoryProvider).removeRememberStatus();
+      }
+    }
+  }
+
   void changeStatus() {
+    state = !state;
+    if (state) {
+      ref.read(authRepositoryProvider).saveRememberStatus();
+    } else {
+      ref.read(authRepositoryProvider).removeRememberStatus();
+    }
+  }
+
+  void changeStatus2() {
     state = !state;
     if (state) {
       ref.read(authRepositoryProvider).saveRememberStatus();

@@ -15,11 +15,9 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
 
   @override
   Future<Either<Failure, UserResponseEntity>> updateAvatar(
-      String avatarLink) async {
+      String imageUrl, String id) async {
     try {
-      final Map<String, String> body = {
-        "avatarLink": avatarLink,
-      };
+      final Map<String, String> body = {"image_url": imageUrl, "id": id};
       final signUpRes = await _apiClient.updateAvatar(body);
       return right(UserResponseEntity.fromJson(signUpRes));
     } catch (error) {

@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
-import 'package:jobs_pot/features/home/presentation/widget/avatar_user.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_jobs.dart';
 import 'package:jobs_pot/features/home/presentation/widget/coupon_card.dart';
+import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -85,10 +86,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _welcomeText(userData?.userName ?? ""),
-        AvatarUser(
-          context: context,
-          userData: userData,
-        ),
+        Container(
+          margin: const EdgeInsets.only(top: 50),
+          child: TextButton(
+            onPressed: () {
+              context.router.navigateNamed(ProfileScreen.path);
+            },
+            style: TextButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40),
+              ),
+            ),
+            child: AvatarImage(
+              avatarLink: userData?.photoUrl,
+              size: 40,
+              edit: false,
+            ),
+          ),
+        )
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_images.dart';
@@ -28,58 +29,50 @@ class ProfileCard extends ConsumerStatefulWidget {
 class _ProfileCardState extends ConsumerState<ProfileCard> {
   @override
   Widget build(BuildContext context) {
-    final UserEntity? userData = ref.watch(authControllerProvider);
+    UserEntity? userData = ref.watch(authControllerProvider);
     ref.watch(languageControllerProvider);
     bool editProfileState = ref.watch(profileControllerProvider);
 
     return Stack(
       children: [
-        Image.asset(
-          AppImages.cardBackground2,
-          fit: BoxFit.fitHeight,
+        Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: 175 + MediaQuery.of(context).padding.top,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25),
+                ),
+                child: Image.asset(
+                  AppImages.cardBackground2,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],
         ),
         Container(
-          margin: const EdgeInsets.only(top: 50, right: 20, left: 20),
+          margin: EdgeInsets.only(
+              top: MediaQuery.of(context).padding.top, right: 20, left: 20),
           child: Stack(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _avatarUser(userData?.photoUrl),
-                  _userName(userData?.userName ?? ''),
-                  _customText2(
-                    userData?.dateOfBirth?.split(' ')[0] != null
-                        ? LocaleKeys.profileCardDateOfBirthTitle.plural(
-                            0,
-                            args: [userData!.dateOfBirth!.split(' ')[0]],
-                          )
-                        : null,
-                  ),
-                  _customText2(
-                    userData?.gender != null
-                        ? LocaleKeys.profileCardGenderTitle
-                            .plural(0, args: [userData!.gender!])
-                        : null,
-                  ),
-                  _customText2(
-                    userData?.email != null
-                        ? LocaleKeys.profileCardEmailTitle
-                            .plural(0, args: [userData!.email])
-                        : null,
-                  ),
-                  _customText2(
-                    userData?.phoneNumber != null
-                        ? LocaleKeys.profileCardPhoneTitle
-                            .plural(0, args: [userData!.phoneNumber!])
-                        : null,
-                  ),
-                  _customText2(
-                    userData?.location != null
-                        ? LocaleKeys.profileCardLocationTitle
-                            .plural(0, args: [userData!.location!])
-                        : null,
-                  ),
-                ],
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _avatarUser(userData?.photoUrl, false),
+                    _userName(userData?.userName ?? ''),
+                    _customText2(
+                      userData?.email != null
+                          ? LocaleKeys.profileCardEmailTitle
+                              .plural(0, args: [userData!.email])
+                          : null,
+                    ),
+                  ],
+                ),
               ),
               _buttonActions(context, editProfileState)
             ],
@@ -89,35 +82,17 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     );
   }
 
-  SizedBox _buttonActions(BuildContext context, bool editProfileState) {
-    return SizedBox(
+  Widget _buttonActions(BuildContext context, bool editProfileState) {
+    return Container(
       width: double.infinity,
       height: double.infinity,
+      margin: const EdgeInsets.only(bottom: 5),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _customButton(
-                onTab: () {
-                  FocusScopeNode currentFocus = FocusScope.of(context);
-                  if (!currentFocus.hasPrimaryFocus) {
-                    currentFocus.unfocus();
-                  }
-                  ref
-                      .read(profileControllerProvider.notifier)
-                      .changeEditProfile();
-                  if (!editProfileState) {
-                    ref.read(profileControllerProvider.notifier).clearInput();
-                  }
-                },
-                iconPath: AppIcons.edit,
-                colorFilter: ColorFilter.mode(
-                  editProfileState ? Colors.white : AppColors.fireYellowColor,
-                  BlendMode.srcIn,
-                ),
-              ),
               const SizedBox(width: 15),
               _customButton(
                 onTab: () {},
@@ -140,7 +115,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const SizedBox(),
-              editProfileState ? const SizedBox() : _buttonChangeImage(),
+              _buttonEditProfile(editProfileState, context),
             ],
           )
         ],
@@ -153,7 +128,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
       margin: const EdgeInsets.only(top: 5, bottom: 10),
       child: Text(
         userName,
-        style: AppTextStyle.whiteMediumS14,
+        style: AppTextStyle.whiteBoldS14,
       ),
     );
   }
@@ -167,24 +142,106 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
         : const SizedBox();
   }
 
-  Widget _avatarUser(String? avatarLink) {
+  Widget _avatarUser(String? avatarLink, bool editProfileState,
+      [double? size]) {
     return AvatarImage(
-      size: 60,
+      size: size ?? 60,
       avatarLink: avatarLink,
+      edit: editProfileState,
+      onTab: () async {
+        await ref.read(profileControllerProvider.notifier).updateAvatar();
+      },
     );
   }
 
-  ElevatedButton _buttonChangeImage() {
-    return ElevatedButton(
-      onPressed: () async {
-        await ref.read(profileControllerProvider.notifier).updateAvatar();
+  Widget _buttonEditProfile(bool editProfileState, BuildContext parentContext) {
+    UserEntity? userData = ref.watch(authControllerProvider);
+    ref.watch(languageControllerProvider);
+    return ElevatedButton.icon(
+      onPressed: () {
+        ref.read(profileControllerProvider.notifier).changeEditProfile();
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 150),
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: 175 + MediaQuery.of(parentContext).padding.top,
+                        child: Stack(children: [
+                          ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(25)),
+                            child: Image.asset(
+                              AppImages.cardBackground2,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                ClipOval(
+                                  child: Container(
+                                    color: AppColors.fireYellowColor,
+                                    padding: const EdgeInsets.all(2),
+                                    child: SvgPicture.asset(
+                                      width: 15,
+                                      height: 15,
+                                      AppIcons.pencil,
+                                      colorFilter: const ColorFilter.mode(
+                                        AppColors.whiteColor1,
+                                        BlendMode.srcIn,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                _avatarUser(userData?.photoUrl, true, 80)
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        );
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white.withOpacity(0.2),
+        backgroundColor: editProfileState
+            ? AppColors.fireYellowColor
+            : Colors.white.withOpacity(0.2),
         minimumSize: const Size(80, 30),
       ),
-      child: Text(
-        Utils.getLocaleMessage(LocaleKeys.profileChangeImageTitle),
+      icon: SvgPicture.asset(
+        width: 20,
+        height: 20,
+        AppIcons.edit,
+        colorFilter: const ColorFilter.mode(
+          AppColors.whiteColor1,
+          BlendMode.srcIn,
+        ),
+      ),
+      label: Text(
+        Utils.getLocaleMessage(LocaleKeys.profileEditProfileTitle),
         style: AppTextStyle.whiteRegularS12,
       ),
     );

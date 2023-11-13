@@ -12,7 +12,7 @@ import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ProfileController extends StateNotifier<bool> {
-  ProfileController(this.ref) : super(true);
+  ProfileController(this.ref) : super(false);
 
   final Ref ref;
 
@@ -106,13 +106,17 @@ class ProfileController extends StateNotifier<bool> {
   }
 
   Future<void> updateAvatar() async {
+    ref.read(systemControllerProvider.notifier).showLoading();
     final ImagePicker picker = ImagePicker();
     try {
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
         uploadImageToFirebase(image);
       }
+
+      ref.read(systemControllerProvider.notifier).hideLoading();
     } catch (e) {
+      ref.read(systemControllerProvider.notifier).hideLoading();
       ref.read(systemControllerProvider.notifier).showToastGeneralError();
     }
   }
@@ -124,7 +128,7 @@ class ProfileController extends StateNotifier<bool> {
     final File image = File(imageFile.path);
     try {
       String storagePath =
-          "${FirebaseKeys.pathFolderAvatarImage}/${userData?.uid}.jpg";
+          "${FirebaseKeys.pathFolderAvatarImage}/${userData?.uid}/avatar.jpg";
 
       Reference refStorage = FirebaseStorage.instance.ref().child(storagePath);
 
@@ -148,14 +152,24 @@ class ProfileController extends StateNotifier<bool> {
     }
   }
 
-  Future<void> uploadAvatarLinkOnServer(String downloadUrl) async {
-    final updateAvatarResult =
-        await ref.read(profileResponsitoryProvider).updateAvatar(downloadUrl);
+  Future<void> uploadAvatarLinkOnServer(String imageUrl) async {
+    UserEntity? userData = ref.read(authControllerProvider);
+    String? userId = userData?.id;
+    if (userId != null) {
+      final updateAvatarResult = await ref
+          .read(profileResponsitoryProvider)
+          .updateAvatar(imageUrl, userId);
 
-    updateAvatarResult.fold((l) {}, (r) {
-      ref.read(authControllerProvider.notifier).setDataUser(r.results);
+      updateAvatarResult.fold((l) {
+        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      }, (r) {
+        changeEditProfile();
+        ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-      ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
-    });
+        ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+      });
+    } else {
+      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+    }
   }
 }

@@ -31,6 +31,7 @@ class AppIcons {
   static const darkMode = 'lib/assets/iconsSvg/dark_mode.svg';
   static const edit = 'lib/assets/iconsSvg/edit.svg';
   static const edit2 = 'lib/assets/iconsSvg/edit_2.svg';
+  static const pencil = 'lib/assets/iconsSvg/pencil.svg';
   static const education2 = 'lib/assets/iconsSvg/education_2.svg';
   static const file = 'lib/assets/iconsSvg/file.svg';
   static const filter = 'lib/assets/iconsSvg/filter.svg';

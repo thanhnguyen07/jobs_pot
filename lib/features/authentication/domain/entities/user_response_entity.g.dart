@@ -10,8 +10,8 @@ _$UserResponseEntityImpl _$$UserResponseEntityImplFromJson(
         Map<String, dynamic> json) =>
     _$UserResponseEntityImpl(
       results: UserEntity.fromJson(json['results'] as Map<String, dynamic>),
-      token: json['token'] as String,
-      refreshToken: json['refresh_token'] as String,
+      token: json['token'] as String?,
+      refreshToken: json['refresh_token'] as String?,
       msg: json['msg'] as String,
     );
 

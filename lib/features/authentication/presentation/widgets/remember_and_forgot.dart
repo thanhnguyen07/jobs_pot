@@ -20,6 +20,13 @@ class RememberAndForgot extends ConsumerStatefulWidget {
 
 class _RememberAndForgotState extends ConsumerState<RememberAndForgot> {
   @override
+  void initState() {
+    super.initState();
+
+    ref.read(rememberLoginController.notifier).initData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ref.watch(languageControllerProvider);
 
