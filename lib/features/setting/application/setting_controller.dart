@@ -8,17 +8,4 @@ import 'package:jobs_pot/routes/route_config.gr.dart';
 class SettingController extends StateNotifier {
   SettingController(this.ref) : super(null);
   final Ref ref;
-
-  void onLogOut(BuildContext context) async {
-    await FirebaseAuth.instance.signOut().then(
-      (value) {
-        ref.read(authRepositoryProvider).removeToken().then(
-          (value) {
-            ref.read(loginWithGoogleControllerProvider.notifier).disconnect();
-            context.router.replaceAll([const LoginRoute()]);
-          },
-        );
-      },
-    );
-  }
 }

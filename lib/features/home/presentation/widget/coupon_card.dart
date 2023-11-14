@@ -8,8 +8,11 @@ import 'package:jobs_pot/utils/utils.dart';
 
 class CouponCard extends StatelessWidget {
   const CouponCard({
-    super.key,
-  });
+    Key? key,
+    required this.onPress,
+  }) : super(key: null);
+
+  final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class CouponCard extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: onPress,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(0, 30),
                 backgroundColor: AppColors.fireYellowColor,

@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/resfresh_token_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/verification_code_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
@@ -14,6 +15,8 @@ abstract class AuthRepositoryInterface {
 
   Future<String?> getToken();
 
+  Future<String?> getRefreshToken();
+
   Future<String?> getIdUser();
 
   Future<bool?> getOnboadingStatus();
@@ -25,6 +28,8 @@ abstract class AuthRepositoryInterface {
   void removeOnboadingStatus();
 
   void removeRememberStatus();
+
+  Future removeDataUser();
 
   Future<Either<Failure, UserResponseEntity>> signUpWithEmail(
     String fullName,
@@ -40,4 +45,7 @@ abstract class AuthRepositoryInterface {
       String email);
 
   Future<Either<Failure, VerificationCodeEntity>> sendVerifyCode(String code);
+
+  Future<Either<Failure, RefreshTokenResponseEntity>> refreshToken(
+      String refreshToken);
 }

@@ -31,8 +31,8 @@ abstract class ApiClient {
   @POST("user/update-informations")
   Future<dynamic> updateInformations(@Body() Map<String, dynamic> body);
 
-  // @GET("user/profile")
-  // Future<dynamic> getUserProfile();
+  @POST("user/refresh-token")
+  Future<dynamic> refreshToken(@Body() Map<String, dynamic> body);
 
   @GET("job/summary")
   Future<dynamic> getJobsSummary();

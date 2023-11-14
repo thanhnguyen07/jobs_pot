@@ -29,11 +29,8 @@ class LocalStorageHelper {
     await prefs.setString(_refreshTokenKey, jsonEncode(token));
   }
 
-  static Future<void> saveDataUser(
-    String? token,
-    String? refreshToken,
-    String idUser,
-  ) async {
+  static Future<void> saveDataUser(String? token, String? refreshToken,
+      [String? idUser]) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_tokenKey, jsonEncode(token));
     await prefs.setString(_refreshTokenKey, jsonEncode(refreshToken));

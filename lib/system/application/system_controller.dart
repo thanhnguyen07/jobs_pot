@@ -1,12 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/networks/api_util.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:jobs_pot/routes/route_config.gr.dart';
+import 'package:jobs_pot/routes/route_providers.dart';
+import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/logger.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import '../domain/entities/app_state_entity.dart';
@@ -77,8 +83,10 @@ class SystemController extends StateNotifier<AppStateEntity> {
 
     if (error.response != null) {
       try {
-        final res = error.response?.data;
-        showToastMessage(res!["msg"]);
+        if (statusCode != 401) {
+          final res = error.response?.data;
+          showToastMessage(res!["msg"]);
+        }
 
         data = jsonEncode(error.response.toString());
       } catch (e) {
@@ -94,28 +102,20 @@ class SystemController extends StateNotifier<AppStateEntity> {
     apiLogger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
 
     if (statusCode == 401) {
-      // final User? userFirebase =
-      //     ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
-      // final String? idToken = await userFirebase?.getIdToken();
+      final bool refreshTokenRes =
+          await ref.read(authControllerProvider.notifier).refreshToken();
 
-      // if (idToken != null) {
-      //   await ref.read(authRepositoryProvider).saveToken(idToken);
-
-      //   error.requestOptions.headers['authorization'] = 'Bearer $idToken';
-
-      //   final opts = Options(
-      //     method: error.requestOptions.method,
-      //     headers: error.requestOptions.headers,
-      //   );
-
-      //   final cloneReq = await ApiUtil().getDio().request(
-      //       error.requestOptions.uri.toString(),
-      //       options: opts,
-      //       data: error.requestOptions.data,
-      //       queryParameters: error.requestOptions.queryParameters);
-
-      //   return handler.resolve(cloneReq);
-      // }
+      if (refreshTokenRes) {
+        final cloneReq = await ApiUtil().getDio().fetch(error.requestOptions);
+        return handler.resolve(cloneReq);
+      } else {
+        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+        ref.read(authControllerProvider.notifier).onLogOut();
+      }
+    }
+    if (statusCode == 403) {
+      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      ref.read(authControllerProvider.notifier).onLogOut();
     }
   }
 }

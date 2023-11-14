@@ -49,7 +49,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _header(context),
-                const CouponCard(),
+                CouponCard(
+                  onPress: () {},
+                ),
                 _customTitle(LocaleKeys.homeFindJobTitle),
                 const ButtonJobs(),
                 _customTitle(LocaleKeys.homeRecentFinJobTitle),
