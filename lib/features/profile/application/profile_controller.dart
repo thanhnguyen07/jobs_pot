@@ -29,10 +29,6 @@ class ProfileController extends StateNotifier<bool> {
   String? getPhoneNumber() => _phoneNumber;
   void setPhoneNumber(String? value) => _phoneNumber = value;
 
-  void changeEditProfile() {
-    state = !state;
-  }
-
   final _profileInputForm = FormGroup(
     {
       ValidationKeys.fullName: FormControl<String>(
@@ -81,8 +77,6 @@ class ProfileController extends StateNotifier<bool> {
     updateAvatarResult.fold((l) {
       ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
     }, (r) {
-      ref.read(profileControllerProvider.notifier).changeEditProfile();
-
       ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
       ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
@@ -163,7 +157,6 @@ class ProfileController extends StateNotifier<bool> {
       updateAvatarResult.fold((l) {
         ref.read(systemControllerProvider.notifier).showToastGeneralError();
       }, (r) {
-        changeEditProfile();
         ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
         ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);

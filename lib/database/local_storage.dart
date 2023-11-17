@@ -34,7 +34,9 @@ class LocalStorageHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_tokenKey, jsonEncode(token));
     await prefs.setString(_refreshTokenKey, jsonEncode(refreshToken));
-    await prefs.setString(_idUser, jsonEncode(idUser));
+    if (idUser != null) {
+      await prefs.setString(_idUser, jsonEncode(idUser));
+    }
   }
 
   //GET

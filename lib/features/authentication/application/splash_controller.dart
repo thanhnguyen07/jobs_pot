@@ -27,7 +27,7 @@ class SplashController extends StateNotifier<bool> {
 
               if (token != null && idUser != null && rememberStatus != null) {
                 if (context.mounted) {
-                  getUserProfile(context, idUser);
+                  await getUserProfile(context, idUser);
                 }
               } else {
                 if (context.mounted) {

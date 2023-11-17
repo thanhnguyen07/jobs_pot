@@ -32,6 +32,7 @@ class AppIcons {
   static const edit = 'lib/assets/iconsSvg/edit.svg';
   static const edit2 = 'lib/assets/iconsSvg/edit_2.svg';
   static const pencil = 'lib/assets/iconsSvg/pencil.svg';
+  static const pencil2 = 'lib/assets/iconsSvg/pencil_2.svg';
   static const education2 = 'lib/assets/iconsSvg/education_2.svg';
   static const file = 'lib/assets/iconsSvg/file.svg';
   static const filter = 'lib/assets/iconsSvg/filter.svg';

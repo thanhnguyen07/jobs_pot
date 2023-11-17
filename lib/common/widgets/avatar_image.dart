@@ -10,12 +10,14 @@ class AvatarImage extends StatelessWidget {
     required this.avatarLink,
     required this.size,
     this.onTab,
+    this.sizeEditIcon,
     required this.edit,
   });
 
   final String? avatarLink;
   final bool edit;
   final double size;
+  final double? sizeEditIcon;
   final void Function()? onTab;
 
   @override
@@ -81,11 +83,11 @@ class AvatarImage extends StatelessWidget {
                     children: [
                       ClipOval(
                         child: Container(
-                          color: AppColors.fireYellowColor,
-                          padding: const EdgeInsets.all(2),
+                          color: AppColors.iconColor,
+                          padding: const EdgeInsets.all(3),
                           child: SvgPicture.asset(
-                            width: 15,
-                            height: 15,
+                            width: sizeEditIcon ?? 15,
+                            height: sizeEditIcon ?? 15,
                             AppIcons.pencil,
                             colorFilter: const ColorFilter.mode(
                               AppColors.whiteColor1,
