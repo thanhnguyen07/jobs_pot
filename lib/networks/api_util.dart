@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../config/app_configs.dart';
 import 'api_client.dart';
 import 'api_interceptors.dart';

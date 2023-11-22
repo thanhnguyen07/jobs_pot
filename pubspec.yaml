@@ -37,6 +37,33 @@ dependencies:
   flutter_facebook_auth: ^6.0.2
   pinput: ^3.0.1
   fluttertoast: ^8.2.3
+  flutter_flavorizr: ^2.2.1
+
+flavorizr:
+  flavors:
+    production:
+      app:
+        name: "Jobs Post"
+      android:
+        applicationId: "com.example.jobs_pot"
+        firebase:
+          config: "./android/app/google-services.json"
+      ios:
+        bundleId: "com.example.jobsPot"
+        firebase:
+          config: "./ios/Runner/GoogleService-Info.plist"
+
+    dev:
+      app:
+        name: "Jobs Post Dev"
+      android:
+        applicationId: "com.example.jobs_pot.dev"
+        firebase:
+          config: "./android/app/google-services-dev.json"
+      ios:
+        bundleId: "com.example.jobsPot.dev"
+        firebase:
+          config: "./ios/Runner/GoogleService-Info-dev.plist"
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +78,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - lib/assets/
     - lib/resources/i18n/langs/
     - lib/assets/iconsPng/
     - lib/assets/imagesPng/

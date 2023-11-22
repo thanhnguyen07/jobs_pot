@@ -1,22 +1,17 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "jobs_pot",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "jobs_pot (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "jobs_pot (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Production",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--flavor", "production", "-t", "lib/main_production.dart"]
+    },
+    {
+      "name": "Dev",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--flavor", "dev", "-t", "lib/main_dev.dart"]
+    }
+  ]
 }

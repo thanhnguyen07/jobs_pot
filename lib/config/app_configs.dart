@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jobs_pot/flavors.dart';
 
 class AppConfigs {
-  // static const baseUrl = "https://server-jobs-pot.vercel.app/";
-  static const baseUrl = "http://localhost:7002/";
+  static const defaultUrl = "https://server-jobs-pot.vercel.app/";
+  static String baseUrl = FLAVER.baseUrl;
 
   ///Locale Language
   static const appLanguageVi = Locale('vi');
