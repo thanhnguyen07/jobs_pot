@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/config/app_configs.dart';
 import 'package:jobs_pot/config/providers.dart';
+import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/routes/route_providers.dart';
 
 late ProviderContainer appContainer;
@@ -16,12 +17,15 @@ void main() async {
 
   appContainer = await appProviderContainer();
 
+  String defaultLanguage = await LocalStorageHelper.getDefaultLanguage();
+
   runApp(
     EasyLocalization(
       supportedLocales: const [
         AppConfigs.appLanguageEn,
         AppConfigs.appLanguageVi
       ],
+      startLocale: Locale(defaultLanguage),
       path: AppConfigs.pathLanguage,
       fallbackLocale: AppConfigs.appLanguageEn,
       child: UncontrolledProviderScope(

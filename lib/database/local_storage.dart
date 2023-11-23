@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:jobs_pot/config/app_configs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageHelper {
@@ -7,6 +8,7 @@ class LocalStorageHelper {
   static const _onboarding = '_onboarding';
   static const _remember = '_remember';
   static const _idUser = '_idUser';
+  static const _defaultLanguage = '_defaultLanguage';
 
   //SAVE
   static Future<void> saveOnboadingStatus() async {
@@ -17,6 +19,11 @@ class LocalStorageHelper {
   static Future<void> saveRememberStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_remember, true);
+  }
+
+  static Future<void> saveDefaultLanguage(String defaultLanguage) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_defaultLanguage, jsonEncode(defaultLanguage));
   }
 
   static Future<void> saveToken(String token) async {
@@ -51,6 +58,20 @@ class LocalStorageHelper {
       }
     } catch (e) {
       return null;
+    }
+  }
+
+  static Future<String> getDefaultLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      final defaultLanguageEncoded = prefs.getString(_defaultLanguage);
+      if (defaultLanguageEncoded == null) {
+        return AppConfigs.appLanguageEn.toString();
+      } else {
+        return jsonDecode(defaultLanguageEncoded);
+      }
+    } catch (e) {
+      return AppConfigs.appLanguageEn.toString();
     }
   }
 
