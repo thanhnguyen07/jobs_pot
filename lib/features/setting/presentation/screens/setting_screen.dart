@@ -8,7 +8,6 @@ import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/setttin_button.dart';
-import 'package:jobs_pot/features/setting/setting_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
