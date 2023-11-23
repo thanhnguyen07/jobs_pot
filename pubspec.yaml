@@ -43,7 +43,7 @@ flavorizr:
   flavors:
     production:
       app:
-        name: "Jobs Post"
+        name: "Jobs Pot"
       android:
         applicationId: "com.example.jobs_pot"
         firebase:
@@ -55,7 +55,7 @@ flavorizr:
 
     dev:
       app:
-        name: "Jobs Post Dev"
+        name: "Jobs Pot Dev"
       android:
         applicationId: "com.example.jobs_pot.dev"
         firebase:
