@@ -10,12 +10,14 @@ class SettingButton extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.showArrowButton,
+    this.color,
   });
 
   final Function onPress;
   final String title;
   final Widget icon;
   final bool showArrowButton;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class SettingButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => onPress(),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
+          backgroundColor: color ?? Colors.white,
           minimumSize: const Size(double.infinity, 45),
           elevation: 8,
           shadowColor: Colors.white,

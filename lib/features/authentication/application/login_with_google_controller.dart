@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/system/system_providers.dart';
@@ -30,18 +33,27 @@ class LoginWithGoogleController extends StateNotifier {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await linkUser(credential);
-      if (context.mounted) {
-        await signIn(credential, context);
+      final String providerId = credential.providerId;
+      final String email = googleUser.email;
+
+      bool check = await checkAccount(providerId, email);
+      if (check) {
+        if (context.mounted) {
+          await signIn(credential, context);
+        }
+      } else {
+        ref.read(systemControllerProvider.notifier).handlerFirebaseError(
+            FirebaseKeys.accountExistsWithDifferentCredential);
       }
     }
     ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
-  Future linkUser(OAuthCredential credential) async {
-    try {
-      await FirebaseAuth.instance.currentUser?.linkWithCredential(credential);
-    } on FirebaseAuthException catch (_) {}
+  Future<bool> checkAccount(String providerId, String email) async {
+    final checkAccountRes =
+        await ref.read(authRepositoryProvider).checkAccount(providerId, email);
+
+    return checkAccountRes.fold((l) => false, (r) => true);
   }
 
   Future signIn(OAuthCredential credential, BuildContext context) async {

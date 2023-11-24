@@ -20,9 +20,10 @@ class FirebaseKeys {
   static const String wrongPassword = "wrong-password";
   static const String tooManyRequests = "too-many-requests";
   static const String googleType = "google";
-  static const String pathFolderAvatarImage = "avatar_images";
+  static const String pathFolderUserImage = "user_images";
   static const String pathFolderPostImage = "post_images";
   static const String accountExistsWithDifferentCredential =
       "account-exists-with-different-credential";
   static const String providerAlreadyLinked = "provider-already-linked";
+  static const String invalidLoginCredentials = "INVALID_LOGIN_CREDENTIALS";
 }

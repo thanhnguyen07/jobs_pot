@@ -9,7 +9,9 @@ part 'api_client.g.dart';
 abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
-  ///User
+  @POST("user/check-account")
+  Future<dynamic> checkAccount(@Body() Map<String, dynamic> body);
+
   @POST("user/signup-with-email")
   Future<dynamic> signUpWithEmail(@Body() Map<String, dynamic> body);
 
@@ -25,8 +27,8 @@ abstract class ApiClient {
   @GET("user/profile")
   Future<dynamic> getUserProfile(@Query("id") String id);
 
-  @PUT("user/update-avatar")
-  Future<dynamic> updateAvatar(@Body() Map<String, dynamic> body);
+  @PUT("user/update-image")
+  Future<dynamic> updateImage(@Body() Map<String, dynamic> body);
 
   @POST("user/update-informations")
   Future<dynamic> updateInformations(@Body() Map<String, dynamic> body);

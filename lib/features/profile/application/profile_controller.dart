@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
@@ -99,13 +100,13 @@ class ProfileController extends StateNotifier<bool> {
         ?.toString();
   }
 
-  Future<void> updateAvatar() async {
+  Future<void> updateImage(UploadImageType type) async {
     ref.read(systemControllerProvider.notifier).showLoading();
     final ImagePicker picker = ImagePicker();
     try {
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
-        uploadImageToFirebase(image);
+        uploadImageToFirebase(image, type);
       }
 
       ref.read(systemControllerProvider.notifier).hideLoading();
@@ -115,28 +116,30 @@ class ProfileController extends StateNotifier<bool> {
     }
   }
 
-  Future<void> uploadImageToFirebase(XFile imageFile) async {
+  Future<void> uploadImageToFirebase(
+      XFile imageFile, UploadImageType type) async {
     UserEntity? userData = ref.read(authControllerProvider);
 
     ref.read(systemControllerProvider.notifier).showLoading();
     final File image = File(imageFile.path);
+
+    final fileName = type == UploadImageType.avatar ? "avatar" : "background";
+
     try {
       String storagePath =
-          "${FirebaseKeys.pathFolderAvatarImage}/${userData?.uid}/avatar.jpg";
+          "${FirebaseKeys.pathFolderUserImage}/${userData?.uid}/$fileName.jpg";
 
       Reference refStorage = FirebaseStorage.instance.ref().child(storagePath);
 
       try {
         await refStorage.delete();
-      } catch (e) {
-        //
-      }
+      } catch (_) {}
 
       UploadTask uploadTask = refStorage.putFile(image);
 
       String downloadUrl = await (await uploadTask).ref.getDownloadURL();
 
-      await uploadAvatarLinkOnServer(downloadUrl);
+      await uploadAvatarLinkOnServer(downloadUrl, type);
 
       ref.read(systemControllerProvider.notifier).hideLoading();
     } catch (e) {
@@ -146,13 +149,14 @@ class ProfileController extends StateNotifier<bool> {
     }
   }
 
-  Future<void> uploadAvatarLinkOnServer(String imageUrl) async {
+  Future<void> uploadAvatarLinkOnServer(
+      String imageUrl, UploadImageType type) async {
     UserEntity? userData = ref.read(authControllerProvider);
     String? userId = userData?.id;
     if (userId != null) {
       final updateAvatarResult = await ref
           .read(profileResponsitoryProvider)
-          .updateAvatar(imageUrl, userId);
+          .updateImage(imageUrl, userId, type);
 
       updateAvatarResult.fold((l) {
         ref.read(systemControllerProvider.notifier).showToastGeneralError();

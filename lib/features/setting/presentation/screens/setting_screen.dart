@@ -35,6 +35,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             _backButton(context),
             _titleSettting(),
             _buttonChangeLanguage(context),
+            _accountButton(context),
             _buttonLogout(),
           ],
         ),
@@ -52,9 +53,32 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
           },
         );
       },
+      color: Colors.red,
       title: Utils.getLocaleMessage(LocaleKeys.settingLogoutTitle),
       showArrowButton: true,
       icon: SvgPicture.asset(AppIcons.logout),
+    );
+  }
+
+  SettingButton _accountButton(BuildContext context) {
+    return SettingButton(
+      onPress: () {
+        // showModalBottomSheet<void>(
+        //   context: context,
+        //   builder: (BuildContext context) {
+        //     return _modalLogout(context);
+        //   },
+        // );
+      },
+      title: Utils.getLocaleMessage(LocaleKeys.settingLogoutTitle),
+      showArrowButton: true,
+      icon: SvgPicture.asset(
+        AppIcons.profile,
+        colorFilter: const ColorFilter.mode(
+          AppColors.blackColor,
+          BlendMode.srcIn,
+        ),
+      ),
     );
   }
 

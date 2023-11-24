@@ -11,7 +11,7 @@
   "authenticationLoginTitle": "Welcome Back",
   "authenticationSignUpTitle": "Create an Account",
   "authenticationSignUpWith": "Sign up with",
-  "authenticationSignUpError": "This email is already registered. Please use another email.",
+  "authenticationSignUpError": "This email is already registered. Please use another email. Or log in to the account that used this email and link the account.",
   "authenticationSignUpError2": "The password provided is too weak.",
   "authenticationSignUpError3": "Email does not exist!",
   "authenticationSignUpError4": "Email or password is incorrect!",

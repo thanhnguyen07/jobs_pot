@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
+import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
+import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
@@ -30,7 +32,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
         children: [
           Stack(
             children: [
-              _background(context),
+              _background(context, userData),
               _buttonHeader(context),
               _userAvatar(userData),
             ],
@@ -69,7 +71,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
                     onTab: () async {
                       await ref
                           .read(profileControllerProvider.notifier)
-                          .updateAvatar();
+                          .updateImage(UploadImageType.avatar);
                     },
                   ),
                 ),
@@ -93,45 +95,50 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _backButton(context),
-          ClipOval(
-            child: Container(
-              color: AppColors.iconColor,
-              padding: const EdgeInsets.all(3),
-              child: SvgPicture.asset(
-                width: 20,
-                height: 20,
-                AppIcons.pencil,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.whiteColor1,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          ),
+          _editBackground(),
         ],
       ),
     );
   }
 
-  SizedBox _background(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 175 + MediaQuery.of(context).padding.top,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(25)),
-        child: Image.asset(
-          AppImages.cardBackground2,
-          fit: BoxFit.cover,
+  Widget _editBackground() {
+    return GestureDetector(
+      onTap: () {
+        ref
+            .read(profileControllerProvider.notifier)
+            .updateImage(UploadImageType.background);
+      },
+      child: ClipOval(
+        child: Container(
+          color: AppColors.iconColor,
+          padding: const EdgeInsets.all(3),
+          child: SvgPicture.asset(
+            width: 20,
+            height: 20,
+            AppIcons.pencil,
+            colorFilter: const ColorFilter.mode(
+              AppColors.whiteColor1,
+              BlendMode.srcIn,
+            ),
+          ),
         ),
       ),
     );
   }
 
-  GestureDetector _backButton(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+  Widget _background(BuildContext context, UserEntity? userData) {
+    return BackgroundImage(imageUrl: userData?.backgroundUrl);
+  }
+
+  Widget _backButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
         context.router.back();
       },
+      style: TextButton.styleFrom(
+        backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
+        minimumSize: const Size(0, 0),
+      ),
       child: SvgPicture.asset(
         AppIcons.back,
         colorFilter: const ColorFilter.mode(

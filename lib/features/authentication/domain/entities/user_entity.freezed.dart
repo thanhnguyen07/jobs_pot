@@ -33,6 +33,8 @@ mixin _$UserEntity {
   String? get fcmToken => throw _privateConstructorUsedError;
   @JsonKey(name: "photo_url")
   String? get photoUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: "background_url")
+  String? get backgroundUrl => throw _privateConstructorUsedError;
   @JsonKey(name: "date_of_birth")
   String? get dateOfBirth => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
@@ -62,6 +64,7 @@ abstract class $UserEntityCopyWith<$Res> {
       @JsonKey(name: "provider_data") List<ProviderInfoEntity> providerData,
       @JsonKey(name: "fcm_token") String? fcmToken,
       @JsonKey(name: "photo_url") String? photoUrl,
+      @JsonKey(name: "background_url") String? backgroundUrl,
       @JsonKey(name: "date_of_birth") String? dateOfBirth,
       String? gender,
       @JsonKey(name: "phone_number") String? phoneNumber,
@@ -89,6 +92,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? providerData = null,
     Object? fcmToken = freezed,
     Object? photoUrl = freezed,
+    Object? backgroundUrl = freezed,
     Object? dateOfBirth = freezed,
     Object? gender = freezed,
     Object? phoneNumber = freezed,
@@ -123,6 +127,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
       photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      backgroundUrl: freezed == backgroundUrl
+          ? _value.backgroundUrl
+          : backgroundUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
@@ -164,6 +172,7 @@ abstract class _$$UserEntityImplCopyWith<$Res>
       @JsonKey(name: "provider_data") List<ProviderInfoEntity> providerData,
       @JsonKey(name: "fcm_token") String? fcmToken,
       @JsonKey(name: "photo_url") String? photoUrl,
+      @JsonKey(name: "background_url") String? backgroundUrl,
       @JsonKey(name: "date_of_birth") String? dateOfBirth,
       String? gender,
       @JsonKey(name: "phone_number") String? phoneNumber,
@@ -189,6 +198,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? providerData = null,
     Object? fcmToken = freezed,
     Object? photoUrl = freezed,
+    Object? backgroundUrl = freezed,
     Object? dateOfBirth = freezed,
     Object? gender = freezed,
     Object? phoneNumber = freezed,
@@ -223,6 +233,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
       photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      backgroundUrl: freezed == backgroundUrl
+          ? _value.backgroundUrl
+          : backgroundUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
@@ -260,6 +274,7 @@ class _$UserEntityImpl implements _UserEntity {
       required final List<ProviderInfoEntity> providerData,
       @JsonKey(name: "fcm_token") this.fcmToken,
       @JsonKey(name: "photo_url") this.photoUrl,
+      @JsonKey(name: "background_url") this.backgroundUrl,
       @JsonKey(name: "date_of_birth") this.dateOfBirth,
       this.gender,
       @JsonKey(name: "phone_number") this.phoneNumber,
@@ -296,6 +311,9 @@ class _$UserEntityImpl implements _UserEntity {
   @JsonKey(name: "photo_url")
   final String? photoUrl;
   @override
+  @JsonKey(name: "background_url")
+  final String? backgroundUrl;
+  @override
   @JsonKey(name: "date_of_birth")
   final String? dateOfBirth;
   @override
@@ -311,7 +329,7 @@ class _$UserEntityImpl implements _UserEntity {
 
   @override
   String toString() {
-    return 'UserEntity(userName: $userName, email: $email, uid: $uid, emailVerified: $emailVerified, providerData: $providerData, fcmToken: $fcmToken, photoUrl: $photoUrl, dateOfBirth: $dateOfBirth, gender: $gender, phoneNumber: $phoneNumber, location: $location, id: $id)';
+    return 'UserEntity(userName: $userName, email: $email, uid: $uid, emailVerified: $emailVerified, providerData: $providerData, fcmToken: $fcmToken, photoUrl: $photoUrl, backgroundUrl: $backgroundUrl, dateOfBirth: $dateOfBirth, gender: $gender, phoneNumber: $phoneNumber, location: $location, id: $id)';
   }
 
   @override
@@ -331,6 +349,8 @@ class _$UserEntityImpl implements _UserEntity {
                 other.fcmToken == fcmToken) &&
             (identical(other.photoUrl, photoUrl) ||
                 other.photoUrl == photoUrl) &&
+            (identical(other.backgroundUrl, backgroundUrl) ||
+                other.backgroundUrl == backgroundUrl) &&
             (identical(other.dateOfBirth, dateOfBirth) ||
                 other.dateOfBirth == dateOfBirth) &&
             (identical(other.gender, gender) || other.gender == gender) &&
@@ -352,6 +372,7 @@ class _$UserEntityImpl implements _UserEntity {
       const DeepCollectionEquality().hash(_providerData),
       fcmToken,
       photoUrl,
+      backgroundUrl,
       dateOfBirth,
       gender,
       phoneNumber,
@@ -382,6 +403,7 @@ abstract class _UserEntity implements UserEntity {
       required final List<ProviderInfoEntity> providerData,
       @JsonKey(name: "fcm_token") final String? fcmToken,
       @JsonKey(name: "photo_url") final String? photoUrl,
+      @JsonKey(name: "background_url") final String? backgroundUrl,
       @JsonKey(name: "date_of_birth") final String? dateOfBirth,
       final String? gender,
       @JsonKey(name: "phone_number") final String? phoneNumber,
@@ -410,6 +432,9 @@ abstract class _UserEntity implements UserEntity {
   @override
   @JsonKey(name: "photo_url")
   String? get photoUrl;
+  @override
+  @JsonKey(name: "background_url")
+  String? get backgroundUrl;
   @override
   @JsonKey(name: "date_of_birth")
   String? get dateOfBirth;

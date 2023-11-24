@@ -31,7 +31,7 @@ class SystemController extends StateNotifier<AppStateEntity> {
     Fluttertoast.showToast(
       msg: message,
       backgroundColor: AppColors.purpleColor,
-      timeInSecForIosWeb: 3,
+      timeInSecForIosWeb: 5,
     );
   }
 
@@ -64,6 +64,10 @@ class SystemController extends StateNotifier<AppStateEntity> {
       case FirebaseKeys.accountExistsWithDifferentCredential:
         return showToastMessageWithLocaleKeys(
           LocaleKeys.authenticationSignUpError,
+        );
+      case FirebaseKeys.invalidLoginCredentials:
+        return showToastMessageWithLocaleKeys(
+          LocaleKeys.authenticationSignUpError4,
         );
       default:
         return showToastGeneralError();

@@ -39,6 +39,7 @@ class AppIcons {
   static const hideEye = 'lib/assets/iconsSvg/hide_eye.svg';
   static const showEye = 'lib/assets/iconsSvg/show_eye.svg';
   static const language = 'lib/assets/iconsSvg/language.svg';
+  static const profile = 'lib/assets/iconsSvg/profile.svg';
   static const like = 'lib/assets/iconsSvg/like.svg';
   static const location = 'lib/assets/iconsSvg/location.svg';
   static const location2 = 'lib/assets/iconsSvg/location_2.svg';

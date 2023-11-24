@@ -168,4 +168,20 @@ class AuthRepository implements AuthRepositoryInterface {
       return left(const Failure.empty());
     }
   }
+
+  @override
+  Future<Either<Failure, RefreshTokenResponseEntity>> checkAccount(
+      String providerId, String email) async {
+    try {
+      final Map<String, dynamic> body = {
+        "provider_id": providerId,
+        "email": email,
+      };
+      final refreshTokenRes = await _apiClient.checkAccount(body);
+
+      return right(RefreshTokenResponseEntity.fromJson(refreshTokenRes));
+    } catch (error) {
+      return left(const Failure.empty());
+    }
+  }
 }

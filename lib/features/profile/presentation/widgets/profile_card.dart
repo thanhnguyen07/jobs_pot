@@ -4,13 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
+import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/edit_profile.dart';
-import 'package:jobs_pot/features/profile/profile_provider.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/setting_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
@@ -32,7 +31,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     ref.watch(languageControllerProvider);
     return Stack(
       children: [
-        _cardBackground(context),
+        _cardBackground(context, userData),
         _cardBody(context, userData),
       ],
     );
@@ -61,14 +60,14 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               const SizedBox(width: 15),
-              _customButton(
-                onTab: () {},
-                iconPath: AppIcons.share,
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
-                  BlendMode.srcIn,
-                ),
-              ),
+              // _customButton(
+              //   onTab: () {},
+              //   iconPath: AppIcons.share,
+              //   colorFilter: const ColorFilter.mode(
+              //     Colors.white,
+              //     BlendMode.srcIn,
+              //   ),
+              // ),
               const SizedBox(width: 15),
               _customButton(
                 onTab: () {
@@ -100,21 +99,8 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     );
   }
 
-  SizedBox _cardBackground(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 175 + MediaQuery.of(context).padding.top,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(25),
-          bottomRight: Radius.circular(25),
-        ),
-        child: Image.asset(
-          AppImages.cardBackground2,
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
+  Widget _cardBackground(BuildContext context, UserEntity? userData) {
+    return BackgroundImage(imageUrl: userData?.backgroundUrl);
   }
 
   Container _userName(String userName) {
@@ -132,9 +118,6 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
       size: 80,
       avatarLink: avatarLink,
       edit: false,
-      onTab: () async {
-        await ref.read(profileControllerProvider.notifier).updateAvatar();
-      },
     );
   }
 
@@ -145,7 +128,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
         parentContext.router.navigateNamed(EditProfileScreen.path);
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white.withOpacity(0.2),
+        backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
         minimumSize: const Size(80, 30),
       ),
       icon: SvgPicture.asset(
@@ -164,15 +147,19 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     );
   }
 
-  GestureDetector _customButton({
+  Widget _customButton({
     required Function() onTab,
     required String iconPath,
     ColorFilter? colorFilter,
   }) {
-    return GestureDetector(
-      onTap: () {
-        onTab();
-      },
+    return TextButton(
+      onPressed: onTab,
+      style: TextButton.styleFrom(
+        backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
+        minimumSize: const Size(30, 0),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20))),
+      ),
       child: SvgPicture.asset(
         iconPath,
         colorFilter: colorFilter,

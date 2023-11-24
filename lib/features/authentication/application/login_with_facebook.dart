@@ -20,19 +20,12 @@ class LoginWithFacebookController extends StateNotifier {
       if (accessToken != null) {
         final OAuthCredential facebookAuthCredential =
             FacebookAuthProvider.credential(accessToken.token);
-        await linkUser(facebookAuthCredential);
         if (context.mounted) {
           await signIn(facebookAuthCredential, context);
         }
       }
     });
     ref.read(systemControllerProvider.notifier).hideLoading();
-  }
-
-  Future linkUser(OAuthCredential credential) async {
-    try {
-      await FirebaseAuth.instance.currentUser?.linkWithCredential(credential);
-    } on FirebaseAuthException catch (_) {}
   }
 
   Future signIn(OAuthCredential credential, BuildContext context) async {

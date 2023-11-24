@@ -11,7 +11,7 @@
   "authenticationLoginTitle": "Chào mừng trở lại",
   "authenticationSignUpTitle": "Tạo một tài khoản",
   "authenticationSignUpWith": "Đăng ký với",
-  "authenticationSignUpError": "Email này đã được đăng ký. Vui lòng sử dụng email khác.",
+  "authenticationSignUpError": "Email này đã được đăng ký. Vui lòng sử dụng email khác. Hoặc đăng nhập vào tài khoản đã sử dụng email này và liên kết tài khoản.",
   "authenticationSignUpError2": "Mật khẩu được cung cấp quá yếu.",
   "authenticationSignUpError3": "Email không tồn tại!",
   "authenticationSignUpError4": "Email hoặc mật khẩu không chính xác!",

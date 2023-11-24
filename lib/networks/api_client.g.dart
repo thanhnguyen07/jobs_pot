@@ -13,12 +13,39 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://localhost:7002/';
+    baseUrl ??= 'https://server-jobs-pot.vercel.app/';
   }
 
   final Dio _dio;
 
   String? baseUrl;
+
+  @override
+  Future<dynamic> checkAccount(Map<String, dynamic> body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'user/check-account',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
 
   @override
   Future<dynamic> signUpWithEmail(Map<String, dynamic> body) async {
@@ -155,7 +182,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> updateAvatar(Map<String, dynamic> body) async {
+  Future<dynamic> updateImage(Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -168,7 +195,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          'user/update-avatar',
+          'user/update-image',
           queryParameters: queryParameters,
           data: _data,
         )

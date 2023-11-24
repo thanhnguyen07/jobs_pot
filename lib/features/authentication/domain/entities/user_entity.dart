@@ -15,6 +15,7 @@ class UserEntity with _$UserEntity {
     required List<ProviderInfoEntity> providerData,
     @JsonKey(name: "fcm_token") String? fcmToken,
     @JsonKey(name: "photo_url") String? photoUrl,
+    @JsonKey(name: "background_url") String? backgroundUrl,
     @JsonKey(name: "date_of_birth") String? dateOfBirth,
     String? gender,
     @JsonKey(name: "phone_number") String? phoneNumber,

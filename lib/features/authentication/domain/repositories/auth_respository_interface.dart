@@ -48,4 +48,7 @@ abstract class AuthRepositoryInterface {
 
   Future<Either<Failure, RefreshTokenResponseEntity>> refreshToken(
       String refreshToken);
+
+  Future<Either<Failure, RefreshTokenResponseEntity>> checkAccount(
+      String providerId, String email);
 }
