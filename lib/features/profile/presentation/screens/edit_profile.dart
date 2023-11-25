@@ -5,9 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/bacground_image.dart';
+import 'package:jobs_pot/common/widgets/modal_bottom_photo.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
@@ -69,9 +69,20 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
                     edit: true,
                     sizeEditIcon: 20,
                     onTab: () async {
-                      await ref
-                          .read(profileControllerProvider.notifier)
-                          .updateImage(UploadImageType.avatar);
+                      await showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ModalBottomPhoto(
+                            takePhoto: () {},
+                            pickFromGallery: () async {
+                              Navigator.pop(context);
+                              await ref
+                                  .read(profileControllerProvider.notifier)
+                                  .updateImage(UploadImageType.avatar);
+                            },
+                          );
+                        },
+                      );
                     },
                   ),
                 ),

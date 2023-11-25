@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_enum.dart';
-import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/widgets/modal_bottom_photo.dart';
 import 'package:jobs_pot/features/create/create_provider.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class CreatePostController extends StateNotifier<List<XFile>?> {
@@ -89,74 +85,15 @@ class CreatePostController extends StateNotifier<List<XFile>?> {
   }
 
   void addImages(BuildContext context) async {
-    showModalBottomSheet<void>(
+    await showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
-        return SizedBox(
-          height: 220,
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              Text(
-                Utils.getLocaleMessage(LocaleKeys.postAddImageTitle),
-                style: AppTextStyle.blackBoldS16,
-              ),
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 80, vertical: 30),
-                child: Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.babyBlueColor, // foreground
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            AppIcons.camera,
-                            width: 40,
-                            height: 40,
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            Utils.getLocaleMessage(
-                                LocaleKeys.postTakePictureTitle),
-                            style: AppTextStyle.darkPurpleBoldS14,
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        openGallery();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.babyBlueColor, // foreground
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            AppIcons.picture,
-                            width: 40,
-                            height: 40,
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            Utils.getLocaleMessage(
-                                LocaleKeys.postPickFromGalleryTitle),
-                            style: AppTextStyle.darkPurpleBoldS14,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+        return ModalBottomPhoto(
+          takePhoto: () {},
+          pickFromGallery: () {
+            Navigator.pop(context);
+            openGallery();
+          },
         );
       },
     );

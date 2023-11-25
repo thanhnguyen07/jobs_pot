@@ -72,6 +72,7 @@ abstract class  LocaleKeys {
   static const settingDarkmodeTitle = 'settingDarkmodeTitle';
   static const settingLightmodeTitle = 'settingLightmodeTitle';
   static const settingPasswordTitle = 'settingPasswordTitle';
+  static const settingAccountTitle = 'settingAccountTitle';
   static const settingLogoutTitle = 'settingLogoutTitle';
   static const settingLogoutModalSubTitle = 'settingLogoutModalSubTitle';
   static const settingLanguagesTitle = 'settingLanguagesTitle';

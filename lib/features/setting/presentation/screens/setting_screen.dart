@@ -53,7 +53,6 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
           },
         );
       },
-      color: Colors.red,
       title: Utils.getLocaleMessage(LocaleKeys.settingLogoutTitle),
       showArrowButton: true,
       icon: SvgPicture.asset(AppIcons.logout),
@@ -70,7 +69,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         //   },
         // );
       },
-      title: Utils.getLocaleMessage(LocaleKeys.settingLogoutTitle),
+      title: Utils.getLocaleMessage(LocaleKeys.settingAccountTitle),
       showArrowButton: true,
       icon: SvgPicture.asset(
         AppIcons.profile,
