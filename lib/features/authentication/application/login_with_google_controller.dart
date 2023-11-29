@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,6 +18,7 @@ class LoginWithGoogleController extends StateNotifier {
 
   Future<void> disconnect() async {
     _googleSignIn.disconnect();
+    await FacebookAuth.instance.logOut();
   }
 
   Future signInWithGoogle(BuildContext context) async {

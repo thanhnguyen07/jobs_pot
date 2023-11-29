@@ -53,7 +53,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       ..toastPosition = EasyLoadingToastPosition.bottom
       ..backgroundColor = AppColors.purpleColor
       ..indicatorColor = Colors.white
-      ..textColor = Colors.white;
+      ..textColor = Colors.white
+      ..progressColor = Colors.white;
 
     return MaterialApp.router(
       builder: EasyLoading.init(builder: FToastBuilder()),

@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
+import 'package:jobs_pot/common/app_icons.dart';
+import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
@@ -11,6 +13,7 @@ import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_jobs.dart';
 import 'package:jobs_pot/features/home/presentation/widget/coupon_card.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
+import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -81,42 +84,72 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Row _header(BuildContext context) {
+  Widget _header(BuildContext context) {
     final UserEntity? userData = ref.watch(authControllerProvider);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _welcomeText(userData?.userName ?? ""),
-        Container(
-          margin: const EdgeInsets.only(top: 50),
-          child: TextButton(
+    return Container(
+      margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _userInfo(context, userData),
+          TextButton(
             onPressed: () {
-              context.router.navigateNamed(ProfileScreen.path);
+              context.router.pushNamed(SaveJobScreen.path);
             },
-            style: TextButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40),
-              ),
+            child: SvgPicture.asset(
+              AppIcons.save,
+              width: 30,
+              height: 30,
             ),
-            child: AvatarImage(
-              avatarLink: userData?.photoUrl,
-              size: 40,
-              edit: false,
-            ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 
-  Container _welcomeText(String userName) {
-    return Container(
-      margin: const EdgeInsets.only(top: 70),
-      child: Text(
-        plural(LocaleKeys.homeHelloTitle, 0, args: [userName]),
-        style: AppTextStyle.egglantBoldS22,
-      ),
+  Widget _userInfo(BuildContext context, UserEntity? userData) {
+    return Row(
+      children: [
+        TextButton(
+          onPressed: () {
+            context.router.navigateNamed(ProfileScreen.path);
+          },
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+          child: AvatarImage(
+            avatarLink: userData?.photoUrl,
+            size: 50,
+            edit: false,
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  Utils.getLocaleMessage(LocaleKeys.homeHelloTitle),
+                  style: AppTextStyle.textColor3MediumS16,
+                ),
+                const SizedBox(width: 5),
+                Image.asset(
+                  AppImages.hello,
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.cover,
+                ),
+              ],
+            ),
+            Text(
+              userData?.userName ?? "",
+              style: AppTextStyle.darkPurpleBoldS18,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

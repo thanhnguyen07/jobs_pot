@@ -11,9 +11,7 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/edit_profile.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/setting_screen.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 
 class ProfileCard extends ConsumerStatefulWidget {
   const ProfileCard({
@@ -32,70 +30,91 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     return Stack(
       children: [
         _cardBackground(context, userData),
-        _cardBody(context, userData),
+        _userAvatar(userData),
+        _userName(context, userData),
+        _buttonsAction(context, userData),
       ],
     );
   }
 
-  Container _cardBody(BuildContext context, UserEntity? userData) {
+  Container _buttonsAction(BuildContext context, UserEntity? userData) {
     return Container(
       margin: EdgeInsets.only(
           top: MediaQuery.of(context).padding.top, right: 20, left: 20),
-      child: Row(
-        children: [
-          _userInfo(userData),
-          _buttonsAction(context),
-        ],
-      ),
-    );
-  }
-
-  Expanded _buttonsAction(BuildContext context) {
-    return Expanded(
-      flex: 1,
+      width: double.infinity,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const SizedBox(width: 15),
-              // _customButton(
-              //   onTab: () {},
-              //   iconPath: AppIcons.share,
-              //   colorFilter: const ColorFilter.mode(
-              //     Colors.white,
-              //     BlendMode.srcIn,
-              //   ),
-              // ),
-              const SizedBox(width: 15),
-              _customButton(
-                onTab: () {
-                  context.router.navigateNamed(SettingScreen.path);
-                },
-                iconPath: AppIcons.setting,
-              ),
-            ],
+          _customButton(
+            onTab: () {
+              context.router.navigateNamed(SettingScreen.path);
+            },
+            iconPath: AppIcons.setting,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(),
-              _buttonEditProfile(context),
-            ],
-          )
+          _customButton(
+              onTab: () {
+                context.router.navigateNamed(EditProfileScreen.path);
+              },
+              iconPath: AppIcons.edit),
         ],
       ),
     );
   }
 
-  Column _userInfo(UserEntity? userData) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _avatarUser(userData?.photoUrl),
-        _userName(userData?.userName ?? ''),
-      ],
+  SizedBox _userName(BuildContext context, UserEntity? userData) {
+    return SizedBox(
+      width: double.infinity,
+      height: 210 + MediaQuery.of(context).padding.top,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          const SizedBox(width: 50),
+          Text(
+            userData!.userName,
+            style: AppTextStyle.darkPurpleBoldS18,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _userAvatar(UserEntity? userData) {
+    return SizedBox(
+      width: double.infinity,
+      height: 225 + MediaQuery.of(context).padding.top,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 20),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  child: Container(
+                    color: AppColors.whiteColor1,
+                    width: 110,
+                    height: 110,
+                  ),
+                ),
+                SizedBox(
+                  width: 110,
+                  height: 110,
+                  child: Center(
+                    child: AvatarImage(
+                      size: 100,
+                      avatarLink: userData?.photoUrl,
+                      edit: false,
+                      sizeEditIcon: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -103,66 +122,26 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     return BackgroundImage(imageUrl: userData?.backgroundUrl);
   }
 
-  Container _userName(String userName) {
-    return Container(
-      margin: const EdgeInsets.only(top: 5, bottom: 10),
-      child: Text(
-        userName,
-        style: AppTextStyle.whiteBoldS14,
-      ),
-    );
-  }
-
-  Widget _avatarUser(String? avatarLink) {
-    return AvatarImage(
-      size: 80,
-      avatarLink: avatarLink,
-      edit: false,
-    );
-  }
-
-  Widget _buttonEditProfile(BuildContext parentContext) {
-    ref.watch(languageControllerProvider);
-    return ElevatedButton.icon(
-      onPressed: () {
-        parentContext.router.navigateNamed(EditProfileScreen.path);
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
-        minimumSize: const Size(80, 30),
-      ),
-      icon: SvgPicture.asset(
-        width: 20,
-        height: 20,
-        AppIcons.edit,
-        colorFilter: const ColorFilter.mode(
-          AppColors.whiteColor1,
-          BlendMode.srcIn,
-        ),
-      ),
-      label: Text(
-        Utils.getLocaleMessage(LocaleKeys.profileEditProfileTitle),
-        style: AppTextStyle.whiteRegularS12,
-      ),
-    );
-  }
-
   Widget _customButton({
     required Function() onTab,
     required String iconPath,
-    ColorFilter? colorFilter,
   }) {
     return TextButton(
       onPressed: onTab,
       style: TextButton.styleFrom(
         backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
-        minimumSize: const Size(30, 0),
+        minimumSize: const Size(40, 40),
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+        ),
+        padding: EdgeInsets.zero,
       ),
       child: SvgPicture.asset(
         iconPath,
-        colorFilter: colorFilter,
+        colorFilter: const ColorFilter.mode(
+          Colors.white,
+          BlendMode.srcIn,
+        ),
       ),
     );
   }

@@ -56,6 +56,7 @@ class EmailVerificationController extends StateNotifier<bool> {
       },
       (r) async {
         UserEntity? userData = ref.read(authControllerProvider);
+        clearErrorCode();
         ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
         if (userData?.id != null) {
           await getProfile(context, userData!.id);
@@ -73,7 +74,6 @@ class EmailVerificationController extends StateNotifier<bool> {
           (l) {},
           (r) {
             context.router.replaceAll([const HomeStackRoute()]);
-            ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
           },
         );
       },

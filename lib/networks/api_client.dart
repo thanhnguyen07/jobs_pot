@@ -28,7 +28,13 @@ abstract class ApiClient {
   Future<dynamic> getUserProfile(@Query("id") String id);
 
   @PUT("user/update-image")
-  Future<dynamic> updateImage(@Body() Map<String, dynamic> body);
+  Future<dynamic> updateImage(@Body() FormData body);
+
+  @PUT("user/account-link")
+  Future<dynamic> accountLink(@Body() Map<String, dynamic> body);
+
+  @PUT("user/account-unlink")
+  Future<dynamic> accountUnLink(@Body() Map<String, dynamic> body);
 
   @POST("user/update-informations")
   Future<dynamic> updateInformations(@Body() Map<String, dynamic> body);

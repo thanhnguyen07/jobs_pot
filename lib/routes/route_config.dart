@@ -14,6 +14,8 @@ import 'package:jobs_pot/features/post/presentation/screens/post_screen.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/edit_profile.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
+import 'package:jobs_pot/features/setting/presentation/screens/account_screen.dart';
+import 'package:jobs_pot/features/setting/presentation/screens/change_password_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/setting_screen.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 
@@ -24,17 +26,25 @@ class AppRouter extends $AppRouter {
         ..._authRoutesList,
         _homeStack,
         AutoRoute(
-          page: ProfileRoute.page,
-          path: ProfileScreen.path,
+          page: SettingRoute.page,
+          path: SettingScreen.path,
+        ),
+        AutoRoute(
+          page: AccountRoute.page,
+          path: AccountScreen.path,
+        ),
+        AutoRoute(
+          page: ChangePasswordRoute.page,
+          path: ChangePasswordScreen.path,
+        ),
+        AutoRoute(
+          page: SaveJobRoute.page,
+          path: SaveJobScreen.path,
         ),
         AutoRoute(
           page: EditProfileRoute.page,
           path: EditProfileScreen.path,
         ),
-        AutoRoute(
-          page: SettingRoute.page,
-          path: SettingScreen.path,
-        )
       ];
 
   final List<AutoRoute> _authRoutesList = [
@@ -90,8 +100,8 @@ class AppRouter extends $AppRouter {
         path: ChatScreen.path,
       ),
       AutoRoute(
-        page: SaveJobRoute.page,
-        path: SaveJobScreen.path,
+        page: ProfileRoute.page,
+        path: ProfileScreen.path,
       ),
     ],
   );

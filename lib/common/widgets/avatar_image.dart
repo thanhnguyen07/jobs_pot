@@ -83,7 +83,7 @@ class AvatarImage extends StatelessWidget {
                     children: [
                       ClipOval(
                         child: Container(
-                          color: AppColors.iconColor,
+                          color: AppColors.darkPurpleColor.withOpacity(0.8),
                           padding: const EdgeInsets.all(3),
                           child: SvgPicture.asset(
                             width: sizeEditIcon ?? 15,

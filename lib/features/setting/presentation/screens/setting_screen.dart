@@ -6,7 +6,9 @@ import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
+import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/setting/presentation/screens/account_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/setttin_button.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
@@ -27,18 +29,32 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top, left: 20, right: 20),
+        margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _backButton(context),
-            _titleSettting(),
-            _buttonChangeLanguage(context),
-            _accountButton(context),
-            _buttonLogout(),
+            Header(
+              onBack: () {
+                context.router.back();
+              },
+              titleKey: LocaleKeys.settingTitle,
+            ),
+            _body(context),
           ],
         ),
+      ),
+    );
+  }
+
+  Container _body(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          _buttonChangeLanguage(context),
+          _accountButton(context),
+          _buttonLogout(),
+        ],
       ),
     );
   }
@@ -62,12 +78,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
   SettingButton _accountButton(BuildContext context) {
     return SettingButton(
       onPress: () {
-        // showModalBottomSheet<void>(
-        //   context: context,
-        //   builder: (BuildContext context) {
-        //     return _modalLogout(context);
-        //   },
-        // );
+        context.router.navigateNamed(AccountScreen.path);
       },
       title: Utils.getLocaleMessage(LocaleKeys.settingAccountTitle),
       showArrowButton: true,
@@ -104,25 +115,6 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     );
   }
 
-  Container _titleSettting() {
-    return Container(
-      margin: const EdgeInsets.only(top: 40),
-      child: Text(
-        Utils.getLocaleMessage(LocaleKeys.settingTitle),
-        style: AppTextStyle.textColor3MediumS16,
-      ),
-    );
-  }
-
-  GestureDetector _backButton(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.router.back();
-      },
-      child: SvgPicture.asset(AppIcons.back),
-    );
-  }
-
   SizedBox _modalChangeLanguages(BuildContext context) {
     return SizedBox(
       height: 200,
@@ -150,6 +142,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
                 Utils.getLocaleMessage(
                   LocaleKeys.changeLanguageTitle,
                 ),
+                style: AppTextStyle.whiteBoldS14,
               ),
             ),
           ],
@@ -174,7 +167,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
               Utils.getLocaleMessage(LocaleKeys.settingLogoutModalSubTitle),
               style: AppTextStyle.textColor1RegularS14,
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
             Container(
               margin: const EdgeInsets.only(left: 25, right: 25),
               child: CustomButton(

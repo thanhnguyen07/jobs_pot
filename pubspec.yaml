@@ -38,6 +38,8 @@ dependencies:
   pinput: ^3.0.1
   fluttertoast: ^8.2.3
   flutter_flavorizr: ^2.2.1
+  http_parser: ^4.0.2
+  mime: ^1.0.4
 
 flavorizr:
   flavors:

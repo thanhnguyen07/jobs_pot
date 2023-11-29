@@ -26,4 +26,25 @@ class AppColors {
   static const iconColor2 = Color(0xFFFF9228);
 
   static const whiteColor1 = Color(0xFFF9F9F9);
+  static final colorList = [
+    darkPurpleColor,
+    purpleColor,
+    egglantColor,
+    lavenderColor,
+    skyColor,
+    babyBlueColor,
+    fireYellowColor,
+    amberColor,
+    textColor1,
+    textColor2,
+    textColor3,
+    textColor4,
+    textColor5,
+    textColor6,
+    shadowColor,
+    blackColor,
+    iconColor,
+    iconColor2,
+    iconColor2
+  ];
 }

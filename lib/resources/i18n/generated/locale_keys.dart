@@ -111,10 +111,23 @@ abstract class  LocaleKeys {
   static const postImagesCancelButtonTitle = 'postImagesCancelButtonTitle';
   static const postImagesDeleteButtonTitle = 'postImagesDeleteButtonTitle';
   static const postAddImageTitle = 'postAddImageTitle';
+  static const postAddImageTitleWithColor = 'postAddImageTitleWithColor';
+  static const postChooseColorTitle = 'postChooseColorTitle';
   static const postTakePictureTitle = 'postTakePictureTitle';
   static const postPickFromGalleryTitle = 'postPickFromGalleryTitle';
   static const postPostingProcessTitle = 'postPostingProcessTitle';
   static const postPostingProcessStep1Title = 'postPostingProcessStep1Title';
   static const postPostingProcessStep2Title = 'postPostingProcessStep2Title';
+  static const settingAccountGooogleTitle = 'settingAccountGooogleTitle';
+  static const settingAccountFacebookTitle = 'settingAccountFacebookTitle';
+  static const settingAccountEmailTitle = 'settingAccountEmailTitle';
+  static const settingAccountLinkAccount = 'settingAccountLinkAccount';
+  static const settingAccountDisplayNameAccount = 'settingAccountDisplayNameAccount';
+  static const settingAccountDisplayEmailAccount = 'settingAccountDisplayEmailAccount';
+  static const settingAccountProviderIdAccount = 'settingAccountProviderIdAccount';
+  static const settingAccountUnlinkAccount = 'settingAccountUnlinkAccount';
+  static const settingAccountLinkAccountError = 'settingAccountLinkAccountError';
+  static const settingAccountConfirmUnLink = 'settingAccountConfirmUnLink';
+  static const settingAccountChangePassword = 'settingAccountChangePassword';
 
 }

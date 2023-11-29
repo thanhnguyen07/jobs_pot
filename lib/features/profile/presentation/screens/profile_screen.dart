@@ -15,7 +15,7 @@ import 'package:jobs_pot/features/profile/presentation/widgets/profile_card.dart
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({Key? key}) : super(key: null);
 
-  static const String path = '/ProfileScreen';
+  static const String path = 'ProfileScreen';
 
   @override
   ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
@@ -30,7 +30,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       context: context,
       child: const Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(175),
+          preferredSize: Size.fromHeight(225),
           child: ProfileCard(),
         ),
         // body: SizedBox(

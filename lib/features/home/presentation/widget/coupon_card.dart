@@ -42,9 +42,12 @@ class CouponCard extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(0, 30),
                 backgroundColor: AppColors.fireYellowColor,
+                elevation: 5,
+                shadowColor: AppColors.amberColor,
               ),
               child: Text(
                 Utils.getLocaleMessage(LocaleKeys.homeJoinNowTitle),
+                style: AppTextStyle.whiteBoldS14,
               ),
             )
           ],

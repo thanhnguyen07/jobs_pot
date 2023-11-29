@@ -27,3 +27,9 @@ class FirebaseKeys {
   static const String providerAlreadyLinked = "provider-already-linked";
   static const String invalidLoginCredentials = "INVALID_LOGIN_CREDENTIALS";
 }
+
+class ProviderKeys {
+  static const String google = "google.com";
+  static const String facebook = "facebook.com";
+  static const String password = "password";
+}

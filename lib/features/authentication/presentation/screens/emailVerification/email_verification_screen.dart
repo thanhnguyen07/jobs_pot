@@ -65,7 +65,6 @@ class _EmailVerificationScreenState
 
   @override
   void dispose() {
-    ref.read(emailVerificationControllerProvider.notifier).clearErrorCode();
     _cancelTimer();
     super.dispose();
   }

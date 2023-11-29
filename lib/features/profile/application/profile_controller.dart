@@ -1,7 +1,6 @@
-import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_keys.dart';
@@ -10,6 +9,7 @@ import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dar
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
+import 'package:mime/mime.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ProfileController extends StateNotifier<bool> {
@@ -104,11 +104,38 @@ class ProfileController extends StateNotifier<bool> {
     ref.read(systemControllerProvider.notifier).showLoading();
     final ImagePicker picker = ImagePicker();
     try {
-      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        uploadImageToFirebase(image, type);
+      final XFile? imageXFile =
+          await picker.pickImage(source: ImageSource.gallery);
+      if (imageXFile != null) {
+        UserEntity? userData = ref.read(authControllerProvider);
+
+        String typeName =
+            type == UploadImageType.avatar ? "avatar" : "background";
+
+        String fileExtension = imageXFile.name.split(".").last;
+
+        String fileName = "$typeName.$fileExtension";
+
+        String? originalFileMimeTye = lookupMimeType(imageXFile.path);
+
+        if (originalFileMimeTye != null && userData != null) {
+          List<String> originalFileMimeTyeList = originalFileMimeTye.split('/');
+
+          ref.read(systemControllerProvider.notifier).showLoading();
+
+          await uploadAvatarLinkOnServer(
+            filePath: imageXFile.path,
+            fileName: fileName,
+            contentType: MediaType(
+                originalFileMimeTyeList.first, originalFileMimeTyeList.last),
+            id: userData.id,
+          );
+
+          ref.read(systemControllerProvider.notifier).hideLoading();
+        } else {
+          ref.read(systemControllerProvider.notifier).showToastGeneralError();
+        }
       }
-
       ref.read(systemControllerProvider.notifier).hideLoading();
     } catch (e) {
       ref.read(systemControllerProvider.notifier).hideLoading();
@@ -116,48 +143,22 @@ class ProfileController extends StateNotifier<bool> {
     }
   }
 
-  Future<void> uploadImageToFirebase(
-      XFile imageFile, UploadImageType type) async {
-    UserEntity? userData = ref.read(authControllerProvider);
-
-    ref.read(systemControllerProvider.notifier).showLoading();
-    final File image = File(imageFile.path);
-
-    final fileName = type == UploadImageType.avatar ? "avatar" : "background";
-
-    try {
-      String storagePath =
-          "${FirebaseKeys.pathFolderUserImage}/${userData?.uid}/$fileName.jpg";
-
-      Reference refStorage = FirebaseStorage.instance.ref().child(storagePath);
-
-      try {
-        await refStorage.delete();
-      } catch (_) {}
-
-      UploadTask uploadTask = refStorage.putFile(image);
-
-      String downloadUrl = await (await uploadTask).ref.getDownloadURL();
-
-      await uploadAvatarLinkOnServer(downloadUrl, type);
-
-      ref.read(systemControllerProvider.notifier).hideLoading();
-    } catch (e) {
-      ref.read(systemControllerProvider.notifier).hideLoading();
-
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
-    }
-  }
-
-  Future<void> uploadAvatarLinkOnServer(
-      String imageUrl, UploadImageType type) async {
+  Future<void> uploadAvatarLinkOnServer({
+    required String filePath,
+    required String fileName,
+    required MediaType contentType,
+    required String id,
+  }) async {
     UserEntity? userData = ref.read(authControllerProvider);
     String? userId = userData?.id;
     if (userId != null) {
-      final updateAvatarResult = await ref
-          .read(profileResponsitoryProvider)
-          .updateImage(imageUrl, userId, type);
-
+      final updateAvatarResult =
+          await ref.read(profileResponsitoryProvider).updateImage(
+                filePath: filePath,
+                fileName: fileName,
+                contentType: contentType,
+                id: id,
+              );
       updateAvatarResult.fold((l) {
         ref.read(systemControllerProvider.notifier).showToastGeneralError();
       }, (r) {

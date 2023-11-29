@@ -26,7 +26,7 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
         PostJobRoute(),
         CreateRoute(),
         ChatRoute(),
-        SaveJobRoute(),
+        ProfileRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
@@ -39,7 +39,6 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
               await ref
                   .read(bottomNavigationController.notifier)
                   .actionButtonCreate(context);
-
               tabsRouter.setActiveIndex(2);
             }
           },
@@ -86,8 +85,8 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
   BottomNavigationBarItem _saveIcon() {
     return BottomNavigationBarItem(
       label: '',
-      icon: _svgIcons(icon: AppIcons.save),
-      activeIcon: _svgIcons(icon: AppIcons.save, activeIcon: true),
+      icon: _svgIcons(icon: AppIcons.user),
+      activeIcon: _svgIcons(icon: AppIcons.user, activeIcon: true),
     );
   }
 

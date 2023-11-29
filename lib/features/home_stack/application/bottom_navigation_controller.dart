@@ -14,6 +14,7 @@ class BottomNavigationController extends StateNotifier<CreateScreenType?> {
 
   Future<void> actionButtonCreate(BuildContext context) {
     return showModalBottomSheet<void>(
+      isDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return SizedBox(

@@ -1,5 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:jobs_pot/common/app_enum.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/profile/domain/repositories/profile_responsitory_interface.dart';
@@ -15,14 +16,21 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
   }
 
   @override
-  Future<Either<Failure, UserResponseEntity>> updateImage(
-      String imageUrl, String id, UploadImageType type) async {
+  Future<Either<Failure, UserResponseEntity>> updateImage({
+    required String filePath,
+    required String fileName,
+    required MediaType contentType,
+    required String id,
+  }) async {
     try {
-      final Map<String, String> body = {
-        "image_url": imageUrl,
+      FormData body = FormData.fromMap({
+        'file': await MultipartFile.fromFile(
+          filePath,
+          filename: fileName,
+          contentType: contentType,
+        ),
         "id": id,
-        "type": type == UploadImageType.avatar ? "avatar" : "background"
-      };
+      });
       final signUpRes = await _apiClient.updateImage(body);
       return right(UserResponseEntity.fromJson(signUpRes));
     } catch (error) {

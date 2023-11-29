@@ -31,15 +31,17 @@ class CustomButton1 extends StatelessWidget {
         ),
         child: TextButton(
           onPressed: () {},
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  count ?? "",
-                  style: AppTextStyle.textColor3MediumS16,
-                ),
+              Text(
+                count ?? "",
+                style: AppTextStyle.textColor3MediumS16,
               ),
               Text(
                 title,

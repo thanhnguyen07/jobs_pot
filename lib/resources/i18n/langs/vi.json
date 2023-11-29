@@ -56,7 +56,7 @@
   "authenticationBackButtonTitle": "QUAY LẠI",
   "authenticationCheckMailTitle": "Kiểm tra Email của bạn",
   "authenticationCheckMailSubTitle": "Chúng tôi đã gửi liên kết đặt lại mật khẩu đến địa chỉ email",
-  "homeHelloTitle": { "zero": "Xin chào\n{}." },
+  "homeHelloTitle": "Xin chào",
   "homeJoinNowTitle": "Tham gia ngay",
   "homeFindJobTitle": "Tìm việc của bạn",
   "homeRecentJobList": "Danh sách công việc gần đây",
@@ -121,11 +121,24 @@
   "postImagesCancelButtonTitle": "Huỷ",
   "postImagesDeleteButtonTitle": "Xoá",
   "postAddImageTitle": "Chụp ảnh mới hoặc chọn ảnh từ thư viện",
+  "postAddImageTitleWithColor": "Chụp ảnh mới hoặc chọn ảnh từ thư viện hoặc chọn một màu",
+  "postChooseColorTitle": "Chọn một màu",
   "postTakePictureTitle": "Chụp ảnh",
   "postPickFromGalleryTitle": "Chọn từ Thư viện",
   "postPostingProcessTitle": "Quá trình đăng",
   "postPostingProcessStep1Title": {
     "zero": "Bước 1 - Tải lên hình ảnh {}/{}"
   },
-  "postPostingProcessStep2Title": "Bước 2 - Tải lên bài viết"
+  "postPostingProcessStep2Title": "Bước 2 - Tải lên bài viết",
+  "settingAccountGooogleTitle": "Google",
+  "settingAccountFacebookTitle": "Facebook",
+  "settingAccountEmailTitle": "Email",
+  "settingAccountLinkAccount": "Liên kết tài khoản",
+  "settingAccountDisplayNameAccount": "Tên hiển thị: ",
+  "settingAccountDisplayEmailAccount": "Email: ",
+  "settingAccountProviderIdAccount": "ID nhà cung cấp: ",
+  "settingAccountUnlinkAccount": "Huỷ liên kết",
+  "settingAccountLinkAccountError": "Tài khoản được liên kết có email khác với email hiện tại. Vui lòng sử dụng tài khoản được liên kết có cùng email với email hiện tại!",
+  "settingAccountConfirmUnLink": "Bạn có chắc chắn muốn hủy liên kết?",
+  "settingAccountChangePassword": "Đổi mật khẩu"
 }

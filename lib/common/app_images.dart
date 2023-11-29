@@ -33,6 +33,8 @@ class AppImages {
   static const googleLogo = 'lib/assets/iconsPng/company/google_logo.png';
   static const facebookLogo = 'lib/assets/iconsPng/company/facebook_logo.png';
   static const appleLogo = 'lib/assets/iconsPng/company/apple_logo.png';
+  static const hello = 'lib/assets/iconsPng/hello.png';
+  static const password = 'lib/assets/iconsPng/password.png';
 
   static const arabic = 'lib/assets/iconsPng/languages/arabic.svg';
   static const english = 'lib/assets/iconsPng/languages/english.svg';

@@ -5,11 +5,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_icons.dart';
+import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/common/widgets/modal_bottom_photo.dart';
+import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/profile/presentation/screens/edit_profile_form.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 
 @RoutePage()
@@ -27,18 +30,111 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
   Widget build(BuildContext context) {
     UserEntity? userData = ref.watch(authControllerProvider);
 
-    return Scaffold(
-      body: Column(
+    return UnFocusKeyboard(
+      context: context,
+      child: Scaffold(
+        body: SizedBox(
+          height: double.infinity,
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    _background(context, userData),
+                    _buttonHeader(context),
+                    _userAvatar(userData),
+                    _userName(context, userData),
+                  ],
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: AppColors.amberColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: const Column(
+                    children: [
+                      EditProfileForm(),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox _userName(BuildContext context, UserEntity? userData) {
+    return SizedBox(
+      width: double.infinity,
+      height: 225 + MediaQuery.of(context).padding.top,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Stack(
-            children: [
-              _background(context, userData),
-              _buttonHeader(context),
-              _userAvatar(userData),
-            ],
+          Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            child: Text(
+              userData!.userName,
+              style: AppTextStyle.darkPurpleBoldS18,
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _chooseColor({
+    required BuildContext context,
+  }) {
+    return showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            children: [
+              const Text('Choose a Color',
+                  style: AppTextStyle.darkPurpleBoldS18),
+              Expanded(
+                flex: 1,
+                child: SizedBox(
+                  width: 300,
+                  child: GridView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                    ),
+                    itemCount: AppColors.colorList.length,
+                    itemBuilder: (context, index) {
+                      Color color = AppColors.colorList[index];
+                      return TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -48,46 +144,50 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
       height: 225 + MediaQuery.of(context).padding.top,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
-                child: Container(
-                  color: AppColors.whiteColor1,
-                  width: 110,
-                  height: 110,
-                ),
-              ),
-              SizedBox(
-                width: 110,
-                height: 110,
-                child: Center(
-                  child: AvatarImage(
-                    size: 100,
-                    avatarLink: userData?.photoUrl,
-                    edit: true,
-                    sizeEditIcon: 20,
-                    onTab: () async {
-                      await showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ModalBottomPhoto(
-                            takePhoto: () {},
-                            pickFromGallery: () async {
-                              Navigator.pop(context);
-                              await ref
-                                  .read(profileControllerProvider.notifier)
-                                  .updateImage(UploadImageType.avatar);
-                            },
-                          );
-                        },
-                      );
-                    },
+          Container(
+            margin: const EdgeInsets.only(left: 20),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  child: Container(
+                    color: AppColors.whiteColor1,
+                    width: 110,
+                    height: 110,
                   ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: 110,
+                  height: 110,
+                  child: Center(
+                    child: AvatarImage(
+                      size: 100,
+                      avatarLink: userData?.photoUrl,
+                      edit: true,
+                      sizeEditIcon: 20,
+                      onTab: () async {
+                        await showModalBottomSheet<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ModalBottomPhoto(
+                              takePhoto: () {},
+                              pickFromGallery: () async {
+                                Navigator.pop(context);
+                                await ref
+                                    .read(profileControllerProvider.notifier)
+                                    .updateImage(UploadImageType.avatar);
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -113,25 +213,38 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
   }
 
   Widget _editBackground() {
-    return GestureDetector(
-      onTap: () {
-        ref
-            .read(profileControllerProvider.notifier)
-            .updateImage(UploadImageType.background);
+    return ElevatedButton(
+      onPressed: () async {
+        await showModalBottomSheet<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return ModalBottomPhoto(
+              takePhoto: () {},
+              chooseColorFun: () {
+                _chooseColor(context: context);
+              },
+              pickFromGallery: () async {
+                Navigator.pop(context);
+                await ref
+                    .read(profileControllerProvider.notifier)
+                    .updateImage(UploadImageType.background);
+              },
+            );
+          },
+        );
       },
-      child: ClipOval(
-        child: Container(
-          color: AppColors.iconColor,
-          padding: const EdgeInsets.all(3),
-          child: SvgPicture.asset(
-            width: 20,
-            height: 20,
-            AppIcons.pencil,
-            colorFilter: const ColorFilter.mode(
-              AppColors.whiteColor1,
-              BlendMode.srcIn,
-            ),
-          ),
+      style: TextButton.styleFrom(
+        backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
+        minimumSize: const Size(30, 30),
+        padding: EdgeInsets.zero,
+      ),
+      child: SvgPicture.asset(
+        width: 20,
+        height: 20,
+        AppIcons.pencil,
+        colorFilter: const ColorFilter.mode(
+          AppColors.whiteColor1,
+          BlendMode.srcIn,
         ),
       ),
     );
@@ -148,7 +261,8 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
       },
       style: TextButton.styleFrom(
         backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
-        minimumSize: const Size(0, 0),
+        minimumSize: const Size(40, 30),
+        padding: EdgeInsets.zero,
       ),
       child: SvgPicture.asset(
         AppIcons.back,

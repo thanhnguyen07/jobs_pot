@@ -5,6 +5,7 @@ import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_remote_job.dart';
 import 'package:jobs_pot/features/home/presentation/widget/custom_button.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class ButtonJobs extends ConsumerStatefulWidget {
@@ -20,6 +21,7 @@ class _ButtonJobsState extends ConsumerState<ButtonJobs> {
   @override
   Widget build(BuildContext context) {
     JobsSummaryEntity? jobsSummaryData = ref.watch(jobsSummaryController);
+    ref.watch(languageControllerProvider);
 
     return SizedBox(
       height: 150,
@@ -33,15 +35,15 @@ class _ButtonJobsState extends ConsumerState<ButtonJobs> {
               child: Column(
                 children: [
                   CustomButton1(
-                      topButton: true,
-                      count: Utils.getNumberOfJob(jobsSummaryData?.fullTime),
-                      title:
-                          Utils.getLocaleMessage(LocaleKeys.homeFullTimeTitle)),
+                    topButton: true,
+                    count: Utils.getNumberOfJob(jobsSummaryData?.fullTime),
+                    title: Utils.getLocaleMessage(LocaleKeys.homeFullTimeTitle),
+                  ),
                   CustomButton1(
-                      topButton: false,
-                      count: Utils.getNumberOfJob(jobsSummaryData?.partTime),
-                      title:
-                          Utils.getLocaleMessage(LocaleKeys.homePartTimeTitle)),
+                    topButton: false,
+                    count: Utils.getNumberOfJob(jobsSummaryData?.partTime),
+                    title: Utils.getLocaleMessage(LocaleKeys.homePartTimeTitle),
+                  ),
                 ],
               ),
             ),

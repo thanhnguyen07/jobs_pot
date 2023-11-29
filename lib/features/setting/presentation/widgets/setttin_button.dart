@@ -26,7 +26,7 @@ class SettingButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
           minimumSize: const Size(double.infinity, 45),
-          elevation: 8,
+          elevation: 5,
           shadowColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

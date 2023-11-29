@@ -18,6 +18,8 @@ class AppIcons {
   static const post = 'lib/assets/iconsSvg/tabBar/post.svg';
   static const save = 'lib/assets/iconsSvg/tabBar/save.svg';
 
+  static const circleCheck = 'lib/assets/iconsSvg/circle_check.svg';
+  static const swatches = 'lib/assets/iconsSvg/swatches.svg';
   static const add = 'lib/assets/iconsSvg/add.svg';
   static const apply = 'lib/assets/iconsSvg/apply.svg';
   static const appreciation = 'lib/assets/iconsSvg/appreciation.svg';

@@ -56,7 +56,7 @@
   "authenticationBackButtonTitle": "GO BACK",
   "authenticationCheckMailTitle": "Check Your Email",
   "authenticationCheckMailSubTitle": "We have sent the reset password link to the email address",
-  "homeHelloTitle": { "zero": "Hello\n{}." },
+  "homeHelloTitle": "Hello",
   "homeJoinNowTitle": "Join Now",
   "homeFindJobTitle": "Find Your Job",
   "homeRecentJobList": "Recent Job List",
@@ -121,11 +121,24 @@
   "postImagesCancelButtonTitle": "Cancel",
   "postImagesDeleteButtonTitle": "Delete",
   "postAddImageTitle": "Take a new photo or select one from the gallery",
+  "postAddImageTitleWithColor": "Take a new photo or select one from the gallery or choose a color",
+  "postChooseColorTitle": "Choose a color",
   "postTakePictureTitle": "Take Picture",
   "postPickFromGalleryTitle": "Pick from Gallery",
   "postPostingProcessTitle": "Posting process",
   "postPostingProcessStep1Title": {
     "zero": "Step  1 - Upload images {}/{}"
   },
-  "postPostingProcessStep2Title": "Step 2 - Upload post"
+  "postPostingProcessStep2Title": "Step 2 - Upload post",
+  "settingAccountGooogleTitle": "Google",
+  "settingAccountFacebookTitle": "Facebook",
+  "settingAccountEmailTitle": "Email",
+  "settingAccountLinkAccount": "Link account",
+  "settingAccountDisplayNameAccount": "Display Name: ",
+  "settingAccountDisplayEmailAccount": "Email: ",
+  "settingAccountProviderIdAccount": "Provider ID: ",
+  "settingAccountUnlinkAccount": "Unlink",
+  "settingAccountLinkAccountError": "The linked account has a different email than the current email. Please use the linked account that has the same email as the current email!",
+  "settingAccountConfirmUnLink": "Are you sure you want to unlink?",
+  "settingAccountChangePassword": "Change Password"
 }

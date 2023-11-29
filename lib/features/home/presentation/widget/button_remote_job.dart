@@ -6,6 +6,7 @@ import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/features/home/domain/entities/jobs_summary_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class ButtonRemoteJob extends ConsumerStatefulWidget {
@@ -21,6 +22,7 @@ class _ButtonRemoteJobState extends ConsumerState<ButtonRemoteJob> {
   @override
   Widget build(BuildContext context) {
     JobsSummaryEntity? jobsSummaryData = ref.watch(jobsSummaryController);
+    ref.watch(languageControllerProvider);
 
     return Expanded(
       flex: 1,
@@ -35,6 +37,11 @@ class _ButtonRemoteJobState extends ConsumerState<ButtonRemoteJob> {
         ),
         child: TextButton(
           onPressed: () {},
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

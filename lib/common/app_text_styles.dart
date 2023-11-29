@@ -105,6 +105,12 @@ class AppTextStyle {
       color: AppColors.textColor1,
       fontSize: 14,
       fontFamily: AppFontFamily.dMSansRegular);
+
+  static const whiteRegularS14 = TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontFamily: AppFontFamily.dMSansRegular,
+  );
   static const whiteBoldS14 = TextStyle(
     color: Colors.white,
     fontSize: 14,
