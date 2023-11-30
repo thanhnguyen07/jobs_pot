@@ -35,22 +35,6 @@ class _CreateHeaderState extends ConsumerState<CreateHeader> {
             },
             child: SvgPicture.asset(AppIcons.back),
           ),
-          TextButton(
-            onPressed: () {
-              if (uploadsData != null) {
-              } else {
-                ref.read(createPostController.notifier).onPost(context);
-              }
-            },
-            style: TextButton.styleFrom(
-              foregroundColor:
-                  uploadsData != null ? Colors.white : null, // foreground
-            ),
-            child: Text(
-              Utils.getLocaleMessage(LocaleKeys.postButtonPost),
-              style: AppTextStyle.textColor6BoldS14,
-            ),
-          )
         ],
       ),
     );

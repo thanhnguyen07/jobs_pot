@@ -2,6 +2,8 @@
   "changeLanguageTitle": "English",
   "changeLanguageTitle2": "Tiếng Việt",
   "generalError": "Đã có lỗi xảy ra!!!",
+  "errorPassword": "Mật khẩu cũ không chính xác!",
+  "errorPassword2": "Mật khẩu không chính xác!",
   "splashTitle": "Jobspot",
   "onboardingTitle1": "Find Your",
   "onboardingTitle2": "Dream Job",
@@ -44,6 +46,7 @@
   "authenticationPasswordValidationMessages5": "Mật khẩu phải nhiều hơn 3 ký tự.",
   "authenticationPasswordValidationMessages6": "Tên đầy đủ phải nhiều hơn 3 ký tự.",
   "authenticationPasswordValidationMessages7": "Xác nhận mật khẩu không khớp với mật khẩu.",
+  "authenticationPasswordValidationMessages8": "Mật khẩu mới phải khác với mật khẩu cũ.",
   "authenticationVerifyEmailButtonTitle": "TIẾP TỤC",
   "authenticationVerifyEmailBackButtonTitle": "QUAY LẠI ĐĂNG KÝ",
   "authenticationVerifyEmailTitle": "Xác thực email của bạn",
@@ -141,5 +144,16 @@
   "settingAccountUnlinkAccount": "Huỷ liên kết",
   "settingAccountLinkAccountError": "Tài khoản được liên kết có email khác với email hiện tại. Vui lòng sử dụng tài khoản được liên kết có cùng email với email hiện tại!",
   "settingAccountConfirmUnLink": "Bạn có chắc chắn muốn hủy liên kết?",
-  "settingAccountChangePassword": "Đổi mật khẩu"
+  "settingAccountChooseAuthTypeUnLinkTitle": "Chọn một phương thức xác thực",
+  "settingAccountChooseAuthTypeUnLinkSubTitle": "Để huỷ liên kết yêu cầu bạn phải xác thực, vui lòng chọn phương thức xác thực?",
+  "settingAccountChangeVerificationCode": "Mã xác minh",
+  "settingAccountChangePassword": "Đổi mật khẩu",
+  "settingAccountChangePasswordOldTitle": "Cũ",
+  "settingAccountChangePasswordNewTitle": "Mới",
+  "settingAccountChangePasswordConfirmTitle": "Xác nhận",
+  "settingAccountChangePasswordMsg": "Đổi mật khẩu thành công!",
+  "settingAccountPasswordVerify": "Xác minh mật khẩu",
+  "settingAccountVerify": "Xác minh",
+  "settingAccountVerifyMsg": "Xác minh mật khẩu thành công!"
+
 }

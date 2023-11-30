@@ -97,7 +97,7 @@ class LoginWithEmailController extends StateNotifier {
                   .then(
                 (value) async {
                   if (r.results.emailVerified) {
-                    context.router.replaceAll([const HomeStackRoute()]);
+                    context.router.replaceAll([const HomeRoute()]);
                   } else {
                     final sendVerificationCodeRes = await ref
                         .read(authRepositoryProvider)

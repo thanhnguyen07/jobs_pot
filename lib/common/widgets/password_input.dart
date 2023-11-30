@@ -10,9 +10,12 @@ import 'package:reactive_forms/reactive_forms.dart';
 class PasswordInput extends StatefulWidget {
   const PasswordInput({
     required this.formControlPassword,
+    this.subTitleKey,
   }) : super(key: null);
 
   final FormControl<dynamic>? formControlPassword;
+
+  final String? subTitleKey;
 
   @override
   State<StatefulWidget> createState() => _PasswordInputState();
@@ -20,6 +23,13 @@ class PasswordInput extends StatefulWidget {
 
 class _PasswordInputState extends State<PasswordInput> {
   late bool showPassword = true;
+
+  String getTitle() {
+    final String? subTitleKey = widget.subTitleKey;
+    return subTitleKey != null
+        ? "${Utils.getLocaleMessage(subTitleKey)} ${Utils.getLocaleMessage(LocaleKeys.authenticationPasswordInputTitle)}"
+        : Utils.getLocaleMessage(LocaleKeys.authenticationPasswordInputTitle);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +45,7 @@ class _PasswordInputState extends State<PasswordInput> {
       ),
       formController: widget.formControlPassword,
       title: Text(
-        Utils.getLocaleMessage(LocaleKeys.authenticationPasswordInputTitle),
+        getTitle(),
         style: AppTextStyle.darkPurpleBoldS14,
       ),
       validationMessages: {
@@ -53,6 +63,8 @@ class _PasswordInputState extends State<PasswordInput> {
             LocaleKeys.authenticationPasswordValidationMessages5),
         ValidationMessage.mustMatch: (error) => Utils.getLocaleMessage(
             LocaleKeys.authenticationPasswordValidationMessages7),
+        ValidationKeys.different: (error) => Utils.getLocaleMessage(
+            LocaleKeys.authenticationPasswordValidationMessages8),
       },
     );
   }

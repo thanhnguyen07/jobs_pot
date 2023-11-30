@@ -8,13 +8,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
-import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
+import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/create/create_provider.dart';
-import 'package:jobs_pot/features/create/presentation/widgets/create_header.dart';
 import 'package:jobs_pot/features/create/presentation/widgets/create_post_input_form.dart';
+import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -44,97 +45,116 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
 
   @override
   Widget build(BuildContext context) {
+    return AppScaffold(
+      unFocusKeyboard: true,
+      scroll: true,
+      physicsScroll: const BouncingScrollPhysics(),
+      paddingTop: true,
+      child: _body(),
+    );
+  }
+
+  ReactiveForm _body() {
     final UserEntity? userData = ref.watch(authControllerProvider);
     final List<XFile>? imagesData = ref.watch(createPostController);
     final List<String>? uploadsData =
         ref.watch(uploadImageToFirebaseController);
-
-    return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(20),
-        child: CreateHeader(),
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: UnFocusKeyboard(
-          context: context,
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: ReactiveForm(
-              formGroup: _createPostInputForm,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  imagesData != null && uploadsData != null
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              Utils.getLocaleMessage(
-                                  LocaleKeys.postPostingProcessTitle),
-                              style: AppTextStyle.text4BoldS16,
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        LocaleKeys.postPostingProcessStep1Title
-                                            .plural(0, args: [
-                                          uploadsData.length.toString(),
-                                          (imagesData.length - 1).toString()
-                                        ]),
-                                        style: AppTextStyle.darkPurpleBoldS12,
-                                      ),
-                                      Container(
-                                        width: 10,
-                                        height: 10,
-                                        margin: const EdgeInsets.only(left: 10),
-                                        child: uploadsData.length ==
-                                                (imagesData.length - 1)
-                                            ? SvgPicture.asset(AppIcons.checked)
-                                            : const CircularProgressIndicator(
-                                                color:
-                                                    AppColors.fireYellowColor,
-                                                strokeWidth: 2,
-                                              ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    Utils.getLocaleMessage(LocaleKeys
-                                        .postPostingProcessStep2Title),
-                                    style: AppTextStyle.darkPurpleBoldS12,
-                                  ),
-                                ],
+    return ReactiveForm(
+      formGroup: _createPostInputForm,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _header(uploadsData),
+          imagesData != null && uploadsData != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      Utils.getLocaleMessage(
+                          LocaleKeys.postPostingProcessTitle),
+                      style: AppTextStyle.text4BoldS16,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                LocaleKeys.postPostingProcessStep1Title
+                                    .plural(0, args: [
+                                  uploadsData.length.toString(),
+                                  (imagesData.length - 1).toString()
+                                ]),
+                                style: AppTextStyle.darkPurpleBoldS12,
                               ),
-                            ),
-                          ],
-                        )
-                      : const SizedBox(),
-                  const SizedBox(height: 20),
-                  _addPostTitle(),
-                  const SizedBox(height: 30),
-                  _userInfo(userData),
-                  const CraetePostInputForm(),
-                  Text(
-                    Utils.getLocaleMessage(LocaleKeys.postImagesTitle),
-                    style: AppTextStyle.darkPurpleBoldS12,
-                  ),
-                  const SizedBox(height: 10),
-                  imagesData != null && imagesData.isNotEmpty
-                      ? _imagesView(context, imagesData)
-                      : _addImages(context),
-                  const SizedBox(height: 60)
-                ],
-              ),
-            ),
+                              Container(
+                                width: 10,
+                                height: 10,
+                                margin: const EdgeInsets.only(left: 10),
+                                child: uploadsData.length ==
+                                        (imagesData.length - 1)
+                                    ? SvgPicture.asset(AppIcons.checked)
+                                    : const CircularProgressIndicator(
+                                        color: AppColors.fireYellowColor,
+                                        strokeWidth: 2,
+                                      ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            Utils.getLocaleMessage(
+                                LocaleKeys.postPostingProcessStep2Title),
+                            style: AppTextStyle.darkPurpleBoldS12,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              : const SizedBox(),
+          const SizedBox(height: 20),
+          _addPostTitle(),
+          const SizedBox(height: 30),
+          _userInfo(userData),
+          const CraetePostInputForm(),
+          Text(
+            Utils.getLocaleMessage(LocaleKeys.postImagesTitle),
+            style: AppTextStyle.darkPurpleBoldS12,
           ),
+          const SizedBox(height: 10),
+          imagesData != null && imagesData.isNotEmpty
+              ? _imagesView(context, imagesData)
+              : _addImages(context),
+          const SizedBox(height: 60)
+        ],
+      ),
+    );
+  }
+
+  Header _header(List<String>? uploadsData) {
+    return Header(
+      onBack: () {
+        ref
+            .read(bottomNavigationController.notifier)
+            .actionButtonCreate(context);
+      },
+      titleKey: LocaleKeys.postAddHashtagTitle,
+      rightButton: TextButton(
+        onPressed: () {
+          if (uploadsData != null) {
+          } else {
+            ref.read(createPostController.notifier).onPost(context);
+          }
+        },
+        style: TextButton.styleFrom(
+          foregroundColor:
+              uploadsData != null ? Colors.white : null, // foreground
+        ),
+        child: Text(
+          Utils.getLocaleMessage(LocaleKeys.postButtonPost),
+          style: AppTextStyle.textColor6BoldS14,
         ),
       ),
     );

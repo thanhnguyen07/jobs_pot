@@ -53,3 +53,31 @@ class PasswordValidator extends Validator<dynamic> {
 }
 
 Validator<dynamic> get passwordValidatorSchema => PasswordValidator();
+
+class DifferentValidator extends Validator<dynamic> {
+  final String controlName;
+  final String differentControlName;
+
+  DifferentValidator({
+    required this.controlName,
+    required this.differentControlName,
+  }) : super();
+
+  @override
+  Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
+    final form = control as FormGroup;
+
+    final formControl = form.control(controlName);
+    final matchingFormControl = form.control(differentControlName);
+
+    if (formControl.dirty && formControl.value == matchingFormControl.value) {
+      matchingFormControl.setErrors({ValidationKeys.different: true});
+
+      matchingFormControl.markAsTouched();
+    } else {
+      matchingFormControl.removeError(ValidationKeys.different);
+    }
+
+    return null;
+  }
+}

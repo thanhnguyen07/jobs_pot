@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
+import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/signUp/sign_up_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/change_language.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/or_social_login.dart';
@@ -31,34 +31,29 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     ref.watch(languageControllerProvider);
 
-    return UnFocusKeyboard(
-      context: context,
-      child: Scaffold(
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 30),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: _body(),
-          ),
-        ),
-      ),
+    return AppScaffold(
+      unFocusKeyboard: true,
+      scroll: true,
+      physicsScroll: const BouncingScrollPhysics(),
+      child: _body(),
     );
   }
 
   Widget _body() {
-    return Column(
-      children: [
-        _loginTitle(),
-        const LoginForm(),
-        const OrSocialLogin(),
-        const SizedBox(
-          height: 15,
-        ),
-        _signUpSuggestion(),
-        const ChangeLanguage(),
-      ],
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      child: Column(
+        children: [
+          _loginTitle(),
+          const LoginForm(),
+          const OrSocialLogin(),
+          const SizedBox(
+            height: 15,
+          ),
+          _signUpSuggestion(),
+          const ChangeLanguage(),
+        ],
+      ),
     );
   }
 

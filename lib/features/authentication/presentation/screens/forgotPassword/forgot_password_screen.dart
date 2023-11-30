@@ -5,8 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
-import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/forgotPassword/forgot_password_form.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/title_and_sub_title.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
@@ -26,25 +26,24 @@ class ForgotPasswordScreen extends ConsumerStatefulWidget {
 class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    return UnFocusKeyboard(
-      context: context,
-      child: Scaffold(
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          width: double.infinity,
-          height: double.infinity,
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                _forgotPasswordTitle(),
-                SvgPicture.asset(AppImages.forgotPassword),
-                const ForgotPasswordForm(),
-                _buttonActions(),
-              ],
-            ),
-          ),
-        ),
+    return AppScaffold(
+      unFocusKeyboard: true,
+      scroll: true,
+      physicsScroll: const ClampingScrollPhysics(),
+      child: _body(),
+    );
+  }
+
+  Widget _body() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          _forgotPasswordTitle(),
+          SvgPicture.asset(AppImages.forgotPassword),
+          const ForgotPasswordForm(),
+          _buttonActions(),
+        ],
       ),
     );
   }
@@ -61,9 +60,9 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15),
       child: CustomButton(
-        backgroundColor: AppColors.lavenderColor,
+        backgroundColor: AppColors.fireYellowColor,
         title: Text(
-          Utils.getLocaleMessage(LocaleKeys.authenticationButtonBackToLogin),
+          Utils.getLocaleMessage(LocaleKeys.authenticationBackButtonTitle),
           style: AppTextStyle.whiteBoldS14,
         ),
         onPressed: () {

@@ -4,6 +4,8 @@ abstract class  LocaleKeys {
   static const changeLanguageTitle = 'changeLanguageTitle';
   static const changeLanguageTitle2 = 'changeLanguageTitle2';
   static const generalError = 'generalError';
+  static const errorPassword = 'errorPassword';
+  static const errorPassword2 = 'errorPassword2';
   static const splashTitle = 'splashTitle';
   static const onboardingTitle1 = 'onboardingTitle1';
   static const onboardingTitle2 = 'onboardingTitle2';
@@ -46,6 +48,7 @@ abstract class  LocaleKeys {
   static const authenticationPasswordValidationMessages5 = 'authenticationPasswordValidationMessages5';
   static const authenticationPasswordValidationMessages6 = 'authenticationPasswordValidationMessages6';
   static const authenticationPasswordValidationMessages7 = 'authenticationPasswordValidationMessages7';
+  static const authenticationPasswordValidationMessages8 = 'authenticationPasswordValidationMessages8';
   static const authenticationVerifyEmailButtonTitle = 'authenticationVerifyEmailButtonTitle';
   static const authenticationVerifyEmailBackButtonTitle = 'authenticationVerifyEmailBackButtonTitle';
   static const authenticationVerifyEmailTitle = 'authenticationVerifyEmailTitle';
@@ -129,6 +132,16 @@ abstract class  LocaleKeys {
   static const settingAccountUnlinkAccount = 'settingAccountUnlinkAccount';
   static const settingAccountLinkAccountError = 'settingAccountLinkAccountError';
   static const settingAccountConfirmUnLink = 'settingAccountConfirmUnLink';
+  static const settingAccountChooseAuthTypeUnLinkTitle = 'settingAccountChooseAuthTypeUnLinkTitle';
+  static const settingAccountChooseAuthTypeUnLinkSubTitle = 'settingAccountChooseAuthTypeUnLinkSubTitle';
+  static const settingAccountChangeVerificationCode = 'settingAccountChangeVerificationCode';
   static const settingAccountChangePassword = 'settingAccountChangePassword';
+  static const settingAccountChangePasswordOldTitle = 'settingAccountChangePasswordOldTitle';
+  static const settingAccountChangePasswordNewTitle = 'settingAccountChangePasswordNewTitle';
+  static const settingAccountChangePasswordConfirmTitle = 'settingAccountChangePasswordConfirmTitle';
+  static const settingAccountChangePasswordMsg = 'settingAccountChangePasswordMsg';
+  static const settingAccountPasswordVerify = 'settingAccountPasswordVerify';
+  static const settingAccountVerify = 'settingAccountVerify';
+  static const settingAccountVerifyMsg = 'settingAccountVerifyMsg';
 
 }

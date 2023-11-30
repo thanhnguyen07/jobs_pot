@@ -26,6 +26,9 @@ class SplashController extends StateNotifier<bool> {
                   await ref.read(authRepositoryProvider).getRememberStatus();
 
               if (token != null && idUser != null && rememberStatus != null) {
+                await ref
+                    .read(authControllerProvider.notifier)
+                    .reloadFirebaseUser();
                 if (context.mounted) {
                   await getUserProfile(context, idUser);
                 }

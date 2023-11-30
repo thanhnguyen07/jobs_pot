@@ -15,7 +15,8 @@ class TitleAndSubTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 80, bottom: 40),
+      margin: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top + 20, bottom: 40),
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(

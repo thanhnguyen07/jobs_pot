@@ -6,10 +6,10 @@ import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/common/widgets/modal_bottom_photo.dart';
-import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/edit_profile_form.dart';
@@ -28,43 +28,41 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 class _EditProfileState extends ConsumerState<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    return AppScaffold(
+      unFocusKeyboard: true,
+      scroll: true,
+      physicsScroll: const ClampingScrollPhysics(),
+      child: _body(context),
+    );
+  }
+
+  Column _body(BuildContext context) {
     UserEntity? userData = ref.watch(authControllerProvider);
 
-    return UnFocusKeyboard(
-      context: context,
-      child: Scaffold(
-        body: SizedBox(
-          height: double.infinity,
-          child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    _background(context, userData),
-                    _buttonHeader(context),
-                    _userAvatar(userData),
-                    _userName(context, userData),
-                  ],
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: AppColors.amberColor,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: const Column(
-                    children: [
-                      EditProfileForm(),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
+    return Column(
+      children: [
+        Stack(
+          children: [
+            _background(context, userData),
+            _buttonHeader(context),
+            _userAvatar(userData),
+            _userName(context, userData),
+          ],
         ),
-      ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: AppColors.amberColor,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: const Column(
+            children: [
+              EditProfileForm(),
+            ],
+          ),
+        )
+      ],
     );
   }
 

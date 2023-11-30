@@ -90,12 +90,10 @@ class SignWithEmailController extends StateNotifier {
 
     try {
       await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then(
-        (value) async {
-          await _createUserOnServer(context, email);
-        },
-      );
+          .createUserWithEmailAndPassword(email: email, password: password);
+      if (context.mounted) {
+        await _createUserOnServer(context, email);
+      }
     } on FirebaseAuthException catch (e) {
       ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
     }

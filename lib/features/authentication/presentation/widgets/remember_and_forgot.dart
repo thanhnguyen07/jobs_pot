@@ -12,7 +12,9 @@ import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class RememberAndForgot extends ConsumerStatefulWidget {
-  const RememberAndForgot({Key? key}) : super(key: null);
+  const RememberAndForgot({Key? key, this.disableRemember}) : super(key: null);
+
+  final bool? disableRemember;
 
   @override
   ConsumerState<RememberAndForgot> createState() => _RememberAndForgotState();
@@ -35,7 +37,9 @@ class _RememberAndForgotState extends ConsumerState<RememberAndForgot> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _remember(rememberStauts),
+        (widget.disableRemember != null && widget.disableRemember == true)
+            ? const SizedBox()
+            : _remember(rememberStauts),
         _forgot(context),
       ],
     );

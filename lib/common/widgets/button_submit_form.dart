@@ -15,10 +15,18 @@ class ButtonSubmitForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color checkBackgroundColor(FormGroup form) {
-      if (form.dirty) {
+      if (!form.pristine) {
         return form.valid ? AppColors.egglantColor : AppColors.shadowColor;
       } else {
         return AppColors.egglantColor;
+      }
+    }
+
+    void Function()? checkOnPress(FormGroup form) {
+      if (form.pristine) {
+        return onLogin;
+      } else {
+        return form.valid ? onLogin : null;
       }
     }
 
@@ -29,7 +37,7 @@ class ButtonSubmitForm extends StatelessWidget {
           child: CustomButton(
             title: title,
             backgroundColor: checkBackgroundColor(form),
-            onPressed: form.valid ? onLogin : null,
+            onPressed: checkOnPress(form),
           ),
         );
       },

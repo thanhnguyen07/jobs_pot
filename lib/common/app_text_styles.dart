@@ -148,6 +148,11 @@ class AppTextStyle {
     fontSize: 18,
     fontFamily: AppFontFamily.dMSansMedium,
   );
+  static const darkPurpleBoldS20 = TextStyle(
+    color: AppColors.darkPurpleColor,
+    fontSize: 20,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
   //22
   static const blackBoldS22 = TextStyle(
     color: Colors.black,
@@ -160,6 +165,11 @@ class AppTextStyle {
     fontFamily: AppFontFamily.dMSansBold,
   );
   //26
+  static const darkPurpleBoldS26 = TextStyle(
+    color: AppColors.darkPurpleColor,
+    fontSize: 26,
+    fontFamily: AppFontFamily.dMSansBold,
+  );
   static const whiteBoldS26 = TextStyle(
     color: Colors.white,
     fontSize: 26,

@@ -84,6 +84,10 @@ class ProfileController extends StateNotifier<bool> {
     });
   }
 
+  void showToastGeneralError() {
+    ref.read(systemControllerProvider.notifier).showToastGeneralError();
+  }
+
   FormGroup getProfileInputForm() => _profileInputForm;
 
   String? getInputName() {
@@ -133,13 +137,13 @@ class ProfileController extends StateNotifier<bool> {
 
           ref.read(systemControllerProvider.notifier).hideLoading();
         } else {
-          ref.read(systemControllerProvider.notifier).showToastGeneralError();
+          showToastGeneralError();
         }
       }
       ref.read(systemControllerProvider.notifier).hideLoading();
     } catch (e) {
       ref.read(systemControllerProvider.notifier).hideLoading();
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      showToastGeneralError();
     }
   }
 
@@ -160,14 +164,14 @@ class ProfileController extends StateNotifier<bool> {
                 id: id,
               );
       updateAvatarResult.fold((l) {
-        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+        showToastGeneralError();
       }, (r) {
         ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
         ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
       });
     } else {
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      showToastGeneralError();
     }
   }
 }

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,8 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
-import 'package:jobs_pot/common/widgets/un_focus_keyboard.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/pin_code.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/suggestions_text.dart';
@@ -77,18 +76,11 @@ class _EmailVerificationScreenState
 
     bool errorPin = ref.watch(emailVerificationControllerProvider);
 
-    return UnFocusKeyboard(
-      context: context,
-      child: Scaffold(
-        body: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: _body(emailUser, countDown, errorPin),
-          ),
-        ),
-      ),
+    return AppScaffold(
+      unFocusKeyboard: true,
+      scroll: true,
+      physicsScroll: const ClampingScrollPhysics(),
+      child: _body(emailUser, countDown, errorPin),
     );
   }
 

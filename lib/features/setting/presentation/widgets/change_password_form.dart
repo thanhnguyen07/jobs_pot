@@ -4,7 +4,7 @@ import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/common/widgets/button_submit_form.dart';
 import 'package:jobs_pot/common/widgets/password_input.dart';
-import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/authentication/presentation/widgets/remember_and_forgot.dart';
 import 'package:jobs_pot/features/setting/setting_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
@@ -30,8 +30,9 @@ class _ChangePasswordState extends ConsumerState<ChangePasswordForm> {
   void initState() {
     super.initState();
 
-    _changePasswordForm =
-        ref.read(changePasswordControllerProvider.notifier).getSignUpForm();
+    _changePasswordForm = ref
+        .read(changePasswordControllerProvider.notifier)
+        .getChangePasswordForm();
 
     _changePasswordForm.reset();
 
@@ -54,16 +55,18 @@ class _ChangePasswordState extends ConsumerState<ChangePasswordForm> {
       child: Column(
         children: [
           _formInput(),
+          const RememberAndForgot(
+            disableRemember: true,
+          ),
           ButtonSubmitForm(
             title: Text(
-              Utils.getLocaleMessage(
-                  LocaleKeys.authenticationSignUpButtonTitle),
+              Utils.getLocaleMessage(LocaleKeys.settingAccountChangePassword),
               style: AppTextStyle.whiteBoldS14,
             ),
             onLogin: () {
               ref
                   .read(changePasswordControllerProvider.notifier)
-                  .onSignUp(context);
+                  .changePassword(context);
             },
           ),
         ],
@@ -76,12 +79,15 @@ class _ChangePasswordState extends ConsumerState<ChangePasswordForm> {
       children: [
         PasswordInput(
           formControlPassword: formControlOldPassword,
+          subTitleKey: LocaleKeys.settingAccountChangePasswordOldTitle,
         ),
         PasswordInput(
           formControlPassword: formControlNewPassword,
+          subTitleKey: LocaleKeys.settingAccountChangePasswordNewTitle,
         ),
         PasswordInput(
           formControlPassword: formControlConfirmNewPassword,
+          subTitleKey: LocaleKeys.settingAccountChangePasswordConfirmTitle,
         )
       ],
     );

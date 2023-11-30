@@ -14,6 +14,7 @@ class ValidationKeys {
   static const String oldPassword = 'oldPassword';
   static const String newPassword = 'newPassword';
   static const String confirmNewPassword = 'confirmNewPassword';
+  static const String different = 'different';
 }
 
 class FirebaseKeys {

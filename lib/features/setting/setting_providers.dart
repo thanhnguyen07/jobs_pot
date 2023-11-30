@@ -14,7 +14,7 @@ final settingControllerProvider =
 );
 
 final accountControllerProvider =
-    StateNotifierProvider<AccountController, dynamic>(
+    StateNotifierProvider<AccountController, String?>(
   (ref) => AccountController(ref),
 );
 

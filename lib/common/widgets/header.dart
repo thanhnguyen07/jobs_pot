@@ -9,10 +9,12 @@ class Header extends StatelessWidget {
     super.key,
     required this.onBack,
     required this.titleKey,
+    this.rightButton,
   });
 
   final String titleKey;
   final void Function() onBack;
+  final Widget? rightButton;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,12 @@ class Header extends StatelessWidget {
           Utils.getLocaleMessage(titleKey),
           style: AppTextStyle.darkPurpleBoldS18,
         ),
-        const TextButton(
-          onPressed: null,
-          child: SizedBox(),
-        ),
+        rightButton != null
+            ? rightButton!
+            : const TextButton(
+                onPressed: null,
+                child: SizedBox(),
+              ),
       ],
     );
   }
