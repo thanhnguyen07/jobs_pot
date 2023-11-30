@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
@@ -329,6 +327,9 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                 isPassword
                     ? ElevatedButton(
                         onPressed: changePassword,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.babyBlueColor,
+                        ),
                         child: Text(
                           Utils.getLocaleMessage(
                             LocaleKeys.settingAccountChangePassword,
@@ -347,6 +348,9 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                             },
                           );
                         },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.amberColor,
+                        ),
                         child: Text(
                           Utils.getLocaleMessage(
                             LocaleKeys.settingAccountUnlinkAccount,

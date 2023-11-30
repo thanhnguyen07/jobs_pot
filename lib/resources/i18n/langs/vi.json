@@ -43,6 +43,7 @@
   "authenticationPasswordValidationMessages4": "Mật khẩu phải có ít nhất một chữ hoa ('A'-Z').",
   "authenticationPasswordValidationMessages5": "Mật khẩu phải nhiều hơn 3 ký tự.",
   "authenticationPasswordValidationMessages6": "Tên đầy đủ phải nhiều hơn 3 ký tự.",
+  "authenticationPasswordValidationMessages7": "Xác nhận mật khẩu không khớp với mật khẩu.",
   "authenticationVerifyEmailButtonTitle": "TIẾP TỤC",
   "authenticationVerifyEmailBackButtonTitle": "QUAY LẠI ĐĂNG KÝ",
   "authenticationVerifyEmailTitle": "Xác thực email của bạn",

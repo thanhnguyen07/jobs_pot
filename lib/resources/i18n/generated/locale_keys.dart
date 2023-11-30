@@ -45,6 +45,7 @@ abstract class  LocaleKeys {
   static const authenticationPasswordValidationMessages4 = 'authenticationPasswordValidationMessages4';
   static const authenticationPasswordValidationMessages5 = 'authenticationPasswordValidationMessages5';
   static const authenticationPasswordValidationMessages6 = 'authenticationPasswordValidationMessages6';
+  static const authenticationPasswordValidationMessages7 = 'authenticationPasswordValidationMessages7';
   static const authenticationVerifyEmailButtonTitle = 'authenticationVerifyEmailButtonTitle';
   static const authenticationVerifyEmailBackButtonTitle = 'authenticationVerifyEmailBackButtonTitle';
   static const authenticationVerifyEmailTitle = 'authenticationVerifyEmailTitle';

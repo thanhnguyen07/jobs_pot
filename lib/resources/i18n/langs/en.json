@@ -43,6 +43,7 @@
   "authenticationPasswordValidationMessages4": "Passwords must have at least one uppercase ('A'-Z').",
   "authenticationPasswordValidationMessages5": "Password must be more than 3 characters.",
   "authenticationPasswordValidationMessages6": "Full name must be more than 3 characters.",
+  "authenticationPasswordValidationMessages7": "The password confirmation does not match the password.",
   "authenticationVerifyEmailButtonTitle": "CONTINUE",
   "authenticationVerifyEmailBackButtonTitle": "BACK TO SIGNUP",
   "authenticationVerifyEmailTitle": "Verify your email",

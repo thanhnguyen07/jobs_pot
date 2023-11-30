@@ -51,6 +51,8 @@ class _PasswordInputState extends State<PasswordInput> {
             LocaleKeys.authenticationPasswordValidationMessages4),
         ValidationKeys.min: (error) => Utils.getLocaleMessage(
             LocaleKeys.authenticationPasswordValidationMessages5),
+        ValidationMessage.mustMatch: (error) => Utils.getLocaleMessage(
+            LocaleKeys.authenticationPasswordValidationMessages7),
       },
     );
   }
