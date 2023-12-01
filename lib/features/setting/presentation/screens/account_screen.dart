@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
@@ -9,8 +11,10 @@ import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/provider_info_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/setting/presentation/widgets/add_password_form.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/change_password_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_choose_verify_method.dart';
+import 'package:jobs_pot/features/setting/presentation/widgets/modal_verification_code.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/provider_button.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/provider_details.dart';
 import 'package:jobs_pot/features/setting/setting_providers.dart';
@@ -111,6 +115,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
         ref
             .read(accountControllerProvider.notifier)
             .setProvider(ProviderKeys.password);
+
         linked
             ? await _providerDetailsDialog(
                 providerKey: ProviderKeys.password,
@@ -120,7 +125,18 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                 changePassword: () {
                   context.router.pushNamed(ChangePasswordScreen.path);
                 })
-            : null;
+            : await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(
+                      Utils.getLocaleMessage(
+                          LocaleKeys.settingAccountLinkPassword),
+                      style: AppTextStyle.darkPurpleBoldS30,
+                    ),
+                    content: const AddPasswordForm(),
+                  );
+                });
       },
     );
   }
@@ -136,6 +152,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
         ref
             .read(accountControllerProvider.notifier)
             .setProvider(ProviderKeys.facebook);
+
         linked
             ? await _providerDetailsDialog(
                 providerKey: ProviderKeys.facebook,
@@ -144,11 +161,6 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               )
             : ref.read(accountControllerProvider.notifier).facebookLink();
       },
-      // unLink: () async {
-      //   await ref
-      //       .read(accountControllerProvider.notifier)
-      //       .unLink(ProviderKeys.facebook);
-      // },
     );
   }
 
@@ -171,16 +183,6 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               )
             : ref.read(accountControllerProvider.notifier).googleLink();
       },
-
-      // unLink: () async {
-      //   await ref
-      //       .read(accountControllerProvider.notifier)
-      //       .unLink(ProviderKeys.google);
-
-      //   if (context.mounted) {
-      //     Navigator.pop(context);
-      //   }
-      // },
     );
   }
 
@@ -203,8 +205,8 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
           unLinkAction: () async {
             await showModalBottomSheet<void>(
               context: context,
-              builder: (BuildContext context) {
-                return const ModalChooseVerifyMethod();
+              builder: (_) {
+                return ModalChooseVerifyMethod(detailContext: context);
               },
             );
           },

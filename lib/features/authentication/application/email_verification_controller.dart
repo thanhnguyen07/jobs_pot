@@ -10,21 +10,23 @@ import 'package:jobs_pot/system/system_providers.dart';
 class EmailVerificationController extends StateNotifier<bool> {
   EmailVerificationController(this.ref) : super(false);
   final Ref ref;
-  String _cureentEmail = '';
+  String? _cureentEmail;
 
-  void setCurrentEmail(String email) {
+  void setCurrentEmail(String? email) {
     _cureentEmail = email;
   }
 
   String getCurrentEmail() {
-    return _cureentEmail;
+    UserEntity? userData = ref.read(authControllerProvider);
+    return _cureentEmail ?? userData?.email ?? "";
   }
 
   Future<bool> reSendVerifyMail() async {
+    String currentEmail = getCurrentEmail();
     ref.read(systemControllerProvider.notifier).showLoading();
     final sendVerificationCodeRes = await ref
         .read(authRepositoryProvider)
-        .sendVerificationCode(_cureentEmail);
+        .sendVerificationCode(currentEmail);
 
     return sendVerificationCodeRes.fold(
       (l) {
@@ -47,24 +49,36 @@ class EmailVerificationController extends StateNotifier<bool> {
   void checkVerifyEmail(BuildContext context, String code) async {
     ref.read(systemControllerProvider.notifier).showLoading();
 
+    bool sendVerifyCodeRes = await verifyCode(code);
+
+    if (sendVerifyCodeRes) {
+      UserEntity? userData = ref.read(authControllerProvider);
+      clearErrorCode();
+      if (userData?.id != null && context.mounted) {
+        await getProfile(context, userData!.id);
+      }
+    }
+
+    ref.read(systemControllerProvider.notifier).hideLoading();
+  }
+
+  Future<bool> verifyCode(String code) async {
+    ref.read(systemControllerProvider.notifier).showLoading();
+
     final sendVerifyCodeRes =
         await ref.read(authRepositoryProvider).sendVerifyCode(code);
 
-    sendVerifyCodeRes.fold(
+    ref.read(systemControllerProvider.notifier).hideLoading();
+
+    return sendVerifyCodeRes.fold(
       (l) {
         state = true;
+        return false;
       },
       (r) async {
-        UserEntity? userData = ref.read(authControllerProvider);
-        clearErrorCode();
-        ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
-        if (userData?.id != null) {
-          await getProfile(context, userData!.id);
-        }
+        return true;
       },
     );
-
-    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
   Future getProfile(BuildContext context, String idUser) async {
@@ -73,6 +87,7 @@ class EmailVerificationController extends StateNotifier<bool> {
         res.fold(
           (l) {},
           (r) {
+            setCurrentEmail(null);
             context.router.replaceAll([const HomeStackRoute()]);
           },
         );

@@ -111,7 +111,7 @@ class SignWithEmailController extends StateNotifier {
           .read(authRepositoryProvider)
           .signUpWithEmail(fullName, tokenFirebase);
 
-      resCreateUserOnServer.fold((l) {
+      await resCreateUserOnServer.fold((l) {
         ref.read(systemControllerProvider.notifier).showToastGeneralError();
       }, (r) async {
         ref.read(authControllerProvider.notifier).setDataUser(r.results);
@@ -130,7 +130,6 @@ class SignWithEmailController extends StateNotifier {
           sendVerificationCodeRes.fold(
             (l) {},
             (r) {
-              ref.read(emailVerificationControllerProvider.notifier);
               ref
                   .read(systemControllerProvider.notifier)
                   .showToastMessage(r.msg);

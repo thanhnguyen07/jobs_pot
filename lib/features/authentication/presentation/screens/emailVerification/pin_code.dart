@@ -48,7 +48,7 @@ class PinCode extends StatelessWidget {
     );
     Widget errorBuilder(String? errorText, String pin) {
       return Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.only(top: 10),
         child: Text(
           errorText ?? "",
           style: const TextStyle(color: Colors.red),

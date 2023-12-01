@@ -34,11 +34,15 @@ class AuthController extends StateNotifier<UserEntity?> {
   }
 
   Future reloadFirebaseUser() async {
-    final User? currenUser = FirebaseAuth.instance.currentUser;
-    if (currenUser != null) {
-      await currenUser.reload();
-    } else {
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+    try {
+      final User? currenUser = FirebaseAuth.instance.currentUser;
+      if (currenUser != null) {
+        await currenUser.reload();
+      } else {
+        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      }
+    } on FirebaseAuthException catch (e) {
+      ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
     }
   }
 

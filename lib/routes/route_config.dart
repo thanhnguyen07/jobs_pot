@@ -38,6 +38,10 @@ class AppRouter extends $AppRouter {
           path: ChangePasswordScreen.path,
         ),
         AutoRoute(
+          page: ChangePasswordRoute.page,
+          path: ChangePasswordScreen.path,
+        ),
+        AutoRoute(
           page: SaveJobRoute.page,
           path: SaveJobScreen.path,
         ),

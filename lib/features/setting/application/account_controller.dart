@@ -69,9 +69,6 @@ class AccountController extends StateNotifier<String?> {
           await FirebaseAuth.instance
               .signInWithEmailAndPassword(email: email, password: password);
 
-          _ref.read(systemControllerProvider.notifier).showToastMessage(
-              Utils.getLocaleMessage(LocaleKeys.settingAccountVerifyMsg));
-
           affterVerifyFun();
         }
       } on FirebaseAuthException catch (_) {
@@ -155,13 +152,16 @@ class AccountController extends StateNotifier<String?> {
     await disconnect();
   }
 
-  Future<void> unLink() async {
+  Future<void> unLink(BuildContext detailContext) async {
     showLoading();
     try {
       String? providerId = state;
       if (providerId != null) {
         await FirebaseAuth.instance.currentUser?.unlink(providerId);
         await synUnLinkWithServer(providerId);
+        if (detailContext.mounted) {
+          Navigator.pop(detailContext);
+        }
         state = null;
         hideLoading();
       } else {
@@ -170,8 +170,9 @@ class AccountController extends StateNotifier<String?> {
         hideLoading();
       }
     } on FirebaseAuthException catch (e) {
-      state = null;
       _ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
+      hideLoading();
+      state = null;
     }
   }
 
@@ -230,6 +231,41 @@ class AccountController extends StateNotifier<String?> {
       });
     } else {
       showToastGeneralError();
+    }
+  }
+
+  Future<void> verifycode(BuildContext context, String code) async {
+    bool verifyCodeRes = await _ref
+        .read(emailVerificationControllerProvider.notifier)
+        .verifyCode(code);
+    if (verifyCodeRes) {
+      UserEntity? userData = _ref.read(authControllerProvider);
+
+      String? password =
+          _ref.read(addPasswordControllerProvider.notifier).getPassword();
+
+      if (userData != null && password != null) {
+        AuthCredential credential = EmailAuthProvider.credential(
+            email: userData.email, password: password);
+        if (context.mounted) {
+          await linkEmail(credential, context);
+        }
+      } else {
+        _ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      }
+    }
+  }
+
+  Future<void> linkEmail(
+      AuthCredential credential, BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.currentUser?.linkWithCredential(credential);
+      await _ref.read(authControllerProvider.notifier).reloadFirebaseUser();
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
+    } on FirebaseAuthException catch (e) {
+      _ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
     }
   }
 }

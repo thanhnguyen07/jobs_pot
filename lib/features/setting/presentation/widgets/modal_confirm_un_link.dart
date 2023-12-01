@@ -10,7 +10,10 @@ import 'package:jobs_pot/utils/utils.dart';
 class ModalConfirmUnLink extends ConsumerStatefulWidget {
   const ModalConfirmUnLink({
     Key? key,
+    required this.detailContext,
   }) : super(key: null);
+
+  final BuildContext detailContext;
 
   @override
   ConsumerState<ModalConfirmUnLink> createState() => _ModalConfirmUnLinkState();
@@ -23,7 +26,7 @@ class _ModalConfirmUnLinkState extends ConsumerState<ModalConfirmUnLink> {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        const SizedBox(height: 5),
+        const SizedBox(height: 10),
         Text(
           Utils.getLocaleMessage(LocaleKeys.settingAccountConfirmUnLink),
           style: AppTextStyle.darkPurpleBoldS20,
@@ -42,7 +45,9 @@ class _ModalConfirmUnLinkState extends ConsumerState<ModalConfirmUnLink> {
             backgroundColor: Colors.redAccent,
             onPressed: () async {
               Navigator.pop(context);
-              await ref.read(accountControllerProvider.notifier).unLink();
+              await ref
+                  .read(accountControllerProvider.notifier)
+                  .unLink(widget.detailContext);
             },
           ),
         ),

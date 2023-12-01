@@ -154,5 +154,8 @@
   "settingAccountChangePasswordMsg": "Change password successfully!",
   "settingAccountPasswordVerify": "Password Verify",
   "settingAccountVerify": "Verify",
-  "settingAccountVerifyMsg": "Verify password successfully!"
+  "settingAccountVerifyMsg": "Verify password successfully!",
+  "settingAccountLinkPassword": "Add password",
+  "settingAccountLinkPasswordMsg": "Add password successfully!",
+  "settingAccountVerifyCodeSubTitle": "The verification code has been sent to the email address"
 }

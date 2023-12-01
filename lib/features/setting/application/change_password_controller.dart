@@ -6,9 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
-import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/email_verification_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
-import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
@@ -58,12 +56,6 @@ class ChangePasswordController extends StateNotifier {
   ]);
 
   FormGroup getChangePasswordForm() => _changePasswordForm;
-
-  String getInputName() {
-    return _changePasswordForm.controls[ValidationKeys.fullName]?.value
-            .toString() ??
-        "";
-  }
 
   String getOldPassword() {
     return _changePasswordForm.controls[ValidationKeys.oldPassword]?.value
@@ -144,72 +136,6 @@ class ChangePasswordController extends StateNotifier {
       }
     } on FirebaseAuthException catch (_) {
       ref.read(systemControllerProvider.notifier).showToastGeneralError();
-    }
-  }
-
-  Future signUpWithEmail(BuildContext context) async {
-    final email =
-        _changePasswordForm.controls[ValidationKeys.email]?.value.toString() ??
-            "";
-
-    final password = _changePasswordForm
-            .controls[ValidationKeys.password]?.value
-            .toString() ??
-        "";
-
-    try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then(
-        (value) async {
-          await _createUserOnServer(context, email);
-        },
-      );
-    } on FirebaseAuthException catch (e) {
-      ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
-    }
-  }
-
-  Future _createUserOnServer(BuildContext context, String email) async {
-    final fullName = ref.read(signUpWithEmailProvider.notifier).getInputName();
-    final User? user =
-        ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
-
-    final String? tokenFirebase = await user?.getIdToken();
-
-    if (tokenFirebase != null) {
-      final resCreateUserOnServer = await ref
-          .read(authRepositoryProvider)
-          .signUpWithEmail(fullName, tokenFirebase);
-
-      resCreateUserOnServer.fold((l) {
-        ref.read(systemControllerProvider.notifier).showToastGeneralError();
-      }, (r) async {
-        ref.read(authControllerProvider.notifier).setDataUser(r.results);
-        await ref
-            .read(authRepositoryProvider)
-            .saveDataUser(r.token, r.refreshToken, r.results.id);
-        if (r.results.emailVerified) {
-          if (context.mounted) {
-            context.router.replaceAll([const HomeStackRoute()]);
-          }
-        } else {
-          final sendVerificationCodeRes = await ref
-              .read(authRepositoryProvider)
-              .sendVerificationCode(email);
-
-          sendVerificationCodeRes.fold(
-            (l) {},
-            (r) {
-              ref.read(emailVerificationControllerProvider.notifier);
-              ref
-                  .read(systemControllerProvider.notifier)
-                  .showToastMessage(r.msg);
-              context.router.pushNamed(EmailVerificationScreen.path);
-            },
-          );
-        }
-      });
     }
   }
 }

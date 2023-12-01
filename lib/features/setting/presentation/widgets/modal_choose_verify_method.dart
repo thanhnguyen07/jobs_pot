@@ -10,7 +10,10 @@ import 'package:jobs_pot/utils/utils.dart';
 class ModalChooseVerifyMethod extends StatelessWidget {
   const ModalChooseVerifyMethod({
     Key? key,
+    required this.detailContext,
   }) : super(key: null);
+
+  final BuildContext detailContext;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class ModalChooseVerifyMethod extends StatelessWidget {
       showDialog(
         context: context,
         builder: (context) {
-          return _passwordDialog(context);
+          return _passwordDialog(context, detailContext);
         },
       );
     }
@@ -84,7 +87,8 @@ class ModalChooseVerifyMethod extends StatelessWidget {
     );
   }
 
-  AlertDialog _passwordDialog(BuildContext context) {
+  AlertDialog _passwordDialog(
+      BuildContext context, BuildContext detailContext) {
     return AlertDialog(
       title: SizedBox(
         width: double.maxFinite,
@@ -102,7 +106,9 @@ class ModalChooseVerifyMethod extends StatelessWidget {
               await showModalBottomSheet<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return const ModalConfirmUnLink();
+                  return ModalConfirmUnLink(
+                    detailContext: detailContext,
+                  );
                 },
               );
             },

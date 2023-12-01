@@ -31,7 +31,7 @@ class SystemController extends StateNotifier<AppStateEntity> {
     Fluttertoast.showToast(
       msg: message,
       backgroundColor: AppColors.purpleColor,
-      timeInSecForIosWeb: 5,
+      timeInSecForIosWeb: 3,
     );
   }
 

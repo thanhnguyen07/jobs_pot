@@ -143,5 +143,8 @@ abstract class  LocaleKeys {
   static const settingAccountPasswordVerify = 'settingAccountPasswordVerify';
   static const settingAccountVerify = 'settingAccountVerify';
   static const settingAccountVerifyMsg = 'settingAccountVerifyMsg';
+  static const settingAccountLinkPassword = 'settingAccountLinkPassword';
+  static const settingAccountLinkPasswordMsg = 'settingAccountLinkPasswordMsg';
+  static const settingAccountVerifyCodeSubTitle = 'settingAccountVerifyCodeSubTitle';
 
 }
