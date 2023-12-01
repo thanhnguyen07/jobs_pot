@@ -41,7 +41,6 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
                   .actionButtonCreate(context, () {
                 tabsRouter.setActiveIndex(2);
               });
-              // tabsRouter.setActiveIndex(2);
             }
           },
           showUnselectedLabels: false,
