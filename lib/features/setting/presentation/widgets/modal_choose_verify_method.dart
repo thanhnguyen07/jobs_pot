@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
-import 'package:jobs_pot/features/setting/presentation/widgets/modal_confirm_un_link.dart';
-import 'package:jobs_pot/features/setting/presentation/widgets/password_form.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
-class ModalChooseVerifyMethod extends StatelessWidget {
+class ModalChooseVerifyMethod extends ConsumerStatefulWidget {
   const ModalChooseVerifyMethod({
     Key? key,
-    required this.detailContext,
+    required this.verificationCodeMethodPress,
+    this.linkedPassword = false,
+    this.passwordMethodPress,
   }) : super(key: null);
 
-  final BuildContext detailContext;
+  final bool linkedPassword;
+  final void Function()? passwordMethodPress;
+  final void Function()? verificationCodeMethodPress;
 
   @override
-  Widget build(BuildContext context) {
-    passwordMethodPress() {
-      Navigator.pop(context);
-      showDialog(
-        context: context,
-        builder: (context) {
-          return _passwordDialog(context, detailContext);
-        },
-      );
-    }
+  ConsumerState<ModalChooseVerifyMethod> createState() =>
+      _ModalChooseVerifyMethodState();
+}
 
+class _ModalChooseVerifyMethodState
+    extends ConsumerState<ModalChooseVerifyMethod> {
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: 270,
       child: Center(
@@ -52,19 +52,21 @@ class ModalChooseVerifyMethod extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            Container(
-              margin: const EdgeInsets.only(left: 25, right: 25),
-              child: CustomButton(
-                title: Text(
-                  Utils.getLocaleMessage(
-                    LocaleKeys.authenticationPasswordInputTitle,
-                  ),
-                  style: AppTextStyle.whiteBoldS14,
-                ),
-                backgroundColor: AppColors.egglantColor,
-                onPressed: passwordMethodPress,
-              ),
-            ),
+            widget.linkedPassword
+                ? Container(
+                    margin: const EdgeInsets.only(left: 25, right: 25),
+                    child: CustomButton(
+                      title: Text(
+                        Utils.getLocaleMessage(
+                          LocaleKeys.authenticationPasswordInputTitle,
+                        ),
+                        style: AppTextStyle.whiteBoldS14,
+                      ),
+                      backgroundColor: AppColors.egglantColor,
+                      onPressed: widget.passwordMethodPress,
+                    ),
+                  )
+                : const SizedBox(),
             Container(
               margin: const EdgeInsets.only(
                   left: 25, right: 25, top: 10, bottom: 20),
@@ -76,44 +78,11 @@ class ModalChooseVerifyMethod extends StatelessWidget {
                   style: AppTextStyle.whiteBoldS14,
                 ),
                 backgroundColor: AppColors.egglantColor,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: widget.verificationCodeMethodPress,
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  AlertDialog _passwordDialog(
-      BuildContext context, BuildContext detailContext) {
-    return AlertDialog(
-      title: SizedBox(
-        width: double.maxFinite,
-        child: Text(
-          Utils.getLocaleMessage(LocaleKeys.settingAccountPasswordVerify),
-          style: AppTextStyle.darkPurpleBoldS26,
-        ),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          PasswordForm(
-            affterVerify: () async {
-              Navigator.pop(context);
-              await showModalBottomSheet<void>(
-                context: context,
-                builder: (BuildContext context) {
-                  return ModalConfirmUnLink(
-                    detailContext: detailContext,
-                  );
-                },
-              );
-            },
-          ),
-        ],
       ),
     );
   }

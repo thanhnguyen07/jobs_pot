@@ -3,17 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
-import 'package:jobs_pot/features/setting/setting_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class ModalConfirmUnLink extends ConsumerStatefulWidget {
   const ModalConfirmUnLink({
     Key? key,
-    required this.detailContext,
+    required this.yesPress,
+    required this.noPress,
   }) : super(key: null);
 
-  final BuildContext detailContext;
+  final void Function() yesPress;
+  final void Function() noPress;
 
   @override
   ConsumerState<ModalConfirmUnLink> createState() => _ModalConfirmUnLinkState();
@@ -43,12 +44,7 @@ class _ModalConfirmUnLinkState extends ConsumerState<ModalConfirmUnLink> {
               style: AppTextStyle.whiteBoldS14,
             ),
             backgroundColor: Colors.redAccent,
-            onPressed: () async {
-              Navigator.pop(context);
-              await ref
-                  .read(accountControllerProvider.notifier)
-                  .unLink(widget.detailContext);
-            },
+            onPressed: widget.yesPress,
           ),
         ),
         Container(
@@ -62,9 +58,7 @@ class _ModalConfirmUnLinkState extends ConsumerState<ModalConfirmUnLink> {
               style: AppTextStyle.whiteBoldS14,
             ),
             backgroundColor: AppColors.lavenderColor,
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: widget.noPress,
           ),
         ),
       ],

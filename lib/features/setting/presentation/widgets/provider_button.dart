@@ -9,12 +9,14 @@ class ProviderButton extends ConsumerStatefulWidget {
     required this.linked,
     required this.icon,
     required this.title,
-    required this.onPress,
+    required this.linkFun,
+    required this.unLinkFun,
   }) : super(key: null);
 
   final String icon;
   final String title;
-  final void Function() onPress;
+  final void Function() linkFun;
+  final void Function() unLinkFun;
   final bool linked;
 
   @override
@@ -38,8 +40,13 @@ class _ProviderButtonState extends ConsumerState<ProviderButton> {
         );
       },
     );
+
+    void onPress() {
+      widget.linked ? widget.unLinkFun() : widget.linkFun();
+    }
+
     return TextButton(
-      onPressed: widget.onPress,
+      onPressed: onPress,
       child: SizedBox(
         width: 250,
         child: Row(
@@ -69,7 +76,7 @@ class _ProviderButtonState extends ConsumerState<ProviderButton> {
               thumbIcon: thumbIcon,
               value: widget.linked,
               onChanged: (_) {
-                widget.onPress();
+                onPress();
               },
             )
           ],

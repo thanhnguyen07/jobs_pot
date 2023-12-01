@@ -1,20 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_icons.dart';
+import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/provider_info_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
-import 'package:jobs_pot/features/setting/presentation/widgets/add_password_form.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/change_password_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_choose_verify_method.dart';
+import 'package:jobs_pot/features/setting/presentation/widgets/modal_confirm_un_link.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_verification_code.dart';
+import 'package:jobs_pot/features/setting/presentation/widgets/modal_verificaton_password.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/provider_button.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/provider_details.dart';
 import 'package:jobs_pot/features/setting/setting_providers.dart';
@@ -72,6 +71,10 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
   Container _body(BuildContext context) {
     UserEntity? userData = ref.watch(authControllerProvider);
 
+    bool linkedPassword = ref
+        .read(accountControllerProvider.notifier)
+        .checkLink(ProviderKeys.password);
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -79,110 +82,133 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
         children: [
           _userInfo(userData),
           const SizedBox(height: 10),
-          Text(
-            Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccount),
-            style: AppTextStyle.darkPurpleBoldS18,
-          ),
+          _linkAccountTitle(),
           const SizedBox(height: 10),
-          _google(context, userData),
-          _facebook(userData),
-          _password(context, userData),
+          _googleButton(),
+          _facebookButton(),
+          _accountManagementTitle(),
+          const SizedBox(height: 10),
+          linkedPassword ? _changePasswordButton(context) : const SizedBox(),
+          const SizedBox(height: 10),
+          _deleteAccount(context)
         ],
       ),
     );
   }
 
-  checkLink(String providerId, UserEntity? userData) {
-    bool result = false;
-    if (userData != null) {
-      for (final ProviderInfoEntity elemet in userData.providerData) {
-        if (elemet.providerId == providerId) {
-          result = true;
-        }
-      }
-    }
-    return result;
-  }
-
-  Widget _password(BuildContext context, UserEntity? userData) {
-    bool linked = checkLink(ProviderKeys.password, userData);
-
-    return ProviderButton(
-      linked: linked,
-      icon: AppImages.password,
-      title: LocaleKeys.authenticationPasswordInputTitle,
-      onPress: () async {
-        ref
-            .read(accountControllerProvider.notifier)
-            .setProvider(ProviderKeys.password);
-
-        linked
-            ? await _providerDetailsDialog(
-                providerKey: ProviderKeys.password,
-                dialogTitle: LocaleKeys.authenticationPasswordInputTitle,
-                dialogIcon: AppImages.password,
-                isPassword: true,
-                changePassword: () {
-                  context.router.pushNamed(ChangePasswordScreen.path);
-                })
-            : await showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text(
-                      Utils.getLocaleMessage(
-                          LocaleKeys.settingAccountLinkPassword),
-                      style: AppTextStyle.darkPurpleBoldS30,
-                    ),
-                    content: const AddPasswordForm(),
-                  );
-                });
-      },
+  Text _accountManagementTitle() {
+    return Text(
+      Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccountManagement),
+      style: AppTextStyle.darkPurpleBoldS18,
     );
   }
 
-  Widget _facebook(UserEntity? userData) {
-    bool linked = checkLink(ProviderKeys.facebook, userData);
+  Text _linkAccountTitle() {
+    return Text(
+      Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccount),
+      style: AppTextStyle.darkPurpleBoldS18,
+    );
+  }
+
+  Container _deleteAccount(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      child: ElevatedButton(
+        onPressed: () {
+          context.router.pushNamed(ChangePasswordScreen.path);
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+        ),
+        child: Text(
+          Utils.getLocaleMessage(
+            LocaleKeys.settingAccountChangePassword,
+          ),
+          style: AppTextStyle.darkPurpleBoldS14,
+        ),
+      ),
+    );
+  }
+
+  Container _changePasswordButton(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      child: ElevatedButton(
+        onPressed: () {
+          context.router.pushNamed(ChangePasswordScreen.path);
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.babyBlueColor,
+        ),
+        child: Text(
+          Utils.getLocaleMessage(
+            LocaleKeys.settingAccountChangePassword,
+          ),
+          style: AppTextStyle.darkPurpleBoldS14,
+        ),
+      ),
+    );
+  }
+
+  Widget _facebookButton() {
+    bool linked = ref
+        .read(accountControllerProvider.notifier)
+        .checkLink(ProviderKeys.facebook);
+
+    linkFun() {
+      ref.read(accountControllerProvider.notifier).facebookLink();
+    }
+
+    unLinkFun() async {
+      ref
+          .read(accountControllerProvider.notifier)
+          .setProvider(ProviderKeys.facebook);
+
+      await _providerDetailsDialog(
+        providerKey: ProviderKeys.facebook,
+        dialogTitle: LocaleKeys.settingAccountFacebookTitle,
+        dialogIcon: AppImages.facebookLogo,
+      );
+    }
 
     return ProviderButton(
       linked: linked,
       icon: AppImages.facebookLogo,
       title: LocaleKeys.settingAccountFacebookTitle,
-      onPress: () async {
-        ref
-            .read(accountControllerProvider.notifier)
-            .setProvider(ProviderKeys.facebook);
-
-        linked
-            ? await _providerDetailsDialog(
-                providerKey: ProviderKeys.facebook,
-                dialogTitle: LocaleKeys.settingAccountFacebookTitle,
-                dialogIcon: AppImages.facebookLogo,
-              )
-            : ref.read(accountControllerProvider.notifier).facebookLink();
-      },
+      linkFun: linkFun,
+      unLinkFun: unLinkFun,
     );
   }
 
-  Widget _google(BuildContext context, UserEntity? userData) {
-    bool linked = checkLink(ProviderKeys.google, userData);
+  Widget _googleButton() {
+    bool linked = ref
+        .read(accountControllerProvider.notifier)
+        .checkLink(ProviderKeys.google);
+
+    linkFun() {
+      ref.read(accountControllerProvider.notifier).googleLink();
+    }
+
+    unLinkFun() async {
+      ref
+          .read(accountControllerProvider.notifier)
+          .setProvider(ProviderKeys.google);
+
+      await _providerDetailsDialog(
+        providerKey: ProviderKeys.google,
+        dialogTitle: LocaleKeys.settingAccountGooogleTitle,
+        dialogIcon: AppImages.googleLogo,
+      );
+    }
 
     return ProviderButton(
       linked: linked,
       icon: AppImages.google3,
       title: LocaleKeys.settingAccountGooogleTitle,
-      onPress: () async {
-        ref
-            .read(accountControllerProvider.notifier)
-            .setProvider(ProviderKeys.google);
-        linked
-            ? await _providerDetailsDialog(
-                providerKey: ProviderKeys.google,
-                dialogTitle: LocaleKeys.settingAccountGooogleTitle,
-                dialogIcon: AppImages.googleLogo,
-              )
-            : ref.read(accountControllerProvider.notifier).googleLink();
-      },
+      linkFun: linkFun,
+      unLinkFun: unLinkFun,
     );
   }
 
@@ -190,26 +216,127 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
     required String providerKey,
     required String dialogTitle,
     required String dialogIcon,
-    bool isPassword = false,
-    void Function()? changePassword,
   }) {
     return showDialog(
       context: context,
-      builder: (context) {
+      builder: (BuildContext detailsContext) {
+        // UnLink flow
+        // Password verify method => Dialog password verify => Verify password => Dialog confirm unlink
+        // Verifiction code method => Send verification code => Verifiction code verify => Verify code => Dialog confirm unlink
+        Future<void> confirmUnLink() {
+          return showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return ModalConfirmUnLink(
+                yesPress: () async {
+                  Navigator.pop(context);
+                  bool unLinkRes = await ref
+                      .read(accountControllerProvider.notifier)
+                      .unLink();
+                  if (unLinkRes && detailsContext.mounted) {
+                    Navigator.pop(detailsContext);
+                  }
+                },
+                noPress: () {
+                  Navigator.pop(context);
+                },
+              );
+            },
+          );
+        }
+
+        void verifyCode(pin) async {
+          bool verifycodeRes = await ref
+              .read(accountControllerProvider.notifier)
+              .verifycode(pin);
+
+          if (verifycodeRes && context.mounted) {
+            Navigator.pop(context);
+            confirmUnLink();
+          }
+        }
+
+        void verifyPassword(BuildContext context) async {
+          bool passwordVerifyRes = await ref
+              .read(accountControllerProvider.notifier)
+              .passwordVerify();
+          if (passwordVerifyRes && context.mounted) {
+            Navigator.pop(context);
+            confirmUnLink();
+          }
+        }
+
+        void verificationCodeMethodPress() async {
+          bool sendVerificationCodeRes = await ref
+              .read(accountControllerProvider.notifier)
+              .sendVerificationCode();
+
+          if (sendVerificationCodeRes && context.mounted) {
+            await showDialog(
+              context: context,
+              builder: (_) {
+                return AlertDialog(
+                  title: Text(
+                    Utils.getLocaleMessage(
+                        LocaleKeys.settingAccountChangeVerificationCode),
+                    style: AppTextStyle.darkPurpleBoldS30,
+                  ),
+                  content: ModalVerificationCode(
+                    onCompleted: verifyCode,
+                  ),
+                );
+              },
+            );
+          }
+        }
+
+        void passwordMethodPress() {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  Utils.getLocaleMessage(
+                      LocaleKeys.settingAccountPasswordVerify),
+                  style: AppTextStyle.darkPurpleBoldS26,
+                ),
+                content: ModalVerificationPassword(
+                  verifyPassword: () {
+                    verifyPassword(context);
+                  },
+                ),
+              );
+            },
+          );
+        }
+
+        void unLinkFun() async {
+          await showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext chooseVerifyMethoContext) {
+              bool linkedPassword = ref
+                  .read(accountControllerProvider.notifier)
+                  .checkLink(ProviderKeys.password);
+              return ModalChooseVerifyMethod(
+                verificationCodeMethodPress: () {
+                  Navigator.pop(chooseVerifyMethoContext);
+                  verificationCodeMethodPress();
+                },
+                linkedPassword: linkedPassword,
+                passwordMethodPress: () {
+                  Navigator.pop(chooseVerifyMethoContext);
+                  passwordMethodPress();
+                },
+              );
+            },
+          );
+        }
+
         return ProviderDetails(
           dialogIcon: dialogIcon,
           dialogTitle: dialogTitle,
-          isPassword: isPassword,
           providerKey: providerKey,
-          changePassword: changePassword,
-          unLinkAction: () async {
-            await showModalBottomSheet<void>(
-              context: context,
-              builder: (_) {
-                return ModalChooseVerifyMethod(detailContext: context);
-              },
-            );
-          },
+          unLinkAction: unLinkFun,
         );
       },
     );

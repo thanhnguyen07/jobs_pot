@@ -11,19 +11,19 @@ import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class PasswordForm extends ConsumerStatefulWidget {
-  const PasswordForm({
+class ModalVerificationPassword extends ConsumerStatefulWidget {
+  const ModalVerificationPassword({
     Key? key,
-    required this.affterVerify,
+    required this.verifyPassword,
   }) : super(key: null);
 
-  final void Function() affterVerify;
+  final void Function() verifyPassword;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _PasswordState();
 }
 
-class _PasswordState extends ConsumerState<PasswordForm> {
+class _PasswordState extends ConsumerState<ModalVerificationPassword> {
   FormControl<dynamic>? formControlPassword;
 
   late bool rememberState = true;
@@ -48,24 +48,24 @@ class _PasswordState extends ConsumerState<PasswordForm> {
 
     return ReactiveForm(
       formGroup: _passwordForm,
-      child: Column(
-        children: [
-          _formInput(),
-          const RememberAndForgot(
-            disableRemember: true,
-          ),
-          ButtonSubmitForm(
-            title: Text(
-              Utils.getLocaleMessage(LocaleKeys.settingAccountVerify),
-              style: AppTextStyle.whiteBoldS14,
+      child: SizedBox(
+        width: double.maxFinite,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _formInput(),
+            const RememberAndForgot(
+              disableRemember: true,
             ),
-            onLogin: () {
-              ref
-                  .read(accountControllerProvider.notifier)
-                  .passwordVerify(widget.affterVerify, context);
-            },
-          ),
-        ],
+            ButtonSubmitForm(
+              title: Text(
+                Utils.getLocaleMessage(LocaleKeys.settingAccountVerify),
+                style: AppTextStyle.whiteBoldS14,
+              ),
+              onLogin: widget.verifyPassword,
+            ),
+          ],
+        ),
       ),
     );
   }

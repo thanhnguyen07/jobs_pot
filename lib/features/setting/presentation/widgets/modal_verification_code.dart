@@ -7,14 +7,16 @@ import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/pin_code.dart';
-import 'package:jobs_pot/features/setting/setting_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class ModalVerificationCode extends ConsumerStatefulWidget {
   const ModalVerificationCode({
     Key? key,
+    required this.onCompleted,
   }) : super(key: null);
+
+  final void Function(String)? onCompleted;
 
   @override
   ConsumerState<ModalVerificationCode> createState() =>
@@ -100,9 +102,7 @@ class _ModalVerificationCodeState extends ConsumerState<ModalVerificationCode> {
       margin: const EdgeInsets.symmetric(vertical: 30),
       child: PinCode(
         error: errorPin,
-        onCompleted: (pin) {
-          ref.read(accountControllerProvider.notifier).verifycode(context, pin);
-        },
+        onCompleted: widget.onCompleted,
         clearError: () {
           ref
               .read(emailVerificationControllerProvider.notifier)

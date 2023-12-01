@@ -14,16 +14,12 @@ class ProviderDetails extends ConsumerStatefulWidget {
     Key? key,
     required this.dialogIcon,
     required this.dialogTitle,
-    required this.isPassword,
-    this.changePassword,
     required this.unLinkAction,
     required this.providerKey,
   }) : super(key: null);
 
   final String dialogIcon;
   final String dialogTitle;
-  final bool isPassword;
-  final void Function()? changePassword;
   final void Function() unLinkAction;
   final String providerKey;
 
@@ -128,20 +124,6 @@ class _ProviderDetailsState extends ConsumerState<ProviderDetails> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            widget.isPassword
-                ? ElevatedButton(
-                    onPressed: widget.changePassword,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.babyBlueColor,
-                    ),
-                    child: Text(
-                      Utils.getLocaleMessage(
-                        LocaleKeys.settingAccountChangePassword,
-                      ),
-                      style: AppTextStyle.darkPurpleBoldS14,
-                    ),
-                  )
-                : const SizedBox(),
             providerData != null && providerData.length > 1
                 ? ElevatedButton(
                     onPressed: widget.unLinkAction,

@@ -126,6 +126,7 @@ abstract class  LocaleKeys {
   static const settingAccountFacebookTitle = 'settingAccountFacebookTitle';
   static const settingAccountEmailTitle = 'settingAccountEmailTitle';
   static const settingAccountLinkAccount = 'settingAccountLinkAccount';
+  static const settingAccountLinkAccountManagement = 'settingAccountLinkAccountManagement';
   static const settingAccountDisplayNameAccount = 'settingAccountDisplayNameAccount';
   static const settingAccountDisplayEmailAccount = 'settingAccountDisplayEmailAccount';
   static const settingAccountProviderIdAccount = 'settingAccountProviderIdAccount';
