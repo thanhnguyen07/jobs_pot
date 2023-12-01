@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_colors.dart';
@@ -6,21 +7,23 @@ import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
-class ModalConfirmUnLink extends ConsumerStatefulWidget {
-  const ModalConfirmUnLink({
+class ModalConfirm extends ConsumerStatefulWidget {
+  const ModalConfirm({
     Key? key,
     required this.yesPress,
     required this.noPress,
+    required this.type,
   }) : super(key: null);
 
   final void Function() yesPress;
   final void Function() noPress;
+  final String type;
 
   @override
-  ConsumerState<ModalConfirmUnLink> createState() => _ModalConfirmUnLinkState();
+  ConsumerState<ModalConfirm> createState() => _ModalConfirmState();
 }
 
-class _ModalConfirmUnLinkState extends ConsumerState<ModalConfirmUnLink> {
+class _ModalConfirmState extends ConsumerState<ModalConfirm> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +32,8 @@ class _ModalConfirmUnLinkState extends ConsumerState<ModalConfirmUnLink> {
       children: <Widget>[
         const SizedBox(height: 10),
         Text(
-          Utils.getLocaleMessage(LocaleKeys.settingAccountConfirmUnLink),
+          LocaleKeys.settingAccountConfirmUnLink
+              .plural(0, args: [Utils.getLocaleMessage(widget.type)]),
           style: AppTextStyle.darkPurpleBoldS20,
           textAlign: TextAlign.center,
         ),

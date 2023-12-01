@@ -11,7 +11,7 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/change_password_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_choose_verify_method.dart';
-import 'package:jobs_pot/features/setting/presentation/widgets/modal_confirm_un_link.dart';
+import 'package:jobs_pot/features/setting/presentation/widgets/modal_confirm.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_verification_code.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_verificaton_password.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/provider_button.dart';
@@ -111,21 +111,124 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
   }
 
   Container _deleteAccount(BuildContext context) {
+    Future<void> confirmUnLink() {
+      return showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return ModalConfirm(
+            type: LocaleKeys.settingAccountDeleteAccount,
+            yesPress: () async {
+              Navigator.pop(context);
+              await ref
+                  .read(accountControllerProvider.notifier)
+                  .deleteAccount();
+            },
+            noPress: () {
+              Navigator.pop(context);
+            },
+          );
+        },
+      );
+    }
+
+    void verifyCode(pin) async {
+      bool verifycodeRes =
+          await ref.read(accountControllerProvider.notifier).verifycode(pin);
+
+      if (verifycodeRes && context.mounted) {
+        Navigator.pop(context);
+        confirmUnLink();
+      }
+    }
+
+    void verifyPassword(BuildContext context) async {
+      bool passwordVerifyRes =
+          await ref.read(accountControllerProvider.notifier).passwordVerify();
+      if (passwordVerifyRes && context.mounted) {
+        Navigator.pop(context);
+        confirmUnLink();
+      }
+    }
+
+    void verificationCodeMethodPress() async {
+      bool sendVerificationCodeRes = await ref
+          .read(accountControllerProvider.notifier)
+          .sendVerificationCode();
+
+      if (sendVerificationCodeRes && context.mounted) {
+        await showDialog(
+          context: context,
+          builder: (_) {
+            return AlertDialog(
+              title: Text(
+                Utils.getLocaleMessage(
+                    LocaleKeys.settingAccountChangeVerificationCode),
+                style: AppTextStyle.darkPurpleBoldS30,
+              ),
+              content: ModalVerificationCode(
+                onCompleted: verifyCode,
+              ),
+            );
+          },
+        );
+      }
+    }
+
+    void passwordMethodPress() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              Utils.getLocaleMessage(LocaleKeys.settingAccountPasswordVerify),
+              style: AppTextStyle.darkPurpleBoldS26,
+            ),
+            content: ModalVerificationPassword(
+              verifyPassword: () {
+                verifyPassword(context);
+              },
+            ),
+          );
+        },
+      );
+    }
+
+    void deleteAction() async {
+      await showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext chooseVerifyMethoContext) {
+          bool linkedPassword = ref
+              .read(accountControllerProvider.notifier)
+              .checkLink(ProviderKeys.password);
+          return ModalChooseVerifyMethod(
+            type: LocaleKeys.settingAccountDeleteAccount,
+            verificationCodeMethodPress: () {
+              Navigator.pop(chooseVerifyMethoContext);
+              verificationCodeMethodPress();
+            },
+            linkedPassword: linkedPassword,
+            passwordMethodPress: () {
+              Navigator.pop(chooseVerifyMethoContext);
+              passwordMethodPress();
+            },
+          );
+        },
+      );
+    }
+
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: ElevatedButton(
-        onPressed: () {
-          context.router.pushNamed(ChangePasswordScreen.path);
-        },
+        onPressed: deleteAction,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
         ),
         child: Text(
           Utils.getLocaleMessage(
-            LocaleKeys.settingAccountChangePassword,
+            LocaleKeys.settingAccountDeleteAccount,
           ),
-          style: AppTextStyle.darkPurpleBoldS14,
+          style: AppTextStyle.whiteBoldS14,
         ),
       ),
     );
@@ -140,13 +243,13 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
           context.router.pushNamed(ChangePasswordScreen.path);
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.babyBlueColor,
+          backgroundColor: AppColors.egglantColor,
         ),
         child: Text(
           Utils.getLocaleMessage(
             LocaleKeys.settingAccountChangePassword,
           ),
-          style: AppTextStyle.darkPurpleBoldS14,
+          style: AppTextStyle.whiteBoldS14,
         ),
       ),
     );
@@ -227,7 +330,8 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
           return showModalBottomSheet<void>(
             context: context,
             builder: (BuildContext context) {
-              return ModalConfirmUnLink(
+              return ModalConfirm(
+                type: LocaleKeys.settingAccountUnlinkAccount,
                 yesPress: () async {
                   Navigator.pop(context);
                   bool unLinkRes = await ref
@@ -318,6 +422,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                   .read(accountControllerProvider.notifier)
                   .checkLink(ProviderKeys.password);
               return ModalChooseVerifyMethod(
+                type: LocaleKeys.settingAccountUnlinkAccount,
                 verificationCodeMethodPress: () {
                   Navigator.pop(chooseVerifyMethoContext);
                   verificationCodeMethodPress();

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/app_colors.dart';
@@ -9,6 +10,7 @@ import 'package:jobs_pot/utils/utils.dart';
 class ModalChooseVerifyMethod extends ConsumerStatefulWidget {
   const ModalChooseVerifyMethod({
     Key? key,
+    required this.type,
     required this.verificationCodeMethodPress,
     this.linkedPassword = false,
     this.passwordMethodPress,
@@ -17,6 +19,7 @@ class ModalChooseVerifyMethod extends ConsumerStatefulWidget {
   final bool linkedPassword;
   final void Function()? passwordMethodPress;
   final void Function()? verificationCodeMethodPress;
+  final String type;
 
   @override
   ConsumerState<ModalChooseVerifyMethod> createState() =>
@@ -45,8 +48,8 @@ class _ModalChooseVerifyMethodState
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 5),
               child: Text(
-                Utils.getLocaleMessage(
-                    LocaleKeys.settingAccountChooseAuthTypeUnLinkSubTitle),
+                LocaleKeys.settingAccountChooseAuthTypeUnLinkSubTitle
+                    .plural(0, args: [Utils.getLocaleMessage(widget.type)]),
                 style: AppTextStyle.darkPurpleRegularS14,
                 textAlign: TextAlign.center,
               ),

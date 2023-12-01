@@ -44,4 +44,7 @@ abstract class ApiClient {
 
   @GET("job/summary")
   Future<dynamic> getJobsSummary();
+
+  @DELETE("user/delete-account")
+  Future<dynamic> deleteAccount(@Body() Map<String, dynamic> body);
 }

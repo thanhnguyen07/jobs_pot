@@ -158,5 +158,6 @@
   "settingAccountVerifyMsg": "Xác minh mật khẩu thành công!",
   "settingAccountLinkPassword": "Thêm mật khẩu",
   "settingAccountLinkPasswordMsg": "Thêm mật khẩu thành công!",
-  "settingAccountVerifyCodeSubTitle": "Mã xác minh đã được gửi đến địa chỉ email"
+  "settingAccountVerifyCodeSubTitle": "Mã xác minh đã được gửi đến địa chỉ email",
+  "settingAccountDeleteAccount": "Xoá tài khoản"
 }

@@ -194,6 +194,22 @@ class AccountController extends StateNotifier<String?> {
     }
   }
 
+  Future deleteAccount() async {
+    showLoading();
+    String? userId = await _ref.read(authRepositoryProvider).getIdUser();
+    if (userId != null) {
+      final deleteAccountRes =
+          await _ref.read(settingRepositoryProvider).deleteAccount(userId);
+      deleteAccountRes.fold((l) {}, (r) {
+        _ref.read(authControllerProvider.notifier).onLogOut();
+        _ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+      });
+    } else {
+      _ref.read(systemControllerProvider.notifier).showToastGeneralError();
+    }
+    hideLoading();
+  }
+
   Future<void> linkAccount(OAuthCredential credential) async {
     showLoading();
 

@@ -144,9 +144,13 @@
   "settingAccountProviderIdAccount": "Provider ID: ",
   "settingAccountUnlinkAccount": "Unlink",
   "settingAccountLinkAccountError": "The linked account has a different email than the current email. Please use the linked account that has the same email as the current email!",
-  "settingAccountConfirmUnLink": "Are you sure you want to unlink?",
+  "settingAccountConfirmUnLink": {
+    "zero": "Are you sure you want to {}?"
+  },
   "settingAccountChooseAuthTypeUnLinkTitle": "Choose an authentication method",
-  "settingAccountChooseAuthTypeUnLinkSubTitle": "Unlinking requires you to authenticate, please select an authentication method?",
+  "settingAccountChooseAuthTypeUnLinkSubTitle": {
+    "zero": "{} requires you to authenticate, please select an authentication method?"
+  },
   "settingAccountChangeVerificationCode": "Verification code",
   "settingAccountChangePassword": "Change Password",
   "settingAccountChangePasswordOldTitle": "Old",
@@ -158,5 +162,6 @@
   "settingAccountVerifyMsg": "Verify password successfully!",
   "settingAccountLinkPassword": "Add password",
   "settingAccountLinkPasswordMsg": "Add password successfully!",
-  "settingAccountVerifyCodeSubTitle": "The verification code has been sent to the email address"
+  "settingAccountVerifyCodeSubTitle": "The verification code has been sent to the email address",
+  "settingAccountDeleteAccount": "Delete Account"
 }
