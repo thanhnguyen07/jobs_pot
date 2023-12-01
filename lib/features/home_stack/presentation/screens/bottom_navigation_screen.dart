@@ -38,8 +38,10 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
             } else {
               await ref
                   .read(bottomNavigationController.notifier)
-                  .actionButtonCreate(context);
-              tabsRouter.setActiveIndex(2);
+                  .actionButtonCreate(context, () {
+                tabsRouter.setActiveIndex(2);
+              });
+              // tabsRouter.setActiveIndex(2);
             }
           },
           showUnselectedLabels: false,

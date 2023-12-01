@@ -12,9 +12,10 @@ class BottomNavigationController extends StateNotifier<CreateScreenType?> {
 
   final Ref ref;
 
-  Future<void> actionButtonCreate(BuildContext context) {
+  Future<void> actionButtonCreate(BuildContext context,
+      [void Function()? setIndex]) {
     return showModalBottomSheet<void>(
-      isDismissible: false,
+      // isDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return SizedBox(
@@ -44,6 +45,9 @@ class BottomNavigationController extends StateNotifier<CreateScreenType?> {
                     ),
                     backgroundColor: AppColors.darkPurpleColor,
                     onPressed: () {
+                      if (setIndex != null) {
+                        setIndex();
+                      }
                       state = CreateScreenType.post;
                       Navigator.pop(context);
                     },
@@ -56,6 +60,9 @@ class BottomNavigationController extends StateNotifier<CreateScreenType?> {
                     ),
                     backgroundColor: AppColors.lavenderColor,
                     onPressed: () {
+                      if (setIndex != null) {
+                        setIndex();
+                      }
                       state = CreateScreenType.createJob;
                       Navigator.pop(context);
                     },
