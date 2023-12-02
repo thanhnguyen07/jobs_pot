@@ -160,10 +160,14 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
           context: context,
           builder: (_) {
             return AlertDialog(
-              title: Text(
-                Utils.getLocaleMessage(
-                    LocaleKeys.settingAccountChangeVerificationCode),
-                style: AppTextStyle.darkPurpleBoldS30,
+              title: SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  Utils.getLocaleMessage(
+                      LocaleKeys.settingAccountChangeVerificationCode),
+                  style: AppTextStyle.darkPurpleBoldS30,
+                  textAlign: TextAlign.center,
+                ),
               ),
               content: ModalVerificationCode(
                 onCompleted: verifyCode,
@@ -380,10 +384,14 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               context: context,
               builder: (_) {
                 return AlertDialog(
-                  title: Text(
-                    Utils.getLocaleMessage(
-                        LocaleKeys.settingAccountChangeVerificationCode),
-                    style: AppTextStyle.darkPurpleBoldS30,
+                  title: SizedBox(
+                    width: double.maxFinite,
+                    child: Text(
+                      Utils.getLocaleMessage(
+                          LocaleKeys.settingAccountChangeVerificationCode),
+                      style: AppTextStyle.darkPurpleBoldS30,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   content: ModalVerificationCode(
                     onCompleted: verifyCode,
