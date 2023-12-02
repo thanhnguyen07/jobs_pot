@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/features/setting/application/account_controller.dart';
 import 'package:jobs_pot/features/setting/application/change_password_controller.dart';
 import 'package:jobs_pot/features/setting/application/setting_controller.dart';
@@ -14,7 +15,7 @@ final settingControllerProvider =
 );
 
 final accountControllerProvider =
-    StateNotifierProvider<AccountController, String?>(
+    StateNotifierProvider<AccountController, ProviderType?>(
   (ref) => AccountController(ref),
 );
 

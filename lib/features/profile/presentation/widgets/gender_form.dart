@@ -47,6 +47,7 @@ class _GenderFormState extends ConsumerState<GenderForm> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
           children: [
             _box(
               title: Utils.getLocaleMessage(LocaleKeys.profileGenderMale),
@@ -54,6 +55,7 @@ class _GenderFormState extends ConsumerState<GenderForm> {
                   Utils.getLocaleMessage(LocaleKeys.profileGenderMale),
               editProfileState: editProfileState,
             ),
+            const SizedBox(width: 20),
             _box(
               title: Utils.getLocaleMessage(LocaleKeys.profileGenderFemale),
               checked: genderValue ==
@@ -66,12 +68,12 @@ class _GenderFormState extends ConsumerState<GenderForm> {
     );
   }
 
-  ElevatedButton _box({
+  Widget _box({
     required String title,
     required bool checked,
     required bool editProfileState,
   }) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: () {
         editProfileState
             ? null
@@ -82,27 +84,23 @@ class _GenderFormState extends ConsumerState<GenderForm> {
               });
       },
       style: ElevatedButton.styleFrom(
-        maximumSize: const Size(160, 50),
-        minimumSize: const Size(160, 50),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        minimumSize: const Size(0, 50),
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        shadowColor: AppColors.shadowColor,
         elevation: 10,
       ),
-      child: SizedBox(
-        width: 160,
-        child: Row(
-          children: [
-            _iconCheck(checked),
-            const SizedBox(width: 10),
-            Text(
-              title,
-              style: AppTextStyle.textlavenderGraS12,
-            ),
-          ],
-        ),
+      child: Row(
+        children: [
+          _iconCheck(checked),
+          const SizedBox(width: 10),
+          Text(
+            title,
+            style: AppTextStyle.textlavenderGraS12,
+          ),
+        ],
       ),
     );
   }

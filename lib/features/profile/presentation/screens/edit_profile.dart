@@ -12,7 +12,7 @@ import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/common/widgets/modal_bottom_photo.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
-import 'package:jobs_pot/features/profile/presentation/screens/edit_profile_form.dart';
+import 'package:jobs_pot/features/profile/presentation/widgets/edit_profile_input_form.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 
 @RoutePage()
@@ -58,7 +58,8 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: const Column(
             children: [
-              EditProfileForm(),
+              // EditProfileForm(),
+              ProfileInputForm(),
             ],
           ),
         )

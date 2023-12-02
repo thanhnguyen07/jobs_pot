@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/provider_info_entity.dart';
@@ -12,7 +13,7 @@ import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AccountController extends StateNotifier<String?> {
+class AccountController extends StateNotifier<ProviderType?> {
   AccountController(this._ref) : super(null);
   final Ref _ref;
 
@@ -34,8 +35,22 @@ class AccountController extends StateNotifier<String?> {
     await _googleSignIn.disconnect();
   }
 
-  void setProvider(String providerId) {
-    state = providerId;
+  void setProvider(ProviderType providerType) {
+    state = providerType;
+  }
+
+  String? getProviderKey() {
+    if (state != null) {
+      if (state == ProviderType.google) {
+        return ProviderKeys.google;
+      }
+      if (state == ProviderType.facebook) {
+        return ProviderKeys.facebook;
+      }
+    } else {
+      return null;
+    }
+    return null;
   }
 
   void showLoading() {
@@ -172,7 +187,7 @@ class AccountController extends StateNotifier<String?> {
   Future<bool> unLink() async {
     showLoading();
     try {
-      String? providerId = state;
+      String? providerId = getProviderKey();
       if (providerId != null) {
         await FirebaseAuth.instance.currentUser?.unlink(providerId);
         await synUnLinkWithServer(providerId);
