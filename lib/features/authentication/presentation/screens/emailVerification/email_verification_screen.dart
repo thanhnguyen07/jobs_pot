@@ -34,9 +34,9 @@ class _EmailVerificationScreenState
   Timer? _timerCountDown;
 
   void _countDownResend() {
-    if (countDown != 60) {
+    if (countDown != 120) {
       setState(() {
-        countDown = 60;
+        countDown = 120;
       });
     }
     _timerCountDown = Timer.periodic(const Duration(seconds: 1), (Timer timer) {

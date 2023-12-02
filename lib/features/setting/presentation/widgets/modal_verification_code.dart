@@ -30,9 +30,9 @@ class _ModalVerificationCodeState extends ConsumerState<ModalVerificationCode> {
   Timer? _timerCountDown;
 
   void _countDownResend() {
-    if (countDown != 60) {
+    if (countDown != 120) {
       setState(() {
-        countDown = 60;
+        countDown = 120;
       });
     }
     _timerCountDown = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
@@ -49,6 +49,12 @@ class _ModalVerificationCodeState extends ConsumerState<ModalVerificationCode> {
   void _cancelTimer() {
     _timerCountDown?.cancel();
     countDown = 0;
+  }
+
+  String formatSeconds(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '$minutes:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -144,7 +150,9 @@ class _ModalVerificationCodeState extends ConsumerState<ModalVerificationCode> {
                     style: AppTextStyle.fireYellowUnderlineRegularS14,
                     children: [
                       TextSpan(
-                        text: countDown > 0 ? " ($countDown)" : '',
+                        text: countDown > 0
+                            ? " (${formatSeconds(countDown)})"
+                            : '',
                       )
                     ]),
               ],

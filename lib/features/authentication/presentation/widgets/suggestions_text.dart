@@ -16,6 +16,16 @@ class SuggestionsText extends StatelessWidget {
   final int? textTime;
   final void Function()? action;
 
+  String formatSeconds(int? seconds) {
+    if (seconds != null) {
+      int minutes = seconds ~/ 60;
+      int remainingSeconds = seconds % 60;
+      return '$minutes:${remainingSeconds.toString().padLeft(2, '0')}';
+    } else {
+      return "";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -39,7 +49,7 @@ class SuggestionsText extends StatelessWidget {
                     TextSpan(
                       text: textTime != null
                           ? textTime! > 0
-                              ? " ($textTime)"
+                              ? " (${formatSeconds(textTime)})"
                               : ''
                           : '',
                     )
