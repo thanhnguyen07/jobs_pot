@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
@@ -13,58 +14,87 @@ class SplashController extends StateNotifier<bool> {
 
   final Ref ref;
 
-  Future initLogic(BuildContext context) async {
-    Timer(
-      const Duration(seconds: 2),
-      () async {
-        ref.read(authRepositoryProvider).getOnboadingStatus().then(
-          (onboadingStatus) async {
-            if (onboadingStatus != null) {
-              final token = await ref.read(authRepositoryProvider).getToken();
-              final idUser = await ref.read(authRepositoryProvider).getIdUser();
-              final rememberStatus =
-                  await ref.read(authRepositoryProvider).getRememberStatus();
+  late StreamSubscription firebaseInit;
 
-              if (token != null && idUser != null && rememberStatus != null) {
-                await ref
-                    .read(authControllerProvider.notifier)
-                    .reloadFirebaseUser();
-                if (context.mounted) {
-                  await getUserProfile(context, idUser);
-                }
-              } else {
-                if (context.mounted) {
-                  context.router.replaceNamed(LoginScreen.path);
-                }
-              }
-            } else {
-              context.router.replaceNamed(OnboardingScreen.path);
-            }
-          },
-        );
-      },
-    );
+  Future initLogic(BuildContext context) async {
+    firebaseInit =
+        FirebaseAuth.instance.authStateChanges().listen((User? user) async {
+      if (user == null) {
+        goToLogin(context);
+        return;
+      } else {
+        await user.reload();
+      }
+
+      bool onboadingStatusRes = await getOnboadingStatus();
+      if (!onboadingStatusRes && context.mounted) {
+        context.router.replaceNamed(OnboardingScreen.path);
+        return;
+      }
+
+      String? idUser = await getIdUser();
+      if (idUser == null) {
+        goToLogin(context.mounted ? context : null);
+        return;
+      }
+
+      bool getUserProfileRes = await getUserProfile(idUser);
+      if (context.mounted) {
+        if (getUserProfileRes) {
+          context.router.removeLast();
+
+          context.router.replaceAll([const HomeStackRoute()]);
+        } else {
+          goToLogin(context.mounted ? context : null);
+        }
+      }
+    });
   }
 
-  Future getUserProfile(BuildContext context, String idUser) async {
+  void goToLogin(BuildContext? context) {
+    if (context != null && context.mounted) {
+      context.router.replaceNamed(LoginScreen.path);
+    }
+  }
+
+  Future<String?> getIdUser() async {
+    final token = await ref.read(authRepositoryProvider).getToken();
+    final idUser = await ref.read(authRepositoryProvider).getIdUser();
+    final rememberStatus =
+        await ref.read(authRepositoryProvider).getRememberStatus();
+    if (token != null && idUser != null && rememberStatus != null) {
+      return idUser;
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool> getOnboadingStatus() async {
+    return await ref.read(authRepositoryProvider).getOnboadingStatus();
+  }
+
+  void cancelFirebaseInitListen() {
+    firebaseInit.cancel();
+  }
+
+  Future<bool> getUserProfile(String idUser) async {
     ref.read(systemControllerProvider.notifier).showLoading();
 
-    await ref.read(authRepositoryProvider).getUserProfile(idUser).then(
+    return await ref.read(authRepositoryProvider).getUserProfile(idUser).then(
       (res) {
-        res.fold(
+        ref.read(systemControllerProvider.notifier).hideLoading();
+
+        return res.fold(
           (l) {
-            context.router.replaceNamed(LoginScreen.path);
+            return false;
           },
           (r) {
             ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-            context.router.removeLast();
-
-            context.router.replaceAll([const HomeStackRoute()]);
+            return true;
           },
         );
       },
     );
-    ref.read(systemControllerProvider.notifier).hideLoading();
   }
 }

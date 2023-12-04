@@ -14,6 +14,6 @@ abstract class SettingRepositoryInterface {
     String id,
   );
   Future<Either<Failure, ErrorResponseEntity>> deleteAccount(
-    String id,
+    String tokenFirebase,
   );
 }

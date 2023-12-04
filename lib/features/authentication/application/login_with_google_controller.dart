@@ -17,7 +17,6 @@ class LoginWithGoogleController extends StateNotifier {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<void> disconnect() async {
-    _googleSignIn.disconnect();
     await FacebookAuth.instance.logOut();
   }
 
@@ -42,6 +41,7 @@ class LoginWithGoogleController extends StateNotifier {
           await signIn(credential, context);
         }
       } else {
+        disconnect();
         ref.read(systemControllerProvider.notifier).handlerFirebaseError(
             FirebaseKeys.accountExistsWithDifferentCredential);
       }

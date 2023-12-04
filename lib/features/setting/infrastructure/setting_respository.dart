@@ -56,10 +56,11 @@ class SettingRepository implements SettingRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, ErrorResponseEntity>> deleteAccount(String id) async {
+  Future<Either<Failure, ErrorResponseEntity>> deleteAccount(
+      String tokenFirebase) async {
     try {
       final Map<String, dynamic> body = {
-        "id": id,
+        "token_firebase": tokenFirebase,
       };
 
       final deleteAccountRes = await _apiClient.deleteAccount(body);

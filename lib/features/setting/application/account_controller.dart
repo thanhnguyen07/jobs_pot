@@ -211,10 +211,14 @@ class AccountController extends StateNotifier<ProviderType?> {
 
   Future deleteAccount() async {
     showLoading();
-    String? userId = await _ref.read(authRepositoryProvider).getIdUser();
-    if (userId != null) {
-      final deleteAccountRes =
-          await _ref.read(settingRepositoryProvider).deleteAccount(userId);
+    final User? user =
+        _ref.read(authControllerProvider.notifier).getCurrentFirebaseUser();
+
+    final String? tokenFirebase = await user?.getIdToken();
+    if (tokenFirebase != null) {
+      final deleteAccountRes = await _ref
+          .read(settingRepositoryProvider)
+          .deleteAccount(tokenFirebase);
       deleteAccountRes.fold((l) {}, (r) {
         _ref.read(authControllerProvider.notifier).onLogOut();
         _ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);

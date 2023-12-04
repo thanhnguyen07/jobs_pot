@@ -47,17 +47,17 @@ class LocalStorageHelper {
   }
 
   //GET
-  static Future<bool?> getOnboadingStatus() async {
+  static Future<bool> getOnboadingStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       final onboadingStatusEncoded = prefs.getBool(_onboarding);
       if (onboadingStatusEncoded == null) {
-        return null;
+        return false;
       } else {
         return onboadingStatusEncoded;
       }
     } catch (e) {
-      return null;
+      return false;
     }
   }
 

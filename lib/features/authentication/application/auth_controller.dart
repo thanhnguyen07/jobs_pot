@@ -72,6 +72,7 @@ class AuthController extends StateNotifier<UserEntity?> {
         ref.read(authRepositoryProvider).removeDataUser().then(
           (value) {
             ref.read(loginWithGoogleControllerProvider.notifier).disconnect();
+            ref.read(loginWithFacebookControllerProvider.notifier).disconnect();
             ref.read(routeControllerProvider)!.replaceAll([const LoginRoute()]);
           },
         );

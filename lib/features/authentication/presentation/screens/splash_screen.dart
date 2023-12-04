@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,6 +27,17 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     super.initState();
 
     ref.read(splashControllerProvider.notifier).initLogic(context);
+  }
+
+  @override
+  void deactivate() {
+    ref.read(splashControllerProvider.notifier).cancelFirebaseInitListen();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override

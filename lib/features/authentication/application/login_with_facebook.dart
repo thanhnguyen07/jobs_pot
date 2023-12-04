@@ -28,6 +28,10 @@ class LoginWithFacebookController extends StateNotifier {
     ref.read(systemControllerProvider.notifier).hideLoading();
   }
 
+  Future<void> disconnect() async {
+    await FacebookAuth.instance.logOut();
+  }
+
   Future signIn(OAuthCredential credential, BuildContext context) async {
     try {
       await FirebaseAuth.instance.signInWithCredential(credential).then(

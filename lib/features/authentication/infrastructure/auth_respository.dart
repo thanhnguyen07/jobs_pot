@@ -51,7 +51,7 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<bool?> getOnboadingStatus() {
+  Future<bool> getOnboadingStatus() {
     return LocalStorageHelper.getOnboadingStatus();
   }
 
