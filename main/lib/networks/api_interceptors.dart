@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:jobs_pot/features/authentication/infrastructure/auth_respository.dart';
 import 'package:jobs_pot/main.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import '../utils/logger.dart';
+import 'package:logger/logger.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
   @override
@@ -17,27 +17,17 @@ class ApiInterceptors extends InterceptorsWrapper {
 
     final token = await AuthRepository().getToken();
 
-    if (!uri.path.contains("login")) {
-      options.headers['Authorization'] = "Bearer $token";
-    }
+    // if (!uri.path.contains("login")) {
+    options.headers['Authorization'] = "Bearer $token";
+    // }
 
-    apiLogger.log(
-        "\n--------------------------------------------------------------------------------------------------------");
-    if (method == 'GET') {
-      apiLogger.log(
-          "✈️ REQUEST[$method] => PATH: $uri \n Token: ${options.headers}",
-          printFullText: true);
-    } else {
-      try {
-        apiLogger.log(
-            "✈️ REQUEST[$method] => PATH: $uri \n Token: $token \n DATA: ${jsonEncode(data)}",
-            printFullText: true);
-      } catch (e) {
-        apiLogger.log(
-            "✈️ REQUEST[$method] => PATH: $uri \n Token: $token \n DATA: $data",
-            printFullText: true);
-      }
-    }
+    MyLogger.apiRequest(
+      method: method,
+      uri: uri,
+      token: token,
+      data: data,
+    );
+
     super.onRequest(options, handler);
   }
 
@@ -46,11 +36,11 @@ class ApiInterceptors extends InterceptorsWrapper {
     final statusCode = response.statusCode;
     final uri = response.requestOptions.uri;
     final data = jsonEncode(response.data);
-
-    apiLogger.log(
-        "\n--------------------------------------------------------------------------------------------------------");
-
-    apiLogger.log("✅ RESPONSE[$statusCode] => PATH: $uri\n DATA: $data");
+    MyLogger.apiResponse(
+      statusCode: statusCode,
+      uri: uri,
+      data: data,
+    );
 
     super.onResponse(response, handler);
   }

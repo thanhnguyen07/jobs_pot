@@ -13,3 +13,9 @@ enum ProviderType {
   password,
   facebook,
 }
+
+enum ApiLogType {
+  error,
+  request,
+  response,
+}

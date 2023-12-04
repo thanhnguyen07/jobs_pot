@@ -10,8 +10,8 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/networks/api_util.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/logger.dart';
 import 'package:jobs_pot/utils/utils.dart';
+import 'package:logger/logger.dart';
 import '../domain/entities/app_state_entity.dart';
 
 class SystemController extends StateNotifier<AppStateEntity> {
@@ -91,7 +91,7 @@ class SystemController extends StateNotifier<AppStateEntity> {
 
         data = jsonEncode(error.response.toString());
       } catch (e) {
-        logger.e(e);
+        MyLogger.error(e);
       }
     }
     if (error.error != null) {
@@ -100,7 +100,7 @@ class SystemController extends StateNotifier<AppStateEntity> {
       showToastMessage(newErr.message);
     }
 
-    apiLogger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
+    MyLogger.apiError(statusCode: statusCode, uri: uri, data: data);
 
     if (statusCode == 401) {
       final bool refreshTokenRes =
