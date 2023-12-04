@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/profile/domain/repositories/profile_responsitory_interface.dart';
@@ -24,12 +25,12 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
   }) async {
     try {
       FormData body = FormData.fromMap({
-        'file': await MultipartFile.fromFile(
+        ApiParameterKeyName.file: await MultipartFile.fromFile(
           filePath,
           filename: fileName,
           contentType: contentType,
         ),
-        "id": id,
+        ApiParameterKeyName.id: id,
       });
       final signUpRes = await _apiClient.updateImage(body);
       return right(UserResponseEntity.fromJson(signUpRes));
@@ -49,12 +50,12 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
   }) async {
     try {
       final Map<String, String?> body = {
-        "userName": userName,
-        "dateOfBirth": dateOfBirth,
-        "gender": gender,
-        "email": email,
-        "phoneNumber": phoneNumber,
-        "location": location,
+        ApiParameterKeyName.userNameCamel: userName,
+        ApiParameterKeyName.dateOfBirthCamel: dateOfBirth,
+        ApiParameterKeyName.gender: gender,
+        ApiParameterKeyName.email: email,
+        ApiParameterKeyName.phoneNumberCamel: phoneNumber,
+        ApiParameterKeyName.location: location,
       };
       final updateInformationsRes = await _apiClient.updateInformations(body);
 

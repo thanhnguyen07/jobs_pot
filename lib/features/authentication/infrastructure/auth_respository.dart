@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/resfresh_token_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
@@ -113,7 +114,7 @@ class AuthRepository implements AuthRepositoryInterface {
       String tokenFirebase) async {
     try {
       final Map<String, dynamic> body = {
-        "token_firebase": tokenFirebase,
+        ApiParameterKeyName.tokenFirebaseSnake: tokenFirebase,
       };
       final signInWithGoogleRes = await _apiClient.signInWithFirebase(body);
 
@@ -128,7 +129,7 @@ class AuthRepository implements AuthRepositoryInterface {
       String email) async {
     try {
       final Map<String, dynamic> body = {
-        "email": email,
+        ApiParameterKeyName.email: email,
       };
       final sendVerificationCodeRes =
           await _apiClient.sendVerificationCode(body);
@@ -144,7 +145,7 @@ class AuthRepository implements AuthRepositoryInterface {
       String code) async {
     try {
       final Map<String, dynamic> body = {
-        "code": code,
+        ApiParameterKeyName.code: code,
       };
       final sendVerificationCodeRes = await _apiClient.sendVerifyCode(body);
 
@@ -159,7 +160,7 @@ class AuthRepository implements AuthRepositoryInterface {
       String refreshToken) async {
     try {
       final Map<String, dynamic> body = {
-        "refresh_token": refreshToken,
+        ApiParameterKeyName.refreshTokenSnake: refreshToken,
       };
       final refreshTokenRes = await _apiClient.refreshToken(body);
 
@@ -174,8 +175,8 @@ class AuthRepository implements AuthRepositoryInterface {
       String providerId, String email) async {
     try {
       final Map<String, dynamic> body = {
-        "provider_id": providerId,
-        "email": email,
+        ApiParameterKeyName.providerIdSnake: providerId,
+        ApiParameterKeyName.email: email,
       };
       final refreshTokenRes = await _apiClient.checkAccount(body);
 

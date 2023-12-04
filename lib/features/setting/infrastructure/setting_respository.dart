@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
@@ -19,15 +20,15 @@ class SettingRepository implements SettingRepositoryInterface {
       UserInfo providerData, String id) async {
     try {
       final Map<String, dynamic> body = {
-        "provider_data": {
-          "displayName": providerData.displayName,
-          "email": providerData.email,
-          "phoneNumber": providerData.phoneNumber,
-          "photoURL": providerData.photoURL,
-          "providerId": providerData.providerId,
-          "uid": providerData.uid,
+        ApiParameterKeyName.providerDataSnake: {
+          ApiParameterKeyName.displayNameCamel: providerData.displayName,
+          ApiParameterKeyName.email: providerData.email,
+          ApiParameterKeyName.phoneNumberCamel: providerData.phoneNumber,
+          ApiParameterKeyName.photoURLCamel: providerData.photoURL,
+          ApiParameterKeyName.providerIdSnake: providerData.providerId,
+          ApiParameterKeyName.uid: providerData.uid,
         },
-        "id": id,
+        ApiParameterKeyName.id: id,
       };
 
       final accountLinkRes = await _apiClient.accountLink(body);
@@ -43,8 +44,8 @@ class SettingRepository implements SettingRepositoryInterface {
       String providerId, String id) async {
     try {
       final Map<String, dynamic> body = {
-        "provider_id": providerId,
-        "id": id,
+        ApiParameterKeyName.providerIdSnake: providerId,
+        ApiParameterKeyName.id: id,
       };
 
       final accountLinkRes = await _apiClient.accountUnLink(body);
@@ -60,7 +61,7 @@ class SettingRepository implements SettingRepositoryInterface {
       String tokenFirebase) async {
     try {
       final Map<String, dynamic> body = {
-        "token_firebase": tokenFirebase,
+        ApiParameterKeyName.tokenFirebaseSnake: tokenFirebase,
       };
 
       final deleteAccountRes = await _apiClient.deleteAccount(body);
