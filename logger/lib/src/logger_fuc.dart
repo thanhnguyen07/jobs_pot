@@ -32,55 +32,81 @@ class MyLogger {
     developer.log(_colorize(message, AnsiColor.highIntensityRed));
   }
 
+  static String _uriLog(String uri) {
+    return _colorize(
+      "PATH: $uri",
+      AnsiColor.highIntensityCyan,
+    );
+  }
+
   static void apiError({
     required int? statusCode,
     required String uri,
     required dynamic data,
   }) {
+    String statusLog = _colorize(
+      "ERROR [$statusCode] 🧨",
+      AnsiColor.highIntensityRed,
+    );
+
+    String uriLog = _uriLog(uri);
+
+    String dataLog = _colorize(
+      "DATA: $data",
+      AnsiColor.highIntensityRed,
+    );
+    String dataJsonLog = _colorize(
+      "DATA: ${jsonEncode(data)}",
+      AnsiColor.highIntensityRed,
+    );
     try {
       developer.log(
-        _colorize(
-          "ERROR [$statusCode] 🧨 \nPATH: $uri \nDATA: ${jsonEncode(data)}",
-          AnsiColor.highIntensityRed,
-        ),
+        "$statusLog \n$uriLog \n$dataJsonLog",
       );
     } catch (e) {
       developer.log(
-        _colorize(
-          "ERROR [$statusCode] 🧨 \nPATH: $uri \nDATA: $data",
-          AnsiColor.highIntensityRed,
-        ),
+        "$statusLog \n$uriLog \n$dataLog",
       );
     }
   }
 
   static void apiRequest({
     required String method,
-    required Uri uri,
+    required String uri,
     required dynamic token,
     dynamic data,
   }) {
+    String uriLog = _uriLog(uri);
+
+    String methodLog = _colorize(
+      "REQUEST: [$method] 🚀",
+      AnsiColor.highIntensityYellow,
+    );
+    String tokenLog = _colorize(
+      "TOKEN: $token",
+      AnsiColor.highIntensityYellow,
+    );
+    String dataLog = _colorize(
+      "DATA: $data",
+      AnsiColor.highIntensityYellow,
+    );
+    String dataJsonLog = _colorize(
+      "DATA: ${jsonEncode(data)}",
+      AnsiColor.highIntensityYellow,
+    );
+
     if (method == 'GET') {
       developer.log(
-        _colorize(
-          "REQUEST: [$method] 🚀 \nPATH: $uri \n Token: $token",
-          AnsiColor.highIntensityYellow,
-        ),
+        "$methodLog \n$uriLog \n$tokenLog",
       );
     } else {
       try {
         developer.log(
-          _colorize(
-            "REQUEST: [$method] 🚀 \nPATH: $uri \nToken: $token \nDATA: ${jsonEncode(data)}",
-            AnsiColor.highIntensityYellow,
-          ),
+          "$methodLog \n$uriLog \n$tokenLog \n$dataJsonLog",
         );
       } catch (e) {
         developer.log(
-          _colorize(
-            "REQUEST: [$method] 🚀 \nPATH: $uri \nToken: $token \nDATA:  $data",
-            AnsiColor.highIntensityYellow,
-          ),
+          "$methodLog \n$uriLog \n$tokenLog \n$dataLog",
         );
       }
     }
@@ -88,14 +114,23 @@ class MyLogger {
 
   static void apiResponse({
     required int? statusCode,
-    required Uri uri,
+    required String uri,
     required dynamic data,
   }) {
+    String uriLog = _uriLog(uri);
+
+    String statusLog = _colorize(
+      "RESPONSE: [$statusCode] 📥",
+      AnsiColor.highIntensityGreen,
+    );
+
+    String dataLog = _colorize(
+      "DATA: $data",
+      AnsiColor.highIntensityGreen,
+    );
+
     developer.log(
-      _colorize(
-        "RESPONSE: [$statusCode] 📥  \nPATH: $uri \nDATA: $data",
-        AnsiColor.highIntensityGreen,
-      ),
+      "$statusLog \n$uriLog  \n$dataLog",
     );
   }
 }

@@ -23,7 +23,7 @@ class ApiInterceptors extends InterceptorsWrapper {
 
     MyLogger.apiRequest(
       method: method,
-      uri: uri,
+      uri: uri.toString(),
       token: token,
       data: data,
     );
@@ -38,7 +38,7 @@ class ApiInterceptors extends InterceptorsWrapper {
     final data = jsonEncode(response.data);
     MyLogger.apiResponse(
       statusCode: statusCode,
-      uri: uri,
+      uri: uri.toString(),
       data: data,
     );
 
