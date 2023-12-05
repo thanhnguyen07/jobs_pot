@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 
 class EmailVerificationController extends StateNotifier<bool> {
   EmailVerificationController(this.ref) : super(false);
@@ -23,18 +23,18 @@ class EmailVerificationController extends StateNotifier<bool> {
 
   Future<bool> reSendVerifyMail() async {
     String currentEmail = getCurrentEmail();
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
     final sendVerificationCodeRes = await ref
         .read(authRepositoryProvider)
         .sendVerificationCode(currentEmail);
 
     return sendVerificationCodeRes.fold(
       (l) {
-        ref.read(systemControllerProvider.notifier).hideLoading();
+        Utils.hideLoading();
         return false;
       },
       (r) {
-        ref.read(systemControllerProvider.notifier).hideLoading();
+        Utils.hideLoading();
         return true;
       },
     );
@@ -47,7 +47,7 @@ class EmailVerificationController extends StateNotifier<bool> {
   }
 
   void checkVerifyEmail(BuildContext context, String code) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
 
     bool sendVerifyCodeRes = await verifyCode(code);
 
@@ -59,16 +59,16 @@ class EmailVerificationController extends StateNotifier<bool> {
       }
     }
 
-    ref.read(systemControllerProvider.notifier).hideLoading();
+    Utils.hideLoading();
   }
 
   Future<bool> verifyCode(String code) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
 
     final sendVerifyCodeRes =
         await ref.read(authRepositoryProvider).sendVerifyCode(code);
 
-    ref.read(systemControllerProvider.notifier).hideLoading();
+    Utils.hideLoading();
 
     return sendVerifyCodeRes.fold(
       (l) {

@@ -7,7 +7,7 @@ import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:mime/mime.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -76,16 +76,16 @@ class ProfileController extends StateNotifier<bool> {
             );
 
     updateAvatarResult.fold((l) {
-      ref.read(systemControllerProvider.notifier).showToastMessage(l.error);
+      Utils.showToastMessage(l.error);
     }, (r) {
       ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-      ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+      Utils.showToastMessage(r.msg);
     });
   }
 
   void showToastGeneralError() {
-    ref.read(systemControllerProvider.notifier).showToastGeneralError();
+    Utils.showToastGeneralError();
   }
 
   FormGroup getProfileInputForm() => _profileInputForm;
@@ -105,7 +105,7 @@ class ProfileController extends StateNotifier<bool> {
   }
 
   Future<void> updateImage(UploadImageType type) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
     final ImagePicker picker = ImagePicker();
     try {
       final XFile? imageXFile =
@@ -125,7 +125,7 @@ class ProfileController extends StateNotifier<bool> {
         if (originalFileMimeTye != null && userData != null) {
           List<String> originalFileMimeTyeList = originalFileMimeTye.split('/');
 
-          ref.read(systemControllerProvider.notifier).showLoading();
+          Utils.showLoading();
 
           await uploadAvatarLinkOnServer(
             filePath: imageXFile.path,
@@ -135,14 +135,14 @@ class ProfileController extends StateNotifier<bool> {
             id: userData.id,
           );
 
-          ref.read(systemControllerProvider.notifier).hideLoading();
+          Utils.hideLoading();
         } else {
           showToastGeneralError();
         }
       }
-      ref.read(systemControllerProvider.notifier).hideLoading();
+      Utils.hideLoading();
     } catch (e) {
-      ref.read(systemControllerProvider.notifier).hideLoading();
+      Utils.hideLoading();
       showToastGeneralError();
     }
   }
@@ -168,7 +168,7 @@ class ProfileController extends StateNotifier<bool> {
       }, (r) {
         ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-        ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+        Utils.showToastMessage(r.msg);
       });
     } else {
       showToastGeneralError();

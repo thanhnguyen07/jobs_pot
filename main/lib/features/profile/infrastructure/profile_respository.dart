@@ -2,12 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/profile/domain/repositories/profile_responsitory_interface.dart';
 import 'package:jobs_pot/networks/api_client.dart';
 import 'package:jobs_pot/networks/api_util.dart';
-import 'package:jobs_pot/utils/utils.dart';
 
 class ProfileResponsitory implements ProfileResponsitoryInterface {
   late ApiClient _apiClient;
@@ -61,7 +61,10 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
 
       return right(UserResponseEntity.fromJson(updateInformationsRes));
     } catch (error) {
-      String errorMessage = Utils.getErrorMessageResponse(error);
+      error as DioException;
+
+      String errorMessage =
+          ErrorResponseEntity.fromJson(error.response?.data).msg;
 
       return left(Failure.message(message: errorMessage));
     }

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart' hide Headers;
+import 'package:jobs_pot/config/app_configs.dart';
 import 'package:retrofit/retrofit.dart';
-
-import '../config/app_configs.dart';
 
 part 'api_client.g.dart';
 

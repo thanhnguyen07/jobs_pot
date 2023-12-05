@@ -1,14 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/networks/api_util.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:logger/logger.dart';
@@ -19,104 +14,71 @@ class SystemController extends StateNotifier<AppStateEntity> {
 
   SystemController(this.ref) : super(const AppStateEntity(message: ""));
 
-  void showLoading() {
-    EasyLoading.show();
-  }
-
-  void hideLoading() {
-    EasyLoading.dismiss();
-  }
-
-  void showToastMessage(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      backgroundColor: AppColors.purpleColor,
-      timeInSecForIosWeb: 3,
-    );
-  }
-
-  void showToastMessageWithLocaleKeys(String localeKeys) {
-    showToastMessage(Utils.getLocaleMessage(localeKeys));
-  }
-
-  void showToastGeneralError() {
-    showToastMessageWithLocaleKeys(LocaleKeys.generalError);
-  }
-
-  void handlerFirebaseError(String errorCode) {
-    switch (errorCode) {
-      case FirebaseKeys.userNotFound:
-        return showToastMessageWithLocaleKeys(
-          LocaleKeys.authenticationSignUpError3,
-        );
-      case FirebaseKeys.wrongPassword:
-        return showToastMessageWithLocaleKeys(
-          LocaleKeys.authenticationSignUpError4,
-        );
-      case FirebaseKeys.tooManyRequests:
-        return showToastMessageWithLocaleKeys(
-          LocaleKeys.authenticationSignUpError5,
-        );
-      case FirebaseKeys.emailAlreadyInUse:
-        return showToastMessageWithLocaleKeys(
-          LocaleKeys.authenticationSignUpError,
-        );
-      case FirebaseKeys.accountExistsWithDifferentCredential:
-        return showToastMessageWithLocaleKeys(
-          LocaleKeys.authenticationSignUpError,
-        );
-      case FirebaseKeys.invalidLoginCredentials:
-        return showToastMessageWithLocaleKeys(
-          LocaleKeys.authenticationSignUpError4,
-        );
-      default:
-        return showToastGeneralError();
-    }
-  }
-
   Future handlerDioException(
       DioException error, ErrorInterceptorHandler handler) async {
     final statusCode = error.response?.statusCode;
 
-    final uri = error.requestOptions.path;
-
-    var data = "";
-
-    if (error.response != null) {
-      try {
-        if (statusCode != 401) {
-          final res = error.response?.data;
-          showToastMessage(res!["msg"]);
-        }
-
-        data = jsonEncode(error.response.toString());
-      } catch (e) {
-        MyLogger.error(e);
-      }
-    }
-    if (error.error != null) {
-      final newErr = error.error as SocketException;
-
-      showToastMessage(newErr.message);
-    }
-
-    MyLogger.apiError(statusCode: statusCode, uri: uri, data: data);
+    handleShowError(error);
 
     if (statusCode == 401) {
-      final bool refreshTokenRes =
-          await ref.read(authControllerProvider.notifier).refreshToken();
+      final bool refreshTokenRes = await refreshToken();
 
       if (refreshTokenRes) {
         final cloneReq = await ApiUtil().getDio().fetch(error.requestOptions);
         return handler.resolve(cloneReq);
       } else {
-        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+        Utils.showToastGeneralError();
         ref.read(authControllerProvider.notifier).onLogOut();
       }
     }
     if (statusCode == 403) {
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      Utils.showToastGeneralError();
       ref.read(authControllerProvider.notifier).onLogOut();
+    }
+  }
+
+  void handleShowError(DioException error) {
+    final statusCode = error.response?.statusCode;
+
+    final uri = error.requestOptions.path;
+
+    String? data;
+
+    if (error.response != null) {
+      try {
+        if (statusCode != 401) {
+          final res = error.response?.data;
+          Utils.showToastMessage(res!["msg"]);
+        }
+
+        data = jsonEncode(error.response.toString());
+      } catch (e) {
+        MyLogger.debugLog(e);
+      }
+    }
+    if (error.error != null) {
+      final newErr = error.error as SocketException;
+
+      Utils.showToastMessage(newErr.message);
+    }
+
+    MyLogger.apiError(statusCode: statusCode, uri: uri, data: data);
+  }
+
+  Future<bool> refreshToken() async {
+    String? refreshToken = await Utils.localStorage.get.refreshToken();
+    if (refreshToken != null) {
+      final refreshTokenRes =
+          await ref.read(systemRepositoryProvider).refreshToken(refreshToken);
+
+      return refreshTokenRes.fold((l) {
+        return false;
+      }, (r) async {
+        await Utils.localStorage.save.dataUser(r.token, r.refreshToken);
+        return true;
+      });
+    } else {
+      return false;
     }
   }
 }

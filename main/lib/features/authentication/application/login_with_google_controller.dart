@@ -7,7 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 
 class LoginWithGoogleController extends StateNotifier {
   LoginWithGoogleController(this.ref) : super(null);
@@ -21,7 +21,7 @@ class LoginWithGoogleController extends StateNotifier {
   }
 
   Future signInWithGoogle(BuildContext context) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     if (googleUser != null) {
@@ -42,11 +42,11 @@ class LoginWithGoogleController extends StateNotifier {
         }
       } else {
         disconnect();
-        ref.read(systemControllerProvider.notifier).handlerFirebaseError(
+        Utils.handlerFirebaseError(
             FirebaseKeys.accountExistsWithDifferentCredential);
       }
     }
-    ref.read(systemControllerProvider.notifier).hideLoading();
+    Utils.hideLoading();
   }
 
   Future<bool> checkAccount(String providerId, String email) async {
@@ -70,17 +70,14 @@ class LoginWithGoogleController extends StateNotifier {
               (res) {
                 res.fold(
                   (l) {
-                    ref
-                        .read(systemControllerProvider.notifier)
-                        .showToastGeneralError();
+                    Utils.showToastGeneralError();
                   },
                   (r) async {
                     ref
                         .read(authControllerProvider.notifier)
                         .setDataUser(r.results);
-                    await ref
-                        .read(authRepositoryProvider)
-                        .saveDataUser(r.token, r.refreshToken, r.results.id)
+                    await Utils.localStorage.save
+                        .dataUser(r.token, r.refreshToken, r.results.id)
                         .then((value) async {
                       context.router.replaceAll([const HomeStackRoute()]);
                     });
@@ -92,7 +89,7 @@ class LoginWithGoogleController extends StateNotifier {
         },
       );
     } on FirebaseAuthException catch (e) {
-      ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
+      Utils.handlerFirebaseError(e.code);
     }
   }
 }

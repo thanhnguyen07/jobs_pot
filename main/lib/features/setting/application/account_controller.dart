@@ -9,7 +9,6 @@ import 'package:jobs_pot/features/authentication/domain/entities/provider_info_e
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/features/setting/setting_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
-import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -54,15 +53,15 @@ class AccountController extends StateNotifier<ProviderType?> {
   }
 
   void showLoading() {
-    _ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
   }
 
   void hideLoading() {
-    _ref.read(systemControllerProvider.notifier).hideLoading();
+    Utils.hideLoading();
   }
 
   void showToastGeneralError() {
-    _ref.read(systemControllerProvider.notifier).showToastGeneralError();
+    Utils.showToastGeneralError();
   }
 
   String getPassword() {
@@ -100,11 +99,9 @@ class AccountController extends StateNotifier<ProviderType?> {
         hideLoading();
         return true;
       } on FirebaseAuthException catch (_) {
-        _ref.read(systemControllerProvider.notifier).showToastMessage(
-              Utils.getLocaleMessage(
-                LocaleKeys.errorPassword2,
-              ),
-            );
+        Utils.showToastMessageWithLocaleKeys(
+          LocaleKeys.errorPassword2,
+        );
         hideLoading();
         return false;
       }
@@ -141,8 +138,9 @@ class AccountController extends StateNotifier<ProviderType?> {
       final providerEmail = providerData['email'];
       if (userData.email != providerEmail) {
         hideLoading();
-        _ref.read(systemControllerProvider.notifier).showToastMessage(
-            Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccountError));
+        Utils.showToastMessageWithLocaleKeys(
+          LocaleKeys.settingAccountLinkAccountError,
+        );
       } else {
         await linkAccount(facebookAuthCredential);
         hideLoading();
@@ -165,8 +163,8 @@ class AccountController extends StateNotifier<ProviderType?> {
       if (userData.email != googleUser.email) {
         hideLoading();
 
-        _ref.read(systemControllerProvider.notifier).showToastMessage(
-            Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccountError));
+        Utils.showToastMessageWithLocaleKeys(
+            LocaleKeys.settingAccountLinkAccountError);
       } else {
         final GoogleSignInAuthentication googleAuth =
             await googleUser.authentication;
@@ -196,13 +194,13 @@ class AccountController extends StateNotifier<ProviderType?> {
         hideLoading();
         return true;
       } else {
-        _ref.read(systemControllerProvider.notifier).showToastGeneralError();
+        Utils.showToastGeneralError();
 
         hideLoading();
         return false;
       }
     } on FirebaseAuthException catch (e) {
-      _ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
+      Utils.handlerFirebaseError(e.code);
       hideLoading();
       state = null;
       return false;
@@ -221,10 +219,10 @@ class AccountController extends StateNotifier<ProviderType?> {
           .deleteAccount(tokenFirebase);
       deleteAccountRes.fold((l) {}, (r) {
         _ref.read(authControllerProvider.notifier).onLogOut();
-        _ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+        Utils.showToastMessage(r.msg);
       });
     } else {
-      _ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      Utils.showToastGeneralError();
     }
     hideLoading();
   }
@@ -252,7 +250,7 @@ class AccountController extends StateNotifier<ProviderType?> {
         showToastGeneralError();
       }
     } on FirebaseAuthException catch (e) {
-      _ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
+      Utils.handlerFirebaseError(e.code);
     }
   }
 
@@ -280,7 +278,7 @@ class AccountController extends StateNotifier<ProviderType?> {
 
       synLinkWithServerRes.fold((l) {}, (r) {
         _ref.read(authControllerProvider.notifier).setDataUser(r.results);
-        _ref.read(systemControllerProvider.notifier).showToastMessage(r.msg);
+        Utils.showToastMessage(r.msg);
       });
     } else {
       showToastGeneralError();
@@ -321,7 +319,7 @@ class AccountController extends StateNotifier<ProviderType?> {
         },
       );
     } else {
-      _ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      Utils.showToastGeneralError();
       return false;
     }
   }

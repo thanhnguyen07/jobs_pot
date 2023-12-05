@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 
 class LoginWithFacebookController extends StateNotifier {
   LoginWithFacebookController(this.ref) : super(null);
@@ -13,7 +13,7 @@ class LoginWithFacebookController extends StateNotifier {
   final Ref ref;
 
   Future signInWithFacebook(BuildContext context) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
     await FacebookAuth.instance.login().then((value) async {
       final AccessToken? accessToken = value.accessToken;
 
@@ -25,7 +25,7 @@ class LoginWithFacebookController extends StateNotifier {
         }
       }
     });
-    ref.read(systemControllerProvider.notifier).hideLoading();
+    Utils.hideLoading();
   }
 
   Future<void> disconnect() async {
@@ -50,9 +50,8 @@ class LoginWithFacebookController extends StateNotifier {
                     ref
                         .read(authControllerProvider.notifier)
                         .setDataUser(r.results);
-                    ref
-                        .read(authRepositoryProvider)
-                        .saveDataUser(r.token, r.refreshToken, r.results.id)
+                    Utils.localStorage.save
+                        .dataUser(r.token, r.refreshToken, r.results.id)
                         .then((value) {
                       context.router.replaceAll([const HomeStackRoute()]);
                     });
@@ -64,7 +63,7 @@ class LoginWithFacebookController extends StateNotifier {
         },
       );
     } on FirebaseAuthException catch (e) {
-      ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
+      Utils.handlerFirebaseError(e.code);
     }
   }
 }

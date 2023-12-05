@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:jobs_pot/features/authentication/infrastructure/auth_respository.dart';
 import 'package:jobs_pot/main.dart';
 import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 import 'package:logger/logger.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
@@ -15,7 +15,7 @@ class ApiInterceptors extends InterceptorsWrapper {
 
     final data = options.data;
 
-    final token = await AuthRepository().getToken();
+    final token = await Utils.localStorage.get.token();
 
     // if (!uri.path.contains("login")) {
     options.headers['Authorization'] = "Bearer $token";

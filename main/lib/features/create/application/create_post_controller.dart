@@ -7,7 +7,7 @@ import 'package:jobs_pot/common/widgets/modal_bottom_photo.dart';
 import 'package:jobs_pot/features/create/create_provider.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class CreatePostController extends StateNotifier<List<XFile>?> {
@@ -121,7 +121,7 @@ class CreatePostController extends StateNotifier<List<XFile>?> {
         }
       }
     } catch (e) {
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      Utils.showToastGeneralError();
     }
   }
 
@@ -133,7 +133,7 @@ class CreatePostController extends StateNotifier<List<XFile>?> {
         // uploadImageToFirebase(image);
       }
     } catch (e) {
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      Utils.showToastGeneralError();
     }
   }
 }

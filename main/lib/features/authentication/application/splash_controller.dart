@@ -7,7 +7,7 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/login/login_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/onboarding_screen.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 
 class SplashController extends StateNotifier<bool> {
   SplashController(this.ref) : super(false);
@@ -58,10 +58,9 @@ class SplashController extends StateNotifier<bool> {
   }
 
   Future<String?> getIdUser() async {
-    final token = await ref.read(authRepositoryProvider).getToken();
-    final idUser = await ref.read(authRepositoryProvider).getIdUser();
-    final rememberStatus =
-        await ref.read(authRepositoryProvider).getRememberStatus();
+    final token = await Utils.localStorage.get.token();
+    final idUser = await Utils.localStorage.get.idUser();
+    final rememberStatus = await Utils.localStorage.get.rememberStatus();
     if (token != null && idUser != null && rememberStatus != null) {
       return idUser;
     } else {
@@ -70,7 +69,7 @@ class SplashController extends StateNotifier<bool> {
   }
 
   Future<bool> getOnboadingStatus() async {
-    return await ref.read(authRepositoryProvider).getOnboadingStatus();
+    return await Utils.localStorage.get.onboadingStatus();
   }
 
   void cancelFirebaseInitListen() {
@@ -78,11 +77,11 @@ class SplashController extends StateNotifier<bool> {
   }
 
   Future<bool> getUserProfile(String idUser) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
 
     return await ref.read(authRepositoryProvider).getUserProfile(idUser).then(
       (res) {
-        ref.read(systemControllerProvider.notifier).hideLoading();
+        Utils.hideLoading();
 
         return res.fold(
           (l) {

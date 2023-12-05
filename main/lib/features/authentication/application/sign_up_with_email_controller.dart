@@ -8,7 +8,7 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/email_verification_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -56,7 +56,7 @@ class SignWithEmailController extends StateNotifier {
   }
 
   void onSignUp(BuildContext context) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
     FocusManager.instance.primaryFocus?.unfocus();
 
     final isValid = _signUpForm.valid;
@@ -78,7 +78,7 @@ class SignWithEmailController extends StateNotifier {
         }
       });
     }
-    ref.read(systemControllerProvider.notifier).hideLoading();
+    Utils.hideLoading();
   }
 
   Future signUpWithEmail(BuildContext context) async {
@@ -95,7 +95,7 @@ class SignWithEmailController extends StateNotifier {
         await _createUserOnServer(context, email);
       }
     } on FirebaseAuthException catch (e) {
-      ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
+      Utils.handlerFirebaseError(e.code);
     }
   }
 
@@ -112,12 +112,11 @@ class SignWithEmailController extends StateNotifier {
           .signUpWithEmail(fullName, tokenFirebase);
 
       await resCreateUserOnServer.fold((l) {
-        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+        Utils.showToastGeneralError();
       }, (r) async {
         ref.read(authControllerProvider.notifier).setDataUser(r.results);
-        await ref
-            .read(authRepositoryProvider)
-            .saveDataUser(r.token, r.refreshToken, r.results.id);
+        await Utils.localStorage.save
+            .dataUser(r.token, r.refreshToken, r.results.id);
         if (r.results.emailVerified) {
           if (context.mounted) {
             context.router.replaceAll([const HomeStackRoute()]);
@@ -130,9 +129,7 @@ class SignWithEmailController extends StateNotifier {
           sendVerificationCodeRes.fold(
             (l) {},
             (r) {
-              ref
-                  .read(systemControllerProvider.notifier)
-                  .showToastMessage(r.msg);
+              Utils.showToastMessage(r.msg);
               context.router.pushNamed(EmailVerificationScreen.path);
             },
           );

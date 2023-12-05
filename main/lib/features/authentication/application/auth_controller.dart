@@ -4,7 +4,7 @@ import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/routes/route_providers.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 
 class AuthController extends StateNotifier<UserEntity?> {
   AuthController(this.ref) : super(null);
@@ -25,10 +25,11 @@ class AuthController extends StateNotifier<UserEntity?> {
 
   User? getCurrentFirebaseUser() {
     final User? currenUser = FirebaseAuth.instance.currentUser;
+
     if (currenUser != null) {
       return currenUser;
     } else {
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      Utils.showToastGeneralError();
       return null;
     }
   }
@@ -39,37 +40,17 @@ class AuthController extends StateNotifier<UserEntity?> {
       if (currenUser != null) {
         await currenUser.reload();
       } else {
-        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+        Utils.showToastGeneralError();
       }
     } on FirebaseAuthException catch (e) {
-      ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
-    }
-  }
-
-  Future<bool> refreshToken() async {
-    String? refreshToken =
-        await ref.read(authRepositoryProvider).getRefreshToken();
-    if (refreshToken != null) {
-      final refreshTokenRes =
-          await ref.read(authRepositoryProvider).refreshToken(refreshToken);
-
-      return refreshTokenRes.fold((l) {
-        return false;
-      }, (r) async {
-        await ref
-            .read(authRepositoryProvider)
-            .saveDataUser(r.token, r.refreshToken);
-        return true;
-      });
-    } else {
-      return false;
+      Utils.handlerFirebaseError(e.code);
     }
   }
 
   Future onLogOut() async {
     await FirebaseAuth.instance.signOut().then(
       (value) {
-        ref.read(authRepositoryProvider).removeDataUser().then(
+        Utils.localStorage.remove.dataUser().then(
           (value) {
             ref.read(loginWithGoogleControllerProvider.notifier).disconnect();
             ref.read(loginWithFacebookControllerProvider.notifier).disconnect();

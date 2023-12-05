@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:logger/src/ansi_color_enum.dart';
 import 'dart:developer' as developer;
 
@@ -8,28 +9,32 @@ class MyLogger {
     return '$color$message${AnsiColor.reset}';
   }
 
-  static String _rainbow(String text) {
-    final rainbow = [
-      AnsiColor.boldRed,
-      AnsiColor.boldGreen,
-      AnsiColor.boldYellow,
-      AnsiColor.boldBlue,
-      AnsiColor.boldPurple,
-      AnsiColor.boldCyan,
-      AnsiColor.boldWhite
-    ];
-    final rainbowText = StringBuffer();
-    for (var i = 0; i < text.length; i++) {
-      final char = text[i];
-      final color = rainbow[i % rainbow.length];
-      rainbowText.write('$color$char');
-    }
-    rainbowText.write(AnsiColor.reset);
-    return rainbowText.toString();
-  }
+  // static String _rainbow(String text) {
+  //   final rainbow = [
+  //     AnsiColor.boldRed,
+  //     AnsiColor.boldGreen,
+  //     AnsiColor.boldYellow,
+  //     AnsiColor.boldBlue,
+  //     AnsiColor.boldPurple,
+  //     AnsiColor.boldCyan,
+  //     AnsiColor.boldWhite
+  //   ];
+  //   final rainbowText = StringBuffer();
+  //   for (var i = 0; i < text.length; i++) {
+  //     final char = text[i];
+  //     final color = rainbow[i % rainbow.length];
+  //     rainbowText.write('$color$char');
+  //   }
+  //   rainbowText.write(AnsiColor.reset);
+  //   return rainbowText.toString();
+  // }
 
   static void error(dynamic message) {
     developer.log(_colorize(message, AnsiColor.highIntensityRed));
+  }
+
+  static void debugLog(dynamic message) {
+    debugPrint(_colorize(message, AnsiColor.highIntensityPurple));
   }
 
   static String _uriLog(String uri) {
@@ -59,13 +64,19 @@ class MyLogger {
       "DATA: ${jsonEncode(data)}",
       AnsiColor.highIntensityRed,
     );
-    try {
+    if (data != null) {
+      try {
+        developer.log(
+          "$statusLog \n$uriLog \n$dataJsonLog",
+        );
+      } catch (e) {
+        developer.log(
+          "$statusLog \n$uriLog \n$dataLog",
+        );
+      }
+    } else {
       developer.log(
-        "$statusLog \n$uriLog \n$dataJsonLog",
-      );
-    } catch (e) {
-      developer.log(
-        "$statusLog \n$uriLog \n$dataLog",
+        "$statusLog \n$uriLog",
       );
     }
   }

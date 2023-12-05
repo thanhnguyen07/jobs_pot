@@ -5,9 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/config/app_configs.dart';
-import 'package:jobs_pot/config/providers.dart';
-import 'package:jobs_pot/database/local_storage.dart';
+import 'package:jobs_pot/app_providers.dart';
 import 'package:jobs_pot/routes/route_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 
 late ProviderContainer appContainer;
 void main() async {
@@ -17,7 +17,7 @@ void main() async {
 
   appContainer = await appProviderContainer();
 
-  String defaultLanguage = await LocalStorageHelper.getDefaultLanguage();
+  String defaultLanguage = await Utils.localStorage.get.defaultLanguage();
 
   runApp(
     EasyLocalization(

@@ -4,7 +4,6 @@ import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/widgets/social_login_button.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
-import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class OrSocialLogin extends ConsumerStatefulWidget {
@@ -35,9 +34,9 @@ class _OrSocialLoginState extends ConsumerState<OrSocialLogin> {
                 .signInWithFacebook(context);
           },
           appleLogin: () {
-            ref.read(systemControllerProvider.notifier).showToastMessage(
-                  Utils.getLocaleMessage(LocaleKeys.authenticationComingSoon),
-                );
+            Utils.showToastMessageWithLocaleKeys(
+              LocaleKeys.authenticationComingSoon,
+            );
           },
         ),
       ],

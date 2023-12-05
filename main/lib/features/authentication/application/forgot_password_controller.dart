@@ -7,7 +7,7 @@ import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/forgotPassword/check_mail_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
-import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -34,7 +34,7 @@ class ForgotPasswordController extends StateNotifier<int> {
 
     final email = _getEmail();
 
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
 
     try {
       return await FirebaseAuth.instance
@@ -43,13 +43,13 @@ class ForgotPasswordController extends StateNotifier<int> {
         (value) {
           countDown();
 
-          ref.read(systemControllerProvider.notifier).hideLoading();
+          Utils.hideLoading();
 
           return true;
         },
       );
     } on FirebaseAuthException catch (e) {
-      ref.read(systemControllerProvider.notifier).handlerFirebaseError(e.code);
+      Utils.handlerFirebaseError(e.code);
       return false;
     }
   }

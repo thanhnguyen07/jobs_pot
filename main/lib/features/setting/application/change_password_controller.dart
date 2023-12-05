@@ -7,7 +7,6 @@ import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
-import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -70,7 +69,7 @@ class ChangePasswordController extends StateNotifier {
   }
 
   void changePassword(BuildContext context) async {
-    ref.read(systemControllerProvider.notifier).showLoading();
+    Utils.showLoading();
     FocusManager.instance.primaryFocus?.unfocus();
 
     UserEntity? userData = ref.read(authControllerProvider);
@@ -92,7 +91,7 @@ class ChangePasswordController extends StateNotifier {
         }
       });
     }
-    ref.read(systemControllerProvider.notifier).hideLoading();
+    Utils.hideLoading();
   }
 
   Future checkOldPassword(
@@ -103,14 +102,12 @@ class ChangePasswordController extends StateNotifier {
       if (context.mounted) {
         await updatePassword(context);
       } else {
-        ref.read(systemControllerProvider.notifier).showToastGeneralError();
+        Utils.showToastGeneralError();
       }
     } on FirebaseAuthException catch (_) {
-      ref
-          .read(systemControllerProvider.notifier)
-          .showToastMessage(Utils.getLocaleMessage(
-            LocaleKeys.errorPassword,
-          ));
+      Utils.showToastMessageWithLocaleKeys(
+        LocaleKeys.errorPassword,
+      );
     }
   }
 
@@ -125,17 +122,17 @@ class ChangePasswordController extends StateNotifier {
 
         await ref.read(authControllerProvider.notifier).reloadFirebaseUser();
 
-        ref.read(systemControllerProvider.notifier).showToastMessage(
-            Utils.getLocaleMessage(LocaleKeys.settingAccountChangePasswordMsg));
+        Utils.showToastMessageWithLocaleKeys(
+            LocaleKeys.settingAccountChangePasswordMsg);
 
         if (context.mounted) {
           context.router.back();
         } else {
-          ref.read(systemControllerProvider.notifier).showToastGeneralError();
+          Utils.showToastGeneralError();
         }
       }
     } on FirebaseAuthException catch (_) {
-      ref.read(systemControllerProvider.notifier).showToastGeneralError();
+      Utils.showToastGeneralError();
     }
   }
 }

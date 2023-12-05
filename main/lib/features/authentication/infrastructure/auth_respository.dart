@@ -1,6 +1,5 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/database/local_storage.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/resfresh_token_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/verification_code_entity.dart';
@@ -14,71 +13,6 @@ class AuthRepository implements AuthRepositoryInterface {
 
   AuthRepository() {
     _apiClient = ApiUtil().getApiClient();
-  }
-
-  @override
-  Future saveToken(String token) {
-    return LocalStorageHelper.saveToken(token);
-  }
-
-  @override
-  Future saveDataUser(String? token, String? refreshToken, [String? idUser]) {
-    return LocalStorageHelper.saveDataUser(token, refreshToken, idUser);
-  }
-
-  @override
-  Future saveOnboadingStatus() {
-    return LocalStorageHelper.saveOnboadingStatus();
-  }
-
-  @override
-  Future saveRememberStatus() {
-    return LocalStorageHelper.saveRememberStatus();
-  }
-
-  @override
-  Future<String?> getToken() {
-    return LocalStorageHelper.getToken();
-  }
-
-  @override
-  Future<String?> getRefreshToken() {
-    return LocalStorageHelper.getRefreshToken();
-  }
-
-  @override
-  Future<String?> getIdUser() {
-    return LocalStorageHelper.getIdUser();
-  }
-
-  @override
-  Future<bool> getOnboadingStatus() {
-    return LocalStorageHelper.getOnboadingStatus();
-  }
-
-  @override
-  Future<bool?> getRememberStatus() {
-    return LocalStorageHelper.getRememberStatus();
-  }
-
-  @override
-  Future removeToken() {
-    return LocalStorageHelper.removeToken();
-  }
-
-  @override
-  Future removeDataUser() {
-    return LocalStorageHelper.removeDataUser();
-  }
-
-  @override
-  Future removeOnboadingStatus() {
-    return LocalStorageHelper.removeOnboadingStatus();
-  }
-
-  @override
-  Future removeRememberStatus() {
-    return LocalStorageHelper.removeRememberStatus();
   }
 
   @override
@@ -150,21 +84,6 @@ class AuthRepository implements AuthRepositoryInterface {
       final sendVerificationCodeRes = await _apiClient.sendVerifyCode(body);
 
       return right(VerificationCodeEntity.fromJson(sendVerificationCodeRes));
-    } catch (error) {
-      return left(const Failure.empty());
-    }
-  }
-
-  @override
-  Future<Either<Failure, RefreshTokenResponseEntity>> refreshToken(
-      String refreshToken) async {
-    try {
-      final Map<String, dynamic> body = {
-        ApiParameterKeyName.refreshTokenSnake: refreshToken,
-      };
-      final refreshTokenRes = await _apiClient.refreshToken(body);
-
-      return right(RefreshTokenResponseEntity.fromJson(refreshTokenRes));
     } catch (error) {
       return left(const Failure.empty());
     }
