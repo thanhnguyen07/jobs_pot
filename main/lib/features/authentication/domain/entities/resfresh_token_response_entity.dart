@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'resfresh_token_response_entity.freezed.dart';
 part 'resfresh_token_response_entity.g.dart';
