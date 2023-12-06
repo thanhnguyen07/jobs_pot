@@ -34,9 +34,9 @@ class SocialIcon extends StatelessWidget {
         onPressed: onPress,
         child: Image.asset(
           icon,
-          width: 30,
-          height: 30,
-          fit: BoxFit.cover,
+          width: 40,
+          height: 40,
+          fit: BoxFit.contain,
         ),
       ),
     );
