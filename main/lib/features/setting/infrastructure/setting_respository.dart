@@ -5,14 +5,16 @@ import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/setting/domain/repositories/setting_respository_interface.dart';
-import 'package:jobs_pot/networks/api_client.dart';
-import 'package:jobs_pot/networks/api_util.dart';
+import 'package:jobs_pot/main.dart';
+import 'package:jobs_pot/system/system_providers.dart';
+import 'package:network/network.dart';
 
 class SettingRepository implements SettingRepositoryInterface {
   late ApiClient _apiClient;
 
   SettingRepository() {
-    _apiClient = ApiUtil().getApiClient();
+    _apiClient =
+        appContainer.read(systemControllerProvider.notifier).getAppApiClient();
   }
 
   @override

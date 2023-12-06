@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart' hide Headers;
-import 'package:jobs_pot/config/app_configs.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_client.g.dart';
 
-@RestApi(baseUrl: AppConfigs.defaultUrl)
+@RestApi(baseUrl: 'https://server-jobs-pot.vercel.app/')
 abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 

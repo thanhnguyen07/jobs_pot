@@ -2,10 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/system/application/language_controller.dart';
 import 'package:jobs_pot/system/domain/infrastructure/system_respository.dart';
 import 'application/system_controller.dart';
-import 'domain/entities/app_state_entity.dart';
 
 final systemControllerProvider =
-    StateNotifierProvider<SystemController, AppStateEntity>(((ref) {
+    StateNotifierProvider<SystemController, dynamic>(((ref) {
   return SystemController(ref);
 }));
 

@@ -5,14 +5,16 @@ import 'package:jobs_pot/features/authentication/domain/entities/user_response_e
 import 'package:jobs_pot/features/authentication/domain/entities/verification_code_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/authentication/domain/repositories/auth_respository_interface.dart';
-import 'package:jobs_pot/networks/api_client.dart';
-import 'package:jobs_pot/networks/api_util.dart';
+import 'package:jobs_pot/main.dart';
+import 'package:jobs_pot/system/system_providers.dart';
+import 'package:network/network.dart';
 
 class AuthRepository implements AuthRepositoryInterface {
   late ApiClient _apiClient;
 
   AuthRepository() {
-    _apiClient = ApiUtil().getApiClient();
+    _apiClient =
+        appContainer.read(systemControllerProvider.notifier).getAppApiClient();
   }
 
   @override

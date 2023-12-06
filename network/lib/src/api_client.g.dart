@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: prefer_const_declarations
-
 part of 'api_client.dart';
 
 // **************************************************************************
@@ -14,9 +12,7 @@ class _ApiClient implements ApiClient {
   _ApiClient(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= 'https://server-jobs-pot.vercel.app/';
-  }
+  });
 
   final Dio _dio;
 

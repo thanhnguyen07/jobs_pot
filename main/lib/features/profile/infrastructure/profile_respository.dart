@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:jobs_pot/common/app_keys.dart';
@@ -6,14 +5,16 @@ import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 import 'package:jobs_pot/features/profile/domain/repositories/profile_responsitory_interface.dart';
-import 'package:jobs_pot/networks/api_client.dart';
-import 'package:jobs_pot/networks/api_util.dart';
+import 'package:jobs_pot/main.dart';
+import 'package:jobs_pot/system/system_providers.dart';
+import 'package:network/network.dart';
 
 class ProfileResponsitory implements ProfileResponsitoryInterface {
   late ApiClient _apiClient;
 
   ProfileResponsitory() {
-    _apiClient = ApiUtil().getApiClient();
+    _apiClient =
+        appContainer.read(systemControllerProvider.notifier).getAppApiClient();
   }
 
   @override
@@ -24,8 +25,8 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
     required String id,
   }) async {
     try {
-      FormData body = FormData.fromMap({
-        ApiParameterKeyName.file: await MultipartFile.fromFile(
+      NetworkFormData body = NetworkFormData.fromMap({
+        ApiParameterKeyName.file: await NetworkMultipartFile.fromFile(
           filePath,
           filename: fileName,
           contentType: contentType,
@@ -61,7 +62,7 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
 
       return right(UserResponseEntity.fromJson(updateInformationsRes));
     } catch (error) {
-      error as DioException;
+      error as NetworkDioException;
 
       String errorMessage =
           ErrorResponseEntity.fromJson(error.response?.data).msg;
