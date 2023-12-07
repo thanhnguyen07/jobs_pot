@@ -14,7 +14,7 @@ class AuthRepository implements AuthRepositoryInterface {
 
   AuthRepository() {
     _apiClient =
-        appContainer.read(systemControllerProvider.notifier).getAppApiClient();
+        appProvider.read(apiControllerProvider.notifier).getAppApiClient();
   }
 
   @override

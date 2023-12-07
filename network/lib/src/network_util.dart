@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:network/network.dart';
-import 'api_interceptors.dart';
+import 'package:network/src/network_client.dart';
+import 'network_interceptors.dart';
 
 class ApiUtil {
   static Dio? _dio;
@@ -14,7 +14,7 @@ class ApiUtil {
   }
 
   Dio getDio({
-    Function(NetworkDioException, NetworkErrorInterceptorHandler)? handleError,
+    Function(DioException, ErrorInterceptorHandler)? handleError,
     Future<String?> Function()? getToken,
     Function({
       String method,
@@ -46,21 +46,9 @@ class ApiUtil {
   }
 
   ApiClient getApiClient({
-    void Function(NetworkDioException, NetworkErrorInterceptorHandler)?
-        handlerError,
+    void Function(DioException, ErrorInterceptorHandler)? handlerError,
     required String baseUrl,
     Future<String?> Function()? getToken,
-    Function({
-      required String method,
-      required String uri,
-      dynamic token,
-      dynamic data,
-    })? requestResult,
-    Function({
-      int? statusCode,
-      required String uri,
-      dynamic data,
-    })? responseResult,
   }) {
     final apiClient = ApiClient(
       getDio(

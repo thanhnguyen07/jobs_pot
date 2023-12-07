@@ -53,7 +53,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               children: [
                 _header(context),
                 CouponCard(
-                  onPress: () {},
+                  onPress: () {
+                    Utils.localStorage.save.token(
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiY3VzdG9tIHRva2VuIiwiaWF0IjoxNzAxOTE5MzE5LCJleHAiOjE3MDE5MTkzMjl9.2hdsvVSRbw1gDyEYYqg-ZhfGQJIwWad9IapNBjHVhoI");
+                  },
                 ),
                 _customTitle(LocaleKeys.homeFindJobTitle),
                 const ButtonJobs(),

@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/system/application/language_controller.dart';
 import 'package:jobs_pot/system/domain/infrastructure/system_respository.dart';
-import 'application/system_controller.dart';
+import 'application/api_controller.dart';
 
-final systemControllerProvider =
-    StateNotifierProvider<SystemController, dynamic>(((ref) {
-  return SystemController(ref);
+final apiControllerProvider =
+    StateNotifierProvider<ApiController, dynamic>(((ref) {
+  return ApiController(ref);
 }));
 
 final languageControllerProvider =

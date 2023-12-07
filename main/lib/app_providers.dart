@@ -22,5 +22,5 @@ Future<ProviderContainer> appProviderContainer() async {
 Future<void> initializeProviders(ProviderContainer container) async {
   container.read(routeControllerProvider);
   container.read(authControllerProvider);
-  container.read(systemControllerProvider);
+  container.read(apiControllerProvider);
 }

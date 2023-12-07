@@ -3,6 +3,19 @@
   "tasks": [
     // START network.
     {
+      "label": "network - log permission",
+      "type": "shell",
+      "command": "chmod 755 ./log/permission.sh && ./log/permission.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/network"
+      }
+    },
+    {
       "label": "network - build_runner build",
       "type": "shell",
       "command": "fvm flutter packages pub run build_runner build --delete-conflicting-outputs",

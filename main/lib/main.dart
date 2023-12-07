@@ -9,13 +9,13 @@ import 'package:jobs_pot/app_providers.dart';
 import 'package:jobs_pot/routes/route_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
-late ProviderContainer appContainer;
+late ProviderContainer appProvider;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await EasyLocalization.ensureInitialized();
 
-  appContainer = await appProviderContainer();
+  appProvider = await appProviderContainer();
 
   String defaultLanguage = await Utils.localStorage.get.defaultLanguage();
 
@@ -29,7 +29,7 @@ void main() async {
       path: AppConfigs.pathLanguage,
       fallbackLocale: AppConfigs.appLanguageEn,
       child: UncontrolledProviderScope(
-        container: appContainer,
+        container: appProvider,
         child: const MyApp(),
       ),
     ),
@@ -61,7 +61,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routerConfig: appContainer.read(routeControllerProvider)?.config(),
+      routerConfig: appProvider.read(routeControllerProvider)?.config(),
     );
   }
 }

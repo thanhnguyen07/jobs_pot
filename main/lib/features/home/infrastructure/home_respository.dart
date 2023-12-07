@@ -11,7 +11,7 @@ class HomeRespinsitory implements HomeRespositoryInterface {
 
   HomeRespinsitory() {
     _apiClient =
-        appContainer.read(systemControllerProvider.notifier).getAppApiClient();
+        appProvider.read(apiControllerProvider.notifier).getAppApiClient();
   }
 
   @override

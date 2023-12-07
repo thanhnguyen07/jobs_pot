@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:jobs_pot/common/app_keys.dart';
@@ -14,7 +15,7 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
 
   ProfileResponsitory() {
     _apiClient =
-        appContainer.read(systemControllerProvider.notifier).getAppApiClient();
+        appProvider.read(apiControllerProvider.notifier).getAppApiClient();
   }
 
   @override
@@ -25,8 +26,8 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
     required String id,
   }) async {
     try {
-      NetworkFormData body = NetworkFormData.fromMap({
-        ApiParameterKeyName.file: await NetworkMultipartFile.fromFile(
+      FormData body = FormData.fromMap({
+        ApiParameterKeyName.file: await MultipartFile.fromFile(
           filePath,
           filename: fileName,
           contentType: contentType,
@@ -62,7 +63,7 @@ class ProfileResponsitory implements ProfileResponsitoryInterface {
 
       return right(UserResponseEntity.fromJson(updateInformationsRes));
     } catch (error) {
-      error as NetworkDioException;
+      error as DioException;
 
       String errorMessage =
           ErrorResponseEntity.fromJson(error.response?.data).msg;
