@@ -58,7 +58,6 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: const Column(
             children: [
-              // EditProfileForm(),
               ProfileInputForm(),
             ],
           ),

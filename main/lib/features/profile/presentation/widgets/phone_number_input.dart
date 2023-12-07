@@ -49,16 +49,23 @@ class _PhoneNumberInputState extends ConsumerState<PhoneNumberInput> {
                   .read(profileControllerProvider.notifier)
                   .setPhoneNumber(number.phoneNumber);
             },
+            spaceBetweenSelectorAndTextField: 0,
             initialValue: number,
             selectorConfig: const SelectorConfig(
-              selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+              selectorType: PhoneInputSelectorType.DIALOG,
+              trailingSpace: false,
+              leadingPadding: 10,
             ),
             inputDecoration: InputDecoration(
               hintText: userData?.phoneNumber?.substring(3) ??
-                  Utils.getLocaleMessage(LocaleKeys.profilePhoneNumberHintText),
-              border: const OutlineInputBorder(),
+                  Utils.getLocaleMessage(
+                    LocaleKeys.profilePhoneNumberHintText,
+                  ),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
             ),
-            textStyle: AppTextStyle.darkPurpleBoldS14,
+            textStyle: AppTextStyle.darkPurpleRegularS14,
           ),
         ),
       ],
