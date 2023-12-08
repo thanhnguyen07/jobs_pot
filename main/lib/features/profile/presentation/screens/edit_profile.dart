@@ -28,7 +28,7 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 class _EditProfileState extends ConsumerState<EditProfileScreen> {
   @override
   void initState() {
-    ref.read(profileControllerProvider.notifier).getUserProfile();
+    ref.read(authControllerProvider.notifier).getUserProfile();
     super.initState();
   }
 
@@ -55,19 +55,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
             _userName(context, userData),
           ],
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: AppColors.amberColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: const Column(
-            children: [
-              ProfileInputForm(),
-            ],
-          ),
-        )
+        ProfileInputForm()
       ],
     );
   }

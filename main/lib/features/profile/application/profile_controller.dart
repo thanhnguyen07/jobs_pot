@@ -46,11 +46,6 @@ class ProfileController extends StateNotifier<bool> {
         ],
         touched: true,
       ),
-      ValidationKeys.email: FormControl<String>(
-        value: '',
-        validators: [emailValidatorSchema],
-        touched: true,
-      ),
       ValidationKeys.location: FormControl<String>(
         value: '',
         touched: true,
@@ -64,6 +59,7 @@ class ProfileController extends StateNotifier<bool> {
 
   Future<void> onSave() async {
     FocusManager.instance.primaryFocus?.unfocus();
+    Utils.showLoading();
 
     UserEntity? userData = ref.read(authControllerProvider);
     if (userData != null) {
@@ -86,12 +82,14 @@ class ProfileController extends StateNotifier<bool> {
 
       updateAvatarResult.fold((l) {
         Utils.showToastMessage(l.error);
+        Utils.hideLoading();
       }, (r) {
         ref.read(authControllerProvider.notifier).setDataUser(r.results);
-
+        Utils.hideLoading();
         Utils.showToastMessage(r.msg);
       });
     } else {
+      Utils.hideLoading();
       showToastGeneralError();
     }
   }
@@ -117,7 +115,7 @@ class ProfileController extends StateNotifier<bool> {
   }
 
   Future<void> updateImage(UploadImageType type) async {
-    await getUserProfile();
+    await ref.read(authControllerProvider.notifier).getUserProfile();
 
     Utils.showLoading();
 
@@ -187,32 +185,6 @@ class ProfileController extends StateNotifier<bool> {
       });
     } else {
       showToastGeneralError();
-    }
-  }
-
-  Future getUserProfile() async {
-    Utils.showLoading();
-
-    UserEntity? userData = ref.read(authControllerProvider);
-
-    if (userData != null) {
-      await ref.read(authRepositoryProvider).getUserProfile(userData.id).then(
-        (res) {
-          Utils.hideLoading();
-
-          return res.fold(
-            (l) {
-              Utils.showToastGeneralError();
-            },
-            (r) {
-              ref.read(authControllerProvider.notifier).setDataUser(r.results);
-            },
-          );
-        },
-      );
-    } else {
-      Utils.hideLoading();
-      Utils.showToastGeneralError();
     }
   }
 }

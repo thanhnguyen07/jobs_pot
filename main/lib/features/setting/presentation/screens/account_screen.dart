@@ -10,6 +10,7 @@ import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
+import 'package:jobs_pot/features/profile/presentation/screens/edit_profile.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/change_password_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_choose_verify_method.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_confirm.dart';
@@ -33,7 +34,17 @@ class AccountScreen extends ConsumerStatefulWidget {
 
 class _AccountScreenState extends ConsumerState<AccountScreen> {
   @override
+  void initState() {
+    ref.read(authControllerProvider.notifier).getUserProfile();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    void onBack() {
+      context.router.back();
+    }
+
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
@@ -42,9 +53,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
         child: Column(
           children: [
             Header(
-              onBack: () {
-                context.router.back();
-              },
+              onBack: onBack,
               titleKey: LocaleKeys.settingAccountTitle,
             ),
             _body(context),
@@ -81,7 +90,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _userInfo(userData),
+          _userInfo(userData, context),
           const SizedBox(height: 10),
           _linkAccountTitle(),
           const SizedBox(height: 10),
@@ -456,13 +465,16 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
     );
   }
 
-  Row _userInfo(UserEntity? userData) {
+  Row _userInfo(UserEntity? userData, BuildContext context) {
     return Row(
       children: [
         AvatarImage(
           avatarLink: userData!.photoUrl,
           size: 70,
           edit: false,
+          onTab: () {
+            context.router.pushNamed(EditProfileScreen.path);
+          },
         ),
         const SizedBox(width: 20),
         Column(

@@ -23,7 +23,7 @@ class AvatarImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: edit ? onTab : null,
+      onTap: onTab,
       child: Stack(
         children: [
           SizedBox(

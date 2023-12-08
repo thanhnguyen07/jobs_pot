@@ -60,4 +60,30 @@ class AuthController extends StateNotifier<UserEntity?> {
       },
     );
   }
+
+  Future getUserProfile() async {
+    Utils.showLoading();
+
+    String? idUser = state?.id;
+
+    if (idUser != null) {
+      await ref.read(authRepositoryProvider).getUserProfile(idUser).then(
+        (res) {
+          Utils.hideLoading();
+
+          return res.fold(
+            (l) {
+              Utils.showToastGeneralError();
+            },
+            (r) {
+              setDataUser(r.results);
+            },
+          );
+        },
+      );
+    } else {
+      Utils.hideLoading();
+      Utils.showToastGeneralError();
+    }
+  }
 }

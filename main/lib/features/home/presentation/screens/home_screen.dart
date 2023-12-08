@@ -45,32 +45,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         physics: const BouncingScrollPhysics(),
         child: Container(
           width: double.infinity,
-          color: AppColors.whiteColor1,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _header(context),
-                CouponCard(
-                  onPress: () {
-                    Utils.localStorage.save.token(
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiY3VzdG9tIHRva2VuIiwiaWF0IjoxNzAxOTE5MzE5LCJleHAiOjE3MDE5MTkzMjl9.2hdsvVSRbw1gDyEYYqg-ZhfGQJIwWad9IapNBjHVhoI");
-                  },
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _header(context),
+              CouponCard(
+                onPress: () {
+                  Utils.localStorage.save.token(
+                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiY3VzdG9tIHRva2VuIiwiaWF0IjoxNzAxOTE5MzE5LCJleHAiOjE3MDE5MTkzMjl9.2hdsvVSRbw1gDyEYYqg-ZhfGQJIwWad9IapNBjHVhoI");
+                },
+              ),
+              _customTitle(LocaleKeys.homeFindJobTitle),
+              const ButtonJobs(),
+              _customTitle(LocaleKeys.homeRecentFinJobTitle),
+              Container(
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
                 ),
-                _customTitle(LocaleKeys.homeFindJobTitle),
-                const ButtonJobs(),
-                _customTitle(LocaleKeys.homeRecentFinJobTitle),
-                Container(
-                  width: double.infinity,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),

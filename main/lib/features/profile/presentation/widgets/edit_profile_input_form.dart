@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/button_submit_form.dart';
@@ -52,10 +54,15 @@ class _ProfileInputFormState extends ConsumerState<ProfileInputForm> {
     ref.watch(languageControllerProvider);
     final UserEntity? userData = ref.watch(authControllerProvider);
 
-    return ReactiveForm(
-      formGroup: _profileInputForm,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    return Container(
+      margin: const EdgeInsets.only(right: 20, left: 20, bottom: 50),
+      decoration: BoxDecoration(
+        color: AppColors.amberColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      child: ReactiveForm(
+        formGroup: _profileInputForm,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,17 +77,24 @@ class _ProfileInputFormState extends ConsumerState<ProfileInputForm> {
               formControlLocation: formControlLocation,
               hintText: userData.location ?? '',
             ),
-            ButtonSubmitForm(
-              title: Text(
-                Utils.getLocaleMessage(LocaleKeys.profileSaveTitle),
-                style: AppTextStyle.whiteBoldS14,
-              ),
-              onLogin: () {
-                ref.read(profileControllerProvider.notifier).onSave();
-              },
-            )
+            _buttonSubmit()
           ],
         ),
+      ),
+    );
+  }
+
+  Container _buttonSubmit() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: ButtonSubmitForm(
+        title: Text(
+          Utils.getLocaleMessage(LocaleKeys.editProfileUpdateTitle),
+          style: AppTextStyle.whiteBoldS14,
+        ),
+        onLogin: () {
+          ref.read(profileControllerProvider.notifier).onSave();
+        },
       ),
     );
   }

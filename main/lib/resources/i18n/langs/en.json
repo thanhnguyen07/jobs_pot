@@ -163,5 +163,6 @@
   "settingAccountLinkPassword": "Add password",
   "settingAccountLinkPasswordMsg": "Add password successfully!",
   "settingAccountVerifyCodeSubTitle": "The verification code has been sent to the email address",
-  "settingAccountDeleteAccount": "Delete Account"
+  "settingAccountDeleteAccount": "Delete Account",
+  "editProfileUpdateTitle": "Update"
 }
