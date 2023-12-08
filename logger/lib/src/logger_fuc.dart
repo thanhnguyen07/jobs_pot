@@ -101,10 +101,6 @@ class MyLogger {
       "DATA: $data",
       AnsiColor.highIntensityYellow,
     );
-    String dataJsonLog = _colorize(
-      "DATA: ${jsonEncode(data)}",
-      AnsiColor.highIntensityYellow,
-    );
 
     if (method == 'GET') {
       developer.log(
@@ -112,6 +108,10 @@ class MyLogger {
       );
     } else {
       try {
+        String dataJsonLog = _colorize(
+          "DATA: ${jsonEncode(data)}",
+          AnsiColor.highIntensityYellow,
+        );
         developer.log(
           "$methodLog \n$uriLog \n$tokenLog \n$dataJsonLog",
         );
