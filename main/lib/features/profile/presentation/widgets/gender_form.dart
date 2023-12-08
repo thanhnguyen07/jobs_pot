@@ -73,7 +73,8 @@ class _GenderFormState extends ConsumerState<GenderForm> {
     required bool checked,
     required bool editProfileState,
   }) {
-    return TextButton(
+    return TextButton.icon(
+      icon: _iconCheck(checked),
       onPressed: () {
         editProfileState
             ? null
@@ -83,8 +84,7 @@ class _GenderFormState extends ConsumerState<GenderForm> {
                 genderValue = title;
               });
       },
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+      style: TextButton.styleFrom(
         minimumSize: const Size(0, 50),
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
@@ -92,15 +92,9 @@ class _GenderFormState extends ConsumerState<GenderForm> {
         ),
         elevation: 10,
       ),
-      child: Row(
-        children: [
-          _iconCheck(checked),
-          const SizedBox(width: 10),
-          Text(
-            title,
-            style: AppTextStyle.textlavenderGraS12,
-          ),
-        ],
+      label: Text(
+        title,
+        style: AppTextStyle.darkPurpleRegularS14,
       ),
     );
   }

@@ -92,6 +92,7 @@ class _DateOfBirthBoxState extends ConsumerState<DateOfBirthBox> {
             children: [
               Text(
                 getDateOfBirth(),
+                style: AppTextStyle.darkPurpleRegularS14,
               ),
               SvgPicture.asset(
                 AppIcons.calendar,

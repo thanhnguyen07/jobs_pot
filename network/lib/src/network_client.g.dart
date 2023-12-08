@@ -12,7 +12,9 @@ class _ApiClient implements ApiClient {
   _ApiClient(
     this._dio, {
     this.baseUrl,
-  });
+  }) {
+    baseUrl ??= 'https://server-jobs-pot.vercel.app/';
+  }
 
   final Dio _dio;
 

@@ -121,6 +121,11 @@ class AppTextStyle {
     fontSize: 14,
     fontFamily: AppFontFamily.dMSansBold,
   );
+  static const textlavenderGraS14 = TextStyle(
+    color: AppColors.lavenderGrayClor,
+    fontSize: 14,
+    fontFamily: AppFontFamily.dMSansRegular,
+  );
   //16
   static const textColor3MediumS16 = TextStyle(
     color: AppColors.darkPurpleColor,

@@ -114,7 +114,7 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
       suffixIcon: widget.suffixIcon,
       filled: true,
       hintText: widget.hintText,
-      hintStyle: AppTextStyle.textlavenderGraS12,
+      hintStyle: AppTextStyle.textlavenderGraS14,
       border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide.none,
