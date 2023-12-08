@@ -5,7 +5,8 @@ import 'package:jobs_pot/common/app_style.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/config/app_configs.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/PhoneNumber/phone_number_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -22,12 +23,16 @@ class PhoneNumberInput extends ConsumerStatefulWidget {
 class _PhoneNumberInputState extends ConsumerState<PhoneNumberInput> {
   @override
   Widget build(BuildContext context) {
-    PhoneNumber number =
-        PhoneNumber(isoCode: AppConfigs.defaultCodePhoneNumber);
-
+    UserEntity? userData = ref.watch(authControllerProvider);
     bool editProfileState = ref.watch(profileControllerProvider);
 
-    UserEntity? userData = ref.watch(authControllerProvider);
+    PhoneNumberEntity? phoneNumberData = userData?.phoneNumber;
+
+    PhoneNumber number = PhoneNumber(
+      dialCode: phoneNumberData?.dialCode,
+      isoCode: phoneNumberData?.isoCode ?? AppConfigs.defaultCodePhoneNumber,
+      phoneNumber: phoneNumberData?.phoneNumber,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,20 +52,22 @@ class _PhoneNumberInputState extends ConsumerState<PhoneNumberInput> {
             onInputChanged: (PhoneNumber number) {
               ref
                   .read(profileControllerProvider.notifier)
-                  .setPhoneNumber(number.phoneNumber);
+                  .setPhoneNumber(number);
             },
             spaceBetweenSelectorAndTextField: 0,
             initialValue: number,
+            selectorTextStyle: AppTextStyle.darkPurpleBoldS14,
             selectorConfig: const SelectorConfig(
               selectorType: PhoneInputSelectorType.DIALOG,
               trailingSpace: false,
               leadingPadding: 10,
             ),
             inputDecoration: InputDecoration(
-              hintText: userData?.phoneNumber?.substring(3) ??
+              hintText: phoneNumberData?.phoneNumber ??
                   Utils.getLocaleMessage(
                     LocaleKeys.profilePhoneNumberHintText,
                   ),
+              hintStyle: AppTextStyle.darkPurpleRegularS14,
               border: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),

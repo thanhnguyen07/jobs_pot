@@ -40,20 +40,4 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       ),
     );
   }
-
-  // Widget _saveButton(BuildContext context) {
-  //   return Container(
-  //     margin: const EdgeInsets.only(bottom: 30, left: 60, right: 60),
-  //     child: CustomButton(
-  //       title: Text(
-  //         Utils.getLocaleMessage(LocaleKeys.profileSaveTitle),
-  //         style: AppTextStyle.whiteBoldS14,
-  //       ),
-  //       backgroundColor: AppColors.egglantColor,
-  //       onPressed: () {
-  //         ref.read(profileControllerProvider.notifier).onSave();
-  //       },
-  //     ),
-  //   );
-  // }
 }

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/database/entities/error_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/user_response_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/UserResponse/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
 
 abstract class SettingRepositoryInterface {

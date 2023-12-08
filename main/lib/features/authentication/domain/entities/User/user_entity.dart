@@ -1,7 +1,8 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/provider_info_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/PhoneNumber/phone_number_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/ProviderInfo/provider_info_entity.dart';
 
 part 'user_entity.freezed.dart';
 part 'user_entity.g.dart';
@@ -20,7 +21,7 @@ class UserEntity with _$UserEntity {
     @JsonKey(name: "background_url") String? backgroundUrl,
     @JsonKey(name: "date_of_birth") String? dateOfBirth,
     String? gender,
-    @JsonKey(name: "phone_number") String? phoneNumber,
+    @JsonKey(name: "phone_number") PhoneNumberEntity? phoneNumber,
     String? location,
     @JsonKey(name: "_id") required String id,
   }) = _UserEntity;

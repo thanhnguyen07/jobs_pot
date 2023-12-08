@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:logger/src/ansi_color_enum.dart';
 import 'dart:developer' as developer;
@@ -30,7 +29,9 @@ class MyLogger {
   // }
 
   static void error(dynamic message) {
-    developer.log(_colorize(message, AnsiColor.highIntensityRed));
+    developer.log(
+      _colorize(message, AnsiColor.highIntensityRed),
+    );
   }
 
   static void debugLog(dynamic message) {
@@ -64,19 +65,25 @@ class MyLogger {
       "DATA: ${jsonEncode(data)}",
       AnsiColor.highIntensityRed,
     );
+
+    String time = _colorize(
+      "${DateTime.now()}",
+      AnsiColor.highIntensityPurple,
+    );
+
     if (data != null) {
       try {
         developer.log(
-          "$statusLog \n$uriLog \n$dataJsonLog",
+          "$time \n$statusLog \n$uriLog \n$dataJsonLog",
         );
       } catch (e) {
         developer.log(
-          "$statusLog \n$uriLog \n$dataLog",
+          "$time \n$statusLog \n$uriLog \n$dataLog",
         );
       }
     } else {
       developer.log(
-        "$statusLog \n$uriLog",
+        "$time \n$statusLog \n$uriLog",
       );
     }
   }
@@ -102,9 +109,14 @@ class MyLogger {
       AnsiColor.highIntensityYellow,
     );
 
+    String time = _colorize(
+      "${DateTime.now()}",
+      AnsiColor.highIntensityPurple,
+    );
+
     if (method == 'GET') {
       developer.log(
-        "$methodLog \n$uriLog \n$tokenLog",
+        "$time \n$methodLog \n$uriLog \n$tokenLog",
       );
     } else {
       try {
@@ -113,11 +125,11 @@ class MyLogger {
           AnsiColor.highIntensityYellow,
         );
         developer.log(
-          "$methodLog \n$uriLog \n$tokenLog \n$dataJsonLog",
+          "$time \n$methodLog \n$uriLog \n$tokenLog \n$dataJsonLog",
         );
       } catch (e) {
         developer.log(
-          "$methodLog \n$uriLog \n$tokenLog \n$dataLog",
+          "$time \n$methodLog \n$uriLog \n$tokenLog \n$dataLog",
         );
       }
     }
@@ -140,8 +152,13 @@ class MyLogger {
       AnsiColor.highIntensityGreen,
     );
 
+    String time = _colorize(
+      "${DateTime.now()}",
+      AnsiColor.highIntensityPurple,
+    );
+
     developer.log(
-      "$statusLog \n$uriLog  \n$dataLog",
+      "$time \n$statusLog \n$uriLog  \n$dataLog",
     );
   }
 }

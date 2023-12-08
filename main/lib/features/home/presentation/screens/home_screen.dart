@@ -8,7 +8,7 @@ import 'package:jobs_pot/common/app_images.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_jobs.dart';
 import 'package:jobs_pot/features/home/presentation/widget/coupon_card.dart';

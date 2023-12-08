@@ -11,7 +11,7 @@ import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/common/widgets/modal_bottom_photo.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/profile/presentation/widgets/edit_profile_input_form.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 
@@ -26,6 +26,12 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _EditProfileState extends ConsumerState<EditProfileScreen> {
+  @override
+  void initState() {
+    ref.read(profileControllerProvider.notifier).getUserProfile();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(

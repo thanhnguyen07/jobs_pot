@@ -9,7 +9,7 @@ import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/change_password_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_choose_verify_method.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_confirm.dart';

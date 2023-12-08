@@ -39,7 +39,7 @@ mixin _$UserEntity {
   String? get dateOfBirth => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
   @JsonKey(name: "phone_number")
-  String? get phoneNumber => throw _privateConstructorUsedError;
+  PhoneNumberEntity? get phoneNumber => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   @JsonKey(name: "_id")
   String get id => throw _privateConstructorUsedError;
@@ -67,9 +67,11 @@ abstract class $UserEntityCopyWith<$Res> {
       @JsonKey(name: "background_url") String? backgroundUrl,
       @JsonKey(name: "date_of_birth") String? dateOfBirth,
       String? gender,
-      @JsonKey(name: "phone_number") String? phoneNumber,
+      @JsonKey(name: "phone_number") PhoneNumberEntity? phoneNumber,
       String? location,
       @JsonKey(name: "_id") String id});
+
+  $PhoneNumberEntityCopyWith<$Res>? get phoneNumber;
 }
 
 /// @nodoc
@@ -143,7 +145,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as PhoneNumberEntity?,
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -153,6 +155,18 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           : id // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PhoneNumberEntityCopyWith<$Res>? get phoneNumber {
+    if (_value.phoneNumber == null) {
+      return null;
+    }
+
+    return $PhoneNumberEntityCopyWith<$Res>(_value.phoneNumber!, (value) {
+      return _then(_value.copyWith(phoneNumber: value) as $Val);
+    });
   }
 }
 
@@ -175,9 +189,12 @@ abstract class _$$UserEntityImplCopyWith<$Res>
       @JsonKey(name: "background_url") String? backgroundUrl,
       @JsonKey(name: "date_of_birth") String? dateOfBirth,
       String? gender,
-      @JsonKey(name: "phone_number") String? phoneNumber,
+      @JsonKey(name: "phone_number") PhoneNumberEntity? phoneNumber,
       String? location,
       @JsonKey(name: "_id") String id});
+
+  @override
+  $PhoneNumberEntityCopyWith<$Res>? get phoneNumber;
 }
 
 /// @nodoc
@@ -249,7 +266,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as PhoneNumberEntity?,
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -320,7 +337,7 @@ class _$UserEntityImpl implements _UserEntity {
   final String? gender;
   @override
   @JsonKey(name: "phone_number")
-  final String? phoneNumber;
+  final PhoneNumberEntity? phoneNumber;
   @override
   final String? location;
   @override
@@ -406,7 +423,7 @@ abstract class _UserEntity implements UserEntity {
       @JsonKey(name: "background_url") final String? backgroundUrl,
       @JsonKey(name: "date_of_birth") final String? dateOfBirth,
       final String? gender,
-      @JsonKey(name: "phone_number") final String? phoneNumber,
+      @JsonKey(name: "phone_number") final PhoneNumberEntity? phoneNumber,
       final String? location,
       @JsonKey(name: "_id") required final String id}) = _$UserEntityImpl;
 
@@ -442,7 +459,7 @@ abstract class _UserEntity implements UserEntity {
   String? get gender;
   @override
   @JsonKey(name: "phone_number")
-  String? get phoneNumber;
+  PhoneNumberEntity? get phoneNumber;
   @override
   String? get location;
   @override

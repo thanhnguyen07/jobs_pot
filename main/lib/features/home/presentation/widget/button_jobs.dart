@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/features/home/domain/entities/jobs_summary_entity.dart';
+import 'package:jobs_pot/features/home/domain/entities/JobsSummary/jobs_summary_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_remote_job.dart';
 import 'package:jobs_pot/features/home/presentation/widget/custom_button.dart';

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jobs_pot/features/home/domain/entities/job_summary_entity.dart';
+import 'package:jobs_pot/features/home/domain/entities/JobSummary/job_summary_entity.dart';
 
 part 'jobs_summary_entity.freezed.dart';
 part 'jobs_summary_entity.g.dart';

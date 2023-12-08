@@ -6,7 +6,7 @@ import 'package:jobs_pot/common/app_icons.dart';
 import 'package:jobs_pot/common/app_style.dart';
 import 'package:jobs_pot/common/app_text_styles.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:jobs_pot/common/app_enum.dart';
 import 'package:jobs_pot/common/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/user_entity.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:jobs_pot/utils/validation_schema.dart';
@@ -19,7 +20,7 @@ class ProfileController extends StateNotifier<bool> {
 
   String? _dateOfBirth;
   String? _gender;
-  String? _phoneNumber;
+  PhoneNumber? _phoneNumberData;
 
   String? getDateOfBirth() => _dateOfBirth;
   void setDateOfBirth(String? value) => _dateOfBirth = value;
@@ -27,8 +28,14 @@ class ProfileController extends StateNotifier<bool> {
   String? getGender() => _gender;
   void setGender(String? value) => _gender = value;
 
-  String? getPhoneNumber() => _phoneNumber;
-  void setPhoneNumber(String? value) => _phoneNumber = value;
+  Map? getPhoneNumber() {
+    return {
+      "isoCode": _phoneNumberData?.isoCode,
+      "phoneNumber": _phoneNumberData?.phoneNumber,
+    };
+  }
+
+  void setPhoneNumber(PhoneNumber? data) => _phoneNumberData = data;
 
   final _profileInputForm = FormGroup(
     {
@@ -58,30 +65,35 @@ class ProfileController extends StateNotifier<bool> {
   Future<void> onSave() async {
     FocusManager.instance.primaryFocus?.unfocus();
 
-    String? email = getInputEmail();
-    String? userName = getInputName();
-    String? location = getInputLocation();
-    String? dateOfBirth = getDateOfBirth();
-    String? gender = getGender();
-    String? phoneNumber = getPhoneNumber();
+    UserEntity? userData = ref.read(authControllerProvider);
+    if (userData != null) {
+      String idUser = userData.id;
+      String? userName = getInputName();
+      String? location = getInputLocation();
+      String? dateOfBirth = getDateOfBirth();
+      String? gender = getGender();
+      Map? phoneNumber = getPhoneNumber();
 
-    final updateAvatarResult =
-        await ref.read(profileResponsitoryProvider).updateInformations(
-              email: email,
-              userName: userName,
-              location: location,
-              dateOfBirth: dateOfBirth,
-              gender: gender,
-              phoneNumber: phoneNumber,
-            );
+      final updateAvatarResult =
+          await ref.read(profileResponsitoryProvider).updateInformations(
+                userId: idUser,
+                userName: userName,
+                location: location,
+                dateOfBirth: dateOfBirth,
+                gender: gender,
+                phoneNumber: phoneNumber,
+              );
 
-    updateAvatarResult.fold((l) {
-      Utils.showToastMessage(l.error);
-    }, (r) {
-      ref.read(authControllerProvider.notifier).setDataUser(r.results);
+      updateAvatarResult.fold((l) {
+        Utils.showToastMessage(l.error);
+      }, (r) {
+        ref.read(authControllerProvider.notifier).setDataUser(r.results);
 
-      Utils.showToastMessage(r.msg);
-    });
+        Utils.showToastMessage(r.msg);
+      });
+    } else {
+      showToastGeneralError();
+    }
   }
 
   void showToastGeneralError() {
@@ -105,7 +117,10 @@ class ProfileController extends StateNotifier<bool> {
   }
 
   Future<void> updateImage(UploadImageType type) async {
+    await getUserProfile();
+
     Utils.showLoading();
+
     final ImagePicker picker = ImagePicker();
     try {
       final XFile? imageXFile =
@@ -172,6 +187,32 @@ class ProfileController extends StateNotifier<bool> {
       });
     } else {
       showToastGeneralError();
+    }
+  }
+
+  Future getUserProfile() async {
+    Utils.showLoading();
+
+    UserEntity? userData = ref.read(authControllerProvider);
+
+    if (userData != null) {
+      await ref.read(authRepositoryProvider).getUserProfile(userData.id).then(
+        (res) {
+          Utils.hideLoading();
+
+          return res.fold(
+            (l) {
+              Utils.showToastGeneralError();
+            },
+            (r) {
+              ref.read(authControllerProvider.notifier).setDataUser(r.results);
+            },
+          );
+        },
+      );
+    } else {
+      Utils.hideLoading();
+      Utils.showToastGeneralError();
     }
   }
 }

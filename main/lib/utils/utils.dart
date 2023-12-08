@@ -5,7 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jobs_pot/common/app_colors.dart';
 import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/features/home/domain/entities/job_summary_entity.dart';
+import 'package:jobs_pot/features/home/domain/entities/JobSummary/job_summary_entity.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:local_storage/local_storage.dart';
 

@@ -20,7 +20,10 @@ _$UserEntityImpl _$$UserEntityImplFromJson(Map<String, dynamic> json) =>
       backgroundUrl: json['background_url'] as String?,
       dateOfBirth: json['date_of_birth'] as String?,
       gender: json['gender'] as String?,
-      phoneNumber: json['phone_number'] as String?,
+      phoneNumber: json['phone_number'] == null
+          ? null
+          : PhoneNumberEntity.fromJson(
+              json['phone_number'] as Map<String, dynamic>),
       location: json['location'] as String?,
       id: json['_id'] as String,
     );
