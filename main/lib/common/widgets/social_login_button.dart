@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobs_pot/common/app_images.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/widgets/social_icon.dart';
 
 class SocialLoginButtons extends StatelessWidget {
@@ -19,9 +19,9 @@ class SocialLoginButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SocialIcon(icon: AppImages.googleLogo, onPress: googleLogin),
-        SocialIcon(icon: AppImages.facebookLogo, onPress: facebookLogin),
-        SocialIcon(icon: AppImages.appleLogo, onPress: appleLogin),
+        SocialIcon(icon: AppPngIcons.googleLogo, onPress: googleLogin),
+        SocialIcon(icon: AppPngIcons.facebookLogo, onPress: facebookLogin),
+        SocialIcon(icon: AppPngIcons.appleLogo, onPress: appleLogin),
       ],
     );
   }

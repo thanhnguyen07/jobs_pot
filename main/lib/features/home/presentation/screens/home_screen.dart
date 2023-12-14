@@ -1,17 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_images.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_jobs.dart';
 import 'package:jobs_pot/features/home/presentation/widget/coupon_card.dart';
+import 'package:jobs_pot/features/home/presentation/widget/custom_title.dart';
+import 'package:jobs_pot/features/home/presentation/widget/recent_job_list.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
@@ -32,6 +32,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     ref.read(jobsSummaryController.notifier).getJobsSummary();
+    ref.read(recentListController.notifier).getRecentList();
 
     super.initState();
   }
@@ -41,45 +42,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.watch(languageControllerProvider);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Container(
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _header(context),
-              CouponCard(
-                onPress: () {
-                  Utils.localStorage.save.token(
-                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiY3VzdG9tIHRva2VuIiwiaWF0IjoxNzAxOTE5MzE5LCJleHAiOjE3MDE5MTkzMjl9.2hdsvVSRbw1gDyEYYqg-ZhfGQJIwWad9IapNBjHVhoI");
-                },
-              ),
-              _customTitle(LocaleKeys.homeFindJobTitle),
-              const ButtonJobs(),
-              _customTitle(LocaleKeys.homeRecentFinJobTitle),
-              Container(
-                width: double.infinity,
-                height: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
+      body: Container(
+        color: AppColors.backgroundColor,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _header(context),
+                CouponCard(
+                  onPress: () {},
                 ),
-              )
-            ],
+                const CustomTitle(
+                  titleKey: LocaleKeys.homeFindJobTitle,
+                ),
+                const ButtonJobs(),
+                const RecentRemoteJob(),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
-
-  Container _customTitle(String localeKeys) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      child: Text(
-        Utils.getLocaleMessage(localeKeys),
-        style: AppTextStyle.blackBoldS16,
       ),
     );
   }
@@ -93,15 +77,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         children: [
           _userInfo(context, userData),
           TextButton(
-            onPressed: () {
-              context.router.pushNamed(SaveJobScreen.path);
-            },
-            child: SvgPicture.asset(
-              AppIcons.save,
-              width: 30,
-              height: 30,
-            ),
-          )
+              onPressed: () {
+                context.router.pushNamed(SaveJobScreen.path);
+              },
+              child: Image.asset(
+                AppPngIcons.bookmark,
+                width: 30,
+                height: 30,
+              ))
         ],
       ),
     );
@@ -136,7 +119,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 const SizedBox(width: 5),
                 Image.asset(
-                  AppImages.hello,
+                  AppPngIcons.hello,
                   width: 20,
                   height: 20,
                   fit: BoxFit.cover,

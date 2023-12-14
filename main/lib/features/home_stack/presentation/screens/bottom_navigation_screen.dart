@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 
@@ -75,7 +75,7 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
       ),
       padding: const EdgeInsets.all(13),
       child: SvgPicture.asset(
-        AppIcons.add,
+        AppSvgIcons.add,
         colorFilter: ColorFilter.mode(
             activeIcon ? AppColors.fireYellowColor : Colors.white,
             BlendMode.srcIn),
@@ -86,16 +86,16 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
   BottomNavigationBarItem _saveIcon() {
     return BottomNavigationBarItem(
       label: '',
-      icon: _svgIcons(icon: AppIcons.user),
-      activeIcon: _svgIcons(icon: AppIcons.user, activeIcon: true),
+      icon: _svgIcons(icon: AppSvgIcons.user),
+      activeIcon: _svgIcons(icon: AppSvgIcons.user, activeIcon: true),
     );
   }
 
   BottomNavigationBarItem _chatIcon() {
     return BottomNavigationBarItem(
       label: '',
-      icon: _svgIcons(icon: AppIcons.chat),
-      activeIcon: _svgIcons(icon: AppIcons.chat, activeIcon: true),
+      icon: _svgIcons(icon: AppSvgIcons.chat),
+      activeIcon: _svgIcons(icon: AppSvgIcons.chat, activeIcon: true),
     );
   }
 
@@ -109,16 +109,16 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
   BottomNavigationBarItem _postIcon() {
     return BottomNavigationBarItem(
       label: '',
-      icon: _svgIcons(icon: AppIcons.post),
-      activeIcon: _svgIcons(icon: AppIcons.post, activeIcon: true),
+      icon: _svgIcons(icon: AppSvgIcons.post),
+      activeIcon: _svgIcons(icon: AppSvgIcons.post, activeIcon: true),
     );
   }
 
   BottomNavigationBarItem _homeIcon() {
     return BottomNavigationBarItem(
       label: '',
-      icon: _svgIcons(icon: AppIcons.home),
-      activeIcon: _svgIcons(icon: AppIcons.home, activeIcon: true),
+      icon: _svgIcons(icon: AppSvgIcons.home),
+      activeIcon: _svgIcons(icon: AppSvgIcons.home, activeIcon: true),
     );
   }
 }

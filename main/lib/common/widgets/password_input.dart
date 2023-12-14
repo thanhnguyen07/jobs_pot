@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
-import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/common/widgets/eye_suffix_icon.dart';
 import 'package:jobs_pot/common/widgets/input_reactive_forms.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';

@@ -65,9 +65,9 @@
   "homeFindJobTitle": "Find Your Job",
   "homeRecentJobList": "Recent Job List",
   "homeRecentFinJobTitle": "Recent Job List",
-  "homeRemoteJobTitle": "Remote Job",
-  "homeFullTimeTitle": "Full Time",
-  "homePartTimeTitle": "Part Time",
+  "homeRemoteJobTitle": "Remote jobs",
+  "homeFullTimeTitle": "Full time",
+  "homePartTimeTitle": "Part time",
   "homePercentSaleTitle": {
     "other": "{}% off\ntake any courses"
   },
@@ -84,7 +84,7 @@
   "yesButtonTitle": "YES",
   "cancelButtonTitle": "CANCEL",
   "profileChangeImageTitle": "Change image",
-  "profileEditProfileTitle": "Edit profile",
+  "profileEditProfileTitle": "Edit your profile",
   "profileDateOfBirthTitle": "Date of birth",
   "profileDateOfBirthDialogTitle": "Select Date of birth",
   "profileGenderTitle": "Gender",

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
@@ -44,20 +44,20 @@ class _ModalBottomPhotoState extends State<ModalBottomPhoto> {
               children: [
                 _customButton(
                   textKey: LocaleKeys.postTakePictureTitle,
-                  iconPath: AppIcons.camera,
+                  iconPath: AppSvgIcons.camera,
                   onPress: widget.takePhoto,
                 ),
                 const SizedBox(height: 10),
                 _customButton(
                   textKey: LocaleKeys.postPickFromGalleryTitle,
-                  iconPath: AppIcons.picture,
+                  iconPath: AppSvgIcons.picture,
                   onPress: widget.pickFromGallery,
                 ),
                 SizedBox(height: checkChooseColor ? 10 : 0),
                 checkChooseColor
                     ? _customButton(
                         textKey: LocaleKeys.postChooseColorTitle,
-                        iconPath: AppIcons.swatches,
+                        iconPath: AppSvgIcons.swatches,
                         changeColor: true,
                         onPress: widget.chooseColorFun,
                       )

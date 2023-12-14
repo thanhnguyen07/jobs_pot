@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
@@ -71,7 +71,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
       },
       title: Utils.getLocaleMessage(LocaleKeys.settingLogoutTitle),
       showArrowButton: true,
-      icon: SvgPicture.asset(AppIcons.logout),
+      icon: SvgPicture.asset(AppSvgIcons.logout),
     );
   }
 
@@ -83,7 +83,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
       title: Utils.getLocaleMessage(LocaleKeys.settingAccountTitle),
       showArrowButton: true,
       icon: SvgPicture.asset(
-        AppIcons.profile,
+        AppSvgIcons.profile,
         colorFilter: const ColorFilter.mode(
           AppColors.blackColor,
           BlendMode.srcIn,
@@ -98,7 +98,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
       title:
           "${Utils.getLocaleMessage(LocaleKeys.settingLanguagesTitle)}: ${Utils.getLocaleMessage(LocaleKeys.changeLanguageTitle2)}",
       icon: SvgPicture.asset(
-        AppIcons.language,
+        AppSvgIcons.language,
         colorFilter: const ColorFilter.mode(
           AppColors.blackColor,
           BlendMode.srcIn,

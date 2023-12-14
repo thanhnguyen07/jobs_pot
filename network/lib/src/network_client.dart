@@ -40,9 +40,12 @@ abstract class ApiClient {
   @POST("user/refresh-token")
   Future<dynamic> refreshToken(@Body() Map<String, dynamic> body);
 
+  @DELETE("user/delete-account")
+  Future<dynamic> deleteAccount(@Body() Map<String, dynamic> body);
+
   @GET("job/summary")
   Future<dynamic> getJobsSummary();
 
-  @DELETE("user/delete-account")
-  Future<dynamic> deleteAccount(@Body() Map<String, dynamic> body);
+  @GET("job/recent-list")
+  Future<dynamic> getRecentList();
 }

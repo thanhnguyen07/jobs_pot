@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 
 class TitleAndSubTitle extends StatelessWidget {
   const TitleAndSubTitle({

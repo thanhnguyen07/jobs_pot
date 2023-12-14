@@ -1,4 +1,4 @@
-import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class EmailValidator extends Validator<dynamic> {

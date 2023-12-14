@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_keys.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/button_submit_form.dart';
 import 'package:jobs_pot/common/widgets/full_name_input.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';

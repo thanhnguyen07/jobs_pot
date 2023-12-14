@@ -1,7 +1,6 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/RefreshTokenResponse/resfresh_token_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/UserResponse/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/VerificationCode/verification_code_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 import 'package:jobs_pot/utils/utils.dart';

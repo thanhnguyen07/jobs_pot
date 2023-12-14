@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 
 class SettingButton extends StatelessWidget {
   const SettingButton({
@@ -47,7 +47,7 @@ class SettingButton extends StatelessWidget {
               ],
             ),
             showArrowButton
-                ? SvgPicture.asset(AppIcons.arrowRight2)
+                ? SvgPicture.asset(AppSvgIcons.arrowRight2)
                 : const SizedBox()
           ],
         ),

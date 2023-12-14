@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_images.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_images.dart';
 
 class AvatarImage extends StatelessWidget {
   const AvatarImage({
@@ -11,7 +11,7 @@ class AvatarImage extends StatelessWidget {
     required this.size,
     this.onTab,
     this.sizeEditIcon,
-    required this.edit,
+    this.edit = false,
   });
 
   final String? avatarLink;
@@ -45,7 +45,7 @@ class AvatarImage extends StatelessWidget {
                           return Stack(
                             children: [
                               SvgPicture.asset(
-                                AppIcons.user,
+                                AppSvgIcons.user,
                                 width: size,
                                 height: size,
                                 colorFilter: const ColorFilter.mode(
@@ -88,7 +88,7 @@ class AvatarImage extends StatelessWidget {
                           child: SvgPicture.asset(
                             width: sizeEditIcon ?? 15,
                             height: sizeEditIcon ?? 15,
-                            AppIcons.pencil,
+                            AppSvgIcons.pencil,
                             colorFilter: const ColorFilter.mode(
                               AppColors.whiteColor1,
                               BlendMode.srcIn,

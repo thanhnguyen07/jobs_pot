@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/app_enum.dart';
+import 'package:jobs_pot/common/constant/app_enum.dart';
 import 'package:jobs_pot/features/create/presentation/screens/create_job_screen.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 

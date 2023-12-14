@@ -2,16 +2,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/edit_profile.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/setting_screen.dart';
+import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
+import 'package:jobs_pot/utils/utils.dart';
 
 class ProfileCard extends ConsumerStatefulWidget {
   const ProfileCard({
@@ -39,23 +41,25 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
 
   Container _buttonsAction(BuildContext context, UserEntity? userData) {
     return Container(
-      margin: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top, right: 20, left: 20),
+      margin: EdgeInsets.symmetric(
+        vertical: MediaQuery.of(context).padding.top,
+        horizontal: 20,
+      ),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _customButton(
+          _setttingButton(
             onTab: () {
               context.router.navigateNamed(SettingScreen.path);
             },
-            iconPath: AppIcons.setting,
           ),
-          _customButton(
-              onTab: () {
-                context.router.navigateNamed(EditProfileScreen.path);
-              },
-              iconPath: AppIcons.edit),
+          _editButton(
+            onTab: () {
+              context.router.navigateNamed(EditProfileScreen.path);
+            },
+          ),
         ],
       ),
     );
@@ -122,9 +126,8 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     return BackgroundImage(imageUrl: userData?.backgroundUrl);
   }
 
-  Widget _customButton({
+  Widget _setttingButton({
     required Function() onTab,
-    required String iconPath,
   }) {
     return TextButton(
       onPressed: onTab,
@@ -137,10 +140,43 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
         padding: EdgeInsets.zero,
       ),
       child: SvgPicture.asset(
-        iconPath,
+        AppSvgIcons.setting,
         colorFilter: const ColorFilter.mode(
           Colors.white,
           BlendMode.srcIn,
+        ),
+      ),
+    );
+  }
+
+  Widget _editButton({
+    required Function() onTab,
+  }) {
+    return TextButton(
+      onPressed: onTab,
+      style: TextButton.styleFrom(
+        backgroundColor: AppColors.purple,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+        ),
+        padding: EdgeInsets.zero,
+      ),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        width: 150,
+        child: Row(
+          children: [
+            Image.asset(
+              AppPngIcons.userPen,
+              width: 20,
+              height: 20,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              Utils.getLocaleMessage(LocaleKeys.profileEditProfileTitle),
+              style: AppTextStyle.regular.black14,
+            ),
+          ],
         ),
       ),
     );

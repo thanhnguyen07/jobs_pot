@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
@@ -95,7 +95,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
                                 margin: const EdgeInsets.only(left: 10),
                                 child: uploadsData.length ==
                                         (imagesData.length - 1)
-                                    ? SvgPicture.asset(AppIcons.checked)
+                                    ? SvgPicture.asset(AppSvgIcons.checked)
                                     : const CircularProgressIndicator(
                                         color: AppColors.fireYellowColor,
                                         strokeWidth: 2,
@@ -211,7 +211,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
           width: 20,
           height: 20,
           child: SvgPicture.asset(
-            AppIcons.add,
+            AppSvgIcons.add,
           ),
         ),
       ),

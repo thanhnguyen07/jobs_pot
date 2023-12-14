@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jobs_pot/common/app_enum.dart';
-import 'package:jobs_pot/common/app_keys.dart';
+import 'package:jobs_pot/common/constant/app_enum.dart';
+import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/common/widgets/modal_bottom_photo.dart';
 import 'package:jobs_pot/features/create/create_provider.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';

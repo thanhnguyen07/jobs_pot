@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_enum.dart';
-import 'package:jobs_pot/common/app_images.dart';
-import 'package:jobs_pot/common/app_keys.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_enum.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_keys.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
@@ -286,13 +286,13 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
       await _providerDetailsDialog(
         providerKey: ProviderKeys.facebook,
         dialogTitle: LocaleKeys.settingAccountFacebookTitle,
-        dialogIcon: AppImages.facebookLogo,
+        dialogIcon: AppPngIcons.facebookLogo,
       );
     }
 
     return ProviderButton(
       linked: linked,
-      icon: AppImages.facebookLogo,
+      icon: AppPngIcons.facebookLogo,
       title: LocaleKeys.settingAccountFacebookTitle,
       linkFun: linkFun,
       unLinkFun: unLinkFun,
@@ -316,13 +316,13 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
       await _providerDetailsDialog(
         providerKey: ProviderKeys.google,
         dialogTitle: LocaleKeys.settingAccountGooogleTitle,
-        dialogIcon: AppImages.googleLogo,
+        dialogIcon: AppPngIcons.googleLogo,
       );
     }
 
     return ProviderButton(
       linked: linked,
-      icon: AppImages.google3,
+      icon: AppPngIcons.google3,
       title: LocaleKeys.settingAccountGooogleTitle,
       linkFun: linkFun,
       unLinkFun: unLinkFun,

@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_enum.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_enum.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/bacground_image.dart';
@@ -55,7 +55,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
             _userName(context, userData),
           ],
         ),
-        ProfileInputForm()
+        const ProfileInputForm()
       ],
     );
   }
@@ -233,7 +233,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
       child: SvgPicture.asset(
         width: 20,
         height: 20,
-        AppIcons.pencil,
+        AppSvgIcons.pencil,
         colorFilter: const ColorFilter.mode(
           AppColors.whiteColor1,
           BlendMode.srcIn,
@@ -257,7 +257,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
         padding: EdgeInsets.zero,
       ),
       child: SvgPicture.asset(
-        AppIcons.back,
+        AppSvgIcons.back,
         colorFilter: const ColorFilter.mode(
           AppColors.whiteColor1,
           BlendMode.srcIn,

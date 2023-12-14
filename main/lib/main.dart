@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:jobs_pot/common/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/config/app_configs.dart';
 import 'package:jobs_pot/app_providers.dart';
 import 'package:jobs_pot/routes/route_providers.dart';

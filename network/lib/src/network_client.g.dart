@@ -316,6 +316,33 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<dynamic> deleteAccount(Map<String, dynamic> body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'user/delete-account',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
   Future<dynamic> getJobsSummary() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -342,20 +369,19 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> deleteAccount(Map<String, dynamic> body) async {
+  Future<dynamic> getRecentList() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body);
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'DELETE',
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'user/delete-account',
+          'job/recent-list',
           queryParameters: queryParameters,
           data: _data,
         )

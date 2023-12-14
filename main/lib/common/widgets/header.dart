@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class Header extends StatelessWidget {
@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
         TextButton(
           onPressed: onBack,
           child: SvgPicture.asset(
-            AppIcons.back,
+            AppSvgIcons.back,
           ),
         ),
         Text(

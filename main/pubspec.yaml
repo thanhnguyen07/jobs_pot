@@ -97,24 +97,30 @@ flutter:
     - lib/assets/iconsSvg/specialization/
     - lib/assets/iconsSvg/tabBar/
   fonts:
-    - family: DMSans-Bold
+    - family: NotoSans-Thin
       fonts:
-        - asset: lib/resources/fonts/DMSans-Bold.ttf
-    - family: DMSans-BoldItalic
+        - asset: lib/resources/fonts/NotoSans-Thin.ttf
+    - family: NotoSans-ExtraLight
       fonts:
-        - asset: lib/resources/fonts/DMSans-BoldItalic.ttf
-          style: italic
-    - family: DMSans-Italic
+        - asset: lib/resources/fonts/NotoSans-ExtraLight.ttf
+    - family: NotoSans-Light
       fonts:
-        - asset: lib/resources/fonts/DMSans-Italic.ttf
-          style: italic
-    - family: DMSans-Medium
+        - asset: lib/resources/fonts/NotoSans-Light.ttf
+    - family: NotoSans-Regular
       fonts:
-        - asset: lib/resources/fonts/DMSans-Medium.ttf
-    - family: DMSans-MediumItalic
+        - asset: lib/resources/fonts/NotoSans-Regular.ttf
+    - family: NotoSans-Medium
       fonts:
-        - asset: lib/resources/fonts/DMSans-MediumItalic.ttf
-          style: italic
-    - family: DMSans-Regular
+        - asset: lib/resources/fonts/NotoSans-Medium.ttf
+    - family: NotoSans-SemiBold
       fonts:
-        - asset: lib/resources/fonts/DMSans-Regular.ttf
+        - asset: lib/resources/fonts/NotoSans-SemiBold.ttf
+    - family: NotoSans-Bold
+      fonts:
+        - asset: lib/resources/fonts/NotoSans-Bold.ttf
+    - family: NotoSans-ExtraBold
+      fonts:
+        - asset: lib/resources/fonts/NotoSans-ExtraBold.ttf
+    - family: NotoSans-Black
+      fonts:
+        - asset: lib/resources/fonts/NotoSans-Black.ttf

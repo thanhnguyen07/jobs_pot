@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_icons.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/features/create/create_provider.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
@@ -33,7 +33,7 @@ class _CreateHeaderState extends ConsumerState<CreateHeader> {
                   .read(bottomNavigationController.notifier)
                   .actionButtonCreate(context);
             },
-            child: SvgPicture.asset(AppIcons.back),
+            child: SvgPicture.asset(AppSvgIcons.back),
           ),
           TextButton(
             onPressed: () {

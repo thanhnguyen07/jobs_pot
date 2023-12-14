@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
 
 class EyeSuffixIcon extends StatelessWidget {
   const EyeSuffixIcon({
@@ -31,7 +31,7 @@ class EyeSuffixIcon extends StatelessWidget {
         ),
         onPressed: setShowPassword,
         child: SvgPicture.asset(
-          showPassword ? AppIcons.showEye : AppIcons.hideEye,
+          showPassword ? AppSvgIcons.showEye : AppSvgIcons.hideEye,
           fit: BoxFit.fitWidth,
         ),
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_images.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/features/home/domain/entities/JobsSummary/jobs_summary_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
@@ -27,34 +27,40 @@ class _ButtonRemoteJobState extends ConsumerState<ButtonRemoteJob> {
     return Expanded(
       flex: 1,
       child: Container(
-        margin: const EdgeInsets.only(right: 12),
+        margin: const EdgeInsets.only(right: 8),
         width: double.infinity,
         decoration: const BoxDecoration(
-          color: AppColors.babyBlueColor,
+          color: AppColors.blue,
           borderRadius: BorderRadius.all(
-            Radius.circular(6),
+            Radius.circular(15),
           ),
         ),
         child: TextButton(
           onPressed: () {},
           style: TextButton.styleFrom(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(15),
             ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                AppImages.findJob,
-                width: 35,
-                height: 35,
+              ClipOval(
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  color: Colors.white,
+                  padding: const EdgeInsets.all(13),
+                  child: Image.asset(
+                    AppPngIcons.houseSignal,
+                  ),
+                ),
               ),
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: Text(
                   Utils.getNumberOfJob(jobsSummaryData?.remoteJob),
-                  style: AppTextStyle.textColor3MediumS16,
+                  style: AppTextStyle.blackBoldS16,
                 ),
               ),
               Text(

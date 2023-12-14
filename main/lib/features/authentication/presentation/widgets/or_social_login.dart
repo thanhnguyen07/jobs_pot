@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/widgets/social_login_button.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';

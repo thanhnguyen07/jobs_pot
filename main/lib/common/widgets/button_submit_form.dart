@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobs_pot/common/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 

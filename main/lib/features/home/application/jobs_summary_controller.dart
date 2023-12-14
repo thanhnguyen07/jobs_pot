@@ -19,4 +19,17 @@ class JobsSummaryController extends StateNotifier<JobsSummaryEntity?> {
 
     Utils.hideLoading();
   }
+
+  Future getRecentList() async {
+    Utils.showLoading();
+
+    final getJobsSummaryResponse =
+        await ref.read(homeRespositoryProvider).getJobsSummary();
+
+    getJobsSummaryResponse.fold((l) {}, (r) {
+      state = r.results;
+    });
+
+    Utils.hideLoading();
+  }
 }

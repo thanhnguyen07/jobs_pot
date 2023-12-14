@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/features/home/domain/entities/JobsSummary/jobs_summary_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_remote_job.dart';
@@ -24,7 +25,7 @@ class _ButtonJobsState extends ConsumerState<ButtonJobs> {
     ref.watch(languageControllerProvider);
 
     return SizedBox(
-      height: 150,
+      height: 180,
       child: Row(
         children: [
           const ButtonRemoteJob(),
@@ -35,11 +36,13 @@ class _ButtonJobsState extends ConsumerState<ButtonJobs> {
               child: Column(
                 children: [
                   CustomButton1(
+                    icon: AppPngIcons.building,
                     topButton: true,
                     count: Utils.getNumberOfJob(jobsSummaryData?.fullTime),
                     title: Utils.getLocaleMessage(LocaleKeys.homeFullTimeTitle),
                   ),
                   CustomButton1(
+                    icon: AppPngIcons.businessTime,
                     topButton: false,
                     count: Utils.getNumberOfJob(jobsSummaryData?.partTime),
                     title: Utils.getLocaleMessage(LocaleKeys.homePartTimeTitle),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jobs_pot/common/app_colors.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 
 class CustomButton1 extends StatelessWidget {
   const CustomButton1({
@@ -8,11 +8,13 @@ class CustomButton1 extends StatelessWidget {
     required this.topButton,
     required this.count,
     required this.title,
+    required this.icon,
   });
 
   final bool topButton;
   final String? count;
   final String title;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {
@@ -21,32 +23,49 @@ class CustomButton1 extends StatelessWidget {
       child: Container(
         width: double.infinity,
         margin: topButton
-            ? const EdgeInsets.only(bottom: 12)
-            : const EdgeInsets.only(top: 12),
+            ? const EdgeInsets.only(bottom: 8)
+            : const EdgeInsets.only(top: 8),
         decoration: BoxDecoration(
-          color: topButton ? AppColors.purpleColor : AppColors.amberColor,
+          color: topButton ? AppColors.purple : AppColors.yellow,
           borderRadius: const BorderRadius.all(
-            Radius.circular(6),
+            Radius.circular(15),
           ),
         ),
         child: TextButton(
           onPressed: () {},
           style: TextButton.styleFrom(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(15),
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
             children: [
-              Text(
-                count ?? "",
-                style: AppTextStyle.textColor3MediumS16,
+              const SizedBox(width: 10),
+              ClipOval(
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  color: Colors.white,
+                  padding: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    icon,
+                  ),
+                ),
               ),
-              Text(
-                title,
-                style: AppTextStyle.darkPurpleRegularS14,
-              )
+              const SizedBox(width: 10),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    count ?? "",
+                    style: AppTextStyle.blackBoldS16,
+                  ),
+                  Text(
+                    title,
+                    style: AppTextStyle.darkPurpleRegularS14,
+                  )
+                ],
+              ),
             ],
           ),
         ),

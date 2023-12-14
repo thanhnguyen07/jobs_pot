@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:jobs_pot/common/app_text_styles.dart';
+import 'package:jobs_pot/common/constant/app_text_styles.dart';
 
 class SuggestionsText extends StatelessWidget {
   const SuggestionsText({
