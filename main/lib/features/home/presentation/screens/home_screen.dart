@@ -7,6 +7,7 @@ import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
+import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
@@ -46,20 +47,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       key: _scaffoldKey,
-      drawerEnableOpenDragGesture: false,
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-          ],
-        ),
-      ),
+      drawer: _drawer(context),
       body: Container(
         color: AppColors.backgroundColor,
         child: SingleChildScrollView(
@@ -78,6 +66,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Drawer _drawer(BuildContext context) {
+    final UserEntity? userData = ref.watch(authControllerProvider);
+
+    return Drawer(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20),
+        ),
+      ),
+      backgroundColor: AppColors.backgroundColor,
+      child: Column(
+        children: [
+          BackgroundImage(
+            imageUrl: userData?.backgroundUrl,
+            radius: 0,
+          )
+        ],
       ),
     );
   }

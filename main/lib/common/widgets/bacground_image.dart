@@ -7,22 +7,25 @@ class BackgroundImage extends StatelessWidget {
     super.key,
     required this.imageUrl,
     this.onTab,
+    this.height = 175,
+    this.radius = 25,
   });
 
   final String? imageUrl;
+  final int height;
+  final double radius;
   final void Function()? onTab;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: edit ? onTab : null,
       child: SizedBox(
         width: double.infinity,
-        height: 175 + MediaQuery.of(context).padding.top,
+        height: height + MediaQuery.of(context).padding.top,
         child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(25),
-            bottomRight: Radius.circular(25),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(radius),
+            bottomRight: Radius.circular(radius),
           ),
           child: imageUrl == null
               ? _defautlAvatar()
