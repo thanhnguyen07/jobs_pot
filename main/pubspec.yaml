@@ -99,28 +99,31 @@ flutter:
   fonts:
     - family: NotoSans-Thin
       fonts:
-        - asset: lib/resources/fonts/NotoSans-Thin.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-Thin.ttf
     - family: NotoSans-ExtraLight
       fonts:
-        - asset: lib/resources/fonts/NotoSans-ExtraLight.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-ExtraLight.ttf
     - family: NotoSans-Light
       fonts:
-        - asset: lib/resources/fonts/NotoSans-Light.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-Light.ttf
     - family: NotoSans-Regular
       fonts:
-        - asset: lib/resources/fonts/NotoSans-Regular.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-Regular.ttf
     - family: NotoSans-Medium
       fonts:
-        - asset: lib/resources/fonts/NotoSans-Medium.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-Medium.ttf
     - family: NotoSans-SemiBold
       fonts:
-        - asset: lib/resources/fonts/NotoSans-SemiBold.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-SemiBold.ttf
     - family: NotoSans-Bold
       fonts:
-        - asset: lib/resources/fonts/NotoSans-Bold.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-Bold.ttf
+    - family: NotoSans-BoldItalic
+      fonts:
+        - asset: lib/resources/fonts/NotoSans/NotoSans-BoldItalic.ttf
     - family: NotoSans-ExtraBold
       fonts:
-        - asset: lib/resources/fonts/NotoSans-ExtraBold.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-ExtraBold.ttf
     - family: NotoSans-Black
       fonts:
-        - asset: lib/resources/fonts/NotoSans-Black.ttf
+        - asset: lib/resources/fonts/NotoSans/NotoSans-Black.ttf

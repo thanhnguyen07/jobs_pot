@@ -166,11 +166,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
         width: 150,
         child: Row(
           children: [
-            Image.asset(
-              AppPngIcons.userPen,
-              width: 20,
-              height: 20,
-            ),
+            SvgPicture.asset(AppSvgIcons.userPen),
             const SizedBox(width: 10),
             Text(
               Utils.getLocaleMessage(LocaleKeys.profileEditProfileTitle),

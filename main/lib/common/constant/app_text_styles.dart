@@ -6,6 +6,7 @@ import 'app_font_family.dart';
 class AppTextStyle {
   static final bold = BoldText();
   static final regular = RegularText();
+  static final boldItalic = BoldItalicText();
 
   //12
   static const textErrorInputS12 = TextStyle(
@@ -215,6 +216,14 @@ class BoldText {
     color: Colors.white,
     fontSize: 12,
     fontFamily: AppFontFamily.bold,
+  );
+}
+
+class BoldItalicText {
+  final black18 = const TextStyle(
+    color: Colors.black,
+    fontSize: 18,
+    fontFamily: AppFontFamily.boldItalic,
   );
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 
@@ -47,9 +48,7 @@ class CustomButton1 extends StatelessWidget {
                   height: 40,
                   color: Colors.white,
                   padding: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    icon,
-                  ),
+                  child: SvgPicture.asset(icon),
                 ),
               ),
               const SizedBox(width: 10),

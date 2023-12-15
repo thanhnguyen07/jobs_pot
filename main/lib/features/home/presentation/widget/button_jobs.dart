@@ -5,52 +5,68 @@ import 'package:jobs_pot/features/home/domain/entities/JobsSummary/jobs_summary_
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_remote_job.dart';
 import 'package:jobs_pot/features/home/presentation/widget/custom_button.dart';
+import 'package:jobs_pot/features/home/presentation/widget/custom_title.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
-class ButtonJobs extends ConsumerStatefulWidget {
-  const ButtonJobs({
+class FindYouJob extends ConsumerStatefulWidget {
+  const FindYouJob({
     super.key,
   });
 
   @override
-  ConsumerState<ButtonJobs> createState() => _ButtonJobsState();
+  ConsumerState<FindYouJob> createState() => _FindYouJobState();
 }
 
-class _ButtonJobsState extends ConsumerState<ButtonJobs> {
+class _FindYouJobState extends ConsumerState<FindYouJob> {
   @override
   Widget build(BuildContext context) {
     JobsSummaryEntity? jobsSummaryData = ref.watch(jobsSummaryController);
     ref.watch(languageControllerProvider);
 
-    return SizedBox(
-      height: 180,
-      child: Row(
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ButtonRemoteJob(),
-          Expanded(
-            flex: 1,
-            child: Container(
-              margin: const EdgeInsets.only(left: 12),
-              child: Column(
-                children: [
-                  CustomButton1(
-                    icon: AppPngIcons.building,
-                    topButton: true,
-                    count: Utils.getNumberOfJob(jobsSummaryData?.fullTime),
-                    title: Utils.getLocaleMessage(LocaleKeys.homeFullTimeTitle),
+          const CustomTitle(
+            titleKey: LocaleKeys.homeFindJobTitle,
+          ),
+          SizedBox(
+            height: 180,
+            child: Row(
+              children: [
+                const ButtonRemoteJob(),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 12),
+                    child: Column(
+                      children: [
+                        CustomButton1(
+                          icon: AppSvgIcons.building,
+                          topButton: true,
+                          count:
+                              Utils.getNumberOfJob(jobsSummaryData?.fullTime),
+                          title: Utils.getLocaleMessage(
+                              LocaleKeys.homeFullTimeTitle),
+                        ),
+                        CustomButton1(
+                          icon: AppSvgIcons.businessTime,
+                          topButton: false,
+                          count:
+                              Utils.getNumberOfJob(jobsSummaryData?.partTime),
+                          title: Utils.getLocaleMessage(
+                              LocaleKeys.homePartTimeTitle),
+                        ),
+                      ],
+                    ),
                   ),
-                  CustomButton1(
-                    icon: AppPngIcons.businessTime,
-                    topButton: false,
-                    count: Utils.getNumberOfJob(jobsSummaryData?.partTime),
-                    title: Utils.getLocaleMessage(LocaleKeys.homePartTimeTitle),
-                  ),
-                ],
-              ),
+                )
+              ],
             ),
-          )
+          ),
         ],
       ),
     );

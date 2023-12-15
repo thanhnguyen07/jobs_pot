@@ -6,6 +6,7 @@ class AppFontFamily {
   static const medium = "NotoSans-Medium";
   static const semiBold = "NotoSans-SemiBold";
   static const bold = "NotoSans-Bold";
+  static const boldItalic = "NotoSans-BoldItalic";
   static const extraBold = "NotoSans-ExtraBold";
   static const black = "NotoSans-Black";
 }

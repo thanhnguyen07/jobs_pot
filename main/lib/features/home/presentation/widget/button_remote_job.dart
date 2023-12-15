@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
@@ -51,8 +52,8 @@ class _ButtonRemoteJobState extends ConsumerState<ButtonRemoteJob> {
                   height: 50,
                   color: Colors.white,
                   padding: const EdgeInsets.all(13),
-                  child: Image.asset(
-                    AppPngIcons.houseSignal,
+                  child: SvgPicture.asset(
+                    AppSvgIcons.houseSignal,
                   ),
                 ),
               ),

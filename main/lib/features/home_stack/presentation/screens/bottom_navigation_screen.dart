@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
+import 'package:jobs_pot/common/widgets/avatar_image.dart';
+import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 
@@ -49,7 +52,7 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
             _postIcon(),
             _addIcon(),
             _chatIcon(),
-            _saveIcon(),
+            _profileIcon(),
           ],
         );
       },
@@ -83,11 +86,27 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
     );
   }
 
-  BottomNavigationBarItem _saveIcon() {
+  BottomNavigationBarItem _profileIcon() {
+    UserEntity? userData = ref.read(authControllerProvider);
     return BottomNavigationBarItem(
       label: '',
-      icon: _svgIcons(icon: AppSvgIcons.user),
-      activeIcon: _svgIcons(icon: AppSvgIcons.user, activeIcon: true),
+      icon: AvatarImage(
+        avatarLink: userData?.photoUrl,
+        size: 25,
+      ),
+      activeIcon: ClipOval(
+        child: Container(
+          width: 32,
+          height: 32,
+          color: AppColors.fireYellowColor,
+          child: Center(
+            child: AvatarImage(
+              avatarLink: userData?.photoUrl,
+              size: 25,
+            ),
+          ),
+        ),
+      ),
     );
   }
 

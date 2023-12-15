@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
@@ -10,7 +12,6 @@ import 'package:jobs_pot/features/authentication/domain/entities/User/user_entit
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_jobs.dart';
 import 'package:jobs_pot/features/home/presentation/widget/coupon_card.dart';
-import 'package:jobs_pot/features/home/presentation/widget/custom_title.dart';
 import 'package:jobs_pot/features/home/presentation/widget/recent_job_list.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
@@ -37,31 +38,44 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
   }
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     ref.watch(languageControllerProvider);
 
     return Scaffold(
+      key: _scaffoldKey,
+      drawerEnableOpenDragGesture: false,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Drawer Header'),
+            ),
+          ],
+        ),
+      ),
       body: Container(
         color: AppColors.backgroundColor,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _header(context),
-                CouponCard(
-                  onPress: () {},
-                ),
-                const CustomTitle(
-                  titleKey: LocaleKeys.homeFindJobTitle,
-                ),
-                const ButtonJobs(),
-                const RecentRemoteJob(),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _header(context),
+              CouponCard(
+                onPress: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                },
+              ),
+              const FindYouJob(),
+              const RecentRemoteJob(),
+            ],
           ),
         ),
       ),
@@ -75,64 +89,49 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _userInfo(context, userData),
           TextButton(
-              onPressed: () {
-                context.router.pushNamed(SaveJobScreen.path);
-              },
-              child: Image.asset(
-                AppPngIcons.bookmark,
-                width: 30,
-                height: 30,
-              ))
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer();
+            },
+            child: SvgPicture.asset(
+              AppSvgIcons.barsSort,
+            ),
+          ),
+          Row(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    Utils.getLocaleMessage(LocaleKeys.homeHelloTitle),
+                    style: AppTextStyle.boldItalic.black18,
+                  ),
+                  const SizedBox(width: 5),
+                  Image.asset(
+                    AppPngIcons.hello,
+                    width: 20,
+                    height: 20,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
+              GestureDetector(
+                onTap: () {
+                  context.router.navigateNamed(ProfileScreen.path);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(right: 20),
+                  child: AvatarImage(
+                    avatarLink: userData?.photoUrl,
+                    size: 40,
+                    edit: false,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
-    );
-  }
-
-  Widget _userInfo(BuildContext context, UserEntity? userData) {
-    return Row(
-      children: [
-        TextButton(
-          onPressed: () {
-            context.router.navigateNamed(ProfileScreen.path);
-          },
-          style: TextButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
-            ),
-          ),
-          child: AvatarImage(
-            avatarLink: userData?.photoUrl,
-            size: 50,
-            edit: false,
-          ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  Utils.getLocaleMessage(LocaleKeys.homeHelloTitle),
-                  style: AppTextStyle.textColor3MediumS16,
-                ),
-                const SizedBox(width: 5),
-                Image.asset(
-                  AppPngIcons.hello,
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.cover,
-                ),
-              ],
-            ),
-            Text(
-              userData?.userName ?? "",
-              style: AppTextStyle.darkPurpleBoldS18,
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

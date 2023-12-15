@@ -64,6 +64,17 @@ class AppSvgIcons {
   static const skill = 'lib/assets/iconsSvg/skill.svg';
   static const upload = 'lib/assets/iconsSvg/upload.svg';
   static const user = 'lib/assets/iconsSvg/user.svg';
+  static const houseSignal = 'lib/assets/iconsSvg/house-signal.svg';
+  static const building = 'lib/assets/iconsSvg/building.svg';
+  static const bookmark = 'lib/assets/iconsSvg/bookmark.svg';
+  static const businessTime = 'lib/assets/iconsSvg/business-time.svg';
+  static const calendarClock = 'lib/assets/iconsSvg/calendar-clock.svg';
+  static const chairOffice = 'lib/assets/iconsSvg/chair-office.svg';
+  static const usd = 'lib/assets/iconsSvg/usd-circle.svg';
+  static const penCircle = 'lib/assets/iconsSvg/pen-circle.svg';
+  static const userPen = 'lib/assets/iconsSvg/user-pen.svg';
+  static const barsSort = 'lib/assets/iconsSvg/bars-sort.svg';
+  static const barsStaggered = 'lib/assets/iconsSvg/bars-staggered.svg';
 }
 
 class AppPngIcons {
@@ -86,17 +97,6 @@ class AppPngIcons {
   static const appleLogo = 'lib/assets/iconsPng/company/apple_logo.png';
   static const hello = 'lib/assets/iconsPng/hello.png';
   static const password = 'lib/assets/iconsPng/password.png';
-  static const houseSignal = 'lib/assets/iconsPng/house-signal.png';
-  static const building = 'lib/assets/iconsPng/building.png';
-  static const bookmark = 'lib/assets/iconsPng/bookmark.png';
-  static const businessTime = 'lib/assets/iconsPng/business-time.png';
-  static const calendarClock = 'lib/assets/iconsPng/calendar-clock.png';
-  static const chairOffice = 'lib/assets/iconsPng/chair-office.png';
-  static const chairOffice1 = 'lib/assets/iconsPng/chair-office1.png';
-  static const sack = 'lib/assets/iconsPng/sack.png';
-  static const usd = 'lib/assets/iconsPng/usd.png';
-  static const penCircle = 'lib/assets/iconsPng/pen-circle.png';
-  static const userPen = 'lib/assets/iconsPng/user-pen.png';
 
   static const arabic = 'lib/assets/iconsPng/languages/arabic.svg';
   static const english = 'lib/assets/iconsPng/languages/english.svg';

@@ -16,43 +16,48 @@ class CouponCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SizedBox(
-        height: 200,
-        child: Image.asset(AppImages.cardDefault),
-      ),
-      Container(
-        width: double.infinity,
-        height: 200,
-        margin: const EdgeInsets.only(left: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 30),
-            SizedBox(
-              width: 200,
-              child: Text(
-                LocaleKeys.homePercentSaleTitle.plural(50),
-                style: AppTextStyle.whiteMediumS18,
-              ),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Stack(
+        children: [
+          SizedBox(
+            height: 200,
+            child: Image.asset(AppImages.cardDefault),
+          ),
+          Container(
+            width: double.infinity,
+            height: 200,
+            margin: const EdgeInsets.only(left: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: 200,
+                  child: Text(
+                    LocaleKeys.homePercentSaleTitle.plural(50),
+                    style: AppTextStyle.whiteMediumS18,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: onPress,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(0, 30),
+                    backgroundColor: AppColors.fireYellowColor,
+                    elevation: 5,
+                    shadowColor: AppColors.amberColor,
+                  ),
+                  child: Text(
+                    Utils.getLocaleMessage(LocaleKeys.homeJoinNowTitle),
+                    style: AppTextStyle.whiteBoldS14,
+                  ),
+                )
+              ],
             ),
-            ElevatedButton(
-              onPressed: onPress,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(0, 30),
-                backgroundColor: AppColors.fireYellowColor,
-                elevation: 5,
-                shadowColor: AppColors.amberColor,
-              ),
-              child: Text(
-                Utils.getLocaleMessage(LocaleKeys.homeJoinNowTitle),
-                style: AppTextStyle.whiteBoldS14,
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
-    ]);
+    );
   }
 }

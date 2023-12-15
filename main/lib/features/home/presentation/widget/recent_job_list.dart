@@ -40,149 +40,153 @@ class _RecentRemoteJobState extends ConsumerState<RecentRemoteJob> {
       }
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const CustomTitle(titleKey: LocaleKeys.homeRecentFinJobTitle),
-        recentListData != null
-            ? SizedBox(
-                height: recentListData.length * 170,
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(0),
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: recentListData.length,
-                  itemBuilder: (context, index) {
-                    return FilledButton(
-                      style: FilledButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTitle(titleKey: LocaleKeys.homeRecentFinJobTitle),
+          recentListData != null
+              ? SizedBox(
+                  height: recentListData.length * 170,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(0),
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: recentListData.length,
+                    itemBuilder: (context, index) {
+                      return FilledButton(
+                        style: FilledButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          backgroundColor: Colors.white,
+                          shadowColor: AppColors.backgroundColor2,
+                          elevation: 3,
+                          padding: const EdgeInsets.all(0),
                         ),
-                        backgroundColor: Colors.white,
-                        shadowColor: AppColors.backgroundColor2,
-                        elevation: 3,
-                        padding: const EdgeInsets.all(0),
-                      ),
-                      onPressed: () {},
-                      child: Container(
-                        padding: const EdgeInsets.only(
-                          left: 15,
-                          top: 15,
-                          bottom: 15,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  height: 40,
-                                  child: Row(
-                                    children: [
-                                      AvatarImage(
-                                        avatarLink:
-                                            recentListData[index].companyAvatar,
-                                        size: 40,
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            recentListData[index].jobName,
-                                            style:
-                                                AppTextStyle.darkPurpleBoldS14,
-                                          ),
-                                          RichText(
-                                            text: TextSpan(
-                                              text: recentListData[index]
-                                                  .companyName,
+                        onPressed: () {},
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                            left: 15,
+                            top: 15,
+                            bottom: 15,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    height: 40,
+                                    child: Row(
+                                      children: [
+                                        AvatarImage(
+                                          avatarLink: recentListData[index]
+                                              .companyAvatar,
+                                          size: 40,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              recentListData[index].jobName,
                                               style: AppTextStyle
-                                                  .textlavenderGraS12,
-                                              children: <TextSpan>[
-                                                const TextSpan(
-                                                  text: ' ׄ· ',
-                                                  style: AppTextStyle
-                                                      .textlavenderGraS12,
-                                                ),
-                                                TextSpan(
-                                                  text: recentListData[index]
-                                                      .companyAddress,
-                                                  style: AppTextStyle
-                                                      .textlavenderGraS12,
-                                                ),
-                                              ],
+                                                  .darkPurpleBoldS14,
                                             ),
-                                          ),
-                                        ],
+                                            RichText(
+                                              text: TextSpan(
+                                                text: recentListData[index]
+                                                    .companyName,
+                                                style: AppTextStyle
+                                                    .textlavenderGraS12,
+                                                children: <TextSpan>[
+                                                  const TextSpan(
+                                                    text: ' ׄ· ',
+                                                    style: AppTextStyle
+                                                        .textlavenderGraS12,
+                                                  ),
+                                                  TextSpan(
+                                                    text: recentListData[index]
+                                                        .companyAddress,
+                                                    style: AppTextStyle
+                                                        .textlavenderGraS12,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: SvgPicture.asset(
+                                      AppSvgIcons.save,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: getAmountSalary(
+                                        recentListData[index].salary),
+                                    style: AppTextStyle.darkPurpleBoldS14,
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text:
+                                            "/${recentListData[index].salary.type}",
+                                        style: AppTextStyle.textlavenderGraS12,
                                       ),
                                     ],
                                   ),
                                 ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: SvgPicture.asset(
-                                    AppSvgIcons.save,
-                                  ),
-                                )
-                              ],
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(top: 20),
-                              child: RichText(
-                                text: TextSpan(
-                                  text: getAmountSalary(
-                                      recentListData[index].salary),
-                                  style: AppTextStyle.darkPurpleBoldS14,
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text:
-                                          "/${recentListData[index].salary.type}",
-                                      style: AppTextStyle.textlavenderGraS12,
-                                    ),
-                                  ],
+                              ),
+                              Container(
+                                height: 35,
+                                margin: const EdgeInsets.only(top: 10),
+                                width: double.infinity,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  padding: const EdgeInsets.all(0),
+                                  itemCount: recentListData[index].tags.length,
+                                  itemBuilder: (childContext, childIndex) {
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.backgroundColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      margin: const EdgeInsets.only(right: 10),
+                                      child: Text(
+                                        recentListData[index].tags[childIndex],
+                                        style: AppTextStyle
+                                            .textBlackColorRegularS12,
+                                      ),
+                                    );
+                                  },
                                 ),
-                              ),
-                            ),
-                            Container(
-                              height: 35,
-                              margin: const EdgeInsets.only(top: 10),
-                              width: double.infinity,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                padding: const EdgeInsets.all(0),
-                                itemCount: recentListData[index].tags.length,
-                                itemBuilder: (childContext, childIndex) {
-                                  return Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.backgroundColor,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    margin: const EdgeInsets.only(right: 10),
-                                    child: Text(
-                                      recentListData[index].tags[childIndex],
-                                      style:
-                                          AppTextStyle.textBlackColorRegularS12,
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              )
-            : const SizedBox(),
-      ],
+                      );
+                    },
+                  ),
+                )
+              : const SizedBox(),
+        ],
+      ),
     );
   }
 }
