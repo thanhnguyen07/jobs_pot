@@ -50,11 +50,6 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _setttingButton(
-            onTab: () {
-              context.router.navigateNamed(SettingScreen.path);
-            },
-          ),
           _editButton(
             onTab: () {
               context.router.navigateNamed(EditProfileScreen.path);
@@ -124,29 +119,6 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
 
   Widget _cardBackground(BuildContext context, UserEntity? userData) {
     return BackgroundImage(imageUrl: userData?.backgroundUrl);
-  }
-
-  Widget _setttingButton({
-    required Function() onTab,
-  }) {
-    return TextButton(
-      onPressed: onTab,
-      style: TextButton.styleFrom(
-        backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
-        minimumSize: const Size(40, 40),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(50)),
-        ),
-        padding: EdgeInsets.zero,
-      ),
-      child: SvgPicture.asset(
-        AppSvgIcons.setting,
-        colorFilter: const ColorFilter.mode(
-          Colors.white,
-          BlendMode.srcIn,
-        ),
-      ),
-    );
   }
 
   Widget _editButton({

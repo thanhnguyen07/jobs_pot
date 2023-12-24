@@ -2,20 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
-import 'package:jobs_pot/common/widgets/avatar_image.dart';
-import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_jobs.dart';
 import 'package:jobs_pot/features/home/presentation/widget/coupon_card.dart';
 import 'package:jobs_pot/features/home/presentation/widget/recent_job_list.dart';
-import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
-import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
+import 'package:jobs_pot/features/home_stack/presentation/screens/bottom_navigation_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -39,15 +35,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
   }
 
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     ref.watch(languageControllerProvider);
 
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: _drawer(context),
       body: Container(
         color: AppColors.backgroundColor,
         child: SingleChildScrollView(
@@ -57,9 +49,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             children: [
               _header(context),
               CouponCard(
-                onPress: () {
-                  _scaffoldKey.currentState?.openDrawer();
-                },
+                onPress: () {},
               ),
               const FindYouJob(),
               const RecentRemoteJob(),
@@ -70,77 +60,86 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Drawer _drawer(BuildContext context) {
+  Widget _header(BuildContext context) {
     final UserEntity? userData = ref.watch(authControllerProvider);
-
-    return Drawer(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20),
-        ),
+    return Container(
+      margin: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top,
+        left: 20,
+        right: 20,
       ),
-      backgroundColor: AppColors.backgroundColor,
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          BackgroundImage(
-            imageUrl: userData?.backgroundUrl,
-            radius: 0,
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  scaffoldBottomNavigationKey.currentState?.openDrawer();
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(50, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  elevation: 5,
+                  padding: EdgeInsets.zero,
+                ),
+                child: SvgPicture.asset(
+                  AppSvgIcons.apps,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _helloText(),
+                  Text(
+                    userData!.userName,
+                    style: AppTextStyle.boldItalic.black18,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(
+              minimumSize: const Size(50, 50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              padding: EdgeInsets.zero,
+              backgroundColor: Colors.white,
+            ),
+            child: SvgPicture.asset(
+              AppSvgIcons.search,
+              colorFilter: const ColorFilter.mode(
+                AppColors.blackColor,
+                BlendMode.srcIn,
+              ),
+            ),
           )
         ],
       ),
     );
   }
 
-  Widget _header(BuildContext context) {
-    final UserEntity? userData = ref.watch(authControllerProvider);
-    return Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextButton(
-            onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
-            },
-            child: SvgPicture.asset(
-              AppSvgIcons.barsSort,
-            ),
-          ),
-          Row(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    Utils.getLocaleMessage(LocaleKeys.homeHelloTitle),
-                    style: AppTextStyle.boldItalic.black18,
-                  ),
-                  const SizedBox(width: 5),
-                  Image.asset(
-                    AppPngIcons.hello,
-                    width: 20,
-                    height: 20,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(width: 10),
-                ],
-              ),
-              GestureDetector(
-                onTap: () {
-                  context.router.navigateNamed(ProfileScreen.path);
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(right: 20),
-                  child: AvatarImage(
-                    avatarLink: userData?.photoUrl,
-                    size: 40,
-                    edit: false,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+  Row _helloText() {
+    return Row(
+      children: [
+        Text(
+          Utils.getLocaleMessage(LocaleKeys.homeHelloTitle),
+          style: AppTextStyle.mediumItalic.black16,
+        ),
+        const SizedBox(width: 5),
+        Image.asset(
+          AppPngIcons.hello,
+          width: 20,
+          height: 20,
+          fit: BoxFit.cover,
+        ),
+      ],
     );
   }
 }

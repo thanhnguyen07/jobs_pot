@@ -160,5 +160,6 @@
   "settingAccountLinkPasswordMsg": "Thêm mật khẩu thành công!",
   "settingAccountVerifyCodeSubTitle": "Mã xác minh đã được gửi đến địa chỉ email",
   "settingAccountDeleteAccount": "Xoá tài khoản",
-  "editProfileUpdateTitle": "Cập Nhật"
+  "editProfileUpdateTitle": "Cập Nhật",
+  "drawerBookmarkTitle": "Đánh dấu"
 }

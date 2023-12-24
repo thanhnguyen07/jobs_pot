@@ -54,7 +54,7 @@ class AppSvgIcons {
   static const picture = 'lib/assets/iconsSvg/picture.svg';
   static const play = 'lib/assets/iconsSvg/play.svg';
   static const remove = 'lib/assets/iconsSvg/remove.svg';
-  static const remove2 = 'lib/assets/iconsSvg/remove_2.svg';
+  static const cancel = 'lib/assets/iconsSvg/remove_2.svg';
   static const save2 = 'lib/assets/iconsSvg/save.svg';
   static const search = 'lib/assets/iconsSvg/search.svg';
   static const send = 'lib/assets/iconsSvg/send.svg';
@@ -75,6 +75,7 @@ class AppSvgIcons {
   static const userPen = 'lib/assets/iconsSvg/user-pen.svg';
   static const barsSort = 'lib/assets/iconsSvg/bars-sort.svg';
   static const barsStaggered = 'lib/assets/iconsSvg/bars-staggered.svg';
+  static const apps = 'lib/assets/iconsSvg/apps.svg';
 }
 
 class AppPngIcons {

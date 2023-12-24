@@ -5,9 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
+import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
+import 'package:jobs_pot/features/home_stack/presentation/screens/drawer.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';
 
 @RoutePage()
@@ -20,6 +22,9 @@ class HomeStackScreen extends ConsumerStatefulWidget {
   ConsumerState<HomeStackScreen> createState() => _HomeStackScreenState();
 }
 
+GlobalKey<ScaffoldState> scaffoldBottomNavigationKey =
+    GlobalKey<ScaffoldState>();
+
 class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
   @override
   Widget build(BuildContext context) {
@@ -31,6 +36,8 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
         ChatRoute(),
         ProfileRoute(),
       ],
+      scaffoldKey: scaffoldBottomNavigationKey,
+      drawer: const MyDrawer(),
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -96,8 +103,8 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
       ),
       activeIcon: ClipOval(
         child: Container(
-          width: 32,
-          height: 32,
+          width: 30,
+          height: 30,
           color: AppColors.fireYellowColor,
           child: Center(
             child: AvatarImage(

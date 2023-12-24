@@ -106,12 +106,18 @@ flutter:
     - family: NotoSans-Light
       fonts:
         - asset: lib/resources/fonts/NotoSans/NotoSans-Light.ttf
+    - family: NotoSans-LightItalic
+      fonts:
+        - asset: lib/resources/fonts/NotoSans/NotoSans-LightItalic.ttf
     - family: NotoSans-Regular
       fonts:
         - asset: lib/resources/fonts/NotoSans/NotoSans-Regular.ttf
     - family: NotoSans-Medium
       fonts:
         - asset: lib/resources/fonts/NotoSans/NotoSans-Medium.ttf
+    - family: NotoSans-MediumItalic
+      fonts:
+        - asset: lib/resources/fonts/NotoSans/NotoSans-MediumItalic.ttf
     - family: NotoSans-SemiBold
       fonts:
         - asset: lib/resources/fonts/NotoSans/NotoSans-SemiBold.ttf

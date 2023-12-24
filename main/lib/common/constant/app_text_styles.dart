@@ -7,6 +7,8 @@ class AppTextStyle {
   static final bold = BoldText();
   static final regular = RegularText();
   static final boldItalic = BoldItalicText();
+  static final lightItalic = LightItalicText();
+  static final mediumItalic = MediumItalicText();
 
   //12
   static const textErrorInputS12 = TextStyle(
@@ -224,6 +226,22 @@ class BoldItalicText {
     color: Colors.black,
     fontSize: 18,
     fontFamily: AppFontFamily.boldItalic,
+  );
+}
+
+class LightItalicText {
+  final black16 = const TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: AppFontFamily.lightItalic,
+  );
+}
+
+class MediumItalicText {
+  final black16 = const TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: AppFontFamily.mediumItalic,
   );
 }
 
