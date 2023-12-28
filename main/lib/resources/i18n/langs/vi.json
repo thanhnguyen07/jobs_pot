@@ -69,7 +69,7 @@
   "homeFullTimeTitle": "Toàn thời gian",
   "homePartTimeTitle": "Bán thời gian",
   "homePercentSaleTitle": {
-    "other": "Giảm giá{}%\nkhi tham gia bất kỳ khóa học nào"
+    "other": "Giảm giá {}%\nkhi tham gia bất kỳ khóa học nào"
   },
   "settingTitle": "Cài đặt",
   "settingNotificationsTitle": "Thông báo",
@@ -161,5 +161,6 @@
   "settingAccountVerifyCodeSubTitle": "Mã xác minh đã được gửi đến địa chỉ email",
   "settingAccountDeleteAccount": "Xoá tài khoản",
   "editProfileUpdateTitle": "Cập Nhật",
-  "drawerBookmarkTitle": "Đánh dấu"
+  "drawerBookmarkTitle": "Đánh dấu",
+  "accountOverviewTitle": "Tổng quan"
 }

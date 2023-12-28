@@ -52,9 +52,12 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           _formInput(),
           const RememberAndForgot(),
           ButtonSubmitForm(
+            backgroundColor: Theme.of(context).colorScheme.primary,
             title: Text(
               Utils.getLocaleMessage(LocaleKeys.authenticationLoginButtonTitle),
-              style: AppTextStyle.whiteBoldS14,
+              style: AppTextStyle.bold.s14.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             ),
             onLogin: () => ref
                 .read(loginWithEmailControllerProvider.notifier)

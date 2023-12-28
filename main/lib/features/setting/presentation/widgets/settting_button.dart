@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 
@@ -24,10 +25,10 @@ class SettingButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => onPress(),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.white,
           minimumSize: const Size(double.infinity, 45),
           elevation: 5,
-          shadowColor: Colors.white,
+          shadowColor: AppColors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -42,7 +43,7 @@ class SettingButton extends StatelessWidget {
                 const SizedBox(width: 15),
                 Text(
                   title,
-                  style: AppTextStyle.textBlackColorRegularS12,
+                  style: AppTextStyle.regular.s12,
                 )
               ],
             ),

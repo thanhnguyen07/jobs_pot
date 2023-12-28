@@ -60,7 +60,7 @@ class _PasswordState extends ConsumerState<ModalVerificationPassword> {
             ButtonSubmitForm(
               title: Text(
                 Utils.getLocaleMessage(LocaleKeys.settingAccountVerify),
-                style: AppTextStyle.whiteBoldS14,
+                style: AppTextStyle.bold.s14,
               ),
               onLogin: widget.verifyPassword,
             ),

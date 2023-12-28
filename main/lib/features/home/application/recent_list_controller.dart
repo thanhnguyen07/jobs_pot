@@ -19,4 +19,8 @@ class RecentListController extends StateNotifier<List<RecentListEntity>?> {
 
     Utils.hideLoading();
   }
+
+  void reState() {
+    state = [...?state];
+  }
 }

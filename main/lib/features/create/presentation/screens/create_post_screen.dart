@@ -72,7 +72,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
                     Text(
                       Utils.getLocaleMessage(
                           LocaleKeys.postPostingProcessTitle),
-                      style: AppTextStyle.text4BoldS16,
+                      style: AppTextStyle.bold.s16,
                     ),
                     Container(
                       margin: const EdgeInsets.only(left: 10),
@@ -87,7 +87,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
                                   uploadsData.length.toString(),
                                   (imagesData.length - 1).toString()
                                 ]),
-                                style: AppTextStyle.darkPurpleBoldS12,
+                                style: AppTextStyle.bold.s12,
                               ),
                               Container(
                                 width: 10,
@@ -106,7 +106,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
                           Text(
                             Utils.getLocaleMessage(
                                 LocaleKeys.postPostingProcessStep2Title),
-                            style: AppTextStyle.darkPurpleBoldS12,
+                            style: AppTextStyle.bold.s12,
                           ),
                         ],
                       ),
@@ -121,7 +121,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
           const CraetePostInputForm(),
           Text(
             Utils.getLocaleMessage(LocaleKeys.postImagesTitle),
-            style: AppTextStyle.darkPurpleBoldS12,
+            style: AppTextStyle.bold.s12,
           ),
           const SizedBox(height: 10),
           imagesData != null && imagesData.isNotEmpty
@@ -150,11 +150,11 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
         },
         style: TextButton.styleFrom(
           foregroundColor:
-              uploadsData != null ? Colors.white : null, // foreground
+              uploadsData != null ? AppColors.white : null, // foreground
         ),
         child: Text(
           Utils.getLocaleMessage(LocaleKeys.postButtonPost),
-          style: AppTextStyle.textColor6BoldS14,
+          style: AppTextStyle.bold.s14,
         ),
       ),
     );
@@ -249,7 +249,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
       TextButton(
         child: Text(
           Utils.getLocaleMessage(LocaleKeys.postImagesCancelButtonTitle),
-          style: AppTextStyle.darkPurpleBoldS14,
+          style: AppTextStyle.bold.s14,
         ),
         onPressed: () {
           Navigator.of(context).pop();
@@ -260,7 +260,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
           Utils.getLocaleMessage(
             LocaleKeys.postImagesDeleteButtonTitle,
           ),
-          style: AppTextStyle.redBoldS14,
+          style: AppTextStyle.bold.s14Red,
         ),
         onPressed: () {
           imagesData.removeAt(index);
@@ -288,12 +288,12 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
             children: [
               Text(
                 userData?.userName ?? "",
-                style: AppTextStyle.darkPurpleBoldS14,
+                style: AppTextStyle.bold.s14,
               ),
               const SizedBox(height: 5),
               Text(
                 userData?.location ?? "",
-                style: AppTextStyle.textBlackColorRegularS12,
+                style: AppTextStyle.regular.s12,
               ),
             ],
           ),
@@ -305,7 +305,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
   Widget _addPostTitle() {
     return Text(
       Utils.getLocaleMessage(LocaleKeys.postAddPostTitle),
-      style: AppTextStyle.text4BoldS16,
+      style: AppTextStyle.bold.s16,
     );
   }
 }

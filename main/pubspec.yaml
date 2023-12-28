@@ -45,6 +45,7 @@ dependencies:
   http_parser: ^4.0.2
   mime: ^1.0.4
   dio: ^5.4.0
+  animated_toggle_switch: ^0.8.0
 
 flavorizr:
   flavors:

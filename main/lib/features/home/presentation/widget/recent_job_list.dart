@@ -59,8 +59,10 @@ class _RecentRemoteJobState extends ConsumerState<RecentRemoteJob> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          backgroundColor: Colors.white,
-                          shadowColor: AppColors.backgroundColor2,
+                          backgroundColor: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.8),
                           elevation: 3,
                           padding: const EdgeInsets.all(0),
                         ),
@@ -96,26 +98,27 @@ class _RecentRemoteJobState extends ConsumerState<RecentRemoteJob> {
                                           children: [
                                             Text(
                                               recentListData[index].jobName,
-                                              style: AppTextStyle
-                                                  .darkPurpleBoldS14,
+                                              style: AppTextStyle.bold.s14
+                                                  .copyWith(
+                                                color: AppColors.white,
+                                              ),
                                             ),
                                             RichText(
                                               text: TextSpan(
                                                 text: recentListData[index]
                                                     .companyName,
-                                                style: AppTextStyle
-                                                    .textlavenderGraS12,
+                                                style: AppTextStyle.regular.s12,
                                                 children: <TextSpan>[
-                                                  const TextSpan(
+                                                  TextSpan(
                                                     text: ' ׄ· ',
                                                     style: AppTextStyle
-                                                        .textlavenderGraS12,
+                                                        .regular.s12,
                                                   ),
                                                   TextSpan(
                                                     text: recentListData[index]
                                                         .companyAddress,
                                                     style: AppTextStyle
-                                                        .textlavenderGraS12,
+                                                        .regular.s12,
                                                   ),
                                                 ],
                                               ),
@@ -129,6 +132,10 @@ class _RecentRemoteJobState extends ConsumerState<RecentRemoteJob> {
                                     onPressed: () {},
                                     child: SvgPicture.asset(
                                       AppSvgIcons.save,
+                                      colorFilter: const ColorFilter.mode(
+                                        AppColors.white,
+                                        BlendMode.srcIn,
+                                      ),
                                     ),
                                   )
                                 ],
@@ -139,12 +146,12 @@ class _RecentRemoteJobState extends ConsumerState<RecentRemoteJob> {
                                   text: TextSpan(
                                     text: getAmountSalary(
                                         recentListData[index].salary),
-                                    style: AppTextStyle.darkPurpleBoldS14,
+                                    style: AppTextStyle.bold.s14,
                                     children: <TextSpan>[
                                       TextSpan(
                                         text:
                                             "/${recentListData[index].salary.type}",
-                                        style: AppTextStyle.textlavenderGraS12,
+                                        style: AppTextStyle.regular.s12,
                                       ),
                                     ],
                                   ),
@@ -162,7 +169,9 @@ class _RecentRemoteJobState extends ConsumerState<RecentRemoteJob> {
                                     return Container(
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
-                                        color: AppColors.backgroundColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       padding: const EdgeInsets.symmetric(
@@ -170,8 +179,12 @@ class _RecentRemoteJobState extends ConsumerState<RecentRemoteJob> {
                                       margin: const EdgeInsets.only(right: 10),
                                       child: Text(
                                         recentListData[index].tags[childIndex],
-                                        style: AppTextStyle
-                                            .textBlackColorRegularS12,
+                                        style:
+                                            AppTextStyle.regular.s12.copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
                                       ),
                                     );
                                   },

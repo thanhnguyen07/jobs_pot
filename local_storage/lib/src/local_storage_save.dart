@@ -13,6 +13,11 @@ class SaveDataLocalStorage {
     await prefs.setBool(LocalStorageKey.remember.toString(), true);
   }
 
+  Future<void> darkMode(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(LocalStorageKey.darkMode.toString(), value);
+  }
+
   Future<void> defaultLanguage(String defaultLanguage) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(LocalStorageKey.defaultLanguage.toString(),

@@ -23,4 +23,5 @@ Future<void> initializeProviders(ProviderContainer container) async {
   container.read(routeControllerProvider);
   container.read(authControllerProvider);
   container.read(apiControllerProvider);
+  container.read(themeControllerProvider);
 }

@@ -61,7 +61,7 @@ class _ChangePasswordState extends ConsumerState<ChangePasswordForm> {
           ButtonSubmitForm(
             title: Text(
               Utils.getLocaleMessage(LocaleKeys.settingAccountChangePassword),
-              style: AppTextStyle.whiteBoldS14,
+              style: AppTextStyle.bold.s14,
             ),
             onLogin: () {
               ref

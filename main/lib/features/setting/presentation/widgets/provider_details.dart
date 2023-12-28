@@ -57,7 +57,7 @@ class _ProviderDetailsState extends ConsumerState<ProviderDetails> {
           ),
           Text(
             Utils.getLocaleMessage(widget.dialogTitle),
-            style: AppTextStyle.darkPurpleBoldS18,
+            style: AppTextStyle.bold.s18,
           ),
           providerInfo?.photoURL != null
               ? AvatarImage(
@@ -78,11 +78,12 @@ class _ProviderDetailsState extends ConsumerState<ProviderDetails> {
                     text: Utils.getLocaleMessage(
                       LocaleKeys.settingAccountDisplayNameAccount,
                     ),
-                    style: AppTextStyle.egglantBoldS14,
+                    style: AppTextStyle.bold.s14.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground),
                     children: [
                       TextSpan(
                         text: providerInfo?.displayName,
-                        style: AppTextStyle.darkPurpleRegularS14,
+                        style: AppTextStyle.regular.s14,
                       )
                     ],
                   ),
@@ -94,11 +95,12 @@ class _ProviderDetailsState extends ConsumerState<ProviderDetails> {
               text: Utils.getLocaleMessage(
                 LocaleKeys.settingAccountDisplayEmailAccount,
               ),
-              style: AppTextStyle.egglantBoldS14,
+              style: AppTextStyle.bold.s14
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
               children: [
                 TextSpan(
                   text: providerInfo?.email ?? "",
-                  style: AppTextStyle.darkPurpleRegularS14,
+                  style: AppTextStyle.regular.s14,
                 )
               ],
             ),
@@ -109,11 +111,12 @@ class _ProviderDetailsState extends ConsumerState<ProviderDetails> {
               text: Utils.getLocaleMessage(
                 LocaleKeys.settingAccountProviderIdAccount,
               ),
-              style: AppTextStyle.egglantBoldS14,
+              style: AppTextStyle.bold.s14
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
               children: [
                 TextSpan(
                   text: providerInfo?.providerId ?? "",
-                  style: AppTextStyle.darkPurpleRegularS14,
+                  style: AppTextStyle.regular.s14,
                 )
               ],
             ),
@@ -134,7 +137,7 @@ class _ProviderDetailsState extends ConsumerState<ProviderDetails> {
                       Utils.getLocaleMessage(
                         LocaleKeys.settingAccountUnlinkAccount,
                       ),
-                      style: AppTextStyle.redBoldS14,
+                      style: AppTextStyle.bold.s14Red,
                     ),
                   )
                 : const SizedBox(),

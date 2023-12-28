@@ -8,17 +8,19 @@ class ButtonSubmitForm extends StatelessWidget {
     Key? key,
     required this.title,
     required this.onLogin,
+    this.backgroundColor = AppColors.egglantColor,
   }) : super(key: null);
   final Text title;
   final void Function() onLogin;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     Color checkBackgroundColor(FormGroup form) {
       if (!form.pristine) {
-        return form.valid ? AppColors.egglantColor : AppColors.shadowColor;
+        return form.valid ? backgroundColor : AppColors.shadowColor;
       } else {
-        return AppColors.egglantColor;
+        return backgroundColor;
       }
     }
 

@@ -42,7 +42,9 @@ class _GenderFormState extends ConsumerState<GenderForm> {
           margin: const EdgeInsets.symmetric(vertical: 10),
           child: Text(
             Utils.getLocaleMessage(LocaleKeys.profileGenderTitle),
-            style: AppTextStyle.darkPurpleBoldS14,
+            style: AppTextStyle.bold.s14.copyWith(
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
         ),
         Row(
@@ -54,6 +56,7 @@ class _GenderFormState extends ConsumerState<GenderForm> {
               checked: genderValue ==
                   Utils.getLocaleMessage(LocaleKeys.profileGenderMale),
               editProfileState: editProfileState,
+              context: context,
             ),
             const SizedBox(width: 20),
             _box(
@@ -61,6 +64,7 @@ class _GenderFormState extends ConsumerState<GenderForm> {
               checked: genderValue ==
                   Utils.getLocaleMessage(LocaleKeys.profileGenderFemale),
               editProfileState: editProfileState,
+              context: context,
             ),
           ],
         )
@@ -72,9 +76,10 @@ class _GenderFormState extends ConsumerState<GenderForm> {
     required String title,
     required bool checked,
     required bool editProfileState,
+    required BuildContext context,
   }) {
     return TextButton.icon(
-      icon: _iconCheck(checked),
+      icon: _iconCheck(checked, context),
       onPressed: () {
         editProfileState
             ? null
@@ -86,7 +91,7 @@ class _GenderFormState extends ConsumerState<GenderForm> {
       },
       style: TextButton.styleFrom(
         minimumSize: const Size(0, 50),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -94,12 +99,14 @@ class _GenderFormState extends ConsumerState<GenderForm> {
       ),
       label: Text(
         title,
-        style: AppTextStyle.darkPurpleRegularS14,
+        style: AppTextStyle.regular.s14.copyWith(
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
       ),
     );
   }
 
-  Container _iconCheck(bool checked) {
+  Container _iconCheck(bool checked, BuildContext context) {
     return Container(
       width: 20,
       height: 20,
@@ -108,16 +115,19 @@ class _GenderFormState extends ConsumerState<GenderForm> {
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
-        border:
-            Border.all(color: checked ? AppColors.iconColor2 : Colors.black),
+        border: Border.all(
+          color: checked
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onBackground,
+        ),
       ),
       child: checked
           ? Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
-                color: AppColors.iconColor2,
+                color: Theme.of(context).colorScheme.primary,
               ),
             )
           : const SizedBox(),

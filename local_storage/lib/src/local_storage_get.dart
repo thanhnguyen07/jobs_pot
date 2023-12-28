@@ -51,6 +51,21 @@ class GetDataLocalStorage {
     }
   }
 
+  Future<bool?> darkMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      final onboadingStatusEncoded =
+          prefs.getBool(LocalStorageKey.darkMode.toString());
+      if (onboadingStatusEncoded == null) {
+        return null;
+      } else {
+        return onboadingStatusEncoded;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<String?> token() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {

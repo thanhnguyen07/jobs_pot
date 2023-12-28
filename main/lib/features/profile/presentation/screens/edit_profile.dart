@@ -55,6 +55,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
             _userName(context, userData),
           ],
         ),
+        const SizedBox(height: 10),
         const ProfileInputForm()
       ],
     );
@@ -71,7 +72,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
             margin: const EdgeInsets.only(bottom: 12),
             child: Text(
               userData!.userName,
-              style: AppTextStyle.darkPurpleBoldS18,
+              style: AppTextStyle.bold.s18,
             ),
           ),
         ],
@@ -88,8 +89,10 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
         return AlertDialog(
           content: Column(
             children: [
-              const Text('Choose a Color',
-                  style: AppTextStyle.darkPurpleBoldS18),
+              Text(
+                'Choose a Color',
+                style: AppTextStyle.bold.s18,
+              ),
               Expanded(
                 flex: 1,
                 child: SizedBox(
@@ -145,7 +148,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
                 ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   child: Container(
-                    color: AppColors.whiteColor1,
+                    color: Theme.of(context).colorScheme.background,
                     width: 110,
                     height: 110,
                   ),
@@ -226,7 +229,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
         );
       },
       style: TextButton.styleFrom(
-        backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
+        backgroundColor: Theme.of(context).colorScheme.background,
         minimumSize: const Size(30, 30),
         padding: EdgeInsets.zero,
       ),
@@ -234,8 +237,8 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
         width: 20,
         height: 20,
         AppSvgIcons.pencil,
-        colorFilter: const ColorFilter.mode(
-          AppColors.whiteColor1,
+        colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.onBackground,
           BlendMode.srcIn,
         ),
       ),
@@ -252,14 +255,14 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
         context.router.back();
       },
       style: TextButton.styleFrom(
-        backgroundColor: AppColors.darkPurpleColor.withOpacity(0.8),
+        backgroundColor: Theme.of(context).colorScheme.background,
         minimumSize: const Size(40, 30),
         padding: EdgeInsets.zero,
       ),
       child: SvgPicture.asset(
         AppSvgIcons.back,
-        colorFilter: const ColorFilter.mode(
-          AppColors.whiteColor1,
+        colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.onBackground,
           BlendMode.srcIn,
         ),
       ),

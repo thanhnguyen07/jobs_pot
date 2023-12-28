@@ -60,7 +60,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             title: Text(
               Utils.getLocaleMessage(
                   LocaleKeys.authenticationSignUpButtonTitle),
-              style: AppTextStyle.whiteBoldS14,
+              style: AppTextStyle.bold.s14,
             ),
             onLogin: () {
               ref.read(signUpWithEmailProvider.notifier).onSignUp(context);

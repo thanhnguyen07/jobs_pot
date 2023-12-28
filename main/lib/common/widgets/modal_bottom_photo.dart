@@ -35,7 +35,7 @@ class _ModalBottomPhotoState extends State<ModalBottomPhoto> {
             Utils.getLocaleMessage(checkChooseColor
                 ? LocaleKeys.postAddImageTitleWithColor
                 : LocaleKeys.postAddImageTitle),
-            style: AppTextStyle.blackBoldS16,
+            style: AppTextStyle.bold.s16,
             textAlign: TextAlign.center,
           ),
           Container(
@@ -97,7 +97,7 @@ class _ModalBottomPhotoState extends State<ModalBottomPhoto> {
           const SizedBox(width: 10),
           Text(
             Utils.getLocaleMessage(textKey),
-            style: AppTextStyle.darkPurpleBoldS14,
+            style: AppTextStyle.bold.s14,
           )
         ],
       ),

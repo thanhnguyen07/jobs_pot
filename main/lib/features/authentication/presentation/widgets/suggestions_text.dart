@@ -36,14 +36,18 @@ class SuggestionsText extends StatelessWidget {
             children: [
               TextSpan(
                 text: textSuggestions,
-                style: AppTextStyle.textColor1RegularS14,
+                style: AppTextStyle.regular.s14.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               ),
               const TextSpan(
                 text: ' ',
               ),
               TextSpan(
                   text: textAction,
-                  style: AppTextStyle.fireYellowUnderlineRegularS14,
+                  style: AppTextStyle.regular.s14FireYellowUnLine.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   recognizer: TapGestureRecognizer()..onTap = action,
                   children: [
                     TextSpan(

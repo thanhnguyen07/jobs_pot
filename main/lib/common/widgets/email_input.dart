@@ -21,6 +21,7 @@ class EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InputReactiveForms(
+      focusedInputBorderColor: Theme.of(context).colorScheme.primary,
       formController: formControlEmail,
       keyboardType: TextInputType.emailAddress,
       hintText: hintEmail,
@@ -28,7 +29,8 @@ class EmailInput extends StatelessWidget {
       suffixIcon: suffixIcon,
       title: Text(
         Utils.getLocaleMessage(LocaleKeys.authenticationEmailInputTitle),
-        style: AppTextStyle.darkPurpleBoldS14,
+        style: AppTextStyle.bold.s14
+            .copyWith(color: Theme.of(context).colorScheme.primary),
       ),
       validationMessages: {
         ValidationKeys.required: (error) =>

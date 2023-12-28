@@ -72,7 +72,7 @@ class _CheckMailScreenState extends ConsumerState<CheckMailScreen> {
         backgroundColor: AppColors.fireYellowColor,
         title: Text(
           Utils.getLocaleMessage(LocaleKeys.authenticationBackButtonTitle),
-          style: AppTextStyle.whiteBoldS14,
+          style: AppTextStyle.bold.s14,
         ),
         onPressed: _backToLogin,
       ),

@@ -6,7 +6,7 @@ class AppStyles {
     borderRadius: BorderRadius.all(
       Radius.circular(10),
     ),
-    color: Colors.white,
+    color: AppColors.white,
     boxShadow: [
       BoxShadow(
         color: AppColors.shadowColor,

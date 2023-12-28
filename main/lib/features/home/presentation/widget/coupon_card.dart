@@ -37,20 +37,19 @@ class CouponCard extends StatelessWidget {
                   width: 200,
                   child: Text(
                     LocaleKeys.homePercentSaleTitle.plural(50),
-                    style: AppTextStyle.whiteMediumS18,
+                    style: AppTextStyle.mediumItalic.s18
+                        .copyWith(color: AppColors.white),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: onPress,
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(0, 30),
-                    backgroundColor: AppColors.fireYellowColor,
                     elevation: 5,
-                    shadowColor: AppColors.amberColor,
                   ),
                   child: Text(
                     Utils.getLocaleMessage(LocaleKeys.homeJoinNowTitle),
-                    style: AppTextStyle.whiteBoldS14,
+                    style: AppTextStyle.bold.s14,
                   ),
                 )
               ],

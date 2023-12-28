@@ -31,9 +31,9 @@ class _CreateJobScreenState extends ConsumerState<CreateJobScreen> {
               Container(
                 color: AppColors.babyBlueColor,
                 width: double.infinity,
-                child: const Text(
+                child: Text(
                   "1",
-                  style: AppTextStyle.blackBoldS40,
+                  style: AppTextStyle.bold.s40,
                 ),
               ),
               const Text("Dola Dola"),

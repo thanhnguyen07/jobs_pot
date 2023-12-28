@@ -4,5 +4,6 @@ enum LocalStorageKey {
   onboarding,
   remember,
   idUser,
-  defaultLanguage
+  defaultLanguage,
+  darkMode,
 }

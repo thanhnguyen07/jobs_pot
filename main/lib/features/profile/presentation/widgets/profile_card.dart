@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
@@ -10,10 +9,7 @@ import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/edit_profile.dart';
-import 'package:jobs_pot/features/setting/presentation/screens/setting_screen.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:jobs_pot/utils/utils.dart';
 
 class ProfileCard extends ConsumerStatefulWidget {
   const ProfileCard({
@@ -32,7 +28,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     return Stack(
       children: [
         _cardBackground(context, userData),
-        _userAvatar(userData),
+        _userAvatar(context, userData),
         _userName(context, userData),
         _buttonsAction(context, userData),
       ],
@@ -48,7 +44,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           _editButton(
             onTab: () {
@@ -70,14 +66,14 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
           const SizedBox(width: 50),
           Text(
             userData!.userName,
-            style: AppTextStyle.darkPurpleBoldS18,
+            style: AppTextStyle.bold.s18,
           ),
         ],
       ),
     );
   }
 
-  Widget _userAvatar(UserEntity? userData) {
+  Widget _userAvatar(BuildContext context, UserEntity? userData) {
     return SizedBox(
       width: double.infinity,
       height: 225 + MediaQuery.of(context).padding.top,
@@ -92,7 +88,7 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
                 ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   child: Container(
-                    color: AppColors.whiteColor1,
+                    color: Theme.of(context).colorScheme.background,
                     width: 110,
                     height: 110,
                   ),
@@ -127,24 +123,19 @@ class _ProfileCardState extends ConsumerState<ProfileCard> {
     return TextButton(
       onPressed: onTab,
       style: TextButton.styleFrom(
-        backgroundColor: AppColors.purple,
+        backgroundColor: Theme.of(context).colorScheme.background,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(50)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(50),
+          ),
         ),
-        padding: EdgeInsets.zero,
+        minimumSize: const Size(40, 40),
       ),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        width: 150,
-        child: Row(
-          children: [
-            SvgPicture.asset(AppSvgIcons.userPen),
-            const SizedBox(width: 10),
-            Text(
-              Utils.getLocaleMessage(LocaleKeys.profileEditProfileTitle),
-              style: AppTextStyle.regular.black14,
-            ),
-          ],
+      child: SvgPicture.asset(
+        AppSvgIcons.edit,
+        colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.onBackground,
+          BlendMode.srcIn,
         ),
       ),
     );

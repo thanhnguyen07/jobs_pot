@@ -85,7 +85,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       margin: const EdgeInsets.only(right: 30, top: 15),
       child: Text(
         Utils.getLocaleMessage(LocaleKeys.onboardingSubTitle),
-        style: AppTextStyle.textColor1RegularS14,
+        style: AppTextStyle.regular.s14,
       ),
     );
   }
@@ -94,15 +94,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     return RichText(
       text: TextSpan(
         text: '${Utils.getLocaleMessage(LocaleKeys.onboardingTitle1)}\n',
-        style: AppTextStyle.blackBoldS40,
+        style: AppTextStyle.bold.s40,
         children: <TextSpan>[
           TextSpan(
             text: '${Utils.getLocaleMessage(LocaleKeys.onboardingTitle2)}\n',
-            style: AppTextStyle.fireYellowUnderlineBoldS40,
+            style: AppTextStyle.bold.s40FireYellowUnLine,
           ),
           TextSpan(
             text: Utils.getLocaleMessage(LocaleKeys.onboardingTitle3),
-            style: AppTextStyle.blackBoldS40,
+            style: AppTextStyle.bold.s40,
           ),
         ],
       ),
@@ -130,7 +130,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           children: [
             Text(
               Utils.getLocaleMessage(LocaleKeys.splashTitle),
-              style: AppTextStyle.darkPurpleBoldS18,
+              style: AppTextStyle.bold.s18,
             ),
           ],
         ),

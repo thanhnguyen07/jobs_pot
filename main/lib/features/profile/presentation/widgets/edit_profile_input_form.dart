@@ -56,7 +56,7 @@ class _ProfileInputFormState extends ConsumerState<ProfileInputForm> {
     return Container(
       margin: const EdgeInsets.only(right: 20, left: 20, bottom: 50),
       decoration: BoxDecoration(
-        color: AppColors.amberColor,
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
         borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -67,7 +67,11 @@ class _ProfileInputFormState extends ConsumerState<ProfileInputForm> {
           children: [
             FullNameInput(
               formControlFullName: formControlFullName,
+              inputBakgourndColor: Theme.of(context).colorScheme.background,
               hintName: userData!.userName,
+              titleColor: Theme.of(context).colorScheme.onPrimary,
+              focusedInputBorderColor:
+                  Theme.of(context).colorScheme.onBackground,
             ),
             const DateOfBirthBox(),
             const GenderForm(),
@@ -89,8 +93,10 @@ class _ProfileInputFormState extends ConsumerState<ProfileInputForm> {
       child: ButtonSubmitForm(
         title: Text(
           Utils.getLocaleMessage(LocaleKeys.editProfileUpdateTitle),
-          style: AppTextStyle.whiteBoldS14,
+          style: AppTextStyle.bold.s14
+              .copyWith(color: Theme.of(context).colorScheme.primary),
         ),
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
         onLogin: () {
           ref.read(profileControllerProvider.notifier).onSave();
         },

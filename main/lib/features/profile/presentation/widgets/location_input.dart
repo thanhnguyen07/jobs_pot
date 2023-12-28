@@ -19,12 +19,16 @@ class LocationInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InputReactiveForms(
+      inputBakgourndColor: Theme.of(context).colorScheme.background,
+      focusedInputBorderColor: Theme.of(context).colorScheme.onBackground,
       hintText: hintText,
       obscureText: false,
       formController: formControlLocation,
       title: Text(
         Utils.getLocaleMessage(LocaleKeys.profileLocationTitle),
-        style: AppTextStyle.darkPurpleBoldS14,
+        style: AppTextStyle.bold.s14.copyWith(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
       ),
       validationMessages: {
         ValidationKeys.required: (error) =>

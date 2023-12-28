@@ -53,7 +53,7 @@ class _ForgotPasswordFormState extends ConsumerState<ForgotPasswordForm> {
             title: Text(
               Utils.getLocaleMessage(
                   LocaleKeys.authenticationForgotPasswordButtonTitle),
-              style: AppTextStyle.whiteBoldS14,
+              style: AppTextStyle.bold.s14,
             ),
             onLogin: () {
               ref

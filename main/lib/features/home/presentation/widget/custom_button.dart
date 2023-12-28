@@ -39,33 +39,55 @@ class CustomButton1 extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
           ),
-          child: Row(
-            children: [
-              const SizedBox(width: 10),
-              ClipOval(
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  color: Colors.white,
-                  padding: const EdgeInsets.all(10),
-                  child: SvgPicture.asset(icon),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    count ?? "",
-                    style: AppTextStyle.blackBoldS16,
+          child: SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Row(
+              children: [
+                ClipOval(
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    color: Theme.of(context).colorScheme.background,
+                    padding: const EdgeInsets.all(10),
+                    child: SvgPicture.asset(
+                      icon,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.onBackground,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                   ),
-                  Text(
-                    title,
-                    style: AppTextStyle.darkPurpleRegularS14,
-                  )
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(width: 10),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      count ?? "",
+                      style: AppTextStyle.bold.s16.copyWith(
+                        color: AppColors.black,
+                      ),
+                    ),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxHeight: 40,
+                        maxWidth: 70,
+                      ),
+                      child: Text(
+                        title,
+                        style: AppTextStyle.regular.s14.copyWith(
+                          color: AppColors.black,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -48,7 +48,7 @@ class _PostDescriptionInputState extends ConsumerState<PostDescriptionInput> {
       formController: formControlPostDescription,
       title: Text(
         Utils.getLocaleMessage(LocaleKeys.postDescriptionTitle),
-        style: AppTextStyle.darkPurpleBoldS12,
+        style: AppTextStyle.bold.s12,
       ),
       validationMessages: {
         ValidationKeys.required: (error) =>

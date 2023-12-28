@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_enum.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
@@ -10,7 +11,8 @@ import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
-import 'package:jobs_pot/features/profile/presentation/screens/edit_profile.dart';
+import 'package:jobs_pot/features/home_stack/presentation/screens/bottom_navigation_screen.dart';
+import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/change_password_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_choose_verify_method.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/modal_confirm.dart';
@@ -45,18 +47,32 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
       context.router.back();
     }
 
+    UserEntity? userData = ref.watch(authControllerProvider);
+
+    bool linkedPassword = ref
+        .read(accountControllerProvider.notifier)
+        .checkLink(ProviderKeys.password);
+
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         height: double.infinity,
         width: double.infinity,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Header(
               onBack: onBack,
               titleKey: LocaleKeys.settingAccountTitle,
             ),
-            _body(context),
+            _overViewTitle(),
+            _userInfo(userData, context),
+            _linkAccountTitle(),
+            _googleButton(),
+            _facebookButton(),
+            _accountManagementTitle(),
+            linkedPassword ? _changePasswordButton(context) : const SizedBox(),
+            _deleteAccount(context),
           ],
         ),
       ),
@@ -69,7 +85,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
       if (states.contains(MaterialState.selected)) {
         return const Icon(
           Icons.check,
-          color: Colors.white,
+          color: AppColors.white,
         );
       }
       return const Icon(
@@ -78,45 +94,39 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
     },
   );
 
-  Container _body(BuildContext context) {
-    UserEntity? userData = ref.watch(authControllerProvider);
-
-    bool linkedPassword = ref
-        .read(accountControllerProvider.notifier)
-        .checkLink(ProviderKeys.password);
-
+  Container _accountManagementTitle() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _userInfo(userData, context),
-          const SizedBox(height: 10),
-          _linkAccountTitle(),
-          const SizedBox(height: 10),
-          _googleButton(),
-          _facebookButton(),
-          _accountManagementTitle(),
-          const SizedBox(height: 10),
-          linkedPassword ? _changePasswordButton(context) : const SizedBox(),
-          const SizedBox(height: 10),
-          _deleteAccount(context)
-        ],
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Text(
+        Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccountManagement),
+        style: AppTextStyle.bold.s16.copyWith(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
       ),
     );
   }
 
-  Text _accountManagementTitle() {
-    return Text(
-      Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccountManagement),
-      style: AppTextStyle.darkPurpleBoldS18,
+  Container _linkAccountTitle() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Text(
+        Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccount),
+        style: AppTextStyle.bold.s16.copyWith(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+      ),
     );
   }
 
-  Text _linkAccountTitle() {
-    return Text(
-      Utils.getLocaleMessage(LocaleKeys.settingAccountLinkAccount),
-      style: AppTextStyle.darkPurpleBoldS18,
+  Container _overViewTitle() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Text(
+        Utils.getLocaleMessage(LocaleKeys.accountOverviewTitle),
+        style: AppTextStyle.bold.s16.copyWith(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+      ),
     );
   }
 
@@ -175,7 +185,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                 child: Text(
                   Utils.getLocaleMessage(
                       LocaleKeys.settingAccountChangeVerificationCode),
-                  style: AppTextStyle.darkPurpleBoldS30,
+                  style: AppTextStyle.bold.s30,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -195,7 +205,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
           return AlertDialog(
             title: Text(
               Utils.getLocaleMessage(LocaleKeys.settingAccountPasswordVerify),
-              style: AppTextStyle.darkPurpleBoldS26,
+              style: AppTextStyle.bold.s26,
             ),
             content: ModalVerificationPassword(
               verifyPassword: () {
@@ -231,39 +241,113 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
     }
 
     return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 30),
-      child: ElevatedButton(
-        onPressed: deleteAction,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-        ),
-        child: Text(
-          Utils.getLocaleMessage(
-            LocaleKeys.settingAccountDeleteAccount,
+      width: double.maxFinite,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+        border: Border.symmetric(
+          horizontal: BorderSide(
+            color: Theme.of(context).colorScheme.onSecondary,
+            width: 2,
           ),
-          style: AppTextStyle.whiteBoldS14,
+          vertical: BorderSide(
+            color: Theme.of(context).colorScheme.onSecondary,
+            width: 2,
+          ),
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextButton(
+        onPressed: deleteAction,
+        style: TextButton.styleFrom(
+          fixedSize: const Size(double.maxFinite, 50),
+          padding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Image.asset(
+                    width: 30,
+                    height: 30,
+                    AppPngIcons.delete,
+                  ),
+                  const SizedBox(width: 15),
+                  Text(
+                    Utils.getLocaleMessage(
+                      LocaleKeys.settingAccountDeleteAccount,
+                    ),
+                    style: AppTextStyle.bold.s14Red,
+                  ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.only(right: 20),
+                child: SvgPicture.asset(
+                  AppSvgIcons.remove,
+                  width: 20,
+                  height: 20,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Container _changePasswordButton(BuildContext context) {
+  Widget _changePasswordButton(BuildContext context) {
     return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 30),
-      child: ElevatedButton(
+      width: double.maxFinite,
+      decoration: const BoxDecoration(
+        color: AppColors.white,
+      ),
+      child: TextButton(
         onPressed: () {
           context.router.pushNamed(ChangePasswordScreen.path);
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.egglantColor,
+        style: TextButton.styleFrom(
+          fixedSize: const Size(double.maxFinite, 50),
+          padding: EdgeInsets.zero,
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
         ),
-        child: Text(
-          Utils.getLocaleMessage(
-            LocaleKeys.settingAccountChangePassword,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Image.asset(
+                    width: 30,
+                    height: 30,
+                    AppPngIcons.password,
+                  ),
+                  const SizedBox(width: 15),
+                  Text(
+                    Utils.getLocaleMessage(
+                      LocaleKeys.settingAccountChangePassword,
+                    ),
+                    style: AppTextStyle.bold.s14,
+                  ),
+                ],
+              ),
+              // Container(
+              //   margin: const EdgeInsets.only(right: 10),
+              //   child: Image.asset(
+              //     width: 30,
+              //     height: 30,
+              //     AppPngIcons.resetPassword,
+              //   ),
+              // )
+            ],
           ),
-          style: AppTextStyle.whiteBoldS14,
         ),
       ),
     );
@@ -321,6 +405,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
     }
 
     return ProviderButton(
+      topButton: true,
       linked: linked,
       icon: AppPngIcons.google3,
       title: LocaleKeys.settingAccountGooogleTitle,
@@ -399,7 +484,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                     child: Text(
                       Utils.getLocaleMessage(
                           LocaleKeys.settingAccountChangeVerificationCode),
-                      style: AppTextStyle.darkPurpleBoldS30,
+                      style: AppTextStyle.bold.s30,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -420,7 +505,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                 title: Text(
                   Utils.getLocaleMessage(
                       LocaleKeys.settingAccountPasswordVerify),
-                  style: AppTextStyle.darkPurpleBoldS26,
+                  style: AppTextStyle.bold.s26,
                 ),
                 content: ModalVerificationPassword(
                   verifyPassword: () {
@@ -465,32 +550,61 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
     );
   }
 
-  Row _userInfo(UserEntity? userData, BuildContext context) {
-    return Row(
-      children: [
-        AvatarImage(
-          avatarLink: userData!.photoUrl,
-          size: 70,
-          edit: false,
-          onTab: () {
-            context.router.pushNamed(EditProfileScreen.path);
-          },
+  Widget _userInfo(UserEntity? userData, BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+        border: Border.symmetric(
+          horizontal: BorderSide(
+            color: Theme.of(context).colorScheme.onPrimary,
+            width: 1,
+          ),
         ),
-        const SizedBox(width: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              userData.userName,
-              style: AppTextStyle.darkPurpleBoldS18,
-            ),
-            Text(
-              userData.email,
-              style: AppTextStyle.textColor1RegularS14,
-            ),
-          ],
-        )
-      ],
+        borderRadius: BorderRadius.circular(20),
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextButton(
+        onPressed: () {
+          context.router.navigateNamed(HomeStackScreen.path).then((value) {
+            context.router.navigateNamed(ProfileScreen.path);
+          });
+        },
+        style: TextButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          padding: EdgeInsets.zero,
+        ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Row(
+            children: [
+              AvatarImage(
+                avatarLink: userData?.photoUrl,
+                size: 70,
+                edit: false,
+              ),
+              const SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    userData?.userName ?? "",
+                    style: AppTextStyle.boldItalic.s16.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
+                  Text(
+                    userData?.email ?? "",
+                    style: AppTextStyle.lightItalic.s14.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

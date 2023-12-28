@@ -12,6 +12,11 @@ class RemoveDataLocalStorage {
     await prefs.remove(LocalStorageKey.remember.toString());
   }
 
+  Future<void> darkMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(LocalStorageKey.darkMode.toString());
+  }
+
   Future<void> token() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(LocalStorageKey.token.toString());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 
 class EyeSuffixIcon extends StatelessWidget {
@@ -16,7 +17,7 @@ class EyeSuffixIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.transparent,
+        color: AppColors.transparent,
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
@@ -31,7 +32,7 @@ class EyeSuffixIcon extends StatelessWidget {
         ),
         onPressed: setShowPassword,
         child: SvgPicture.asset(
-          showPassword ? AppSvgIcons.showEye : AppSvgIcons.hideEye,
+          showPassword ? AppSvgIcons.hideEye : AppSvgIcons.showEye,
           fit: BoxFit.fitWidth,
         ),
       ),

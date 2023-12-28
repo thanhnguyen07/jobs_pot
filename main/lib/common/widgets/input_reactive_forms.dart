@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
-import 'package:jobs_pot/common/constant/app_style.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -15,6 +14,8 @@ class InputReactiveForms extends StatefulWidget {
     this.hintText,
     this.keyboardType,
     this.maxLine,
+    this.inputBakgourndColor = AppColors.white,
+    this.focusedInputBorderColor = AppColors.egglantColor,
   });
 
   final FormControl? formController;
@@ -25,6 +26,8 @@ class InputReactiveForms extends StatefulWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final int? maxLine;
+  final Color inputBakgourndColor;
+  final Color focusedInputBorderColor;
 
   @override
   State<StatefulWidget> createState() => _InputReactiveFormsState();
@@ -84,7 +87,9 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
           Flexible(
             child: Text(
               errorText,
-              style: AppTextStyle.textErrorInputS12,
+              style: AppTextStyle.light.s12.copyWith(
+                color: AppColors.candyAppleRed,
+              ),
               maxLines: 2,
             ),
           ),
@@ -95,7 +100,19 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
 
   Container _input() {
     return Container(
-      decoration: AppStyles.boxStyle,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(10),
+        ),
+        color: widget.inputBakgourndColor.withOpacity(0.5),
+        boxShadow: const [
+          BoxShadow(
+            color: AppColors.shadowColor,
+            blurRadius: 4,
+            offset: Offset(2, 4), // Shadow position
+          ),
+        ],
+      ),
       child: ReactiveTextField(
         formControl: widget.formController,
         keyboardType: widget.keyboardType,
@@ -114,16 +131,18 @@ class _InputReactiveFormsState extends State<InputReactiveForms> {
       suffixIcon: widget.suffixIcon,
       filled: true,
       hintText: widget.hintText,
-      hintStyle: AppTextStyle.textlavenderGraS14,
+      hintStyle: AppTextStyle.regular.s14,
       border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide.none,
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      fillColor: Colors.white,
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(
-            color: errorText.isNotEmpty ? Colors.red : AppColors.egglantColor),
+          color: errorText.isNotEmpty
+              ? AppColors.scarletRed
+              : widget.focusedInputBorderColor,
+        ),
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
     );

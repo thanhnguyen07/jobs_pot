@@ -29,19 +29,19 @@ class BottomNavigationController extends StateNotifier<CreateScreenType?> {
                 children: <Widget>[
                   Text(
                     Utils.getLocaleMessage(LocaleKeys.postTitle),
-                    style: AppTextStyle.text4BoldS16,
+                    style: AppTextStyle.bold.s16,
                   ),
                   const SizedBox(height: 15),
                   Text(
                     Utils.getLocaleMessage(LocaleKeys.postSubTitle),
-                    style: AppTextStyle.textColor5RegularS12,
+                    style: AppTextStyle.regular.s12,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 15),
                   CustomButton(
                     title: Text(
                       Utils.getLocaleMessage(LocaleKeys.postButtonTitle),
-                      style: AppTextStyle.whiteBoldS14,
+                      style: AppTextStyle.bold.s14,
                     ),
                     backgroundColor: AppColors.darkPurpleColor,
                     onPressed: () {
@@ -56,7 +56,7 @@ class BottomNavigationController extends StateNotifier<CreateScreenType?> {
                   CustomButton(
                     title: Text(
                       Utils.getLocaleMessage(LocaleKeys.postMakeAJob),
-                      style: AppTextStyle.whiteBoldS14,
+                      style: AppTextStyle.bold.s14,
                     ),
                     backgroundColor: AppColors.lavenderColor,
                     onPressed: () {

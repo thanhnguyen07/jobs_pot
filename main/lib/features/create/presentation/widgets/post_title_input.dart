@@ -46,7 +46,7 @@ class _PostTitleInputState extends ConsumerState<PostTitleInput> {
       formController: formControlPostTitle,
       title: Text(
         Utils.getLocaleMessage(LocaleKeys.postPostTitle),
-        style: AppTextStyle.darkPurpleBoldS12,
+        style: AppTextStyle.bold.s12,
       ),
       validationMessages: {
         ValidationKeys.required: (error) =>

@@ -32,7 +32,7 @@ class PinCode extends StatelessWidget {
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: AppColors.egglantColor),
+      border: Border.all(color: Theme.of(context).colorScheme.onBackground),
       borderRadius: BorderRadius.circular(8),
     );
 
@@ -51,7 +51,7 @@ class PinCode extends StatelessWidget {
         margin: const EdgeInsets.only(top: 10),
         child: Text(
           errorText ?? "",
-          style: const TextStyle(color: Colors.red),
+          style: const TextStyle(color: AppColors.candyAppleRed),
         ),
       );
     }

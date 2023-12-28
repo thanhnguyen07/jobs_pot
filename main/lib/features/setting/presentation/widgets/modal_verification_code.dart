@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
@@ -92,11 +91,13 @@ class _ModalVerificationCodeState extends ConsumerState<ModalVerificationCode> {
       text: TextSpan(
         text:
             '${Utils.getLocaleMessage(LocaleKeys.settingAccountVerifyCodeSubTitle)}: ',
-        style: AppTextStyle.textColor1RegularS14,
+        style: AppTextStyle.regular.s14
+            .copyWith(color: Theme.of(context).colorScheme.onBackground),
         children: <TextSpan>[
           TextSpan(
             text: userData?.email ?? '',
-            style: AppTextStyle.darkPurpleRegularS14,
+            style: AppTextStyle.mediumItalic.s14
+                .copyWith(color: Theme.of(context).colorScheme.primary),
           )
         ],
       ),
@@ -137,7 +138,7 @@ class _ModalVerificationCodeState extends ConsumerState<ModalVerificationCode> {
         Text(
           Utils.getLocaleMessage(
               LocaleKeys.authenticationVerifyEmailSuggestionsResend),
-          style: AppTextStyle.textColor1RegularS14,
+          style: AppTextStyle.regular.s14,
         ),
         TextButton(
           onPressed: countDown == 0 ? action : null,
@@ -147,7 +148,7 @@ class _ModalVerificationCodeState extends ConsumerState<ModalVerificationCode> {
                 TextSpan(
                     text: Utils.getLocaleMessage(
                         LocaleKeys.authenticationVerifyEmailResendTitle),
-                    style: AppTextStyle.fireYellowUnderlineRegularS14,
+                    style: AppTextStyle.regular.s14FireYellowUnLine,
                     children: [
                       TextSpan(
                         text: countDown > 0
@@ -167,10 +168,11 @@ class _ModalVerificationCodeState extends ConsumerState<ModalVerificationCode> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: CustomButton(
-        backgroundColor: AppColors.lavenderColor,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           Utils.getLocaleMessage(LocaleKeys.authenticationBackButtonTitle),
-          style: AppTextStyle.whiteBoldS14,
+          style: AppTextStyle.bold.s14
+              .copyWith(color: Theme.of(context).colorScheme.onPrimary),
         ),
         onPressed: () {
           Navigator.pop(context);

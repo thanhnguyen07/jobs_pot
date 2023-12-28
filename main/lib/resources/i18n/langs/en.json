@@ -165,5 +165,6 @@
   "settingAccountVerifyCodeSubTitle": "The verification code has been sent to the email address",
   "settingAccountDeleteAccount": "Delete Account",
   "editProfileUpdateTitle": "Update",
-  "drawerBookmarkTitle": "Bookmark"
+  "drawerBookmarkTitle": "Bookmark",
+  "accountOverviewTitle": "Overview"
 }

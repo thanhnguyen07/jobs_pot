@@ -58,7 +58,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           ),
           Text(
             Utils.getLocaleMessage(LocaleKeys.splashTitle),
-            style: AppTextStyle.whiteBoldS26,
+            style: AppTextStyle.bold.s26.copyWith(color: AppColors.white),
           )
         ],
       ),

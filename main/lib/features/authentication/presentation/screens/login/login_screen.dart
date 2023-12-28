@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/widgets/app_scaffold.dart';
+import 'package:jobs_pot/common/widgets/switch_theme.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/signUp/sign_up_screen.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/change_language.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/or_social_login.dart';
@@ -27,6 +28,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     context.router.pushNamed(SignUpScreen.path);
   }
 
+  bool positive = false;
+  int value = 0;
+
   @override
   Widget build(BuildContext context) {
     ref.watch(languageControllerProvider);
@@ -41,9 +45,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   Widget _body() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30),
+      margin: EdgeInsets.only(
+        left: 30,
+        right: 30,
+        top: MediaQuery.of(context).padding.top,
+      ),
       child: Column(
         children: [
+          const SizedBox(height: 30),
           _loginTitle(),
           const LoginForm(),
           const OrSocialLogin(),
@@ -52,6 +61,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           ),
           _signUpSuggestion(),
           const ChangeLanguage(),
+          const SwitchThemeMode(),
         ],
       ),
     );

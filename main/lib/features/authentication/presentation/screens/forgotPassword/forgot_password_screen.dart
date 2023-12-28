@@ -63,7 +63,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
         backgroundColor: AppColors.fireYellowColor,
         title: Text(
           Utils.getLocaleMessage(LocaleKeys.authenticationBackButtonTitle),
-          style: AppTextStyle.whiteBoldS14,
+          style: AppTextStyle.bold.s14,
         ),
         onPressed: () {
           context.router.back();

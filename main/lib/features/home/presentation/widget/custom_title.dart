@@ -21,7 +21,7 @@ class _CustomTitleState extends ConsumerState<CustomTitle> {
       margin: const EdgeInsets.symmetric(vertical: 20),
       child: Text(
         Utils.getLocaleMessage(widget.titleKey),
-        style: AppTextStyle.blackBoldS16,
+        style: AppTextStyle.bold.s16,
       ),
     );
   }

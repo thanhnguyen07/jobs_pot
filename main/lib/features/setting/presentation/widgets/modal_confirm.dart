@@ -30,11 +30,11 @@ class _ModalConfirmState extends ConsumerState<ModalConfirm> {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        const SizedBox(height: 10),
+        const SizedBox(height: 30),
         Text(
           LocaleKeys.settingAccountConfirmUnLink
               .plural(0, args: [Utils.getLocaleMessage(widget.type)]),
-          style: AppTextStyle.darkPurpleBoldS20,
+          style: AppTextStyle.bold.s20,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 30),
@@ -45,9 +45,9 @@ class _ModalConfirmState extends ConsumerState<ModalConfirm> {
               Utils.getLocaleMessage(
                 LocaleKeys.yesButtonTitle,
               ),
-              style: AppTextStyle.whiteBoldS14,
+              style: AppTextStyle.bold.s14.copyWith(color: AppColors.white),
             ),
-            backgroundColor: Colors.redAccent,
+            backgroundColor: AppColors.candyAppleRed,
             onPressed: widget.yesPress,
           ),
         ),
@@ -59,9 +59,10 @@ class _ModalConfirmState extends ConsumerState<ModalConfirm> {
               Utils.getLocaleMessage(
                 LocaleKeys.cancelButtonTitle,
               ),
-              style: AppTextStyle.whiteBoldS14,
+              style: AppTextStyle.bold.s14
+                  .copyWith(color: Theme.of(context).colorScheme.onSecondary),
             ),
-            backgroundColor: AppColors.lavenderColor,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             onPressed: widget.noPress,
           ),
         ),

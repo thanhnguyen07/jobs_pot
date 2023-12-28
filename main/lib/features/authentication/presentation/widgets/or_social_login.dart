@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
@@ -18,7 +19,7 @@ class _OrSocialLoginState extends ConsumerState<OrSocialLogin> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        signUpWith(),
+        signUpWith(context),
         const SizedBox(
           height: 10,
         ),
@@ -43,7 +44,7 @@ class _OrSocialLoginState extends ConsumerState<OrSocialLogin> {
     );
   }
 
-  Widget signUpWith() {
+  Widget signUpWith(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -53,7 +54,7 @@ class _OrSocialLoginState extends ConsumerState<OrSocialLogin> {
             flex: 1,
             child: Container(
               height: 1,
-              color: AppColors.egglantColor,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           Container(
@@ -65,7 +66,7 @@ class _OrSocialLoginState extends ConsumerState<OrSocialLogin> {
             flex: 1,
             child: Container(
               height: 1,
-              color: AppColors.egglantColor,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ],

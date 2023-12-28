@@ -41,7 +41,7 @@ class _ModalChooseVerifyMethodState
             Text(
               Utils.getLocaleMessage(
                   LocaleKeys.settingAccountChooseAuthTypeUnLinkTitle),
-              style: AppTextStyle.darkPurpleBoldS20,
+              style: AppTextStyle.bold.s20,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 5),
@@ -50,7 +50,7 @@ class _ModalChooseVerifyMethodState
               child: Text(
                 LocaleKeys.settingAccountChooseAuthTypeUnLinkSubTitle
                     .plural(0, args: [Utils.getLocaleMessage(widget.type)]),
-                style: AppTextStyle.darkPurpleRegularS14,
+                style: AppTextStyle.regular.s14,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -63,7 +63,7 @@ class _ModalChooseVerifyMethodState
                         Utils.getLocaleMessage(
                           LocaleKeys.authenticationPasswordInputTitle,
                         ),
-                        style: AppTextStyle.whiteBoldS14,
+                        style: AppTextStyle.bold.s14,
                       ),
                       backgroundColor: AppColors.egglantColor,
                       onPressed: widget.passwordMethodPress,
@@ -78,9 +78,10 @@ class _ModalChooseVerifyMethodState
                   Utils.getLocaleMessage(
                     LocaleKeys.settingAccountChangeVerificationCode,
                   ),
-                  style: AppTextStyle.whiteBoldS14,
+                  style: AppTextStyle.bold.s14.copyWith(
+                      color: Theme.of(context).colorScheme.background),
                 ),
-                backgroundColor: AppColors.egglantColor,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 onPressed: widget.verificationCodeMethodPress,
               ),
             ),

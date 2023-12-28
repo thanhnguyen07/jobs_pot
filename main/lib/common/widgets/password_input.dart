@@ -46,7 +46,8 @@ class _PasswordInputState extends State<PasswordInput> {
       formController: widget.formControlPassword,
       title: Text(
         getTitle(),
-        style: AppTextStyle.darkPurpleBoldS14,
+        style: AppTextStyle.bold.s14
+            .copyWith(color: Theme.of(context).colorScheme.primary),
       ),
       validationMessages: {
         ValidationKeys.required: (error) =>

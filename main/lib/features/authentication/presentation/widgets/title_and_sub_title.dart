@@ -14,27 +14,24 @@ class TitleAndSubTitle extends StatelessWidget {
   final String? subTitle2;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top + 20, bottom: 40),
-      child: RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-          text: "$title\n",
-          style: AppTextStyle.darkPurpleBoldS30,
-          children: <TextSpan>[
-            TextSpan(
-              text: '$subTitle\n',
-              style: AppTextStyle.textColor1RegularS14,
-              children: <TextSpan>[
-                TextSpan(
-                  text: subTitle2,
-                  style: AppTextStyle.darkPurpleBoldS14,
-                )
-              ],
-            )
-          ],
-        ),
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: "$title\n",
+        style: AppTextStyle.bold.s30
+            .copyWith(color: Theme.of(context).colorScheme.primary),
+        children: <TextSpan>[
+          TextSpan(
+            text: '$subTitle\n',
+            style: AppTextStyle.regular.s14,
+            children: <TextSpan>[
+              TextSpan(
+                text: subTitle2,
+                style: AppTextStyle.bold.s14,
+              )
+            ],
+          )
+        ],
       ),
     );
   }

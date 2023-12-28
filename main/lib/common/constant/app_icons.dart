@@ -76,6 +76,8 @@ class AppSvgIcons {
   static const barsSort = 'lib/assets/iconsSvg/bars-sort.svg';
   static const barsStaggered = 'lib/assets/iconsSvg/bars-staggered.svg';
   static const apps = 'lib/assets/iconsSvg/apps.svg';
+  static const dark = 'lib/assets/iconsSvg/dark.svg';
+  static const light = 'lib/assets/iconsSvg/light.svg';
 }
 
 class AppPngIcons {
@@ -98,6 +100,10 @@ class AppPngIcons {
   static const appleLogo = 'lib/assets/iconsPng/company/apple_logo.png';
   static const hello = 'lib/assets/iconsPng/hello.png';
   static const password = 'lib/assets/iconsPng/password.png';
+  static const delete = 'lib/assets/iconsPng/delete.png';
+  static const sun = 'lib/assets/iconsPng/sun.png';
+  static const moon = 'lib/assets/iconsPng/moon.png';
+  static const system = 'lib/assets/iconsPng/system.png';
 
   static const arabic = 'lib/assets/iconsPng/languages/arabic.svg';
   static const english = 'lib/assets/iconsPng/languages/english.svg';

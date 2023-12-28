@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
-import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
@@ -57,7 +56,7 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
           items: [
             _homeIcon(),
             _postIcon(),
-            _addIcon(),
+            _addIcon(context),
             _chatIcon(),
             _profileIcon(),
           ],
@@ -75,19 +74,21 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
     );
   }
 
-  Widget _svgAddIcon({bool activeIcon = false}) {
+  Widget _svgAddIcon({bool activeIcon = false, BuildContext? context}) {
     return Container(
       width: 40,
       height: 40,
-      decoration: const BoxDecoration(
-        color: AppColors.egglantColor,
+      decoration: BoxDecoration(
+        color: context != null
+            ? Theme.of(context).colorScheme.primary
+            : AppColors.egglantColor,
         shape: BoxShape.circle,
       ),
       padding: const EdgeInsets.all(13),
       child: SvgPicture.asset(
         AppSvgIcons.add,
         colorFilter: ColorFilter.mode(
-            activeIcon ? AppColors.fireYellowColor : Colors.white,
+            activeIcon ? AppColors.fireYellowColor : AppColors.white,
             BlendMode.srcIn),
       ),
     );
@@ -125,10 +126,10 @@ class _HomeStackScreenState extends ConsumerState<HomeStackScreen> {
     );
   }
 
-  BottomNavigationBarItem _addIcon() {
+  BottomNavigationBarItem _addIcon(BuildContext context) {
     return BottomNavigationBarItem(
         label: '',
-        icon: _svgAddIcon(),
+        icon: _svgAddIcon(context: context),
         activeIcon: _svgAddIcon(activeIcon: true));
   }
 

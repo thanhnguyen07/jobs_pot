@@ -25,11 +25,15 @@ class Header extends StatelessWidget {
           onPressed: onBack,
           child: SvgPicture.asset(
             AppSvgIcons.back,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.onBackground,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         Text(
           Utils.getLocaleMessage(titleKey),
-          style: AppTextStyle.darkPurpleBoldS18,
+          style: AppTextStyle.bold.s20,
         ),
         rightButton != null
             ? rightButton!

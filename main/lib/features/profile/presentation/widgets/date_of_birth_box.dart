@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
-import 'package:jobs_pot/common/constant/app_style.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
@@ -40,7 +38,7 @@ class _DateOfBirthBoxState extends ConsumerState<DateOfBirthBox> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _title(),
+        _title(context),
         _dateOfBirthBox(context, editProfileState, userData),
       ],
     );
@@ -83,7 +81,12 @@ class _DateOfBirthBoxState extends ConsumerState<DateOfBirthBox> {
       },
       child: Container(
         height: 50,
-        decoration: AppStyles.boxStyle,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          color: Theme.of(context).colorScheme.background,
+        ),
         margin: const EdgeInsets.only(bottom: 10),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -92,15 +95,15 @@ class _DateOfBirthBoxState extends ConsumerState<DateOfBirthBox> {
             children: [
               Text(
                 getDateOfBirth(),
-                style: AppTextStyle.darkPurpleRegularS14,
+                style: AppTextStyle.regular.s14,
               ),
               SvgPicture.asset(
                 AppSvgIcons.calendar,
                 width: 30,
                 height: 30,
                 fit: BoxFit.cover,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.iconColor,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.onBackground,
                   BlendMode.srcIn,
                 ),
               )
@@ -111,12 +114,13 @@ class _DateOfBirthBoxState extends ConsumerState<DateOfBirthBox> {
     );
   }
 
-  Container _title() {
+  Container _title(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         Utils.getLocaleMessage(LocaleKeys.profileDateOfBirthTitle),
-        style: AppTextStyle.darkPurpleBoldS14,
+        style: AppTextStyle.bold.s14
+            .copyWith(color: Theme.of(context).colorScheme.onPrimary),
       ),
     );
   }

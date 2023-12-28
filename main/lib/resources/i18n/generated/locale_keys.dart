@@ -150,5 +150,6 @@ abstract class  LocaleKeys {
   static const settingAccountDeleteAccount = 'settingAccountDeleteAccount';
   static const editProfileUpdateTitle = 'editProfileUpdateTitle';
   static const drawerBookmarkTitle = 'drawerBookmarkTitle';
+  static const accountOverviewTitle = 'accountOverviewTitle';
 
 }

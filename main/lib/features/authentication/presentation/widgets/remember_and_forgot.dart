@@ -55,7 +55,7 @@ class _RememberAndForgotState extends ConsumerState<RememberAndForgot> {
           child: Container(
             width: 24,
             height: 24,
-            color: AppColors.lavenderColor,
+            color: Theme.of(context).colorScheme.primary,
             child: TextButton(
               onPressed: () {
                 ref.read(rememberLoginController.notifier).changeStatus();
@@ -71,8 +71,9 @@ class _RememberAndForgotState extends ConsumerState<RememberAndForgot> {
                           AppSvgIcons.checked,
                           width: 10,
                           height: 10,
-                          colorFilter: const ColorFilter.mode(
-                              AppColors.darkPurpleColor, BlendMode.srcIn),
+                          colorFilter: ColorFilter.mode(
+                              Theme.of(context).colorScheme.onPrimary,
+                              BlendMode.srcIn),
                         )
                       : const SizedBox(),
                 ],
@@ -81,11 +82,12 @@ class _RememberAndForgotState extends ConsumerState<RememberAndForgot> {
           ),
         ),
         const SizedBox(
-          width: 15,
+          width: 10,
         ),
         Text(
           Utils.getLocaleMessage(LocaleKeys.authenticationRememberMe),
-          style: AppTextStyle.textlavenderGraS12,
+          style: AppTextStyle.regular.s14
+              .copyWith(color: Theme.of(context).colorScheme.secondary),
         )
       ],
     );
@@ -95,7 +97,7 @@ class _RememberAndForgotState extends ConsumerState<RememberAndForgot> {
     return TextButton(
       child: Text(
         Utils.getLocaleMessage(LocaleKeys.authenticationForgotPassword),
-        style: AppTextStyle.darkPurpleRegularS12,
+        style: AppTextStyle.regular.s14,
       ),
       onPressed: () {
         context.router.pushNamed(ForgotPasswordScreen.path);

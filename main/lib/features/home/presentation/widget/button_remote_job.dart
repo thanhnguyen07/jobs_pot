@@ -50,10 +50,14 @@ class _ButtonRemoteJobState extends ConsumerState<ButtonRemoteJob> {
                 child: Container(
                   width: 50,
                   height: 50,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.background,
                   padding: const EdgeInsets.all(13),
                   child: SvgPicture.asset(
                     AppSvgIcons.houseSignal,
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.onBackground,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
@@ -61,12 +65,16 @@ class _ButtonRemoteJobState extends ConsumerState<ButtonRemoteJob> {
                 margin: const EdgeInsets.only(top: 10),
                 child: Text(
                   Utils.getNumberOfJob(jobsSummaryData?.remoteJob),
-                  style: AppTextStyle.blackBoldS16,
+                  style: AppTextStyle.bold.s16.copyWith(
+                    color: AppColors.black,
+                  ),
                 ),
               ),
               Text(
                 Utils.getLocaleMessage(LocaleKeys.homeRemoteJobTitle),
-                style: AppTextStyle.darkPurpleRegularS14,
+                style: AppTextStyle.regular.s14.copyWith(
+                  color: AppColors.black,
+                ),
               )
             ],
           ),

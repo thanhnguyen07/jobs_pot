@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
@@ -40,21 +39,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.watch(languageControllerProvider);
 
     return Scaffold(
-      body: Container(
-        color: AppColors.backgroundColor,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _header(context),
-              CouponCard(
-                onPress: () {},
-              ),
-              const FindYouJob(),
-              const RecentRemoteJob(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _header(context),
+            CouponCard(
+              onPress: () {},
+            ),
+            const FindYouJob(),
+            const RecentRemoteJob(),
+          ],
         ),
       ),
     );
@@ -73,54 +69,69 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         children: [
           Row(
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  scaffoldBottomNavigationKey.currentState?.openDrawer();
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(50, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  elevation: 5,
-                  padding: EdgeInsets.zero,
-                ),
-                child: SvgPicture.asset(
-                  AppSvgIcons.apps,
-                ),
-              ),
+              _menu(),
               const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _helloText(),
-                  Text(
-                    userData!.userName,
-                    style: AppTextStyle.boldItalic.black18,
-                  ),
-                ],
-              ),
+              _headerText(userData),
             ],
           ),
-          TextButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              minimumSize: const Size(50, 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              padding: EdgeInsets.zero,
-              backgroundColor: Colors.white,
-            ),
-            child: SvgPicture.asset(
-              AppSvgIcons.search,
-              colorFilter: const ColorFilter.mode(
-                AppColors.blackColor,
-                BlendMode.srcIn,
-              ),
-            ),
-          )
+          _search(context)
         ],
+      ),
+    );
+  }
+
+  ElevatedButton _search(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(50, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        padding: EdgeInsets.zero,
+      ),
+      child: SvgPicture.asset(
+        AppSvgIcons.search,
+        colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.onBackground,
+          BlendMode.srcIn,
+        ),
+      ),
+    );
+  }
+
+  Column _headerText(UserEntity? userData) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _helloText(),
+        Text(
+          userData!.userName,
+          style: AppTextStyle.boldItalic.s18,
+        ),
+      ],
+    );
+  }
+
+  ElevatedButton _menu() {
+    return ElevatedButton(
+      onPressed: () {
+        scaffoldBottomNavigationKey.currentState?.openDrawer();
+      },
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(50, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        elevation: 5,
+        padding: EdgeInsets.zero,
+      ),
+      child: SvgPicture.asset(
+        AppSvgIcons.apps,
+        colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.onBackground,
+          BlendMode.srcIn,
+        ),
       ),
     );
   }
@@ -130,7 +141,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       children: [
         Text(
           Utils.getLocaleMessage(LocaleKeys.homeHelloTitle),
-          style: AppTextStyle.mediumItalic.black16,
+          style: AppTextStyle.mediumItalic.s16,
         ),
         const SizedBox(width: 5),
         Image.asset(

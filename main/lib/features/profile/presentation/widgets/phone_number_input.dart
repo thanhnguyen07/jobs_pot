@@ -41,11 +41,17 @@ class _PhoneNumberInputState extends ConsumerState<PhoneNumberInput> {
           margin: const EdgeInsets.symmetric(vertical: 10),
           child: Text(
             Utils.getLocaleMessage(LocaleKeys.profilePhoneNumberTitle),
-            style: AppTextStyle.darkPurpleBoldS14,
+            style: AppTextStyle.bold.s14
+                .copyWith(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ),
         Container(
-          decoration: AppStyles.boxStyle,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            color: Theme.of(context).colorScheme.background,
+          ),
           padding: const EdgeInsets.only(left: 10),
           child: InternationalPhoneNumberInput(
             isEnabled: !editProfileState,
@@ -56,7 +62,9 @@ class _PhoneNumberInputState extends ConsumerState<PhoneNumberInput> {
             },
             spaceBetweenSelectorAndTextField: 0,
             initialValue: number,
-            selectorTextStyle: AppTextStyle.darkPurpleBoldS14,
+            selectorTextStyle: AppTextStyle.bold.s14.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
             selectorConfig: const SelectorConfig(
               selectorType: PhoneInputSelectorType.DIALOG,
               trailingSpace: false,
@@ -67,12 +75,16 @@ class _PhoneNumberInputState extends ConsumerState<PhoneNumberInput> {
                   Utils.getLocaleMessage(
                     LocaleKeys.profilePhoneNumberHintText,
                   ),
-              hintStyle: AppTextStyle.darkPurpleRegularS14,
+              hintStyle: AppTextStyle.regular.s14.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
               border: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),
             ),
-            textStyle: AppTextStyle.darkPurpleRegularS14,
+            textStyle: AppTextStyle.regular.s14.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
           ),
         ),
       ],
