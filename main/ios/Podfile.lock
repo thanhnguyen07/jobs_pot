@@ -5,6 +5,9 @@ PODS:
   - AppAuth/Core (1.6.2)
   - AppAuth/ExternalUserAgent (1.6.2):
     - AppAuth/Core
+  - camerawesome (0.0.1):
+    - Flutter
+    - JPSVolumeButtonHandler
   - FBAEMKit (16.2.1):
     - FBSDKCoreKit_Basics (= 16.2.1)
   - FBSDKCoreKit (16.2.1):
@@ -21,14 +24,14 @@ PODS:
   - Firebase/Storage (10.18.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.18.0)
-  - firebase_auth (4.15.1):
+  - firebase_auth (4.15.3):
     - Firebase/Auth (= 10.18.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.24.1):
+  - firebase_core (2.24.2):
     - Firebase/CoreOnly (= 10.18.0)
     - Flutter
-  - firebase_storage (11.5.4):
+  - firebase_storage (11.5.6):
     - Firebase/Storage (= 10.18.0)
     - firebase_core
     - Flutter
@@ -66,11 +69,12 @@ PODS:
     - Toast
   - google_sign_in_ios (0.0.1):
     - Flutter
-    - GoogleSignIn (~> 6.2)
-  - GoogleSignIn (6.2.4):
+    - FlutterMacOS
+    - GoogleSignIn (~> 7.0)
+  - GoogleSignIn (7.0.0):
     - AppAuth (~> 1.5)
-    - GTMAppAuth (~> 1.3)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
+    - GTMAppAuth (< 3.0, >= 1.3)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.1)
   - GoogleUtilities/AppDelegateSwizzler (7.12.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -86,12 +90,13 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.12.0)"
   - GoogleUtilities/Reachability (7.12.0):
     - GoogleUtilities/Logger
-  - GTMAppAuth (1.3.1):
+  - GTMAppAuth (2.0.0):
     - AppAuth/Core (~> 1.6)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.5)
   - GTMSessionFetcher/Core (2.3.0)
   - image_picker_ios (0.0.1):
     - Flutter
+  - JPSVolumeButtonHandler (1.0.5)
   - libphonenumber_plugin (0.0.1):
     - Flutter
     - PhoneNumberKit
@@ -114,6 +119,7 @@ PODS:
   - Toast (4.0.0)
 
 DEPENDENCIES:
+  - camerawesome (from `.symlinks/plugins/camerawesome/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
@@ -121,7 +127,7 @@ DEPENDENCIES:
   - flutter_facebook_auth (from `.symlinks/plugins/flutter_facebook_auth/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
+  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - libphonenumber_plugin (from `.symlinks/plugins/libphonenumber_plugin/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -147,12 +153,15 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
+    - JPSVolumeButtonHandler
     - PhoneNumberKit
     - PromisesObjC
     - RecaptchaInterop
     - Toast
 
 EXTERNAL SOURCES:
+  camerawesome:
+    :path: ".symlinks/plugins/camerawesome/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
@@ -168,7 +177,7 @@ EXTERNAL SOURCES:
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   google_sign_in_ios:
-    :path: ".symlinks/plugins/google_sign_in_ios/ios"
+    :path: ".symlinks/plugins/google_sign_in_ios/darwin"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   libphonenumber_plugin:
@@ -182,14 +191,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
+  camerawesome: 1e06540f60158809bc70f398ed1ac2cf93fe4188
   FBAEMKit: 4763aa27b8f69eb9d2c274189e91388de1dbd88a
   FBSDKCoreKit: 40ae989ca1da1bbeba56acd4671dde64ad415506
   FBSDKCoreKit_Basics: 1257d71d2d692661290bf2af4bea5f9a101387af
   FBSDKLoginKit: bf4f96d0ce475de2da4b1800ce150bd8a6f120f3
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
-  firebase_auth: d6737fa2721c9dfc57ca16a1bb57c244a4ae9332
-  firebase_core: 3d2a3f6e075df5207950cc5577202ed2e6805d9e
-  firebase_storage: a1cdbaa40928d5b8d31c8d632ba3e0a80d7d53d4
+  firebase_auth: df44e14f8a93e8a9869d91695bd3f8e53d2c9f5a
+  firebase_core: 0af4a2b24f62071f9bf283691c0ee41556dcb3f5
+  firebase_storage: 62de29ba51989dbf16f6a127a181d7dfd2b71d01
   FirebaseAppCheckInterop: 3cd914842ba46f4304050874cd284de82f154ffd
   FirebaseAuth: 12314b438fa76048540c8fb86d6cfc9e08595176
   FirebaseAuthInterop: 5818713dcd7239beb96c1125e4b14d6a5a910e5f
@@ -201,13 +211,14 @@ SPEC CHECKSUMS:
   flutter_facebook_auth: 24f9040e28e60ef2a8a93fdd1848e18a9cacb148
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   fluttertoast: fafc4fa4d01a6a9e4f772ecd190ffa525e9e2d9c
-  google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
-  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
+  google_sign_in_ios: ede92ec558c3a73ec07cb180f31820152fb8ca89
+  GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
-  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
+  GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
-  libphonenumber_plugin: e8a7d64a6624a7c25f2c4ab0b7ead2a8e341e35e
+  JPSVolumeButtonHandler: 53110330c9168ed325def93eabff39f0fe3e8082
+  libphonenumber_plugin: 48bf4078546377eedaab4aa54978cd0f6fa23072
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   PhoneNumberKit: f3980e01b84615524dd496adee6a1b5ced87d3f4
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4

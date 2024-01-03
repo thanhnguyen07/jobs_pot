@@ -17,7 +17,7 @@ class LoginWithGoogleController extends StateNotifier {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<void> disconnect() async {
-    await FacebookAuth.instance.logOut();
+    await _googleSignIn.disconnect();
   }
 
   Future signInWithGoogle(BuildContext context) async {

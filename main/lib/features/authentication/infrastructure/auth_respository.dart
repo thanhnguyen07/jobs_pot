@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/common/constant/app_keys.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/RefreshTokenResponse/resfresh_token_response_entity.dart';
+import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/UserResponse/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/VerificationCode/verification_code_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
@@ -104,7 +104,7 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, RefreshTokenResponseEntity>> checkAccount(
+  Future<Either<Failure, ErrorResponseEntity>> checkAccount(
       String providerId, String email) async {
     try {
       final Map<String, dynamic> body = {
@@ -113,7 +113,7 @@ class AuthRepository implements AuthRepositoryInterface {
       };
       final refreshTokenRes = await _apiClient.checkAccount(body);
 
-      return right(RefreshTokenResponseEntity.fromJson(refreshTokenRes));
+      return right(ErrorResponseEntity.fromJson(refreshTokenRes));
     } catch (error) {
       return left(const Failure.empty());
     }

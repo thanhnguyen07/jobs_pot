@@ -282,7 +282,49 @@
       "options": {
         "cwd": "${workspaceFolder}/logger"
       }
-    }
+    },
     // END logger.
+
+    // START camer_awesome.
+    {
+      "label": "camer_awesome - flutter pub get",
+      "type": "shell",
+      "command": "fvm flutter pub get",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/camer_awesome"
+      }
+    },
+    {
+      "label": "camer_awesome - flutter clean",
+      "type": "shell",
+      "command": "fvm flutter clean",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/camer_awesome"
+      }
+    },
+    {
+      "label": "camer_awesome - flutter pub upgrade",
+      "type": "shell",
+      "command": "fvm flutter pub upgrade --major-versions",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/camer_awesome"
+      }
+    }
+    // END camer_awesome.
   ]
 }

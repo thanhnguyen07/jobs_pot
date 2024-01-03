@@ -62,10 +62,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Allow photo access to add photos to your profile.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow photo access to add photos to your profile.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow photo access to add photos to your profile.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
@@ -89,5 +85,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Your own description</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To enable microphone access when recording video</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To enable GPS location access for Exif data</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

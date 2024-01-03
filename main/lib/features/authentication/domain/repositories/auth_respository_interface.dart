@@ -1,5 +1,5 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/RefreshTokenResponse/resfresh_token_response_entity.dart';
+import 'package:jobs_pot/database/entities/error_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/UserResponse/user_response_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/VerificationCode/verification_code_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
@@ -20,6 +20,6 @@ abstract class AuthRepositoryInterface {
 
   Future<Either<Failure, VerificationCodeEntity>> sendVerifyCode(String code);
 
-  Future<Either<Failure, RefreshTokenResponseEntity>> checkAccount(
+  Future<Either<Failure, ErrorResponseEntity>> checkAccount(
       String providerId, String email);
 }

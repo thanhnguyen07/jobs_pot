@@ -11,6 +11,7 @@ import 'package:jobs_pot/features/home/presentation/widget/button_jobs.dart';
 import 'package:jobs_pot/features/home/presentation/widget/coupon_card.dart';
 import 'package:jobs_pot/features/home/presentation/widget/recent_job_list.dart';
 import 'package:jobs_pot/features/home_stack/presentation/screens/bottom_navigation_screen.dart';
+import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -82,7 +83,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   ElevatedButton _search(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        context.router.navigateNamed(SaveJobScreen.path);
+      },
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(50, 50),
         shape: RoundedRectangleBorder(

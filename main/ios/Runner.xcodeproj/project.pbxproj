@@ -758,7 +758,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = 6N8WRQ35AV;
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -828,6 +828,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ABB456AECE2D3688A8C784A5 /* Pods-Runner.debug-production.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-production";
@@ -836,6 +837,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E9D6A4BCF6316B84A0139514 /* Pods-Runner.profile-production.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-production";
@@ -844,6 +846,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BEA4D2C03FD0246DF9DFDAA4 /* Pods-Runner.release-production.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-production";
@@ -852,7 +855,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 252B85B37EE324758ECF6C02 /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				PRODUCT_NAME = Runner;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = "Debug-dev";
 		};
@@ -860,7 +867,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1D8F4F9B927BC06E6C428F6 /* Pods-Runner.profile-dev.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				PRODUCT_NAME = Runner;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = "Profile-dev";
 		};
@@ -868,7 +879,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B4D32666BB7DB52ACDAFAEC8 /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				PRODUCT_NAME = Runner;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = "Release-dev";
 		};
@@ -1035,7 +1050,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = 6N8WRQ35AV;
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1060,7 +1075,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = 6N8WRQ35AV;
+				DEVELOPMENT_TEAM = C695NKCKX3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

@@ -24,7 +24,7 @@ class FLAVER {
       case Flavor.production:
         return 'https://server-jobs-pot.vercel.app/';
       case Flavor.dev:
-        return 'http://localhost:7002/';
+        return 'http://192.168.15.53:7002/';
       default:
         return 'https://server-jobs-pot.vercel.app/';
     }
