@@ -137,7 +137,12 @@ class _AwesomeCameraGestureDetector
           ),
       },
       child: Stack(children: [
-        Positioned.fill(child: widget.child),
+        Positioned.fill(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: widget.child,
+          ),
+        ),
         if (_tapPosition != null &&
             widget.onPreviewTapBuilder?.onPreviewTap.onTapPainter != null)
           widget.onPreviewTapBuilder!.onPreviewTap.onTapPainter!(_tapPosition!),

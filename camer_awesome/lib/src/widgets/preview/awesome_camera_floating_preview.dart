@@ -42,7 +42,6 @@ class _AwesomeCameraFloatingPreviewState
       left: _position.dx,
       top: _position.dy,
       child: AwesomeBouncingWidget(
-        // TODO We can tap behind the preview with the current AwesomeBouncingWidget implementation
         onTap: widget.pictureInPictureConfig.onTap,
         disabledOpacity: 1.0,
         child: GestureDetector(
@@ -60,12 +59,12 @@ class _AwesomeCameraFloatingPreviewState
               AnimatedPreviewFit(
                 previewFit: CameraPreviewFit.cover,
                 previewSize: PreviewSize(
-                  width: 1000,
-                  height: 1000 / widget.aspectRatio,
-                ), // FIXME  we don't know preview size of other sensors
+                  width: 150,
+                  height: 200,
+                ),
                 constraints: const BoxConstraints(
-                  maxWidth: 300,
-                  maxHeight: 300,
+                  maxWidth: 150,
+                  maxHeight: 200,
                 ),
                 sensor: widget.sensor,
                 child: widget.texture,

@@ -20,9 +20,9 @@ class _SaveJobScreenState extends ConsumerState<SaveJobScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
+      backgroundColor: Colors.black,
+      body: Container(
+        margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child: CameraAwesomeBuilder.awesome(
           sensorConfig: SensorConfig.multiple(
             sensors: [
@@ -38,15 +38,11 @@ class _SaveJobScreenState extends ConsumerState<SaveJobScreen> {
               final Directory extDir = await getTemporaryDirectory();
               final testDir = await Directory('${extDir.path}/camerawesome')
                   .create(recursive: true);
-
-              // 2.
               if (sensors.length == 1) {
                 final String filePath =
                     '${testDir.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
-                // 3.
                 return SingleCaptureRequest(filePath, sensors.first);
               } else {
-                // 4.
                 return MultipleCaptureRequest(
                   {
                     for (final sensor in sensors)
@@ -56,7 +52,6 @@ class _SaveJobScreenState extends ConsumerState<SaveJobScreen> {
                 );
               }
             },
-            // Other params
           ),
           pictureInPictureConfigBuilder: (index, sensor) {
             return PictureInPictureConfig(
@@ -86,51 +81,46 @@ class _SaveJobScreenState extends ConsumerState<SaveJobScreen> {
               ),
             );
           },
-          previewFit: CameraPreviewFit.fitWidth,
+          previewFit: CameraPreviewFit.cover,
           middleContentBuilder: (state) {
             return Column(
               children: [
-                const Spacer(),
                 Builder(builder: (context) {
-                  return Container(
-                    color: AwesomeThemeProvider.of(context)
-                        .theme
-                        .bottomActionsBackgroundColor,
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: AwesomeCameraModeSelector(state: state),
-                    ),
+                  return Align(
+                    alignment: Alignment.bottomCenter,
+                    child: AwesomeCameraModeSelector(state: state),
                   );
                 }),
               ],
             );
           },
-          bottomActionsBuilder: (state) => AwesomeBottomActions(
-            state: state,
-            left: null,
-            right: AwesomeCameraSwitchButton(
+          bottomActionsBuilder: (state) {
+            return AwesomeBottomActions(
               state: state,
-              theme: AwesomeTheme(
-                buttonTheme: AwesomeButtonTheme(
-                  backgroundColor: Colors.white12,
+              left: null,
+              right: AwesomeCameraSwitchButton(
+                state: state,
+                theme: AwesomeTheme(
+                  buttonTheme: AwesomeButtonTheme(
+                    backgroundColor: Colors.white12,
+                  ),
                 ),
               ),
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 30),
-          ),
+            );
+          },
           topActionsBuilder: (state) {
-            return AwesomeTopActions(
-              state: state,
-              children: [
-                AwesomeFlashButton(state: state),
-              ],
+            return SizedBox(
+              child: AwesomeTopActions(
+                state: state,
+                children: [
+                  AwesomeFlashButton(state: state),
+                ],
+              ),
             );
           },
           theme: AwesomeTheme(
             bottomActionsBackgroundColor: Colors.black,
           ),
-          previewPadding: const EdgeInsets.all(20),
-          previewAlignment: Alignment.center,
         ),
       ),
     );

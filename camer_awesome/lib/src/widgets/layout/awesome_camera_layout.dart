@@ -45,23 +45,26 @@ class AwesomeCameraLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AwesomeThemeProvider.of(context).theme;
-    return SafeArea(
-      bottom: false,
+    return SizedBox(
       child: Column(
         children: [
-          topActions,
-          Expanded(child: middleContent),
-          Container(
-            color: theme.bottomActionsBackgroundColor,
-            child: SafeArea(
-              top: false,
-              child: Column(
-                children: [
-                  bottomActions,
-                ],
-              ),
+          SizedBox(
+            height: 120,
+            child: topActions,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.width * 4 / 3,
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                middleContent,
+                bottomActions,
+              ],
             ),
           ),
+          // color: theme.bottomActionsBackgroundColor,
         ],
       ),
     );
