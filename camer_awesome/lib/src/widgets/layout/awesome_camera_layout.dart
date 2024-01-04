@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:camerawesome/src/logger.dart';
 import 'package:camerawesome/src/orchestrator/models/capture_modes.dart';
 import 'package:camerawesome/src/orchestrator/states/states.dart';
 import 'package:camerawesome/src/widgets/awesome_camera_mode_selector.dart';
@@ -16,36 +17,29 @@ import 'package:flutter/material.dart';
 /// This widget doesn't handle [PreparingCameraState]
 class AwesomeCameraLayout extends StatelessWidget {
   final CameraState state;
-  final Widget middleContent;
+  final Widget? middleContent;
   final Widget topActions;
   final Widget bottomActions;
+  final Function()? reSetState;
 
   AwesomeCameraLayout({
     super.key,
     required this.state,
     OnMediaTap? onMediaTap,
-    Widget? middleContent,
+    this.middleContent,
     Widget? topActions,
     Widget? bottomActions,
-  })  : middleContent = middleContent ??
-            (Column(
-              children: [
-                const Spacer(),
-                if (state is PhotoCameraState && state.hasFilters)
-                  AwesomeFilterWidget(state: state)
-                else if (!kIsWeb && Platform.isAndroid)
-                  AwesomeZoomSelector(state: state),
-                AwesomeCameraModeSelector(state: state),
-              ],
-            )),
-        topActions = topActions ?? AwesomeTopActions(state: state),
+    this.reSetState,
+  })  : topActions = topActions ?? AwesomeTopActions(state: state),
         bottomActions = bottomActions ??
             AwesomeBottomActions(state: state, onMediaTap: onMediaTap);
 
   @override
   Widget build(BuildContext context) {
-    final theme = AwesomeThemeProvider.of(context).theme;
+    // final theme = AwesomeThemeProvider.of(context).theme;
     return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
           SizedBox(
@@ -59,7 +53,13 @@ class AwesomeCameraLayout extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                middleContent,
+                // middleContent ??
+
+                const Spacer(),
+                AwesomeCameraModeSelector(
+                  state: state,
+                  reSetState: reSetState,
+                ),
                 bottomActions,
               ],
             ),

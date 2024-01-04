@@ -33,6 +33,9 @@ class PreparingCameraState extends CameraState {
       case CaptureMode.photo:
         await _startPhotoMode();
         break;
+      case CaptureMode.duo:
+        await _startPhotoMode();
+        break;
       case CaptureMode.video:
         await _startVideoMode();
         break;

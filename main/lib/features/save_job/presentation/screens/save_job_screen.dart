@@ -24,15 +24,7 @@ class _SaveJobScreenState extends ConsumerState<SaveJobScreen> {
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child: CameraAwesomeBuilder.awesome(
-          sensorConfig: SensorConfig.multiple(
-            sensors: [
-              Sensor.position(SensorPosition.back),
-              Sensor.position(SensorPosition.front),
-            ],
-            flashMode: FlashMode.auto,
-            aspectRatio: CameraAspectRatios.ratio_4_3,
-          ),
-          saveConfig: SaveConfig.photoAndVideo(
+          saveConfig: SaveConfig.custom(
             photoPathBuilder: (sensors) async {
               // 1.
               final Directory extDir = await getTemporaryDirectory();

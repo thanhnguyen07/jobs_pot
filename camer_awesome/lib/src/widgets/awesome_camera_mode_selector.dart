@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 
 class AwesomeCameraModeSelector extends StatelessWidget {
   final CameraState state;
+  final Function()? reSetState;
 
   const AwesomeCameraModeSelector({
     super.key,
     required this.state,
+    this.reSetState,
   });
 
   @override
@@ -24,7 +26,10 @@ class AwesomeCameraModeSelector extends StatelessWidget {
       content = CameraModePager(
         initialMode: state.captureMode,
         availableModes: state.saveConfig!.captureModes,
-        onChangeCameraRequest: (mode) {
+        onChangeCameraRequest: (mode) async {
+          if (reSetState != null) {
+            await reSetState!();
+          }
           state.setState(mode);
         },
       );

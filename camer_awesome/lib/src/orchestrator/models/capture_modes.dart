@@ -5,6 +5,7 @@ enum CaptureMode {
   photo,
   video,
   preview,
+  duo,
   // ignore: constant_identifier_names
   analysis_only;
 
@@ -17,6 +18,8 @@ enum CaptureMode {
       return PreviewCameraState(cameraContext: cameraContext);
     } else if (this == CaptureMode.analysis_only) {
       return AnalysisCameraState(cameraContext: cameraContext);
+    } else if (this == CaptureMode.duo) {
+      return DuoCameraState.from(cameraContext);
     }
     throw "State not recognized";
   }

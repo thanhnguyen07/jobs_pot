@@ -7,6 +7,7 @@ typedef CaptureRequestBuilder = Future<CaptureRequest> Function(
 
 class SaveConfig {
   final CaptureRequestBuilder? photoPathBuilder;
+  final CaptureRequestBuilder? duoPathBuilder;
   final CaptureRequestBuilder? videoPathBuilder;
   final List<CaptureMode> captureModes;
   final CaptureMode initialCaptureMode;
@@ -19,6 +20,7 @@ class SaveConfig {
   SaveConfig._({
     this.photoPathBuilder,
     this.videoPathBuilder,
+    this.duoPathBuilder,
     required this.captureModes,
     required this.initialCaptureMode,
     this.videoOptions,
@@ -72,6 +74,30 @@ class SaveConfig {
               (sensors) => AwesomeCaptureRequestBuilder()
                   .build(captureMode: CaptureMode.video, sensors: sensors),
           captureModes: [CaptureMode.photo, CaptureMode.video],
+          initialCaptureMode: initialCaptureMode,
+          videoOptions: videoOptions,
+          exifPreferences: exifPreferences,
+          mirrorFrontCamera: mirrorFrontCamera,
+        );
+  SaveConfig.custom({
+    CaptureRequestBuilder? photoPathBuilder,
+    CaptureRequestBuilder? videoPathBuilder,
+    CaptureRequestBuilder? duoPathBuilder,
+    CaptureMode initialCaptureMode = CaptureMode.photo,
+    VideoOptions? videoOptions,
+    ExifPreferences? exifPreferences,
+    bool mirrorFrontCamera = false,
+  }) : this._(
+          photoPathBuilder: photoPathBuilder ??
+              (sensors) => AwesomeCaptureRequestBuilder()
+                  .build(captureMode: CaptureMode.photo, sensors: sensors),
+          duoPathBuilder: photoPathBuilder ??
+              (sensors) => AwesomeCaptureRequestBuilder()
+                  .build(captureMode: CaptureMode.photo, sensors: sensors),
+          videoPathBuilder: videoPathBuilder ??
+              (sensors) => AwesomeCaptureRequestBuilder()
+                  .build(captureMode: CaptureMode.video, sensors: sensors),
+          captureModes: [CaptureMode.photo, CaptureMode.duo],
           initialCaptureMode: initialCaptureMode,
           videoOptions: videoOptions,
           exifPreferences: exifPreferences,

@@ -28,6 +28,7 @@ class AwesomeCameraPreview extends StatefulWidget {
   final EdgeInsets padding;
   final Alignment alignment;
   final PictureInPictureConfigBuilder? pictureInPictureConfigBuilder;
+  final Function()? reSetState;
 
   const AwesomeCameraPreview({
     super.key,
@@ -41,6 +42,7 @@ class AwesomeCameraPreview extends StatefulWidget {
     required this.padding,
     required this.alignment,
     this.pictureInPictureConfigBuilder,
+    this.reSetState,
   });
 
   @override
@@ -62,7 +64,6 @@ class AwesomeCameraPreviewState extends State<AwesomeCameraPreview> {
   double? _aspectRatioValue;
   Preview? _preview;
 
-  // TODO: fetch this value from the native side
   final int kMaximumSupportedFloatingPreview = 3;
 
   @override
@@ -109,6 +110,8 @@ class AwesomeCameraPreviewState extends State<AwesomeCameraPreview> {
 
   Future _loadTextures() async {
     // ignore: invalid_use_of_protected_member
+    print("================ _loadTextures");
+    _textures.clear();
     final sensors = widget.state.cameraContext.sensorConfig.sensors.length;
 
     // Set it to true to debug the floating preview on a device that doesn't
@@ -142,6 +145,10 @@ class AwesomeCameraPreviewState extends State<AwesomeCameraPreview> {
     super.dispose();
   }
 
+  bool checkDuoMode() {
+    return widget.state.captureMode == CaptureMode.duo ? true : false;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_textures.isEmpty || _previewSize == null || _aspectRatio == null) {
@@ -157,85 +164,166 @@ class AwesomeCameraPreviewState extends State<AwesomeCameraPreview> {
       color: Colors.black,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 120, left: 5, right: 5),
-                  child: AnimatedPreviewFit(
-                    previewFit: widget.previewFit,
-                    previewSize: PreviewSize(
-                      width: MediaQuery.of(context).size.width - 10,
-                      height: MediaQuery.of(context).size.width *
-                          _aspectRatioValue!,
-                    ),
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width - 10,
-                      maxHeight: MediaQuery.of(context).size.width *
-                          _aspectRatioValue!,
-                    ),
-                    // previewSize: _previewSize!,
-                    // constraints: constraints,
-                    sensor: widget.state.sensorConfig.sensors.first,
-                    onPreviewCalculated: (preview) {
-                      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                        if (mounted) {
-                          setState(() {
-                            _preview = preview;
-                          });
-                        }
-                      });
-                    },
-                    child: AwesomeCameraGestureDetector(
-                      onPreviewTapBuilder:
-                          widget.onPreviewTap != null && _previewSize != null
-                              ? OnPreviewTapBuilder(
-                                  pixelPreviewSizeGetter: () => _previewSize!,
-                                  flutterPreviewSizeGetter: () =>
-                                      _previewSize!, //croppedPreviewSize,
-                                  onPreviewTap: widget.onPreviewTap!,
-                                )
-                              : null,
-                      onPreviewScale: widget.onPreviewScale,
-                      initialZoom: widget.state.sensorConfig.zoom,
-                      child: StreamBuilder<AwesomeFilter>(
-                        //FIX performances
-                        stream: widget.state.filter$,
-                        builder: (context, snapshot) {
-                          return snapshot.hasData &&
-                                  snapshot.data != AwesomeFilter.None
-                              ? ColorFiltered(
-                                  colorFilter: snapshot.data!.preview,
-                                  child: _textures.first,
-                                )
-                              : _textures.first;
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              if (widget.previewDecoratorBuilder != null && _preview != null)
-                Positioned.fill(
-                  child: widget.previewDecoratorBuilder!(
-                    widget.state,
-                    _preview!,
-                  ),
-                ),
-              if (_preview != null)
-                Positioned.fill(
-                  child: widget.interfaceBuilder(
-                    widget.state,
-                    _preview!,
-                  ),
-                ),
-              // TODO: be draggable
-              // TODO: add shadow & border
-              ..._buildPreviewTextures(),
-            ],
-          );
+          return checkDuoMode()
+              ? _previewDuoMode(context, constraints)
+              : _defaultMode(context, constraints);
         },
       ),
+    );
+  }
+
+  Stack _previewDuoMode(BuildContext context, BoxConstraints constraints) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Container(
+            margin: const EdgeInsets.only(top: 120, left: 5, right: 5),
+            child: AnimatedPreviewFit(
+              previewFit: widget.previewFit,
+              previewSize: PreviewSize(
+                width: MediaQuery.of(context).size.width - 10,
+                height: MediaQuery.of(context).size.width * _aspectRatioValue!,
+              ),
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width - 10,
+                maxHeight:
+                    MediaQuery.of(context).size.width * _aspectRatioValue!,
+              ),
+              sensor: widget.state.sensorConfig.sensors.first,
+              onPreviewCalculated: (preview) {
+                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  if (mounted) {
+                    setState(() {
+                      _preview = preview;
+                    });
+                  }
+                });
+              },
+              child: AwesomeCameraGestureDetector(
+                onPreviewTapBuilder:
+                    widget.onPreviewTap != null && _previewSize != null
+                        ? OnPreviewTapBuilder(
+                            pixelPreviewSizeGetter: () => _previewSize!,
+                            flutterPreviewSizeGetter: () =>
+                                _previewSize!, //croppedPreviewSize,
+                            onPreviewTap: widget.onPreviewTap!,
+                          )
+                        : null,
+                onPreviewScale: widget.onPreviewScale,
+                initialZoom: widget.state.sensorConfig.zoom,
+                child: StreamBuilder<AwesomeFilter>(
+                  //FIX performances
+                  stream: widget.state.filter$,
+                  builder: (context, snapshot) {
+                    return snapshot.hasData &&
+                            snapshot.data != AwesomeFilter.None
+                        ? ColorFiltered(
+                            colorFilter: snapshot.data!.preview,
+                            child: _textures.first,
+                          )
+                        : _textures.first;
+                  },
+                ),
+              ),
+            ),
+          ),
+        ),
+        if (widget.previewDecoratorBuilder != null && _preview != null)
+          Positioned.fill(
+            child: widget.previewDecoratorBuilder!(
+              widget.state,
+              _preview!,
+              null,
+            ),
+          ),
+        if (_preview != null)
+          Positioned.fill(
+            child: widget.interfaceBuilder(
+              widget.state,
+              _preview!,
+              () {
+                if (widget.reSetState != null) {
+                  widget.reSetState!();
+                  _loadTextures();
+                  setState(() {});
+                }
+              },
+            ),
+          ),
+        ..._buildPreviewTextures(),
+      ],
+    );
+  }
+
+  Stack _defaultMode(BuildContext context, BoxConstraints constraints) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: AnimatedPreviewFit(
+            previewFit: widget.previewFit,
+            previewSize: _previewSize!,
+            constraints: constraints,
+            sensor: widget.state.sensorConfig.sensors.first,
+            onPreviewCalculated: (preview) {
+              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                if (mounted) {
+                  setState(() {
+                    _preview = preview;
+                  });
+                }
+              });
+            },
+            child: AwesomeCameraGestureDetector(
+              onPreviewTapBuilder:
+                  widget.onPreviewTap != null && _previewSize != null
+                      ? OnPreviewTapBuilder(
+                          pixelPreviewSizeGetter: () => _previewSize!,
+                          flutterPreviewSizeGetter: () =>
+                              _previewSize!, //croppedPreviewSize,
+                          onPreviewTap: widget.onPreviewTap!,
+                        )
+                      : null,
+              onPreviewScale: widget.onPreviewScale,
+              initialZoom: widget.state.sensorConfig.zoom,
+              child: StreamBuilder<AwesomeFilter>(
+                //FIX performances
+                stream: widget.state.filter$,
+                builder: (context, snapshot) {
+                  return snapshot.hasData && snapshot.data != AwesomeFilter.None
+                      ? ColorFiltered(
+                          colorFilter: snapshot.data!.preview,
+                          child: _textures.first,
+                        )
+                      : _textures.first;
+                },
+              ),
+            ),
+          ),
+        ),
+        if (widget.previewDecoratorBuilder != null && _preview != null)
+          Positioned.fill(
+            child: widget.previewDecoratorBuilder!(
+              widget.state,
+              _preview!,
+              null,
+            ),
+          ),
+        if (_preview != null)
+          Positioned.fill(
+            child: widget.interfaceBuilder(
+              widget.state,
+              _preview!,
+              () {
+                if (widget.reSetState != null) {
+                  widget.reSetState!();
+                  _loadTextures();
+                  setState(() {});
+                }
+              },
+            ),
+          ),
+        ..._buildPreviewTextures(),
+      ],
     );
   }
 
