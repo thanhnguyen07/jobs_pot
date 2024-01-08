@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/change_password_form.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 
 @RoutePage()
 class ChangePasswordScreen extends ConsumerStatefulWidget {

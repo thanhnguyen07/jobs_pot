@@ -4,7 +4,7 @@ import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/input_reactive_forms.dart';
 import 'package:jobs_pot/features/create/create_provider.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';

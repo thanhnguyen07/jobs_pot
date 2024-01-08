@@ -21,7 +21,7 @@ import 'package:jobs_pot/features/setting/presentation/widgets/modal_verificaton
 import 'package:jobs_pot/features/setting/presentation/widgets/provider_button.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/provider_details.dart';
 import 'package:jobs_pot/features/setting/setting_providers.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()

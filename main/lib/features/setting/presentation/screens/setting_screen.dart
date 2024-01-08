@@ -7,7 +7,7 @@ import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/setting/presentation/widgets/settting_button.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 

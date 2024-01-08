@@ -9,7 +9,7 @@ import 'package:jobs_pot/features/home/domain/entities/RecentList/recent_list_en
 import 'package:jobs_pot/features/home/domain/entities/Salary/salary_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/custom_title.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 
 class RecentRemoteJob extends ConsumerStatefulWidget {
   const RecentRemoteJob({

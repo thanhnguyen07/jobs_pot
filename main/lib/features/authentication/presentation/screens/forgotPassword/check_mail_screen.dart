@@ -10,7 +10,7 @@ import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/suggestions_text.dart';
 import 'package:jobs_pot/features/authentication/presentation/widgets/title_and_sub_title.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 @RoutePage()

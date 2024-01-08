@@ -282,7 +282,75 @@
       "options": {
         "cwd": "${workspaceFolder}/logger"
       }
-    }
+    },
     // END logger.
+
+    // START i18n.
+    {
+      "label": "i18n - flutter pub get",
+      "type": "shell",
+      "command": "fvm flutter pub get",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/i18n"
+      }
+    },
+    {
+      "label": "i18n - flutter clean",
+      "type": "shell",
+      "command": "fvm flutter clean",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/i18n"
+      }
+    },
+    {
+      "label": "i18n - flutter pub upgrade",
+      "type": "shell",
+      "command": "fvm flutter pub upgrade --major-versions",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/i18n"
+      }
+    },
+    {
+      "label": "i18n - generate file codegen_loader.g.dart",
+      "type": "shell",
+      "command": "fvm flutter pub run easy_localization:generate -S 'lib/langs' -O 'lib/generated'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/i18n"
+      }
+    },
+    {
+      "label": "i18n - generate file locale_keys.dart",
+      "type": "shell",
+      "command": "fvm flutter pub run easy_localization:generate -S 'lib/langs' -O 'lib/generated' -o 'locale_keys.dart' -f keys",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/i18n"
+      }
+    }
+    // END i18n.
   ]
 }

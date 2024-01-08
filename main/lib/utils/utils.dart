@@ -1,32 +1,22 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/features/home/domain/entities/JobSummary/job_summary_entity.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:local_storage/local_storage.dart';
 
 class Utils {
   static String getLocaleMessage(String key) {
-    return key.tr();
+    return I18n.getLocaleMessage(key);
   }
 
   static String encryptPassword(String password) {
     final bytes = utf8.encode(password);
     final hash = sha256.convert(bytes);
     return hash.toString();
-  }
-
-  static String converDateOfBirth(String date) {
-    try {
-      return DateFormat('dd MMMM yyyy')
-          .format(DateTime.parse(date.toString()).toLocal());
-    } catch (e) {
-      return '';
-    }
   }
 
   static String getNumberOfJob(JobSummaryEntity? data) {

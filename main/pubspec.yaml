@@ -16,9 +16,10 @@ dependencies:
     path: ../local_storage
   network:
     path: ../network
+  i18n:
+    path: ../i18n
 
   cupertino_icons: ^1.0.2
-  easy_localization: ^3.0.2
   flutter_svg: ^2.0.6
   email_validator: ^2.1.17
   flutter_easyloading: ^3.0.5
@@ -87,7 +88,6 @@ flutter:
   uses-material-design: true
   assets:
     - lib/assets/
-    - lib/resources/i18n/langs/
     - lib/assets/iconsPng/
     - lib/assets/imagesPng/
     - lib/assets/iconsPng/company/

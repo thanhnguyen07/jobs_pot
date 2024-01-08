@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/button_submit_form.dart';
@@ -11,7 +10,7 @@ import 'package:jobs_pot/features/profile/presentation/widgets/gender_form.dart'
 import 'package:jobs_pot/features/profile/presentation/widgets/location_input.dart';
 import 'package:jobs_pot/features/profile/presentation/widgets/phone_number_input.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';

@@ -1,10 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class ModalConfirm extends ConsumerStatefulWidget {
@@ -32,8 +31,10 @@ class _ModalConfirmState extends ConsumerState<ModalConfirm> {
       children: <Widget>[
         const SizedBox(height: 30),
         Text(
-          LocaleKeys.settingAccountConfirmUnLink
-              .plural(0, args: [Utils.getLocaleMessage(widget.type)]),
+          I18n.plural(
+            key: LocaleKeys.settingAccountConfirmUnLink,
+            args: [Utils.getLocaleMessage(widget.type)],
+          ),
           style: AppTextStyle.bold.s20,
           textAlign: TextAlign.center,
         ),

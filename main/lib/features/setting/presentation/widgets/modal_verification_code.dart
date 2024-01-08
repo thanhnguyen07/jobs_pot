@@ -6,7 +6,7 @@ import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/authentication/presentation/screens/emailVerification/pin_code.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class ModalVerificationCode extends ConsumerStatefulWidget {

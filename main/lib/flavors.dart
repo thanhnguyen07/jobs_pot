@@ -1,3 +1,5 @@
+import 'package:jobs_pot/config/app_configs.dart';
+
 enum Flavor {
   production,
   dev,
@@ -22,11 +24,11 @@ class FLAVER {
   static String get baseUrl {
     switch (appFlavor) {
       case Flavor.production:
-        return 'https://server-jobs-pot.vercel.app/';
+        return AppConfigs.productionUrl;
       case Flavor.dev:
-        return 'http://localhost:7002/';
+        return AppConfigs.localUrl;
       default:
-        return 'https://server-jobs-pot.vercel.app/';
+        return AppConfigs.productionUrl;
     }
   }
 }

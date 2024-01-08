@@ -5,7 +5,7 @@ import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/common/widgets/button_submit_form.dart';
 import 'package:jobs_pot/common/widgets/email_input.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';

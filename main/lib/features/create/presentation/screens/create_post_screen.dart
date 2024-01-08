@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,7 +15,7 @@ import 'package:jobs_pot/features/authentication/domain/entities/User/user_entit
 import 'package:jobs_pot/features/create/create_provider.dart';
 import 'package:jobs_pot/features/create/presentation/widgets/create_post_input_form.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -82,11 +81,13 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen>
                           Row(
                             children: [
                               Text(
-                                LocaleKeys.postPostingProcessStep1Title
-                                    .plural(0, args: [
-                                  uploadsData.length.toString(),
-                                  (imagesData.length - 1).toString()
-                                ]),
+                                I18n.plural(
+                                  key: LocaleKeys.postPostingProcessStep1Title,
+                                  args: [
+                                    uploadsData.length.toString(),
+                                    (imagesData.length - 1).toString()
+                                  ],
+                                ),
                                 style: AppTextStyle.bold.s12,
                               ),
                               Container(

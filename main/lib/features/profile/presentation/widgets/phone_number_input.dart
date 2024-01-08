@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:jobs_pot/common/constant/app_style.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/config/app_configs.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/PhoneNumber/phone_number_entity.dart';
 import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
-import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
+import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 class PhoneNumberInput extends ConsumerStatefulWidget {
