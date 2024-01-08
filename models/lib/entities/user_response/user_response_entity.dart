@@ -1,7 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
+import 'package:models/entities/user/user_entity.dart';
 
 part 'user_response_entity.freezed.dart';
 part 'user_response_entity.g.dart';

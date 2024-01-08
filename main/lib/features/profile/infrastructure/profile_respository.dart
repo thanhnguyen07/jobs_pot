@@ -2,12 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:jobs_pot/common/constant/app_keys.dart';
-import 'package:jobs_pot/database/entities/error_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/UserResponse/user_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
+import 'package:models/failures/failure.dart';
+import 'package:models/entities/user_response/user_response_entity.dart';
 import 'package:jobs_pot/features/profile/domain/repositories/profile_responsitory_interface.dart';
 import 'package:jobs_pot/main.dart';
 import 'package:jobs_pot/system/system_providers.dart';
+import 'package:models/entities/error_response/error_response_entity.dart';
 import 'package:network/network.dart';
 
 class ProfileResponsitory implements ProfileResponsitoryInterface {

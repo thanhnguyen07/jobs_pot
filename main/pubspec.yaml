@@ -18,6 +18,8 @@ dependencies:
     path: ../network
   i18n:
     path: ../i18n
+  models:
+    path: ../models
 
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.6

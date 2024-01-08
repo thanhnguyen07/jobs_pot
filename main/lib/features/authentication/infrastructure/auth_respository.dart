@@ -1,13 +1,13 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:jobs_pot/common/constant/app_keys.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/RefreshTokenResponse/resfresh_token_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/UserResponse/user_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/VerificationCode/verification_code_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
+import 'package:models/failures/failure.dart';
 import 'package:jobs_pot/features/authentication/domain/repositories/auth_respository_interface.dart';
 import 'package:jobs_pot/main.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
+import 'package:models/entities/refresh_token_response/resfresh_token_response_entity.dart';
+import 'package:models/entities/user_response/user_response_entity.dart';
+import 'package:models/entities/verification_code/verification_code_entity.dart';
 import 'package:network/network.dart';
 
 class AuthRepository implements AuthRepositoryInterface {

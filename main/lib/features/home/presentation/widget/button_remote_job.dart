@@ -4,11 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
-import 'package:jobs_pot/features/home/domain/entities/JobsSummary/jobs_summary_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
+import 'package:models/entities/jobs_summary/jobs_summary_entity.dart';
 
 class ButtonRemoteJob extends ConsumerStatefulWidget {
   const ButtonRemoteJob({

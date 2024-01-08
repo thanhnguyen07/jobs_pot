@@ -11,7 +11,7 @@ import 'package:jobs_pot/common/widgets/app_scaffold.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/common/widgets/header.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
+import 'package:models/entities/user/user_entity.dart';
 import 'package:jobs_pot/features/create/create_provider.dart';
 import 'package:jobs_pot/features/create/presentation/widgets/create_post_input_form.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';

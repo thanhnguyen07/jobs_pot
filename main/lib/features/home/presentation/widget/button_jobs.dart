@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
-import 'package:jobs_pot/features/home/domain/entities/JobsSummary/jobs_summary_entity.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/button_remote_job.dart';
 import 'package:jobs_pot/features/home/presentation/widget/custom_button.dart';
@@ -9,6 +8,7 @@ import 'package:jobs_pot/features/home/presentation/widget/custom_title.dart';
 import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
+import 'package:models/entities/jobs_summary/jobs_summary_entity.dart';
 
 class FindYouJob extends ConsumerStatefulWidget {
   const FindYouJob({

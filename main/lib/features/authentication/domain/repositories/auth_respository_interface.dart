@@ -1,8 +1,8 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/RefreshTokenResponse/resfresh_token_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/UserResponse/user_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/VerificationCode/verification_code_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
+import 'package:models/failures/failure.dart';
+import 'package:models/entities/refresh_token_response/resfresh_token_response_entity.dart';
+import 'package:models/entities/user_response/user_response_entity.dart';
+import 'package:models/entities/verification_code/verification_code_entity.dart';
 
 abstract class AuthRepositoryInterface {
   Future<Either<Failure, UserResponseEntity>> signUpWithEmail(

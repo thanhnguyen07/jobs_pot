@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/RefreshTokenResponse/resfresh_token_response_entity.dart';
-import 'package:jobs_pot/features/authentication/domain/failures/failure.dart';
+import 'package:models/failures/failure.dart';
+import 'package:models/entities/refresh_token_response/resfresh_token_response_entity.dart';
 
 abstract class SystemRepositoryInterface {
   Future<Either<Failure, RefreshTokenResponseEntity>> refreshToken(

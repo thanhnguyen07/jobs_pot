@@ -173,32 +173,6 @@
         "cwd": "${workspaceFolder}/main"
       }
     },
-    {
-      "label": "main - easy_localization file codegen_loader.g.dart",
-      "type": "shell",
-      "command": "fvm flutter pub run easy_localization:generate -S 'lib/resources/i18n/langs' -O 'lib/resources/i18n/generated'",
-      "group": "none",
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/main"
-      }
-    },
-    {
-      "label": "main - easy_localization file locale_keys.dart",
-      "type": "shell",
-      "command": "fvm flutter pub run easy_localization:generate -S 'lib/resources/i18n/langs' -O 'lib/resources/i18n/generated' -o 'locale_keys.dart' -f keys",
-      "group": "none",
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/main"
-      }
-    },
     // END main
 
     // START local_storage.
@@ -350,7 +324,62 @@
       "options": {
         "cwd": "${workspaceFolder}/i18n"
       }
-    }
+    },
+    // END i18n.
+
+    // START models.
+    {
+      "label": "models - flutter pub get",
+      "type": "shell",
+      "command": "fvm flutter pub get",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/models"
+      }
+    },
+    {
+      "label": "models - flutter clean",
+      "type": "shell",
+      "command": "fvm flutter clean",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/models"
+      }
+    },
+    {
+      "label": "models - flutter pub upgrade",
+      "type": "shell",
+      "command": "fvm flutter pub upgrade --major-versions",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/models"
+      }
+    },
+    {
+      "label": "models - build_runner build",
+      "type": "shell",
+      "command": "fvm flutter packages pub run build_runner build --delete-conflicting-outputs",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/models"
+      }
+    },
     // END i18n.
   ]
 }

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jobs_pot/features/home/domain/entities/Salary/salary_entity.dart';
+import 'package:models/entities/salary_entity/salary_entity.dart';
 
 part 'recent_list_entity.freezed.dart';
 part 'recent_list_entity.g.dart';

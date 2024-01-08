@@ -4,9 +4,8 @@ part 'failure.freezed.dart';
 
 @freezed
 
-/// Represents all app failures
+// Represents all app failures
 class Failure implements Exception {
-
   const Failure._();
 
   /// Expected value is null or empty

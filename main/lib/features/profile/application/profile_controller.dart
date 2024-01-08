@@ -6,7 +6,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:jobs_pot/common/constant/app_enum.dart';
 import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:jobs_pot/features/authentication/domain/entities/User/user_entity.dart';
+import 'package:models/entities/user/user_entity.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 import 'package:jobs_pot/utils/utils.dart';
 import 'package:mime/mime.dart';

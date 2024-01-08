@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jobs_pot/features/home/domain/entities/RecentList/recent_list_entity.dart';
+import 'package:models/entities/recent_list/recent_list_entity.dart';
 
 part 'recent_list_response_entity.freezed.dart';
 part 'recent_list_response_entity.g.dart';
