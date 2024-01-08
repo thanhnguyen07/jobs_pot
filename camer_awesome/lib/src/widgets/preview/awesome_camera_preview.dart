@@ -28,7 +28,12 @@ class AwesomeCameraPreview extends StatefulWidget {
   final EdgeInsets padding;
   final Alignment alignment;
   final PictureInPictureConfigBuilder? pictureInPictureConfigBuilder;
-  final Function()? reSetState;
+  final Function(CaptureMode mode)? reSetState;
+  final OnMediaTap? onMediaTap;
+  final Widget Function(CameraState state)? topActionsBuilder;
+  final Widget Function(CameraState state)? bottomActionsBuilder;
+  final Widget Function(CameraState state)? middleContentBuilder;
+  final Function()? nextCamScreen;
 
   const AwesomeCameraPreview({
     super.key,
@@ -43,6 +48,11 @@ class AwesomeCameraPreview extends StatefulWidget {
     required this.alignment,
     this.pictureInPictureConfigBuilder,
     this.reSetState,
+    this.onMediaTap,
+    this.topActionsBuilder,
+    this.bottomActionsBuilder,
+    this.middleContentBuilder,
+    this.nextCamScreen,
   });
 
   @override
@@ -238,16 +248,46 @@ class AwesomeCameraPreviewState extends State<AwesomeCameraPreview> {
           ),
         if (_preview != null)
           Positioned.fill(
-            child: widget.interfaceBuilder(
-              widget.state,
-              _preview!,
-              () {
-                if (widget.reSetState != null) {
-                  widget.reSetState!();
-                  _loadTextures();
-                  setState(() {});
-                }
-              },
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 120,
+                    child: widget.topActionsBuilder?.call(widget.state) ??
+                        AwesomeTopActions(state: widget.state),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width * 4 / 3,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        widget.middleContentBuilder?.call(widget.state) ??
+                            AwesomeCameraModeSelector(
+                              state: widget.state,
+                              reSetState: (mode) {
+                                if (widget.reSetState != null) {
+                                  widget.reSetState!(mode);
+                                  _loadTextures();
+                                  setState(() {});
+                                }
+                              },
+                              nextCamScreen: widget.nextCamScreen,
+                            ),
+                        widget.bottomActionsBuilder?.call(widget.state) ??
+                            AwesomeBottomActions(
+                                state: widget.state,
+                                onMediaTap: widget.onMediaTap),
+                      ],
+                    ),
+                  ),
+                  // color: theme.bottomActionsBackgroundColor,
+                ],
+              ),
             ),
           ),
         ..._buildPreviewTextures(),
@@ -310,16 +350,47 @@ class AwesomeCameraPreviewState extends State<AwesomeCameraPreview> {
           ),
         if (_preview != null)
           Positioned.fill(
-            child: widget.interfaceBuilder(
-              widget.state,
-              _preview!,
-              () {
-                if (widget.reSetState != null) {
-                  widget.reSetState!();
-                  _loadTextures();
-                  setState(() {});
-                }
-              },
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 120,
+                    child: widget.topActionsBuilder?.call(widget.state) ??
+                        AwesomeTopActions(state: widget.state),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width * 4 / 3,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        widget.middleContentBuilder?.call(widget.state) ??
+                            AwesomeCameraModeSelector(
+                              state: widget.state,
+                              reSetState: (mode) {
+                                if (widget.reSetState != null) {
+                                  widget.reSetState!(mode);
+                                  _loadTextures();
+                                  setState(() {});
+                                }
+                              },
+                              nextCamScreen: widget.nextCamScreen,
+                            ),
+                        widget.bottomActionsBuilder?.call(widget.state) ??
+                            AwesomeBottomActions(
+                              state: widget.state,
+                              onMediaTap: widget.onMediaTap,
+                            ),
+                      ],
+                    ),
+                  ),
+                  // color: theme.bottomActionsBackgroundColor,
+                ],
+              ),
             ),
           ),
         ..._buildPreviewTextures(),

@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 
 class AwesomeCameraModeSelector extends StatelessWidget {
   final CameraState state;
-  final Function()? reSetState;
+  final Function(CaptureMode mode)? reSetState;
+  final Function()? nextCamScreen;
 
   const AwesomeCameraModeSelector({
     super.key,
     required this.state,
     this.reSetState,
+    this.nextCamScreen,
   });
 
   @override
@@ -24,13 +26,22 @@ class AwesomeCameraModeSelector extends StatelessWidget {
       );
     } else {
       content = CameraModePager(
-        initialMode: state.captureMode,
+        initialMode: state.saveConfig?.initialCaptureMode ?? CaptureMode.photo,
         availableModes: state.saveConfig!.captureModes,
-        onChangeCameraRequest: (mode) async {
-          if (reSetState != null) {
-            await reSetState!();
+        onChangeCameraRequest: (nextMode, currentMode) async {
+          if (((currentMode == CaptureMode.photo ||
+                      currentMode == CaptureMode.video) &&
+                  nextMode == CaptureMode.duo) ||
+              (currentMode == CaptureMode.duo &&
+                  (nextMode == CaptureMode.photo ||
+                      nextMode == CaptureMode.video))) {
+            if (nextCamScreen != null) nextCamScreen!();
+          } else {
+            state.setState(nextMode);
           }
-          state.setState(mode);
+          // if (reSetState != null) {
+          //   await reSetState!(nextMode);
+          // }
         },
       );
     }
@@ -42,7 +53,8 @@ class AwesomeCameraModeSelector extends StatelessWidget {
   }
 }
 
-typedef OnChangeCameraRequest = Function(CaptureMode mode);
+typedef OnChangeCameraRequest = Function(
+    CaptureMode mode, CaptureMode currentMode);
 
 class CameraModePager extends StatefulWidget {
   final OnChangeCameraRequest onChangeCameraRequest;
@@ -97,7 +109,8 @@ class _CameraModePagerState extends State<CameraModePager> {
               controller: _pageController,
               onPageChanged: (index) {
                 final cameraMode = widget.availableModes[index];
-                widget.onChangeCameraRequest(cameraMode);
+                final currentMode = widget.availableModes[_index];
+                widget.onChangeCameraRequest(cameraMode, currentMode);
                 setState(() {
                   _index = index;
                 });

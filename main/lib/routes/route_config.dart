@@ -13,6 +13,7 @@ import 'package:jobs_pot/features/home_stack/presentation/screens/bottom_navigat
 import 'package:jobs_pot/features/post/presentation/screens/post_screen.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/edit_profile.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
+import 'package:jobs_pot/features/save_job/presentation/screens/duo_cam_screen.dart';
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/account_screen.dart';
 import 'package:jobs_pot/features/setting/presentation/screens/change_password_screen.dart';
@@ -44,6 +45,10 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: SaveJobRoute.page,
           path: SaveJobScreen.path,
+        ),
+        AutoRoute(
+          page: DuoCamRoute.page,
+          path: DuoCamScreen.path,
         ),
         AutoRoute(
           page: EditProfileRoute.page,

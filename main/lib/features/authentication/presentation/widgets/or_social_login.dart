@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/widgets/social_login_button.dart';
-import 'package:jobs_pot/features/authentication/auth_providers.dart';
+import 'package:jobs_pot/features/save_job/presentation/screens/duo_cam_screen.dart';
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';
 import 'package:jobs_pot/resources/i18n/generated/locale_keys.dart';
 import 'package:jobs_pot/utils/utils.dart';
@@ -33,7 +31,7 @@ class _OrSocialLoginState extends ConsumerState<OrSocialLogin> {
             //     .signInWithGoogle(context);
           },
           facebookLogin: () {
-            context.router.navigateNamed(SaveJobScreen.path);
+            context.router.navigateNamed(DuoCamScreen.path);
             // ref
             //     .read(loginWithFacebookControllerProvider.notifier)
             //     .signInWithFacebook(context);

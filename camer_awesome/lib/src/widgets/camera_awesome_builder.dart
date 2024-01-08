@@ -28,7 +28,7 @@ typedef CameraLayoutBuilder = Widget Function(
   //Rect previewRect,
 
   Preview preview,
-  Function()? reSetState,
+  Function(CaptureMode mode)? reSetState,
 );
 
 /// Callback when a video or photo has been saved and user click on thumbnail
@@ -114,6 +114,14 @@ class CameraAwesomeBuilder extends StatefulWidget {
   /// Push null to hide the filter button
   final List<AwesomeFilter>? availableFilters;
 
+  final Widget Function(CameraState state)? topActionsBuilder;
+
+  final Widget Function(CameraState state)? bottomActionsBuilder;
+
+  final Widget Function(CameraState state)? middleContentBuilder;
+
+  final Function()? nextCamScreen;
+
   const CameraAwesomeBuilder._({
     required this.sensorConfig,
     required this.enablePhysicalButton,
@@ -134,6 +142,10 @@ class CameraAwesomeBuilder extends StatefulWidget {
     this.showPreview = true,
     required this.pictureInPictureConfigBuilder,
     this.availableFilters,
+    this.topActionsBuilder,
+    this.bottomActionsBuilder,
+    this.middleContentBuilder,
+    this.nextCamScreen,
   });
 
   /// Use the camera with the built-in interface.
@@ -158,6 +170,7 @@ class CameraAwesomeBuilder extends StatefulWidget {
   /// [imageAnaysisConfig] and listen to the stream of images with
   /// [onImageForAnalysis].
   CameraAwesomeBuilder.awesome({
+    Function()? nextCamScreen,
     SensorConfig? sensorConfig,
     bool enablePhysicalButton = false,
     Widget? progressIndicator,
@@ -179,6 +192,7 @@ class CameraAwesomeBuilder extends StatefulWidget {
     AwesomeFilter? defaultFilter,
     List<AwesomeFilter>? availableFilters,
   }) : this._(
+          nextCamScreen: nextCamScreen,
           sensorConfig: sensorConfig ??
               SensorConfig.single(
                 sensor: Sensor.position(SensorPosition.back),
@@ -195,6 +209,9 @@ class CameraAwesomeBuilder extends StatefulWidget {
               middleContent: middleContentBuilder?.call(cameraModeState),
             );
           },
+          topActionsBuilder: topActionsBuilder,
+          bottomActionsBuilder: bottomActionsBuilder,
+          middleContentBuilder: middleContentBuilder,
           saveConfig: saveConfig,
           onMediaTap: onMediaTap,
           onImageForAnalysis: onImageForAnalysis,
@@ -379,43 +396,37 @@ class _CameraWidgetBuilder extends State<CameraAwesomeBuilder>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      _cameraContext = CameraContext.create(
-        // SensorConfig.single(sensor: Sensor.position(SensorPosition.back)),
-        SensorConfig.multiple(
-          sensors: [
-            Sensor.position(SensorPosition.back),
-            Sensor.position(SensorPosition.front),
-          ],
-          flashMode: FlashMode.auto,
-          aspectRatio: CameraAspectRatios.ratio_4_3,
-        ),
-        enablePhysicalButton: widget.enablePhysicalButton,
-        filter: widget.defaultFilter ?? AwesomeFilter.None,
-        initialCaptureMode: widget.saveConfig?.initialCaptureMode ??
-            (widget.showPreview
-                ? CaptureMode.preview
-                : CaptureMode.analysis_only),
-        saveConfig: widget.saveConfig,
-        onImageForAnalysis: widget.onImageForAnalysis,
-        analysisConfig: widget.imageAnalysisConfig,
-        exifPreferences: widget.saveConfig?.exifPreferences ??
-            ExifPreferences(saveGPSLocation: false),
-        availableFilters: widget.availableFilters,
-      );
+    _cameraContext = CameraContext.create(
+      widget.sensorConfig,
+      enablePhysicalButton: widget.enablePhysicalButton,
+      filter: widget.defaultFilter ?? AwesomeFilter.None,
+      initialCaptureMode: widget.saveConfig?.initialCaptureMode ??
+          (widget.showPreview
+              ? CaptureMode.preview
+              : CaptureMode.analysis_only),
+      saveConfig: widget.saveConfig,
+      onImageForAnalysis: widget.onImageForAnalysis,
+      analysisConfig: widget.imageAnalysisConfig,
+      exifPreferences: widget.saveConfig?.exifPreferences ??
+          ExifPreferences(saveGPSLocation: false),
+      availableFilters: widget.availableFilters,
+    );
 
-      // Initial CameraState is always PreparingState
-      _cameraContext?.state.when(onPreparingCamera: (mode) async {
-        await mode.start();
+    // Initial CameraState is always PreparingState
+    // _cameraContext?.state.when(onPreparingCamera: (mode) => mode.start());
+
+    _cameraContext?.state.when(onPreparingCamera: (mode) async {
+      await mode.start();
+      if (_cameraContext?.saveConfig?.initialCaptureMode == CaptureMode.photo) {
         await _cameraContext?.setSensorConfig(
             SensorConfig.single(sensor: Sensor.position(SensorPosition.back)));
-      });
-
-      setState(() {});
+      }
     });
+
+    setState(() {});
   }
 
-  Future<void> reSetState() async {
+  Future<void> reSetState(CaptureMode mode) async {
     final sensors = _cameraContext?.sensorConfig.sensors;
     if ((sensors?.length ?? 0) > 1) {
       await _cameraContext?.setSensorConfig(
@@ -431,8 +442,6 @@ class _CameraWidgetBuilder extends State<CameraAwesomeBuilder>
         aspectRatio: CameraAspectRatios.ratio_4_3,
       ));
     }
-
-    // _cameraPreviewKey.currentState.
   }
 
   @override
@@ -456,7 +465,7 @@ class _CameraWidgetBuilder extends State<CameraAwesomeBuilder>
                 }
                 return Stack(
                   fit: StackFit.expand,
-                  children: <Widget>[
+                  children: [
                     Positioned.fill(
                       child: !widget.showPreview
                           ? widget.builder(
@@ -465,9 +474,11 @@ class _CameraWidgetBuilder extends State<CameraAwesomeBuilder>
                               null,
                             )
                           : AwesomeCameraPreview(
-                              reSetState: () {
-                                reSetState();
+                              reSetState: (CaptureMode mode) {
+                                reSetState(mode);
                               },
+                              onMediaTap: widget.onMediaTap,
+                              nextCamScreen: widget.nextCamScreen,
                               key: _cameraPreviewKey,
                               previewFit: widget.previewFit,
                               state: snapshot.requireData,
@@ -523,6 +534,9 @@ class _CameraWidgetBuilder extends State<CameraAwesomeBuilder>
                                   widget.previewDecoratorBuilder,
                               pictureInPictureConfigBuilder:
                                   widget.pictureInPictureConfigBuilder,
+                              topActionsBuilder: widget.topActionsBuilder,
+                              middleContentBuilder: widget.middleContentBuilder,
+                              bottomActionsBuilder: widget.bottomActionsBuilder,
                             ),
                     ),
                   ],

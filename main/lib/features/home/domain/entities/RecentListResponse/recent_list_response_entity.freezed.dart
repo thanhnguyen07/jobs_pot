@@ -137,7 +137,7 @@ class _$RecentListResponseEntityImpl implements _RecentListResponseEntity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RecentListResponseEntityImpl &&

@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -11,6 +12,8 @@ import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
 
 late ProviderContainer appProvider;
+late List<CameraDescription> camerasMain;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -21,6 +24,8 @@ void main() async {
   await appProvider.read(themeControllerProvider.notifier).initTheme();
 
   String defaultLanguage = await Utils.localStorage.get.defaultLanguage();
+
+  camerasMain = await availableCameras();
 
   runApp(
     EasyLocalization(

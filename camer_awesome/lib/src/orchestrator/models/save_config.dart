@@ -97,7 +97,7 @@ class SaveConfig {
           videoPathBuilder: videoPathBuilder ??
               (sensors) => AwesomeCaptureRequestBuilder()
                   .build(captureMode: CaptureMode.video, sensors: sensors),
-          captureModes: [CaptureMode.photo, CaptureMode.duo],
+          captureModes: [CaptureMode.photo, CaptureMode.video, CaptureMode.duo],
           initialCaptureMode: initialCaptureMode,
           videoOptions: videoOptions,
           exifPreferences: exifPreferences,

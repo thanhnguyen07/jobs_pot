@@ -20,7 +20,7 @@ class AwesomeCameraLayout extends StatelessWidget {
   final Widget? middleContent;
   final Widget topActions;
   final Widget bottomActions;
-  final Function()? reSetState;
+  final Function(CaptureMode mode)? reSetState;
 
   AwesomeCameraLayout({
     super.key,
@@ -53,8 +53,6 @@ class AwesomeCameraLayout extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                // middleContent ??
-
                 const Spacer(),
                 AwesomeCameraModeSelector(
                   state: state,
