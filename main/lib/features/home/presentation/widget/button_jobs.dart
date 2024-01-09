@@ -8,7 +8,7 @@ import 'package:jobs_pot/features/home/presentation/widget/custom_title.dart';
 import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
-import 'package:models/entities/jobs_summary/jobs_summary_entity.dart';
+import 'package:models/entities/export.dart';
 
 class FindYouJob extends ConsumerStatefulWidget {
   const FindYouJob({

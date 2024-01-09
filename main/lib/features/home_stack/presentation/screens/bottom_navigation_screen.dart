@@ -6,7 +6,7 @@ import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:models/entities/user/user_entity.dart';
+import 'package:models/entities/export.dart';
 import 'package:jobs_pot/features/home_stack/home_stack_provider.dart';
 import 'package:jobs_pot/features/home_stack/presentation/screens/drawer.dart';
 import 'package:jobs_pot/routes/route_config.gr.dart';

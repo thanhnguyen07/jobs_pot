@@ -4,7 +4,7 @@ import 'package:models/failures/failure.dart';
 import 'package:jobs_pot/main.dart';
 import 'package:jobs_pot/system/domain/repositories/system_respository_interface.dart';
 import 'package:jobs_pot/system/system_providers.dart';
-import 'package:models/entities/refresh_token_response/resfresh_token_response_entity.dart';
+import 'package:models/entities/authentication/refresh_token_response/resfresh_token_response_entity.dart';
 import 'package:network/network.dart';
 
 class SytemRepository implements SystemRepositoryInterface {

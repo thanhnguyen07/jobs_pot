@@ -5,9 +5,7 @@ import 'package:jobs_pot/features/authentication/domain/repositories/auth_respos
 import 'package:jobs_pot/main.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';
-import 'package:models/entities/refresh_token_response/resfresh_token_response_entity.dart';
-import 'package:models/entities/user_response/user_response_entity.dart';
-import 'package:models/entities/verification_code/verification_code_entity.dart';
+import 'package:models/entities/export.dart';
 import 'package:network/network.dart';
 
 class AuthRepository implements AuthRepositoryInterface {

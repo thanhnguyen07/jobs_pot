@@ -5,7 +5,7 @@ import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/common/constant/app_icons.dart';
 import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:models/entities/user/user_entity.dart';
+import 'package:models/entities/export.dart';
 import 'package:jobs_pot/features/profile/profile_provider.dart';
 import 'package:jobs_pot/system/system_providers.dart';
 import 'package:jobs_pot/utils/utils.dart';

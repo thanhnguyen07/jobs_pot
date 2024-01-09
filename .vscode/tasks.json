@@ -1,6 +1,20 @@
 {
   "version": "2.0.0",
   "tasks": [
+    {
+      "label": "Setup project all sub module",
+      "type": "shell",
+      "command": "chmod 755 ./setup.sh && ./setup.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+
     // START network.
     {
       "label": "network - build_runner build",
@@ -57,19 +71,6 @@
     // END network.
 
     // START main.
-    {
-      "label": "main - build_runner build",
-      "type": "shell",
-      "command": "fvm flutter packages pub run build_runner build --delete-conflicting-outputs",
-      "group": "none",
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/main"
-      }
-    },
     {
       "label": "main - ios pod",
       "type": "shell",

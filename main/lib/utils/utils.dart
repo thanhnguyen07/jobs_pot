@@ -6,7 +6,7 @@ import 'package:i18n/i18n.dart';
 import 'package:jobs_pot/common/constant/app_colors.dart';
 import 'package:jobs_pot/common/constant/app_keys.dart';
 import 'package:local_storage/local_storage.dart';
-import 'package:models/entities/job_summary/job_summary_entity.dart';
+import 'package:models/models.dart';
 
 class Utils {
   static String getLocaleMessage(String key) {

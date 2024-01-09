@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/utils/utils.dart';
-import 'package:models/entities/jobs_summary/jobs_summary_entity.dart';
+import 'package:models/entities/export.dart';
 
 class JobsSummaryController extends StateNotifier<JobsSummaryEntity?> {
   JobsSummaryController(this.ref) : super(null);

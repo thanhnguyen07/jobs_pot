@@ -5,7 +5,7 @@ import 'package:jobs_pot/common/constant/app_text_styles.dart';
 import 'package:jobs_pot/common/widgets/button_submit_form.dart';
 import 'package:jobs_pot/common/widgets/full_name_input.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:models/entities/user/user_entity.dart';
+import 'package:models/entities/export.dart';
 import 'package:jobs_pot/features/profile/presentation/widgets/gender_form.dart';
 import 'package:jobs_pot/features/profile/presentation/widgets/location_input.dart';
 import 'package:jobs_pot/features/profile/presentation/widgets/phone_number_input.dart';

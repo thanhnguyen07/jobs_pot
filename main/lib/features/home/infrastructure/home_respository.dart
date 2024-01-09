@@ -1,6 +1,5 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:models/entities/jobs_summary_response/jobs_summary_response_entity.dart';
-import 'package:models/entities/recent_list_response/recent_list_response_entity.dart';
+import 'package:models/entities/export.dart';
 import 'package:models/failures/failure.dart';
 import 'package:jobs_pot/features/home/domain/respositories/home_respository_interface.dart';
 import 'package:jobs_pot/main.dart';

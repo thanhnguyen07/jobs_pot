@@ -10,7 +10,7 @@ import 'package:jobs_pot/common/widgets/bacground_image.dart';
 import 'package:jobs_pot/common/widgets/cutom_button.dart';
 import 'package:jobs_pot/common/widgets/switch_theme.dart';
 import 'package:jobs_pot/features/authentication/auth_providers.dart';
-import 'package:models/entities/user/user_entity.dart';
+import 'package:models/entities/export.dart';
 import 'package:jobs_pot/features/home_stack/presentation/screens/bottom_navigation_screen.dart';
 import 'package:jobs_pot/features/profile/presentation/screens/profile_screen.dart';
 import 'package:jobs_pot/features/save_job/presentation/screens/save_job_screen.dart';

@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:models/failures/failure.dart';
-import 'package:models/entities/user_response/user_response_entity.dart';
+import 'package:models/entities/export.dart';
 
 abstract class ProfileResponsitoryInterface {
   Future<Either<Failure, UserResponseEntity>> updateImage({

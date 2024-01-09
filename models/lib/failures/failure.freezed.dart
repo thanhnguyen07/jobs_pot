@@ -112,7 +112,7 @@ class _$EmptyFailureImpl extends _EmptyFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$EmptyFailureImpl);
   }
@@ -246,7 +246,7 @@ class _$MessageRequestFailureImpl extends _MessageRequestFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MessageRequestFailureImpl &&
@@ -376,7 +376,7 @@ class _$UnauthorizedFailureImpl extends _UnauthorizedFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnauthorizedFailureImpl);
@@ -492,7 +492,7 @@ class _$BadRequestFailureImpl extends _BadRequestFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$BadRequestFailureImpl);
   }

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/utils/utils.dart';
-import 'package:models/entities/recent_list/recent_list_entity.dart';
+import 'package:models/entities/export.dart';
 
 class RecentListController extends StateNotifier<List<RecentListEntity>?> {
   RecentListController(this.ref) : super(null);

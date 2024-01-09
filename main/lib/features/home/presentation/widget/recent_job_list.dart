@@ -8,8 +8,7 @@ import 'package:jobs_pot/common/widgets/avatar_image.dart';
 import 'package:jobs_pot/features/home/home_porvider.dart';
 import 'package:jobs_pot/features/home/presentation/widget/custom_title.dart';
 import 'package:i18n/i18n.dart';
-import 'package:models/entities/recent_list/recent_list_entity.dart';
-import 'package:models/entities/salary_entity/salary_entity.dart';
+import 'package:models/entities/export.dart';
 
 class RecentRemoteJob extends ConsumerStatefulWidget {
   const RecentRemoteJob({
